@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyCardStyle" parent="@style/CardView">
+        <item name="cardCornerRadius">16dp</item>
+    </style>
+
+</resources>

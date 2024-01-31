@@ -1,0 +1,307 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:background="@color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient4" />
+
+            <com.example.tradestat.CustomView1.RatingView
+                android:layout_width="match_parent"
+                app:borderColor="@color/lightGray"
+                app:globalColor="@color/black"
+                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:text="Победы: 0"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:text="Поражения: 0"/>
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@color/black_grey" />
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/calendar"
+                    app:tint="@color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="55dp"
+                    android:text="Календарь"
+                    android:textSize="16sp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@color/black_grey" />
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/vector_chart"
+                    app:tint="@color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="55dp"
+                    android:text="Анализ"
+                    android:textSize="16sp"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient3" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="7dp"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="end"
+                android:src="@drawable/courses"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/proback"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center_vertical"
+                android:text="Полезные материалы"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/book_italic"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_vertical"
+                android:text="База,стратегии,полезные советы"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.295"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@color/black_grey" />
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.295"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient_green" />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="7dp"
+                android:layout_gravity="end"
+                android:src="@drawable/chart1" />
+            <TextView
+                android:layout_width="240dp"
+                android:fontFamily="@font/pro_regular"
+                android:text="Статистика по времени"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="28dp"
+                android:layout_marginStart="10dp"
+                android:textSize="24sp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient_green2" />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="7dp"
+                android:layout_gravity="end"
+                android:src="@drawable/chart2" />
+            <TextView
+                android:layout_width="240dp"
+                android:fontFamily="@font/pro_regular"
+                android:text="Статистика по индикаторам"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="28dp"
+                android:layout_marginStart="10dp"
+                android:textSize="24sp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.295"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient_green" />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="7dp"
+                android:layout_gravity="end"
+                android:src="@drawable/chart3" />
+            <TextView
+                android:layout_width="240dp"
+                android:fontFamily="@font/pro_regular"
+                android:text="Общая статистика"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="34dp"
+                android:layout_marginStart="10dp"
+                android:textSize="24sp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="240dp"
+                android:fontFamily="@font/book_italic"
+                android:text="Включая стратегию"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="17dp"
+                android:layout_marginStart="12dp"
+                android:textSize="17sp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="64dp"/>
+
+
+
+    </LinearLayout>
+</ScrollView>
+
+
+
