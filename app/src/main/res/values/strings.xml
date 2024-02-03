@@ -1,6 +1,23 @@
 <resources>
     <string name="app_name">TradeStat</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Trades</string>
     <string name="title_notifications">Notifications</string>
+    <string-array name="weekDays">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday </item>
+        <item>Saturday</item>
+        <item>Friday</item>
+    </string-array>
+    <string-array name="results">
+        <item>Victory</item>
+        <item>Defeat</item>
+    </string-array>
+    <string-array name="direction">
+        <item>Short</item>
+        <item>Long</item>
+    </string-array>
 </resources>

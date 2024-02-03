@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Добавить сделку"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:fontFamily="@font/pro_bold"
+            android:textSize="35sp"/>
+
+        <EditText
+            android:id="@+id/instrument"
+            android:layout_marginTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:hint="Введите инструмент: "
+            android:textSize="15sp"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/strategy"
+            android:layout_marginTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:hint="Введите стратегию: "
+            android:textSize="15sp"
+            android:layout_weight="1"/>
+        <Spinner
+            android:id="@+id/daysSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/MediumGray"
+            android:entries="@array/weekDays"
+            android:layout_weight="1" />
+        <Spinner
+            android:id="@+id/resultSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/MediumGray"
+            android:entries="@array/results"
+            android:layout_weight="1" />
+        <Spinner
+            android:id="@+id/directionSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/MediumGray"
+            android:entries="@array/direction" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_gravity="end"
+                    android:backgroundTint="@color/MediumGray"
+                    android:textColor="@color/white"
+                    app:cornerRadius="16dp"
+                    android:text="Отменить"
+                    android:layout_marginStart="20dp"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_gravity="start"
+                    android:backgroundTint="@color/MediumGray"
+                    android:textColor="@color/white"
+                    app:cornerRadius="16dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Добавить"
+                    />
+
+        </LinearLayout>
+
+</LinearLayout>
