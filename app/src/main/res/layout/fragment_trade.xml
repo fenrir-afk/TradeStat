@@ -18,11 +18,12 @@
         app:layout_constraintTop_toTopOf="parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="60dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/pro_regular"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/lightGray"
                 android:gravity="center_vertical"
@@ -32,6 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/pro_regular"
+                android:layout_marginEnd="15dp"
                 android:textColor="@color/lightGray"
                 android:gravity="center_vertical"
                 android:text="Strategy"
@@ -40,14 +43,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/pro_regular"
                 android:textColor="@color/lightGray"
                 android:gravity="center"
+                android:layout_marginEnd="15dp"
                 android:text="Result"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-
+                android:fontFamily="@font/pro_regular"
                 android:layout_weight="1"
                 android:textColor="@color/lightGray"
                 android:gravity="center"
