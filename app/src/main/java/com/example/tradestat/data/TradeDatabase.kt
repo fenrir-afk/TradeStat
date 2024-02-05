@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.tradestat.data.model.Trade
 
-@Database(version = 1, entities = [Trade::class], exportSchema = false)
+@Database(version = 2, entities = [Trade::class], exportSchema = false)
 abstract class TradeDatabase: RoomDatabase() {
     abstract fun getTradeDao():TradesDao
 

@@ -23,5 +23,10 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
             repository.addTrade(trade)
         }
     }
+    fun deleteTrade(trade: Trade){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteTrade(trade)
+        }
+    }
 
 }

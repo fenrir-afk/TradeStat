@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradestat.R
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class TradeFragment : Fragment() {
 
@@ -38,8 +40,9 @@ class TradeFragment : Fragment() {
         val root: View = binding.root
         tradeViewModel = ViewModelProvider(this)[TradeViewModel::class.java]
         //RecyclerView implementation
-        val adapter = TradeAdapter()
+        val adapter = TradeAdapter(this)
         val manager = LinearLayoutManager(this.context)
+
 
         tradeViewModel.getTradesList.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
@@ -53,6 +56,7 @@ class TradeFragment : Fragment() {
 
         return root
     }
+
     private fun showDialog() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -76,10 +80,15 @@ class TradeFragment : Fragment() {
         var strategy = dialog.findViewById<EditText>(R.id.strategy).text.toString()
         var result = dialog.findViewById<Spinner>(R.id.resultSpinner).selectedItem.toString()
         var instrument = dialog.findViewById<EditText>(R.id.instrument).text.toString()
+        var description = dialog.findViewById<EditText>(R.id.description).text.toString()
         if (direction.isEmpty() || date.isEmpty() || strategy.isEmpty() || result.isEmpty() || instrument.isEmpty()){
             Log.e("DialogError","Some data is not written")
         }else{
-            val trade = Trade(0, direction, date, strategy, result, instrument)
+            //getting current date time
+            val sdf = SimpleDateFormat("dd/M/yyyy")
+            val currentDate = sdf.format(Date())
+            //
+            val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description)
             tradeViewModel.addTrade(trade)
             Toast.makeText(this.context,"Added",Toast.LENGTH_LONG).show()
         }

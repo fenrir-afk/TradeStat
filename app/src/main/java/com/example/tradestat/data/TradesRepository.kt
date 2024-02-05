@@ -8,4 +8,7 @@ class TradesRepository(private val tradesDao: TradesDao) {
     suspend fun addTrade(trade: Trade){
         tradesDao.insert(trade)
     }
+    suspend fun deleteTrade(trade: Trade){
+        tradesDao.delete(trade)
+    }
 }

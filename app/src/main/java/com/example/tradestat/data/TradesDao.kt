@@ -16,5 +16,5 @@ interface TradesDao {
 
 
     @Delete
-    fun delete(trades: Trade)
+    fun delete(trade: Trade)
 }
