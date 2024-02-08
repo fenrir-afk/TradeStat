@@ -133,14 +133,16 @@ class TradeFragment : Fragment() {
                 rowLayout.addView(cardView)
                 counter++ // counter counts the number of created cardViews
 
+                if (counter == arr.size) {
+                    globalLayout.addView(rowLayout)
+                    return globalLayout
+                }
+
                 if (counter % 4 == 0) {
                     break
                 }
 
-                if (counter >= arr.size) {
-                    globalLayout.addView(rowLayout)
-                    return globalLayout
-                }
+
             }
             globalLayout.addView(rowLayout)
         }
