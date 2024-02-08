@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class TradeViewModel(application: Application) : AndroidViewModel(application) {
     val getTradesList:LiveData<List<Trade>>
-    lateinit var getStrategyList:List<Strategy>
+    var getStrategyList:List<Strategy> = arrayListOf()
     private val repository:TradesRepository
     init {
         val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()

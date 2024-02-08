@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"/>
     <LinearLayout
-        android:id="@+id/title_section"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background"
+        >
         <TextView
             android:id="@+id/title"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Strategies"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:layout_weight="1"
             android:gravity="center_vertical"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/tag_section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical">
-
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/lightGray" />
 
+        <LinearLayout
+            android:id="@+id/tag_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
+        </LinearLayout>
 
     </LinearLayout>
+
 
 
 </androidx.cardview.widget.CardView>

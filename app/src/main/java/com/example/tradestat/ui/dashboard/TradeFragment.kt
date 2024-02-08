@@ -2,6 +2,7 @@ package com.example.tradestat.ui.dashboard
 
 import android.app.Dialog
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable.Orientation
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -77,51 +78,73 @@ class TradeFragment : Fragment() {
         dialog.setContentView(R.layout.sort_by_tag)
         val layout = dialog.findViewById<LinearLayout>(R.id.tag_section)
         var arr:List<Strategy> = tradeViewModel.getStrategyList
-        layout.addView(createCardsForList(arr))
-        dialog.show()
+        if (arr.isNotEmpty()){
+            layout.addView(createCardsForList(arr))
+            dialog.show()
+        }else{
+            Toast.makeText(requireContext(),"List is empty",Toast.LENGTH_LONG).show()
+        }
+
     }
-    private fun createCardsForList(arr:List<Strategy>): LinearLayout {
-        var counter = -1
-        var numberOfRows = if (arr.size <= 4) 1 else arr.size/4+1
-        val globalLayout = LinearLayout(context)
-        rowFor@ for (row in 0..numberOfRows) {
+    /*
+        In this method, we create cards for strategy dialog
+   */
+    private fun createCardsForList(arr: List<Strategy>): LinearLayout {
+        val globalLayout = LinearLayout(context) //layout that contain rows
+        globalLayout.orientation = LinearLayout.VERTICAL
+        var counter = 0 // count the index of current strategy
+
+        var globalCharNumber = 0
+        for (i in 0..arr.size){
+            globalCharNumber += arr.size
+        }
+
+        val rowNumber = globalCharNumber / 29
+        for (row in 0..rowNumber) {
             val rowLayout = LinearLayout(context)
-            //params for layout of tags
             rowLayout.orientation = LinearLayout.HORIZONTAL
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, // CardView width
                 LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
             )
-            //
             rowLayout.layoutParams = layoutParams
-            for (item in 0..3) {
+
+            var charCounter = 0 // count the number of characters in a single row string
+            while (charCounter + arr[counter].strategyName.length <= 29) {
                 val cardView = CardView(requireContext())
-                //params for item of tag layout
-                val CardParams = LinearLayout.LayoutParams(
+                charCounter += arr[counter].strategyName.length
+
+                val cardParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width
                     LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
                 )
-                CardParams.setMargins(20,18,0,0)
-                //
-                cardView.layoutParams = CardParams
+                cardParams.setMargins(20, 18, 0, 0)
+
+                cardView.layoutParams = cardParams
                 cardView.radius = 16F
-                cardView.setCardBackgroundColor(Color.parseColor("#4B836B6B"));
+                cardView.setCardBackgroundColor(Color.parseColor("#4B836B6B"))
                 cardView.setContentPadding(10, 10, 10, 10)
+
                 val textView = TextView(context)
-                textView.setTextColor(Color.parseColor("#94F6EFEF"))
-                //counter count the number of already created cardVies
-                counter++
-                if(arr.size > counter){
-                    textView.text = arr[counter].strategyName
-                    cardView.addView(textView)
-                    rowLayout.addView(cardView)
-                }else{
+                textView.setTextColor(Color.parseColor("#94FFFFFF"))
+                textView.text = arr[counter].strategyName
+
+                cardView.addView(textView)
+                rowLayout.addView(cardView)
+                counter++ // counter counts the number of created cardViews
+
+                if (counter % 4 == 0) {
                     break
+                }
+
+                if (counter >= arr.size) {
+                    globalLayout.addView(rowLayout)
+                    return globalLayout
                 }
             }
             globalLayout.addView(rowLayout)
         }
-        return  globalLayout
+        return globalLayout
     }
     /*
          In this method, we create and display dialog for adding trade to the main trade list
