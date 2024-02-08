@@ -7,13 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="darkGray">#332F2F</color>
     <color name="Invisible">#00332F2F</color>
     <color name="MediumGray">#4B836B6B</color>
+    <color name="background">#2B2020</color>
     <color name="lightGray">#94E4D2D2</color>
+    <color name="MorelightGray">#94F6EFEF</color>
+
     <color name="green">#5DA50A</color>
     <color name="red">#C60303</color>
-    <color name="background">#2B2020</color>
     <color name="lightGreen">#8AD138</color>
     <color name="endGreen">#547033</color>
     <color name="black_grey">#353333</color>

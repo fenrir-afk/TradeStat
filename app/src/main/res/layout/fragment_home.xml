@@ -82,9 +82,38 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="55dp"
+                    android:layout_marginTop="50dp"
                     android:text="Календарь"
-                    android:textSize="16sp"/>
+                    android:textSize="13sp"/>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="45dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@color/black_grey" />
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_recomendation"
+                    app:tint="@color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="50dp"
+                    android:text="Рекомендации"
+                    android:textSize="13sp"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -112,9 +141,9 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="55dp"
+                    android:layout_marginTop="50dp"
                     android:text="Анализ"
-                    android:textSize="16sp"/>
+                    android:textSize="13sp"/>
 
             </androidx.cardview.widget.CardView>
 
