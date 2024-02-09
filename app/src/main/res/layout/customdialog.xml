@@ -38,22 +38,30 @@
         <Spinner
             android:id="@+id/daysSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/MediumGray"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:entries="@array/weekDays"
-            android:layout_weight="1" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:spinnerMode="dropdown" />
         <Spinner
             android:id="@+id/resultSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/MediumGray"
+            android:spinnerMode="dropdown"
             android:entries="@array/results"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:layout_weight="1" />
         <Spinner
             android:id="@+id/directionSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/MediumGray"
+            android:spinnerMode="dropdown"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:entries="@array/direction" />
         <EditText
             android:id="@+id/description"

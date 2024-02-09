@@ -4,6 +4,7 @@
     <string name="title_dashboard">Trades</string>
     <string name="title_notifications">Notifications</string>
     <string-array name="weekDays">
+        <item>Day of the week:</item>
         <item>Sunday</item>
         <item>Monday</item>
         <item>Tuesday</item>
@@ -13,10 +14,12 @@
         <item>Friday</item>
     </string-array>
     <string-array name="results">
+        <item>Trade result:</item>
         <item>Victory</item>
         <item>Defeat</item>
     </string-array>
     <string-array name="direction">
+        <item>Trade direction:</item>
         <item>Short</item>
         <item>Long</item>
     </string-array>

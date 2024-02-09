@@ -2,22 +2,21 @@ package com.example.tradestat.ui.dashboard
 
 import android.app.Dialog
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable.Orientation
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.view.marginStart
-import androidx.core.view.setMargins
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -166,6 +165,8 @@ class TradeFragment : Fragment() {
             insertDataToDb(dialog)
         }
     }
+
+
     /*
          In this method, we insert data to data base
     */
@@ -176,7 +177,7 @@ class TradeFragment : Fragment() {
         var result = dialog.findViewById<Spinner>(R.id.resultSpinner).selectedItem.toString()
         var instrument = dialog.findViewById<EditText>(R.id.instrument).text.toString()
         var description = dialog.findViewById<EditText>(R.id.description).text.toString()
-        if (direction.isEmpty() || date.isEmpty() || strategy.isEmpty() || result.isEmpty() || instrument.isEmpty()){
+        if (direction == "Trade direction:" || date == "Day of the week:" || strategy.isEmpty() || result=="Trade result:" || instrument.isEmpty()){
             Toast.makeText(this.context,"Some fields was not written",Toast.LENGTH_LONG).show()
 
         }else{
