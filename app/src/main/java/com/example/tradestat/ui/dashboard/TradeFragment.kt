@@ -3,6 +3,8 @@ package com.example.tradestat.ui.dashboard
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -85,37 +87,48 @@ class TradeFragment : Fragment() {
     private fun strategyDialog() {
         val dialog = Dialog(requireContext())
 
-        with(dialog){
+        with(dialog) {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             window?.setDimAmount(0F)
-            window?.decorView?.setBackgroundResource(R.drawable.dialog_background2) //настройка отступов,фона и скругления углов
+            window?.decorView?.setBackgroundResource(R.drawable.dialog_background2)
             setCancelable(true)
             setContentView(R.layout.strategy_dialog)
         }
 
         val window: Window = dialog.window!!
         val wlp: WindowManager.LayoutParams = window.attributes
-        dialog.window!!.setGravity(Gravity.TOP or Gravity.START)
 
+        val displayMetrics = DisplayMetrics()
+        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        // setting margins in dp
-        val xMarginInDp = 107 //left
-        val yMarginInDp = 115 //top
-        val density = resources.displayMetrics.density
+        val screenWidth = displayMetrics.widthPixels
+        val screenHeight = displayMetrics.heightPixels
 
-        wlp.x = (xMarginInDp * density).toInt()
-        wlp.y = (yMarginInDp * density).toInt()
+        val dialogWidth = (screenWidth * 0.5).toInt()
+        val dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT
+
+        wlp.width = dialogWidth
+        wlp.height = dialogHeight
+        wlp.gravity = Gravity.END or Gravity.TOP
+
+        val xMarginInPx = resources.getDimensionPixelSize(R.dimen.dialog_horizontal_margin)
+        val yMarginInPx = resources.getDimensionPixelSize(R.dimen.dialog_vertical_margin)
+
+        val textSizeInPx = resources.getDimensionPixelSize(R.dimen.dialog_text_size)
+
+        wlp.x = xMarginInPx
+        wlp.y = yMarginInPx
 
         window.attributes = wlp
 
+        val arr: List<Strategy> = tradeViewModel.getStrategyList
+        val parentLayout = dialog.findViewById<LinearLayout>(R.id.parent_layout)
 
-        var arr: List<Strategy> = tradeViewModel.getStrategyList
-        var parentLayout = dialog.findViewById<LinearLayout>(R.id.parent_layout)
-        for (i in arr.indices){
-            var text = TextView(context)
-            text.text = arr[i].strategyName
-            text.textSize = 16f
-            text.setTextColor(ContextCompat.getColor(requireContext(),R.color.MorelightGray))
+        for (strategy in arr) {
+            val text = TextView(context)
+            text.text = strategy.strategyName
+            text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx.toFloat())
+            text.setTextColor(ContextCompat.getColor(requireContext(), R.color.MorelightGray))
             text.gravity = Gravity.CENTER_VERTICAL
             parentLayout.addView(text)
         }
