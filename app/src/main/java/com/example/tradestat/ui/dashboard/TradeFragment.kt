@@ -3,7 +3,6 @@ package com.example.tradestat.ui.dashboard
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +16,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.core.view.marginStart
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -62,7 +63,11 @@ class TradeFragment : Fragment() {
            tradeDialog()
         }
         binding.DateCard.setOnClickListener{
-            dayDialog()
+            if (binding.dateArrow.drawable.constantState == resources.getDrawable( R.drawable.arrow).constantState){
+                binding.dateArrow.setImageResource(R.drawable.arrow_up)
+            }else{
+                binding.dateArrow.setImageResource(R.drawable.arrow)
+            }
         }
 
         binding.instrumentCard.setOnClickListener{
@@ -71,42 +76,54 @@ class TradeFragment : Fragment() {
         }
         binding.StrategyCard.setOnClickListener{
             tradeViewModel.redStrategiesFromRepository()
+            strategyDialog()
         }
 
         return root
     }
 
-    private fun dayDialog() {
+    private fun strategyDialog() {
         val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog?.window?.setDimAmount(0F)
-        dialog.window?.decorView?.setBackgroundResource(R.drawable.dialog_background2) //настройка отступов,фона и скругления углов
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.day_dialog)
+
+        with(dialog){
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            window?.setDimAmount(0F)
+            window?.decorView?.setBackgroundResource(R.drawable.dialog_background2) //настройка отступов,фона и скругления углов
+            setCancelable(true)
+            setContentView(R.layout.strategy_dialog)
+        }
+
         val window: Window = dialog.window!!
         val wlp: WindowManager.LayoutParams = window.attributes
         dialog.window!!.setGravity(Gravity.TOP or Gravity.START)
 
+
         // setting margins in dp
-        val xMarginInDp = 10 //left
-        val yMarginInDp = 120 //top
+        val xMarginInDp = 107 //left
+        val yMarginInDp = 115 //top
         val density = resources.displayMetrics.density
 
         wlp.x = (xMarginInDp * density).toInt()
         wlp.y = (yMarginInDp * density).toInt()
 
         window.attributes = wlp
+
+
+        var arr: List<Strategy> = tradeViewModel.getStrategyList
+        var parentLayout = dialog.findViewById<LinearLayout>(R.id.parent_layout)
+        for (i in arr.indices){
+            var text = TextView(context)
+            text.text = arr[i].strategyName
+            text.textSize = 16f
+            text.setTextColor(ContextCompat.getColor(requireContext(),R.color.MorelightGray))
+            text.gravity = Gravity.CENTER_VERTICAL
+            parentLayout.addView(text)
+        }
+
         dialog.show()
     }
 
-    private fun convertDpToPx(dp: Float): Float {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            resources.displayMetrics
-        )
 
-    }
 
     /*
          In this method, we dynamically create card representations representing instruments
