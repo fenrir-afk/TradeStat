@@ -73,10 +73,12 @@ class TradeFragment : Fragment() {
         }
 
         binding.instrumentCard.setOnClickListener{
+            binding.instrumentArrow.setImageResource(R.drawable.arrow_up)
             tradeViewModel.readInstrumentsFromRepository()//updating the instrument data in the viewmodel
             instrumentDialog()
         }
         binding.StrategyCard.setOnClickListener{
+            binding.strategyArrow.setImageResource(R.drawable.arrow_up)
             tradeViewModel.redStrategiesFromRepository()
             strategyDialog()
         }
@@ -86,7 +88,6 @@ class TradeFragment : Fragment() {
 
     private fun strategyDialog() {
         val dialog = Dialog(requireContext())
-
         with(dialog) {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             window?.setDimAmount(0F)
@@ -100,7 +101,6 @@ class TradeFragment : Fragment() {
 
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-
         val screenWidth = displayMetrics.widthPixels
         val screenHeight = displayMetrics.heightPixels
 
@@ -113,12 +113,10 @@ class TradeFragment : Fragment() {
 
         val xMarginInPx = resources.getDimensionPixelSize(R.dimen.dialog_horizontal_margin)
         val yMarginInPx = resources.getDimensionPixelSize(R.dimen.dialog_vertical_margin)
-
         val textSizeInPx = resources.getDimensionPixelSize(R.dimen.dialog_text_size)
 
         wlp.x = xMarginInPx
         wlp.y = yMarginInPx
-
         window.attributes = wlp
 
         val arr: List<Strategy> = tradeViewModel.getStrategyList
@@ -131,6 +129,10 @@ class TradeFragment : Fragment() {
             text.setTextColor(ContextCompat.getColor(requireContext(), R.color.MorelightGray))
             text.gravity = Gravity.CENTER_VERTICAL
             parentLayout.addView(text)
+        }
+
+        dialog.setOnDismissListener {
+            binding.strategyArrow.setImageResource(R.drawable.arrow)
         }
 
         dialog.show()
@@ -154,6 +156,9 @@ class TradeFragment : Fragment() {
             dialog.show()
         }else{
             Toast.makeText(requireContext(),"List is empty",Toast.LENGTH_LONG).show()
+        }
+        dialog.setOnDismissListener {
+            binding.instrumentArrow.setImageResource(R.drawable.arrow)
         }
 
     }
