@@ -78,8 +78,8 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
 
             // Set background color
             background.setBackgroundResource(
-                if (position % 2 == 1) R.color.black
-                else R.color.background
+                if (position % 2 == 1) R.color.background
+                else R.color.black
             )
         }
 

@@ -3,17 +3,17 @@ package com.example.tradestat.ui.dashboard
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -22,11 +22,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradestat.R
+import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
 import java.text.SimpleDateFormat
 import java.util.Date
+
 
 class TradeFragment : Fragment() {
 
@@ -59,24 +61,64 @@ class TradeFragment : Fragment() {
         binding.fab.setOnClickListener{
            tradeDialog()
         }
+        binding.DateCard.setOnClickListener{
+            dayDialog()
+        }
+
+        binding.instrumentCard.setOnClickListener{
+            tradeViewModel.readInstrumentsFromRepository()//updating the instrument data in the viewmodel
+            instrumentDialog()
+        }
         binding.StrategyCard.setOnClickListener{
-            tradeViewModel.redStrategiesFromRepository()//updating the strategy data in the viewmodel
-            strategyDialog()
+            tradeViewModel.redStrategiesFromRepository()
         }
 
         return root
     }
+
+    private fun dayDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.window?.setDimAmount(0F)
+        dialog.window?.decorView?.setBackgroundResource(R.drawable.dialog_background2) //настройка отступов,фона и скругления углов
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.day_dialog)
+        val window: Window = dialog.window!!
+        val wlp: WindowManager.LayoutParams = window.attributes
+        dialog.window!!.setGravity(Gravity.TOP or Gravity.START)
+
+        // setting margins in dp
+        val xMarginInDp = 10 //left
+        val yMarginInDp = 120 //top
+        val density = resources.displayMetrics.density
+
+        wlp.x = (xMarginInDp * density).toInt()
+        wlp.y = (yMarginInDp * density).toInt()
+
+        window.attributes = wlp
+        dialog.show()
+    }
+
+    private fun convertDpToPx(dp: Float): Float {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            resources.displayMetrics
+        )
+
+    }
+
     /*
-         In this method, we dynamically create card representations representing strategies
+         In this method, we dynamically create card representations representing instruments
     */
-    private fun strategyDialog() {
+    private fun instrumentDialog() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window?.decorView?.setBackgroundResource(R.drawable.dialog_background)
         dialog.setCancelable(true)
         dialog.setContentView(R.layout.sort_by_tag)
         val layout = dialog.findViewById<LinearLayout>(R.id.tag_section)
-        var arr:List<Strategy> = tradeViewModel.getStrategyList
+        var arr:List<Instrument> = tradeViewModel.getInstrumentList
         if (arr.isNotEmpty()){
             layout.addView(createCardsForList(arr))
             dialog.show()
@@ -88,7 +130,7 @@ class TradeFragment : Fragment() {
     /*
         In this method, we create cards for strategy dialog
    */
-    private fun createCardsForList(arr: List<Strategy>): LinearLayout {
+    private fun createCardsForList(arr: List<Instrument>): LinearLayout {
         val globalLayout = LinearLayout(context) //layout that contain rows
         globalLayout.orientation = LinearLayout.VERTICAL
         var counter = 0 // count the index of current strategy
@@ -109,9 +151,9 @@ class TradeFragment : Fragment() {
             rowLayout.layoutParams = layoutParams
 
             var charCounter = 0 // count the number of characters in a single row string
-            while (charCounter + arr[counter].strategyName.length <= 29) {
+            while (charCounter + arr[counter].instrumentName.length <= 29) {
                 val cardView = CardView(requireContext())
-                charCounter += arr[counter].strategyName.length
+                charCounter += arr[counter].instrumentName.length
 
                 val cardParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width
@@ -126,7 +168,7 @@ class TradeFragment : Fragment() {
 
                 val textView = TextView(context)
                 textView.setTextColor(Color.parseColor("#94FFFFFF"))
-                textView.text = arr[counter].strategyName
+                textView.text = arr[counter].instrumentName
 
                 cardView.addView(textView)
                 rowLayout.addView(cardView)
@@ -137,7 +179,8 @@ class TradeFragment : Fragment() {
                     return globalLayout
                 }
 
-                if (counter % 4 == 0) {
+                //Here is the setting the number of items in a row
+                if (counter % 5 == 0) {
                     break
                 }
 
@@ -184,10 +227,11 @@ class TradeFragment : Fragment() {
             //getting current date
             val sdf = SimpleDateFormat("dd/M/yyyy")
             val currentDate = sdf.format(Date())
-            //
+            //updating db entities
             val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description)
             tradeViewModel.addTrade(trade)
             tradeViewModel.addStrategy(Strategy(0,strategy))
+            tradeViewModel.addInstrument(Instrument(0,instrument))
             Toast.makeText(this.context,"Added",Toast.LENGTH_SHORT).show()
         }
 

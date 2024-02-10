@@ -178,11 +178,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="590dp"
             tools:layout_editor_absoluteX="54dp"
             tools:layout_editor_absoluteY="74dp"
             tools:listitem="@layout/list_item" />
-
+        <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
