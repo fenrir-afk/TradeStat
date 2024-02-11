@@ -19,7 +19,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginStart
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -34,8 +33,12 @@ import java.util.Date
 
 
 class TradeFragment : Fragment() {
-
+    companion object CardSettings {
+        const val CHAR_NUMBER_IN_ROW = 25
+        const val ITEMS_IN_ROW = 4
+    }
     private var _binding: FragmentTradeBinding? = null
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -151,34 +154,59 @@ class TradeFragment : Fragment() {
     */
     private fun instrumentDialog() {
         val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.window?.decorView?.setBackgroundResource(R.drawable.dialog_background)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.sort_by_tag)
+        with(dialog) {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            window?.setDimAmount(0F)
+            window?.decorView?.setBackgroundResource(R.drawable.dialog_background2)
+            setCancelable(true)
+            setContentView(R.layout.sort_by_tag)
+        }
+
         val layout = dialog.findViewById<LinearLayout>(R.id.tag_section)
-        var arr:List<Instrument> = tradeViewModel.getInstrumentList
-        if (arr.isNotEmpty()){
+        val arr: List<Instrument> = tradeViewModel.getInstrumentList
+
+        if (arr.isNotEmpty()) {
             layout.addView(createCardsForList(arr))
+
+            val displayMetrics = DisplayMetrics()
+            requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+            //val dialogWidth = (displayMetrics.widthPixels * 0.6).toInt() // set the dialog size
+            val marginFromRight = convertDpToPixels(10f) // Convert dp to pixels
+            val marginFromTop = convertDpToPixels(115f) // Convert dp to pixels
+
+            val window: Window = dialog.window!!
+            val lp: WindowManager.LayoutParams = window.attributes
+           // lp.width = dialogWidth
+            lp.gravity = Gravity.TOP or Gravity.END
+            lp.x = marginFromRight
+            lp.y = marginFromTop
+            window.attributes = lp
+
             dialog.show()
-        }else{
+        } else {
             binding.instrumentArrow.setImageResource(R.drawable.arrow)
-            Toast.makeText(requireContext(),"List is empty",Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "List is empty", Toast.LENGTH_LONG).show()
             return
         }
+
         dialog.setOnDismissListener {
             binding.instrumentArrow.setImageResource(R.drawable.arrow)
         }
+    }
 
+    private fun convertDpToPixels(dp: Float): Int {
+        val scale = resources.displayMetrics.density
+        return (dp * scale + 0.5f).toInt()
     }
     /*
         In this method, we create cards for strategy dialog
    */
     private fun createCardsForList(arr: List<Instrument>): LinearLayout {
+        var counter = 0 // count the index of current strategy
+        var globalCharNumber = 0
         val globalLayout = LinearLayout(context) //layout that contain rows
         globalLayout.orientation = LinearLayout.VERTICAL
-        var counter = 0 // count the index of current strategy
-
-        var globalCharNumber = 0
         for (i in 0..arr.size){
             globalCharNumber += arr.size
         }
@@ -194,7 +222,7 @@ class TradeFragment : Fragment() {
             rowLayout.layoutParams = layoutParams
 
             var charCounter = 0 // count the number of characters in a single row string
-            while (charCounter + arr[counter].instrumentName.length <= 29) {
+            while (charCounter + arr[counter].instrumentName.length <= CHAR_NUMBER_IN_ROW) { //set the number of chars in a row
                 val cardView = CardView(requireContext())
                 charCounter += arr[counter].instrumentName.length
 
@@ -223,7 +251,7 @@ class TradeFragment : Fragment() {
                 }
 
                 //Here is the setting the number of items in a row
-                if (counter % 5 == 0) {
+                if (counter % ITEMS_IN_ROW == 0) {
                     break
                 }
 
