@@ -14,7 +14,7 @@ import com.example.tradestat.data.model.Trade
 interface StrategiesDao {
     @Query("SELECT * FROM strategy_table")
     fun getAllStrategies(): List<Strategy>
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertStrategy(vararg strategy: Strategy)
     @Query("DELETE FROM strategy_table WHERE strategy_name=:strName")
     fun deleteStrategyByName(strName: String)

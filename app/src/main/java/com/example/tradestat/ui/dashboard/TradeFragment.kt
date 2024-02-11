@@ -264,13 +264,16 @@ class TradeFragment : Fragment() {
             val currentDate = sdf.format(Date())
             //updating db entities
             val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description)
-            tradeViewModel.addTrade(trade)
-            tradeViewModel.addStrategy(Strategy(0,strategy))
-            tradeViewModel.addInstrument(Instrument(0,instrument))
+            updateDb(trade,strategy,instrument)
             Toast.makeText(this.context,"Added",Toast.LENGTH_SHORT).show()
         }
 
 
+    }
+    fun updateDb(trade: Trade,strategy: String,instrument: String){
+        tradeViewModel.addInstrument(Instrument(0,instrument))
+        tradeViewModel.addStrategy(Strategy(0,strategy))
+        tradeViewModel.addTrade(trade)
     }
 
     override fun onDestroyView() {
