@@ -121,21 +121,27 @@ class TradeFragment : Fragment() {
 
         val arr: List<Strategy> = tradeViewModel.getStrategyList
         val parentLayout = dialog.findViewById<LinearLayout>(R.id.parent_layout)
+        if (arr.isNotEmpty()){
+            for (strategy in arr) {
+                val text = TextView(context)
+                text.text = strategy.strategyName
+                text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx.toFloat())
+                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.MorelightGray))
+                text.gravity = Gravity.CENTER_VERTICAL
+                parentLayout.addView(text)
+            }
 
-        for (strategy in arr) {
-            val text = TextView(context)
-            text.text = strategy.strategyName
-            text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx.toFloat())
-            text.setTextColor(ContextCompat.getColor(requireContext(), R.color.MorelightGray))
-            text.gravity = Gravity.CENTER_VERTICAL
-            parentLayout.addView(text)
-        }
+            dialog.setOnDismissListener {
+                binding.strategyArrow.setImageResource(R.drawable.arrow)
+            }
 
-        dialog.setOnDismissListener {
+            dialog.show()
+        }else{
             binding.strategyArrow.setImageResource(R.drawable.arrow)
+            Toast.makeText(requireContext(),"List is empty",Toast.LENGTH_LONG).show()
+            return
         }
 
-        dialog.show()
     }
 
 
@@ -155,7 +161,9 @@ class TradeFragment : Fragment() {
             layout.addView(createCardsForList(arr))
             dialog.show()
         }else{
+            binding.instrumentArrow.setImageResource(R.drawable.arrow)
             Toast.makeText(requireContext(),"List is empty",Toast.LENGTH_LONG).show()
+            return
         }
         dialog.setOnDismissListener {
             binding.instrumentArrow.setImageResource(R.drawable.arrow)
