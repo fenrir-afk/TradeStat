@@ -10,12 +10,14 @@ import com.example.tradestat.data.TradesRepository
 import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.Strategy
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class TradeViewModel(application: Application) : AndroidViewModel(application) {
     val getTradesList:LiveData<List<Trade>>
     var getStrategyList:List<Strategy> = arrayListOf()
     var getInstrumentList:List<Instrument> = arrayListOf()
+    var sortedTradeList:List<Trade> = arrayListOf()
     private val repository:TradesRepository
     init {
         val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
@@ -35,6 +37,12 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteTrade(trade)
         }
+    }
+    suspend fun updateListByDate(){ //in this method we get actual trade list sorted by date
+        var job = viewModelScope.async(Dispatchers.IO) {
+            sortedTradeList = repository.getSortedByDateList()
+        }
+        job.await()
     }
 
     //strategies section

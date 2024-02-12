@@ -28,6 +28,10 @@ import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -53,6 +57,7 @@ class TradeFragment : Fragment() {
         _binding = FragmentTradeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         tradeViewModel = ViewModelProvider(this)[TradeViewModel::class.java]
+       // tradeViewModel.updateListByDate() //get the sprt by da
         //RecyclerView implementation
         val adapter = TradeAdapter(this)
         val manager = LinearLayoutManager(this.context)
@@ -69,9 +74,16 @@ class TradeFragment : Fragment() {
         }
         binding.DateCard.setOnClickListener{
             if (binding.dateArrow.drawable.constantState == resources.getDrawable( R.drawable.arrow).constantState){
-                binding.dateArrow.setImageResource(R.drawable.arrow_up)
+                CoroutineScope(Dispatchers.Main).launch {
+                    tradeViewModel.updateListByDate() // wait until we get the data and update UI
+                    binding.dateArrow.setImageResource(R.drawable.arrow_up)
+                    adapter.setTradesData(tradeViewModel.sortedTradeList)
+                    binding.recyclerView.adapter = adapter
+                }
             }else{
                 binding.dateArrow.setImageResource(R.drawable.arrow)
+                adapter.setTradesData(tradeViewModel.getTradesList.value!!)
+                binding.recyclerView.adapter = adapter
             }
         }
 

@@ -6,11 +6,14 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 @Dao
 interface TradesDao {
-    @Query("SELECT * FROM trade_table")
+    @Query("SELECT * FROM trade_table ORDER BY id DESC")
     fun getAll(): LiveData<List<Trade>>
+    @Query("SELECT * FROM trade_table ")
+    fun sortByDate(): List<Trade>
     @Insert
     fun insert(vararg trades: Trade)
 

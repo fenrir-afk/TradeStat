@@ -7,14 +7,15 @@ import com.example.tradestat.data.model.Trade
 
 class TradesRepository(private val tradesDao: TradesDao,private val strategiesDao: StrategiesDao,private val instrumentsDao: InstrumentDao) {
     val readAllData:LiveData<List<Trade>> = tradesDao.getAll()
-
     //Trade part
-
     suspend fun addTrade(trade: Trade){
         tradesDao.insert(trade)
     }
     suspend fun deleteTrade(trade: Trade){
         tradesDao.delete(trade)
+    }
+    suspend fun getSortedByDateList():List<Trade>{
+        return tradesDao.sortByDate()
     }
 
     //Strategy part
