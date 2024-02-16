@@ -17,6 +17,12 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     suspend fun getSortedByDateList():List<Trade>{
         return tradesDao.sortByDate()
     }
+    suspend fun getSortedByStrategList(strategy: String):List<Trade>{
+        return tradesDao.sortByStrategy(strategy)
+    }
+    suspend fun getSortedByInstrumenList(instrument: String):List<Trade>{
+        return tradesDao.sortByInstrument(instrument)
+    }
 
     //Strategy part
 

@@ -44,6 +44,18 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
         }
         job.await()
     }
+    suspend fun updateListByStrategy(strategy: String){ //in this method we get actual trade list sorted by strategy
+        var job = viewModelScope.async(Dispatchers.IO) {
+            sortedTradeList = repository.getSortedByStrategList(strategy)
+        }
+        job.await()
+    }
+    suspend fun updateListByInstrument(instrument: String){ //in this method we get actual trade list sorted by instument
+        var job = viewModelScope.async(Dispatchers.IO) {
+            sortedTradeList = repository.getSortedByInstrumenList(instrument)
+        }
+        job.await()
+    }
 
     //strategies section
 

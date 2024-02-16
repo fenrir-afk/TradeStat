@@ -14,6 +14,10 @@ interface TradesDao {
     fun getAll(): LiveData<List<Trade>>
     @Query("SELECT * FROM trade_table ")
     fun sortByDate(): List<Trade>
+    @Query("SELECT * FROM trade_table WHERE trade_strategy == :strategy ORDER BY id DESC")
+    fun sortByStrategy(strategy:String): List<Trade>
+    @Query("SELECT * FROM trade_table WHERE Instrument == :instrument ORDER BY id DESC")
+    fun sortByInstrument(instrument:String): List<Trade>
     @Insert
     fun insert(vararg trades: Trade)
 

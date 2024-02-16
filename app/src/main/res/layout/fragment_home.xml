@@ -88,7 +88,7 @@
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:layout_width="45dp"
+                android:layout_width="20dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
@@ -112,8 +112,8 @@
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
-                    android:text="Рекомендации"
-                    android:textSize="13sp"/>
+                    android:text="Итоги"
+                    android:textSize="14sp"/>
 
             </androidx.cardview.widget.CardView>
 

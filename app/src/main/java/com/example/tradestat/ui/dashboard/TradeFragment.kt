@@ -57,7 +57,7 @@ class TradeFragment : Fragment() {
         _binding = FragmentTradeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         tradeViewModel = ViewModelProvider(this)[TradeViewModel::class.java]
-       // tradeViewModel.updateListByDate() //get the sprt by da
+        // tradeViewModel.updateListByDate() //get the sprt by da
         //RecyclerView implementation
         val adapter = TradeAdapter(this)
         val manager = LinearLayoutManager(this.context)
@@ -70,7 +70,7 @@ class TradeFragment : Fragment() {
         })
 
         binding.fab.setOnClickListener{
-           tradeDialog()
+            tradeDialog()
         }
         binding.DateCard.setOnClickListener{
             if (binding.dateArrow.drawable.constantState == resources.getDrawable( R.drawable.arrow).constantState){
@@ -100,7 +100,9 @@ class TradeFragment : Fragment() {
 
         return root
     }
-
+    /*
+            In this method, we implement the strategy dialog and its position
+    */
     private fun strategyDialog() {
         val dialog = Dialog(requireContext())
         with(dialog) {
@@ -112,27 +114,8 @@ class TradeFragment : Fragment() {
         }
 
         val window: Window = dialog.window!!
-        val wlp: WindowManager.LayoutParams = window.attributes
-
-        val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val screenWidth = displayMetrics.widthPixels
-        val screenHeight = displayMetrics.heightPixels
-
-        val dialogWidth = (screenWidth * 0.5).toInt()
-        val dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT
-
-        wlp.width = dialogWidth
-        wlp.height = dialogHeight
-        wlp.gravity = Gravity.END or Gravity.TOP
-
-        val xMarginInPx = resources.getDimensionPixelSize(R.dimen.dialog_horizontal_margin)
-        val yMarginInPx = resources.getDimensionPixelSize(R.dimen.dialog_vertical_margin)
+        window.attributes = setTheStrategyDialogPosition(dialog)
         val textSizeInPx = resources.getDimensionPixelSize(R.dimen.dialog_text_size)
-
-        wlp.x = xMarginInPx
-        wlp.y = yMarginInPx
-        window.attributes = wlp
 
         val arr: List<Strategy> = tradeViewModel.getStrategyList
         val parentLayout = dialog.findViewById<LinearLayout>(R.id.parent_layout)
@@ -143,13 +126,20 @@ class TradeFragment : Fragment() {
                 text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx.toFloat())
                 text.setTextColor(ContextCompat.getColor(requireContext(), R.color.MorelightGray))
                 text.gravity = Gravity.CENTER_VERTICAL
+                text.setOnClickListener {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val text =  (it as TextView).text.toString()
+                        tradeViewModel.updateListByStrategy(text) // wait until we get the data and update UI
+                        val adapter = TradeAdapter(requireActivity())
+                        adapter.setTradesData(tradeViewModel.sortedTradeList)
+                        binding.recyclerView.adapter = adapter
+                    }
+                }
                 parentLayout.addView(text)
             }
-
             dialog.setOnDismissListener {
                 binding.strategyArrow.setImageResource(R.drawable.arrow)
             }
-
             dialog.show()
         }else{
             binding.strategyArrow.setImageResource(R.drawable.arrow)
@@ -157,6 +147,24 @@ class TradeFragment : Fragment() {
             return
         }
 
+    }
+    private fun setTheStrategyDialogPosition(dialog: Dialog): WindowManager.LayoutParams {
+        //in this place we set the strategy dialog characteristics
+        val window: Window = dialog.window!!
+        val wlp: WindowManager.LayoutParams = window.attributes
+        val displayMetrics = DisplayMetrics()
+        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val screenWidth = displayMetrics.widthPixels
+        val dialogWidth = (screenWidth * 0.5).toInt()
+        val dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT
+        wlp.width = dialogWidth
+        wlp.height = dialogHeight
+        wlp.gravity = Gravity.END or Gravity.TOP
+        val xMarginInPx = resources.getDimensionPixelSize(R.dimen.dialog_horizontal_margin)
+        val yMarginInPx = resources.getDimensionPixelSize(R.dimen.dialog_vertical_margin)
+        wlp.x = xMarginInPx
+        wlp.y = yMarginInPx
+        return wlp
     }
 
 
@@ -189,7 +197,7 @@ class TradeFragment : Fragment() {
 
             val window: Window = dialog.window!!
             val lp: WindowManager.LayoutParams = window.attributes
-           // lp.width = dialogWidth
+            // lp.width = dialogWidth
             lp.gravity = Gravity.TOP or Gravity.END
             lp.x = marginFromRight
             lp.y = marginFromTop
