@@ -30,7 +30,6 @@ import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -112,29 +111,14 @@ class TradeFragment : Fragment() {
             setCancelable(true)
             setContentView(R.layout.strategy_dialog)
         }
-
         val window: Window = dialog.window!!
         window.attributes = setTheStrategyDialogPosition(dialog)
-        val textSizeInPx = resources.getDimensionPixelSize(R.dimen.dialog_text_size)
 
         val arr: List<Strategy> = tradeViewModel.getStrategyList
         val parentLayout = dialog.findViewById<LinearLayout>(R.id.parent_layout)
         if (arr.isNotEmpty()){
             for (strategy in arr) {
-                val text = TextView(context)
-                text.text = strategy.strategyName
-                text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx.toFloat())
-                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.MorelightGray))
-                text.gravity = Gravity.CENTER_VERTICAL
-                text.setOnClickListener {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        val text =  (it as TextView).text.toString()
-                        tradeViewModel.updateListByStrategy(text) // wait until we get the data and update UI
-                        val adapter = TradeAdapter(requireActivity())
-                        adapter.setTradesData(tradeViewModel.sortedTradeList)
-                        binding.recyclerView.adapter = adapter
-                    }
-                }
+                val text = createBaseStrategyItem(strategy.strategyName)
                 parentLayout.addView(text)
             }
             dialog.setOnDismissListener {
@@ -147,6 +131,24 @@ class TradeFragment : Fragment() {
             return
         }
 
+    }
+    fun createBaseStrategyItem(strategy:String): TextView {
+        val textSizeInPx = resources.getDimensionPixelSize(R.dimen.dialog_text_size)
+        val text = TextView(context)
+        text.text = strategy
+        text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx.toFloat())
+        text.setTextColor(ContextCompat.getColor(requireContext(), R.color.MorelightGray))
+        text.gravity = Gravity.CENTER_VERTICAL
+        text.setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
+                val text =  (it as TextView).text.toString()
+                tradeViewModel.updateListByStrategy(text) // wait until we get the data and update UI
+                val adapter = TradeAdapter(requireActivity())
+                adapter.setTradesData(tradeViewModel.sortedTradeList)
+                binding.recyclerView.adapter = adapter
+            }
+        }
+        return text
     }
     private fun setTheStrategyDialogPosition(dialog: Dialog): WindowManager.LayoutParams {
         //in this place we set the strategy dialog characteristics
@@ -191,13 +193,11 @@ class TradeFragment : Fragment() {
             val displayMetrics = DisplayMetrics()
             requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-            //val dialogWidth = (displayMetrics.widthPixels * 0.6).toInt() // set the dialog size
             val marginFromRight = convertDpToPixels(10f) // Convert dp to pixels
             val marginFromTop = convertDpToPixels(115f) // Convert dp to pixels
 
             val window: Window = dialog.window!!
             val lp: WindowManager.LayoutParams = window.attributes
-            // lp.width = dialogWidth
             lp.gravity = Gravity.TOP or Gravity.END
             lp.x = marginFromRight
             lp.y = marginFromTop
@@ -241,27 +241,10 @@ class TradeFragment : Fragment() {
             )
             rowLayout.layoutParams = layoutParams
 
-            var charCounter = 0 // count the number of characters in a single row string
-            while (charCounter + arr[counter].instrumentName.length <= CHAR_NUMBER_IN_ROW) { //set the number of chars in a row
-                val cardView = CardView(requireContext())
+            var charCounter = 0 // count the number of characters in a single row
+            while (charCounter + arr[counter].instrumentName.length <= CHAR_NUMBER_IN_ROW) { //check the number of chars in a row
                 charCounter += arr[counter].instrumentName.length
-
-                val cardParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width
-                    LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
-                )
-                cardParams.setMargins(20, 18, 0, 0)
-
-                cardView.layoutParams = cardParams
-                cardView.radius = 16F
-                cardView.setCardBackgroundColor(Color.parseColor("#4B836B6B"))
-                cardView.setContentPadding(10, 10, 10, 10)
-
-                val textView = TextView(context)
-                textView.setTextColor(Color.parseColor("#94FFFFFF"))
-                textView.text = arr[counter].instrumentName
-
-                cardView.addView(textView)
+                val cardView = CreateBaseInstrumentCard(arr[counter].instrumentName) //create card with textView and CLickListener
                 rowLayout.addView(cardView)
                 counter++ // counter counts the number of created cardViews
 
@@ -274,12 +257,41 @@ class TradeFragment : Fragment() {
                 if (counter % ITEMS_IN_ROW == 0) {
                     break
                 }
-
-
             }
             globalLayout.addView(rowLayout)
         }
         return globalLayout
+    }
+    /*
+       In this method, we create a base card for Instrument Dialog
+  */
+    fun CreateBaseInstrumentCard(instrumentName: String): CardView {
+        val cardView = CardView(requireContext())
+        val cardParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width
+            LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
+        )
+        cardParams.setMargins(20, 18, 0, 0)
+        cardView.layoutParams = cardParams
+        cardView.radius = 16F
+        cardView.setCardBackgroundColor(Color.parseColor("#4B836B6B"))
+        cardView.setContentPadding(10, 10, 10, 10)
+        val textView = TextView(context)
+        textView.setTextColor(Color.parseColor("#94FFFFFF"))
+        textView.text = instrumentName
+
+        textView.setOnClickListener {//implementation of list sorting
+            CoroutineScope(Dispatchers.Main).launch {
+                val text =  (it as TextView).text.toString()
+                tradeViewModel.updateListByInstrument(text) // wait until we get the data and update UI
+                val adapter = TradeAdapter(requireActivity())
+                adapter.setTradesData(tradeViewModel.sortedTradeList)
+                binding.recyclerView.adapter = adapter
+            }
+        }
+
+        cardView.addView(textView)
+        return cardView
     }
     /*
          In this method, we create and display dialog for adding trade to the main trade list
