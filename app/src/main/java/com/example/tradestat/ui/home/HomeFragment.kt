@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.tradestat.CustomView1.RatingView
 import com.example.tradestat.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -25,6 +24,13 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.analyticalPieChart1.setDataChart(
+            listOf(
+                Pair(10, "Short positions"),
+                Pair(4, "Long postions"),
+            )
+        )
+        binding.analyticalPieChart1.startAnimation()
         val root: View = binding.root
         return root
     }

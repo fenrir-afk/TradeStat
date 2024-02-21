@@ -23,4 +23,44 @@
         <item>Short</item>
         <item>Long</item>
     </string-array>
+
+
+    <string name="analyticalPieChartAmount">Всего</string>
+    <string-array name="analyticalPieChartColorArray">
+        <item>#34AC44</item>
+        <item>#C4CF24</item>
+        <item>#B0ADD5</item>
+        <item>#7E3605</item>
+        <item>#6054EA</item>
+    </string-array>
+
+    <string-array name="analyticalPieChartColorArray2">
+        <item>#58D984</item>
+        <item>#D9455F</item>
+    </string-array>
+
+    <string-array name="analyticalPieChartColorArray3">
+        <item>#488C08</item>
+        <item>#A3E328</item>
+    </string-array>
+
+    <string-array name="analyticalPieChartColorArray5">
+        <item>#81BECE</item>
+        <item>#E9E9E9</item>
+        <item>#E38664</item>
+        <item>#e4d6f8</item>
+        <item>#5BA0BF</item>
+        <item>#aaa2d8</item>
+        <item>#a27eb8</item>
+        <item>#ED413E</item>
+        <item>#EFB786</item>
+        <item>#604d9e</item>
+    </string-array>
+
+    <string-array name="analyticalPieChartColorArray6">
+        <item>#DD2255</item>
+        <item>#FC5F6A</item>
+        <item>#E7242D</item>
+        <item>#F3BFC3</item>
+    </string-array>
 </resources>

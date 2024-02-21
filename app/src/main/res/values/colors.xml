@@ -20,4 +20,7 @@
     <color name="lightGreen">#8AD138</color>
     <color name="endGreen">#547033</color>
     <color name="black_grey">#353333</color>
+
+    <color name="myTextColor">#000000</color>
+    <color name="myHintColor">#808080</color>
 </resources>
