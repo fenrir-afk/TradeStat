@@ -59,6 +59,7 @@ dependencies {
     //Dialog
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
-
+    //pie chart lib
+    implementation "app.futured.donut:donut:2.2.3"
 
 }

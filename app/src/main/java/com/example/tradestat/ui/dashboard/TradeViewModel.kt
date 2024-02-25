@@ -27,7 +27,6 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
         getTradesList = repository.readAllData
     }
     //trade section
-
     fun addTrade(trade: Trade){
         viewModelScope.launch(Dispatchers.IO) {
             repository.addTrade(trade)
@@ -56,7 +55,6 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
         }
         job.await()
     }
-
     //strategies section
 
     fun redStrategiesFromRepository(){

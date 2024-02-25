@@ -23,7 +23,21 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     suspend fun getSortedByInstrumenList(instrument: String):List<Trade>{
         return tradesDao.sortByInstrument(instrument)
     }
+    suspend fun getShortPos(): Int {
+        return tradesDao.getCountShortTrades()
+    }
 
+    suspend fun getLongPos(): Int {
+        return  tradesDao.getCountLongTrades()
+    }
+
+    suspend fun getWinNumber(): Int {
+        return tradesDao.getCountWinTrades()
+    }
+
+    suspend fun getDefNumber(): Int {
+        return  tradesDao.getCountDefTrades()
+    }
     //Strategy part
 
     suspend fun readStrategies(): List<Strategy> {
@@ -37,6 +51,7 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     suspend fun deleteStrategy(strategy: String) {
         strategiesDao.deleteStrategyByName(strategy)
     }
+
 
     //instrument part
 

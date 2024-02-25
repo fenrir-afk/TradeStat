@@ -16,28 +16,76 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             app:cardCornerRadius="16dp">
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/gradient4" />
-            <com.example.tradestat.analyticalpiechart.customView.AnalyticalPieChart
-                android:id="@+id/analyticalPieChart_1"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                app:pieChartColors="@array/analyticalPieChartColorArray3"
-                app:pieChartTextAmountColor="@color/white"
-                app:pieChartTextNumberColor="@color/white"
-                app:pieChartTextDescriptionColor="@color/MorelightGray"
-                app:pieChartTextNumberSize="16sp"
-                app:pieChartTextDescriptionSize="14sp"
-                app:pieChartTextAmount="@string/analyticalPieChartAmount"
+                android:src="@drawable/gradient4"/>
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                app:pieChartCircleStrokeWidth="6dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                app:pieChartCircleSectionSpace="2" />
+                android:orientation="horizontal">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center_vertical">
+                    <app.futured.donut.DonutProgressView
+                        android:id="@+id/donut_view"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        app:donut_bgLineColor="@color/MorelightGray"
+                        app:donut_gapWidth="20"
+                        app:donut_gapAngle="270"
+                        app:donut_strokeWidth="16dp"/>
+                    <TextView
+                        android:id="@+id/Donut_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="7dp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/pro_regular"
+                        android:text="55"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:layout_marginTop="13dp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/pro_regular"
+                        android:text="All"/>
 
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/long_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/pro_regular"
+                        android:text="Long positions: "/>
+                    <TextView
+                        android:id="@+id/short_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/pro_regular"
+                        android:text="Short positions: "/>
+                </LinearLayout>
+
+            </LinearLayout>
 
 
 
@@ -199,7 +247,64 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@color/black_grey" />
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center_vertical">
+                    <app.futured.donut.DonutProgressView
+                        android:id="@+id/donut_view_second"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        app:donut_bgLineColor="@color/MorelightGray"
+                        app:donut_gapWidth="20"
+                        app:donut_gapAngle="270"
+                        app:donut_strokeWidth="16dp"/>
+                    <TextView
+                        android:id="@+id/Donut_text_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/pro_regular"
+                        android:text="X%"/>
 
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/Win_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/pro_regular"
+                        android:text="Win positions: "/>
+                    <TextView
+                        android:id="@+id/Def_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/pro_regular"
+                        android:text="Defeat positions: "/>
+                </LinearLayout>
+
+            </LinearLayout>
 
 
         </androidx.cardview.widget.CardView>
