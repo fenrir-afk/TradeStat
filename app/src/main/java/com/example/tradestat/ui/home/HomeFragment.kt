@@ -79,7 +79,7 @@ class HomeFragment : Fragment() {
             )
             binding.donutViewSecond.cap = 100F // 100% is all
             binding.donutViewSecond.submitData(listOf(section1, section2))
-            binding.DonutTextRating.text = ((wins * 100)/(wins+defeats)).toString() + "%"
+            binding.DonutTextRating.text = "$amount1%"
             binding.WinNumber.text = "Win positions: $wins"
             binding.WinNumber.setTextColor(Color.GREEN)
             binding.DefNumber.text = "Defeat positions: $defeats"
