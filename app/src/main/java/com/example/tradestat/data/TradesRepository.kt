@@ -9,68 +9,71 @@ import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 
 class TradesRepository(private val tradesDao: TradesDao,private val strategiesDao: StrategiesDao,private val instrumentsDao: InstrumentDao) {
-    val readAllData:LiveData<List<Trade>> = tradesDao.getAll()
+    //val readAllData:LiveData<List<Trade>> = tradesDao.getAll()
     //Trade part
-    suspend fun addTrade(trade: Trade){
+    fun addTrade(trade: Trade){
         tradesDao.insert(trade)
     }
-    suspend fun deleteTrade(trade: Trade){
+    fun deleteTrade(trade: Trade){
         tradesDao.delete(trade)
     }
-    suspend fun getSortedByDateList():List<Trade>{
+    fun getSortedByDateDescending():List<Trade>{
         return tradesDao.sortByDate()
     }
-    suspend fun getSortedByStrategList(strategy: String):List<Trade>{
+    fun getSortedByDateAscending():List<Trade>{
+        return tradesDao.getAll()
+    }
+    fun getSortedByStrategList(strategy: String):List<Trade>{
         return tradesDao.sortByStrategy(strategy)
     }
-    suspend fun getSortedByInstrumenList(instrument: String):List<Trade>{
+    fun getSortedByInstrumenList(instrument: String):List<Trade>{
         return tradesDao.sortByInstrument(instrument)
     }
-    suspend fun getShortPos(): Int {
+    fun getShortPos(): Int {
         return tradesDao.countTradesByDirection(Directions.Short.name)
     }
 
-    suspend fun getLongPos(): Int {
+    fun getLongPos(): Int {
         return  tradesDao.countTradesByDirection(Directions.Long.name)
     }
 
-    suspend fun getWinNumber(): Int {
+    fun getWinNumber(): Int {
         return tradesDao.countTradesByResult(Results.Victory.name)
     }
 
-    suspend fun getDefNumber(): Int {
+    fun getDefNumber(): Int {
         return  tradesDao.countTradesByResult(Results.Defeat.name)
     }
 
-    suspend fun getDayStatistic(results: Results,day:DaysOfWeek): Int {
+    fun getDayStatistic(results: Results,day:DaysOfWeek): Int {
         return  tradesDao.countTradesByDayAndResult(results.name,day.name)
     }
     //Strategy part
 
-    suspend fun readStrategies(): List<Strategy> {
+    fun readStrategies(): List<Strategy> {
         return strategiesDao.getAllStrategies()
     }
 
-    suspend fun addStrategy(strategy: Strategy) {
+    fun addStrategy(strategy: Strategy) {
         strategiesDao.insertStrategy(strategy)
     }
 
-    suspend fun deleteStrategy(strategy: String) {
+    fun deleteStrategy(strategy: String) {
         strategiesDao.deleteStrategyByName(strategy)
     }
 
 
     //instrument part
 
-    suspend fun readInstruments(): List<Instrument> {
+    fun readInstruments(): List<Instrument> {
         return instrumentsDao.getAllInstruments()
     }
 
-    suspend fun addInstrument(instrument: Instrument) {
+    fun addInstrument(instrument: Instrument) {
         instrumentsDao.insertInstrument(instrument)
     }
 
-    suspend fun deleteInstrument(instrument: String) {
+    fun deleteInstrument(instrument: String) {
         instrumentsDao.deleteInstrumentByName(instrument)
     }
 }

@@ -13,7 +13,7 @@ import java.time.DayOfWeek
 @Dao
 interface TradesDao {
     @Query("SELECT * FROM trade_table ORDER BY id DESC")
-    fun getAll(): LiveData<List<Trade>>
+    fun getAll(): List<Trade>
 
 
     @Query("SELECT * FROM trade_table ")

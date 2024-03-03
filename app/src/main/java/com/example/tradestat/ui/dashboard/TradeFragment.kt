@@ -24,17 +24,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradestat.R
-import com.example.tradestat.data.model.DaysOfWeek
-import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Instrument
-import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.Date
 
 
@@ -59,11 +54,12 @@ class TradeFragment : Fragment() {
         _binding = FragmentTradeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         tradeViewModel = ViewModelProvider(this)[TradeViewModel::class.java]
+        tradeViewModel.updateListByDateAscending()
         val adapter = TradeAdapter(this)
         val manager = LinearLayoutManager(this.context)
 
 
-        tradeViewModel.getTradesList.observe(viewLifecycleOwner, Observer {
+        tradeViewModel.finalList.observe(viewLifecycleOwner, Observer {
             adapter.setTradesData(it)
             binding.recyclerView.layoutManager = manager // Assigning LayoutManager to RecyclerView
             binding.recyclerView.adapter = adapter
@@ -74,16 +70,11 @@ class TradeFragment : Fragment() {
         }
         binding.DateCard.setOnClickListener{
             if (binding.dateArrow.drawable.constantState == resources.getDrawable( R.drawable.arrow).constantState){
-                CoroutineScope(Dispatchers.Main).launch {
-                    tradeViewModel.updateListByDate() // wait until we get the data and update UI
-                    binding.dateArrow.setImageResource(R.drawable.arrow_up)
-                    adapter.setTradesData(tradeViewModel.sortedTradeList)
-                    binding.recyclerView.adapter = adapter
-                }
+                tradeViewModel.updateListByDateDescending() // wait until we get the data and update UI
+                binding.dateArrow.setImageResource(R.drawable.arrow_up)
             }else{
                 binding.dateArrow.setImageResource(R.drawable.arrow)
-                adapter.setTradesData(tradeViewModel.getTradesList.value!!)
-                binding.recyclerView.adapter = adapter
+                tradeViewModel.updateListByDateAscending()
             }
         }
 
@@ -133,7 +124,7 @@ class TradeFragment : Fragment() {
         }
 
     }
-    fun createBaseStrategyItem(strategy: String, dialog: Dialog): TextView {
+    private fun createBaseStrategyItem(strategy: String, dialog: Dialog): TextView {
         val textSizeInPx = resources.getDimensionPixelSize(R.dimen.dialog_text_size)
         val text = TextView(context)
         text.text = strategy
@@ -151,21 +142,11 @@ class TradeFragment : Fragment() {
    */
     private fun updateRecyclerVIew(view: View, i: Int) {
         if (i == 1){ // code of strategyDialog
-            CoroutineScope(Dispatchers.Main).launch {
-                val text =  (view as TextView).text.toString()
-                tradeViewModel.updateListByStrategy(text) // wait until we get the data and update UI
-                val adapter = TradeAdapter(requireActivity())
-                adapter.setTradesData(tradeViewModel.sortedTradeList)
-                binding.recyclerView.adapter = adapter
-            }
+            val text =  (view as TextView).text.toString()
+            tradeViewModel.updateListByStrategy(text)
         }else{ //instrument dialog
-            CoroutineScope(Dispatchers.Main).launch {
-                val text =  (view as TextView).text.toString()
-                tradeViewModel.updateListByInstrument(text) // wait until we get the data and update UI
-                val adapter = TradeAdapter(requireActivity())
-                adapter.setTradesData(tradeViewModel.sortedTradeList)
-                binding.recyclerView.adapter = adapter
-            }
+            val text =  (view as TextView).text.toString()
+            tradeViewModel.updateListByInstrument(text)
         }
     }
     private fun setTheStrategyDialogPosition(dialog: Dialog): WindowManager.LayoutParams {
@@ -340,9 +321,8 @@ class TradeFragment : Fragment() {
 
         }else{
             //getting current date
-            val sdf = SimpleDateFormat("dd/M/yyyy")
+            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
             val currentDate = sdf.format(Date())
-            //updating db entities
             val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description)
             updateDb(trade,strategy,instrument)
             Toast.makeText(this.context,"Added",Toast.LENGTH_SHORT).show()
