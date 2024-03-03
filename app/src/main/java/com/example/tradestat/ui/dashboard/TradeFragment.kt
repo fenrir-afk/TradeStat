@@ -257,7 +257,7 @@ class TradeFragment : Fragment() {
             while (charCounter + arr[counter].instrumentName.length <= CHAR_NUMBER_IN_ROW) { //check the number of chars in a row
                 charCounter += arr[counter].instrumentName.length
 
-                val cardView = CreateBaseInstrumentCard(arr[counter].instrumentName,dialog) //create card with textView and CLickListener
+                val cardView = createBaseInstrumentCard(arr[counter].instrumentName,dialog) //create card with textView and CLickListener
 
                 rowLayout.addView(cardView)
                 counter++ // counter counts the number of created cardViews
@@ -279,7 +279,7 @@ class TradeFragment : Fragment() {
     /*
        In this method, we create a base card for Instrument Dialog
   */
-    fun CreateBaseInstrumentCard(instrumentName: String, dialog: Dialog): CardView {
+    private fun createBaseInstrumentCard(instrumentName: String, dialog: Dialog): CardView {
         val cardView = CardView(requireContext())
         val cardParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width

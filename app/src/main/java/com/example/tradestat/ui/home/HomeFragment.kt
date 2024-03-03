@@ -65,16 +65,17 @@ class HomeFragment : Fragment() {
             binding.longNumber.text = "Long positions: $longs"
 
             //The second pie chart and its labels
+            var amount1  = if (wins + defeats != 0) ((wins * 100)/(wins+defeats)).toFloat() else 0f
             section1 = DonutSection(
                 name = "Win_section",
                 color = Color.parseColor("#00FF00"),
-                amount = ((wins * 100)/(wins+defeats)).toFloat()
+                amount =  amount1
             )
-
+            var amount2  = if (wins + defeats != 0) ((defeats * 100)/(wins+defeats)).toFloat() else 0f
             section2 = DonutSection(
                 name = "Defeat_section",
                 color = Color.parseColor("#DC143C"),
-                amount = ((defeats * 100)/(wins+defeats)).toFloat()
+                amount = amount2
             )
             binding.donutViewSecond.cap = 100F // 100% is all
             binding.donutViewSecond.submitData(listOf(section1, section2))
