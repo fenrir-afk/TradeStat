@@ -8,6 +8,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
+import java.time.DayOfWeek
+
 @Dao
 interface TradesDao {
     @Query("SELECT * FROM trade_table ORDER BY id DESC")
@@ -22,16 +24,16 @@ interface TradesDao {
     fun sortByInstrument(instrument:String): List<Trade>
 
 
-    @Query("SELECT COUNT(*) FROM trade_table WHERE trade_direction = 'Short'")
-    fun getCountShortTrades(): Int
-    @Query("SELECT COUNT(*) FROM trade_table WHERE trade_direction = 'Long'")
-    fun getCountLongTrades(): Int
+    @Query("SELECT COUNT(*) FROM trade_table WHERE trade_direction = :direction")
+    fun countTradesByDirection(direction:String): Int
+
+    @Query("SELECT COUNT(*) FROM trade_table WHERE trade_result = :result")
+    fun countTradesByResult(result:String): Int
 
 
-    @Query("SELECT COUNT(*) FROM trade_table WHERE trade_result = 'Victory'")
-    fun getCountWinTrades(): Int
-    @Query("SELECT COUNT(*) FROM trade_table WHERE trade_result = 'Defeat'")
-    fun getCountDefTrades(): Int
+    @Query("SELECT COUNT(*) FROM trade_table WHERE trade_result = :result and trade_date = :dayOfWeek")
+    fun countTradesByDayAndResult(result:String,dayOfWeek: String): Int
+
 
 
     @Insert

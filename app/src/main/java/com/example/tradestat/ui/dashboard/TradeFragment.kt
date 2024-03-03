@@ -24,7 +24,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradestat.R
+import com.example.tradestat.data.model.DaysOfWeek
+import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Instrument
+import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding

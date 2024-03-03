@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tradestat.R
+import com.example.tradestat.data.model.Directions
+import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -50,7 +52,7 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
 
         // Set color according to trade result
         holder.tradeResult.setTextColor(
-            if (trade.tradeResult == "Victory") Color.GREEN
+            if (trade.tradeResult == Results.Victory.name) Color.GREEN
             else Color.RED
         )
 
@@ -72,7 +74,7 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
 
             // Set image resource according to trade direction
             image.setImageResource(
-                if (trade.tradeDirection == "Short") R.drawable.bear
+                if (trade.tradeDirection == Directions.Short.name) R.drawable.bear
                 else R.drawable.mull
             )
 
