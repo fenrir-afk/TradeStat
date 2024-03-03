@@ -39,13 +39,13 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
     fun addTrade(trade: Trade){
         viewModelScope.launch(Dispatchers.IO) {
             repository.addTrade(trade)
-            sortedTradeList.postValue(repository.getSortedByDateAscending())
+            sortedTradeList.postValue(repository.getSortedByDateAscending())//Update list
         }
     }
     fun deleteTrade(trade: Trade){
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteTrade(trade)
-            sortedTradeList.postValue(repository.getSortedByDateAscending())
+            sortedTradeList.postValue(repository.getSortedByDateAscending())//Update list
         }
     }
 

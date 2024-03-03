@@ -321,7 +321,7 @@ class TradeFragment : Fragment() {
 
         }else{
             //getting current date
-            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+            val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
             val currentDate = sdf.format(Date())
             val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description)
             updateDb(trade,strategy,instrument)
