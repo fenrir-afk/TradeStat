@@ -9,7 +9,6 @@ import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 
 class TradesRepository(private val tradesDao: TradesDao,private val strategiesDao: StrategiesDao,private val instrumentsDao: InstrumentDao) {
-    //val readAllData:LiveData<List<Trade>> = tradesDao.getAll()
     //Trade part
     fun addTrade(trade: Trade){
         tradesDao.insert(trade)
