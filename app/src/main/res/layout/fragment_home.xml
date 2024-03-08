@@ -311,6 +311,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/date_card"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="30dp"
@@ -346,6 +347,7 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/indicator_card"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="15dp"
@@ -377,6 +379,7 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/strategy_card"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="15dp"

@@ -8,8 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import app.futured.donut.DonutSection
+import com.example.tradestat.R
 import com.example.tradestat.databinding.FragmentHomeBinding
+
 
 class HomeFragment : Fragment() {
 
@@ -28,8 +32,8 @@ class HomeFragment : Fragment() {
     ): View {
         val homeViewModel =
             ViewModelProvider(this)[HomeViewModel::class.java]
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        homeViewModel.updateNumbers()
         homeViewModel.getNumberList.observe(viewLifecycleOwner, Observer {
             shorts = it[0]
             longs = it[1]
@@ -38,12 +42,13 @@ class HomeFragment : Fragment() {
             donut1()
             donut2()
         })
-        homeViewModel.updateNumbers()
-
+        binding.dateCard.setOnClickListener{
+            view?.findNavController()?.navigate(R.id.action_navigation_home_to_dateActivity)
+        }
         val root: View = binding.root
         return root
     }
-    fun donut1(){
+    private fun donut1(){
         //The first pie chart and its labels
         var section1 = DonutSection(
             name = "Short_section",
@@ -62,7 +67,7 @@ class HomeFragment : Fragment() {
         binding.shortNumber.text = "Short positions: $shorts"
         binding.longNumber.text = "Long positions: $longs"
     }
-    fun donut2() {
+    private fun donut2() {
         //The second pie chart and its labels
         var amount1  = if (this.wins + this.defeats != 0) ((this.wins * 100)/(this.wins + this.defeats)).toFloat() else 0f
         var section1 = DonutSection(
