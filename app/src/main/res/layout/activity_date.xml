@@ -28,48 +28,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@color/black_grey" />
-                <LinearLayout
-                    android:layout_width="300dp"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/monday_chart"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="45sp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/old_rus"
-                        android:text="Mon"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_marginStart="40dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/monday_win"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Win positions: "/>
-                        <TextView
-                            android:id="@+id/monday_def"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Defeat positions: "/>
-                    </LinearLayout>
-
-                </LinearLayout>
+                    />
 
 
             </androidx.cardview.widget.CardView>
@@ -89,50 +52,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@color/black_grey" />
-                <LinearLayout
-                    android:layout_width="300dp"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/tuesday_chart"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/old_rus"
-                        android:text="Tue"
-                        android:textColor="@color/white"
-                        android:textSize="45sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_marginStart="40dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/tuesday_win"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Win positions: "/>
-                        <TextView
-                            android:id="@+id/tuesday_def"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Defeat positions: "/>
-                    </LinearLayout>
-
-                </LinearLayout>
+                    />
 
 
             </androidx.cardview.widget.CardView>
@@ -152,48 +76,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@color/black_grey" />
-                <LinearLayout
-                    android:layout_width="300dp"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/wednesday_chart"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="45sp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/old_rus"
-                        android:text="Wed"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_marginStart="40dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/wednesday_win"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Win positions: "/>
-                        <TextView
-                            android:id="@+id/wednesday_def"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Defeat positions: "/>
-                    </LinearLayout>
-
-                </LinearLayout>
+                    />
 
 
             </androidx.cardview.widget.CardView>
@@ -213,48 +100,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@color/black_grey" />
-                <LinearLayout
-                    android:layout_width="300dp"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/thursday_chart"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="45sp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/old_rus"
-                        android:text="Thu"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_marginStart="40dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/thursday_win"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Win positions: "/>
-                        <TextView
-                            android:id="@+id/thursday_def"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Defeat positions: "/>
-                    </LinearLayout>
-
-                </LinearLayout>
+                    />
 
 
             </androidx.cardview.widget.CardView>
@@ -274,48 +124,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@color/black_grey" />
-                <LinearLayout
-                    android:layout_width="300dp"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/friday_chart"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="45sp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/old_rus"
-                        android:text="Fri"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_marginStart="40dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/friday_win"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Win positions: "/>
-                        <TextView
-                            android:id="@+id/friday_def"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Defeat positions: "/>
-                    </LinearLayout>
-
-                </LinearLayout>
+                    />
 
 
             </androidx.cardview.widget.CardView>
@@ -335,48 +148,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@color/black_grey" />
-                <LinearLayout
-                    android:layout_width="300dp"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/saturday_chart"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="45sp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/old_rus"
-                        android:text="Sat"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_marginStart="40dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/saturday_win"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Win positions: "/>
-                        <TextView
-                            android:id="@+id/saturday_def"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Defeat positions: "/>
-                    </LinearLayout>
-
-                </LinearLayout>
+                    />
 
 
             </androidx.cardview.widget.CardView>
@@ -396,50 +172,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@color/black_grey" />
-                <LinearLayout
-                    android:layout_width="300dp"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/sunday_chart"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="45sp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/old_rus"
-                        android:text="Sun"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_marginStart="40dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/sunday_win"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Win positions: "
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/sunday_def"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/pro_regular"
-                            android:text="Defeat positions: "/>
-                    </LinearLayout>
-
-                </LinearLayout>
+                    />
 
 
             </androidx.cardview.widget.CardView>

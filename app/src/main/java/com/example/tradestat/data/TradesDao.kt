@@ -1,14 +1,10 @@
 package com.example.tradestat.data
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
-import java.time.DayOfWeek
 
 @Dao
 interface TradesDao {
@@ -31,8 +27,8 @@ interface TradesDao {
     fun countTradesByResult(result:String): Int
 
 
-    @Query("SELECT COUNT(*) FROM trade_table WHERE trade_result = :result and trade_date = :dayOfWeek")
-    fun countTradesByDayAndResult(result:String,dayOfWeek: String): Int
+    @Query("SELECT * FROM trade_table WHERE trade_date == :dayOfWeek")
+    fun getTradesByDay(dayOfWeek: String): List<Trade>
 
 
 

@@ -1,6 +1,5 @@
 package com.example.tradestat.data
 
-import androidx.lifecycle.LiveData
 import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Instrument
@@ -44,8 +43,8 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
         return  tradesDao.countTradesByResult(Results.Defeat.name)
     }
 
-    fun getDayStatistic(results: Results,day:DaysOfWeek): Int {
-        return  tradesDao.countTradesByDayAndResult(results.name,day.name)
+    fun getDayStatistic(day:DaysOfWeek): List<Trade> {
+        return  tradesDao.getTradesByDay(day.name)
     }
     //Strategy part
 
