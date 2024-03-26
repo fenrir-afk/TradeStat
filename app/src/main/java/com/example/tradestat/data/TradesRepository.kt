@@ -46,7 +46,13 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     fun getDayStatistic(day:DaysOfWeek): List<Trade> {
         return  tradesDao.getTradesByDay(day.name)
     }
+    fun countTradesByResultAndDate(results: Results,day:DaysOfWeek): Int {
+        return  tradesDao.countTradesByResultAndDate(results.name,day.name)
+    }
+
+
     //Strategy part
+
 
     fun readStrategies(): List<Strategy> {
         return strategiesDao.getAllStrategies()
@@ -61,7 +67,9 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     }
 
 
+
     //instrument part
+
 
     fun readInstruments(): List<Instrument> {
         return instrumentsDao.getAllInstruments()

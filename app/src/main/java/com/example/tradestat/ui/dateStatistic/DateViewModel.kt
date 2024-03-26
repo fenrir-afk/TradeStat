@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DateViewModel(application: Application) : AndroidViewModel(application) {
+    val  RatingList: MutableLiveData<MutableList<Int>> = MutableLiveData()
     val  mondayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
     val  thursdayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
     val  tuesdayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
@@ -28,15 +29,15 @@ class DateViewModel(application: Application) : AndroidViewModel(application) {
         val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
         repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
     }
-    fun updateDay(){
+    fun updateDay(){ // in this method we get coordinates relatively to the trade list
         viewModelScope.launch(Dispatchers.IO) {
-            var mondayArr  = repository.getDayStatistic(DaysOfWeek.Monday)
-            var thursdayArr  = repository.getDayStatistic(DaysOfWeek.Thursday)
-            var tuesdayArr  = repository.getDayStatistic(DaysOfWeek.Tuesday)
-            var wednesdayArr  = repository.getDayStatistic(DaysOfWeek.Wednesday)
-            var fridayArr  = repository.getDayStatistic(DaysOfWeek.Friday)
-            var saturdayArr  = repository.getDayStatistic(DaysOfWeek.Saturday)
-            var sundayArr  = repository.getDayStatistic(DaysOfWeek.Sunday)
+            val mondayArr  = repository.getDayStatistic(DaysOfWeek.Monday)
+            val thursdayArr  = repository.getDayStatistic(DaysOfWeek.Thursday)
+            val tuesdayArr  = repository.getDayStatistic(DaysOfWeek.Tuesday)
+            val wednesdayArr  = repository.getDayStatistic(DaysOfWeek.Wednesday)
+            val fridayArr  = repository.getDayStatistic(DaysOfWeek.Friday)
+            val saturdayArr  = repository.getDayStatistic(DaysOfWeek.Saturday)
+            val sundayArr  = repository.getDayStatistic(DaysOfWeek.Sunday)
             getCoordinates(mondayArr,mondayList)
             getCoordinates(thursdayArr, thursdayList)
             getCoordinates(tuesdayArr, tuesdayList)
@@ -53,7 +54,7 @@ class DateViewModel(application: Application) : AndroidViewModel(application) {
         var list:MutableList<Entry> = mutableListOf()
         list.add(Entry(0f,0f))
         var verticalCounter = 0f
-        var horizontalCounter = 1f
+        var horizontalCounter: Float
         repeat(tradeArr.size) {
             horizontalCounter = it.toFloat() + 1f
             if (tradeArr[it].tradeResult == Results.Victory.name){
@@ -64,6 +65,31 @@ class DateViewModel(application: Application) : AndroidViewModel(application) {
             list.add(Entry(horizontalCounter,verticalCounter))
         }
         finalList.postValue(list)
+    }
+    fun getRatingList(){ // in this method we get coordinates relatively to the trade list
+        viewModelScope.launch(Dispatchers.IO) {
+            val arr = mutableListOf<Int>()
+            arr.add(getWinRate(DaysOfWeek.Monday))
+            arr.add(getWinRate(DaysOfWeek.Tuesday))
+            arr.add(getWinRate(DaysOfWeek.Wednesday))
+            arr.add(getWinRate(DaysOfWeek.Thursday))
+            arr.add(getWinRate(DaysOfWeek.Friday))
+            arr.add(getWinRate(DaysOfWeek.Saturday))
+            arr.add(getWinRate(DaysOfWeek.Sunday))
+            RatingList.postValue(arr)
+        }
+    }
+    private fun getWinRate(daysOfWeek: DaysOfWeek): Int {
+        val victories  = repository.countTradesByResultAndDate(Results.Victory,daysOfWeek)
+        var defeats  = repository.countTradesByResultAndDate(Results.Defeat,daysOfWeek)
+        if (defeats != 0){
+            return victories*100/(defeats + victories)
+        }
+        if (victories == 0){
+            return 0
+        }
+        return 100
+
     }
 
 }

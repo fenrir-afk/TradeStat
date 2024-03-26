@@ -2,6 +2,7 @@ package com.example.tradestat.ui.dateStatistic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,35 +24,46 @@ class DateActivity : AppCompatActivity() {
         setContentView(binding.root)
         val dateViewModel = ViewModelProvider(this)[DateViewModel::class.java]
         dateViewModel.updateDay()
-        dateViewModel.mondayList.observe(this, Observer {
-            updateChart(it,binding.mondayChart)
-        })
-        dateViewModel.tuesdayList.observe(this, Observer {
-            updateChart(it,binding.tuesdayChart)
-        })
-        dateViewModel.wednesdayList.observe(this, Observer {
-            updateChart(it,binding.wednesdayChart)
-        })
-        dateViewModel.thursdayList.observe(this, Observer {
-            updateChart(it,binding.thursdayChart)
-        })
-        dateViewModel.fridayList.observe(this, Observer {
-            updateChart(it,binding.fridayChart)
-        })
-        dateViewModel.saturdayList.observe(this, Observer {
-            updateChart(it,binding.saturdayChart)
-        })
-        dateViewModel.sundayList.observe(this, Observer {
-            updateChart(it,binding.sundayChart)
-        })
+        dateViewModel.getRatingList()
+        dateViewModel.mondayList.observe(this) {
+            updateChart(it, binding.mondayChart)
+        }
+        dateViewModel.tuesdayList.observe(this) {
+            updateChart(it, binding.tuesdayChart)
+        }
+        dateViewModel.wednesdayList.observe(this) {
+            updateChart(it, binding.wednesdayChart)
+        }
+        dateViewModel.thursdayList.observe(this) {
+            updateChart(it, binding.thursdayChart)
+        }
+        dateViewModel.fridayList.observe(this) {
+            updateChart(it, binding.fridayChart)
+        }
+        dateViewModel.saturdayList.observe(this) {
+            updateChart(it, binding.saturdayChart)
+        }
+        dateViewModel.sundayList.observe(this) {
+            updateChart(it, binding.sundayChart)
+        }
+        dateViewModel.RatingList.observe(this) {
+            binding.mondayText.text = "${DaysOfWeek.Monday} ${it[0]}%"
+            binding.tuesdayText.text = "${DaysOfWeek.Tuesday} ${it[1]}%"
+            binding.wednesdayText.text = "${DaysOfWeek.Wednesday} ${it[2]}%"
+            binding.thursdayText.text = "${DaysOfWeek.Thursday} ${it[3]}%"
+            binding.fridayText.text = "${DaysOfWeek.Friday} ${it[4]}%"
+            binding.saturdayText.text = "${DaysOfWeek.Saturday} ${it[5]}%"
+            binding.sundayText.text = "${DaysOfWeek.Sunday} ${it[6]}%"
+
+        }
     }
     private fun updateChart(list: MutableList<Entry>, chart: LineChart){
 
-        var lineDataSet = LineDataSet(list,"Victory/defeat")
+        val lineDataSet = LineDataSet(list,"Victory/defeat")
         lineDataSet.valueTextColor = ContextCompat.getColor(this, R.color.lightGray)
-        var dataSets:MutableList<LineDataSet> = mutableListOf()
+        val dataSets:MutableList<LineDataSet> = mutableListOf()
         dataSets.add(lineDataSet)
-        var data = LineData(dataSets as List<ILineDataSet>?)
+        val data = LineData(dataSets as List<ILineDataSet>?)
 
 
         // Получение левой оси
@@ -68,7 +80,7 @@ class DateActivity : AppCompatActivity() {
         val legend = chart.legend
         legend.textColor = ContextCompat.getColor(this, R.color.lightGray)
 
-        var description = Description()
+        val description = Description()
         description.text = ""
         description.textColor = resources.getColor(R.color.lightGray)
 
