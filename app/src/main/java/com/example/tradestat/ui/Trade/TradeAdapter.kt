@@ -1,4 +1,4 @@
-package com.example.tradestat.ui.dashboard
+package com.example.tradestat.ui.Trade
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tradestat.R
 import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Results
-import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 

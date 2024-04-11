@@ -1,4 +1,4 @@
-package com.example.tradestat.ui.dashboard
+package com.example.tradestat.ui.Trade
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -81,11 +81,6 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
             repository.addStrategy(strategy)
         }
     }
-    fun deleteStrategy(strategy: String){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteStrategy(strategy)
-        }
-    }
 
     //instrument section
 
@@ -97,11 +92,6 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
     fun addInstrument(instrument: Instrument){
         viewModelScope.launch(Dispatchers.IO) {
             repository.addInstrument(instrument)
-        }
-    }
-    fun deleteInstrument(instrument: String){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteInstrument(instrument)
         }
     }
 

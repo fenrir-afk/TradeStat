@@ -1,4 +1,4 @@
-package com.example.tradestat.ui.dashboard
+package com.example.tradestat.ui.Trade
 
 import android.app.Dialog
 import android.graphics.Color
@@ -29,7 +29,6 @@ import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.Date
 
 
@@ -59,11 +58,11 @@ class TradeFragment : Fragment() {
         val manager = LinearLayoutManager(this.context)
 
 
-        tradeViewModel.finalList.observe(viewLifecycleOwner, Observer {
+        tradeViewModel.finalList.observe(viewLifecycleOwner) {
             adapter.setTradesData(it)
             binding.recyclerView.layoutManager = manager // Assigning LayoutManager to RecyclerView
             binding.recyclerView.adapter = adapter
-        })
+        }
 
         binding.fab.setOnClickListener{
             tradeDialog()
@@ -310,12 +309,12 @@ class TradeFragment : Fragment() {
          In this method, we insert data to data base
     */
     private fun insertDataToDb(dialog:Dialog){
-        var direction = dialog.findViewById<Spinner>(R.id.directionSpinner).selectedItem.toString()
-        var date = dialog.findViewById<Spinner>(R.id.daysSpinner).selectedItem.toString()
-        var strategy = dialog.findViewById<EditText>(R.id.strategy).text.toString()
-        var result = dialog.findViewById<Spinner>(R.id.resultSpinner).selectedItem.toString()
-        var instrument = dialog.findViewById<EditText>(R.id.instrument).text.toString()
-        var description = dialog.findViewById<EditText>(R.id.description).text.toString()
+        val direction = dialog.findViewById<Spinner>(R.id.directionSpinner).selectedItem.toString()
+        val date = dialog.findViewById<Spinner>(R.id.daysSpinner).selectedItem.toString()
+        val strategy = dialog.findViewById<EditText>(R.id.strategy).text.toString()
+        val result = dialog.findViewById<Spinner>(R.id.resultSpinner).selectedItem.toString()
+        val instrument = dialog.findViewById<EditText>(R.id.instrument).text.toString()
+        val description = dialog.findViewById<EditText>(R.id.description).text.toString()
         if (direction == "Trade direction:" || date == "Day of the week:" || strategy.isEmpty() || result=="Trade result:" || instrument.isEmpty()){
             Toast.makeText(this.context,"Some fields was not written",Toast.LENGTH_LONG).show()
 

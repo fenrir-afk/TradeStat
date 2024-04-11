@@ -13,21 +13,28 @@
         <action
             android:id="@+id/action_navigation_home_to_dateActivity"
             app:destination="@id/dateActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_instrumentActivity"
+            app:destination="@id/instrumentActivity" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.tradestat.ui.dashboard.TradeFragment"
+        android:name="com.example.tradestat.ui.Trade.TradeFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_trade" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.tradestat.ui.notifications.NotificationsFragment"
+        android:name="com.example.tradestat.ui.News.NewsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_news" />
     <activity
         android:id="@+id/dateActivity"
         android:name="com.example.tradestat.ui.dateStatistic.DateActivity"
         android:label="DateActivity" />
+    <activity
+        android:id="@+id/instrumentActivity"
+        android:name="com.example.tradestat.ui.instrumentStatistic.InstrumentActivity"
+        android:label="InstrumentActivity" />
 </navigation>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/black"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.TradeFragment">
+    tools:context=".ui.Trade.TradeFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,14 +36,14 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:fontFamily="@font/pro_bold"
                         android:gravity="center"
-                        android:text="Date"
+                        android:text="@string/date"
                         android:textColor="@color/lightGray" />
                     <ImageView
                         android:id="@+id/date_arrow"
@@ -76,14 +76,14 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/pro_bold"
                         android:gravity="center"
-                        android:textSize="13dp"
-                        android:text="Strategy"
+                        android:textSize="13sp"
+                        android:text="@string/strategy"
                         android:textColor="@color/lightGray" />
                     <ImageView
                         android:id="@+id/strategy_arrow"
@@ -115,14 +115,14 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/pro_bold"
                         android:gravity="center"
-                        android:textSize="13dp"
-                        android:text="Instrument"
+                        android:textSize="13sp"
+                        android:text="@string/instrument"
                         android:textColor="@color/lightGray" />
                     <ImageView
                         android:id="@+id/instrument_arrow"
@@ -146,7 +146,7 @@
                 android:layout_marginStart="10dp"
                 android:textColor="@color/lightGray"
                 android:gravity="center_vertical"
-                android:text="Direction"
+                android:text="@string/direction"
                />
             <TextView
                 android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
                 android:layout_marginEnd="15dp"
                 android:textColor="@color/lightGray"
                 android:gravity="center_vertical"
-                android:text="Strategy"
+                android:text="@string/strategy"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -166,7 +166,7 @@
                 android:textColor="@color/lightGray"
                 android:gravity="center"
                 android:layout_marginEnd="15dp"
-                android:text="Result"
+                android:text="@string/result"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -175,7 +175,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/lightGray"
                 android:gravity="center"
-                android:text="Instrument"
+                android:text="@string/instrument"
                 />
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
@@ -195,7 +195,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:contentDescription="Add"
+        android:contentDescription="@string/add"
         app:borderWidth="0dp"
         app:backgroundTint="@color/lightGray"
         android:src="@drawable/ic_my_icon"

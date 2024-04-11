@@ -49,6 +49,9 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     fun countTradesByResultAndDate(results: Results,day:DaysOfWeek): Int {
         return  tradesDao.countTradesByResultAndDate(results.name,day.name)
     }
+    fun getCountTradesByInstrumentAndResult(result:String,instrument: String): Int {
+        return tradesDao.countTradesByResultAndInstrument(result,instrument)
+    }
 
 
     //Strategy part
@@ -82,4 +85,8 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     fun deleteInstrument(instrument: String) {
         instrumentsDao.deleteInstrumentByName(instrument)
     }
+    fun getInstrumentList(): List<Instrument> {
+        return instrumentsDao.getAllInstruments()
+    }
+
 }

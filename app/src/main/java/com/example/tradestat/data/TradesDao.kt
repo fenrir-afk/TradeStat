@@ -28,6 +28,9 @@ interface TradesDao {
     @Query("SELECT COUNT(*) FROM trade_table WHERE trade_result = :result and trade_date = :date")
     fun countTradesByResultAndDate(result:String,date:String): Int
 
+    @Query("SELECT COUNT(*) FROM trade_table WHERE trade_result = :result and Instrument = :instrument")
+    fun countTradesByResultAndInstrument(result:String,instrument:String): Int
+
 
     @Query("SELECT * FROM trade_table WHERE trade_date == :dayOfWeek")
     fun getTradesByDay(dayOfWeek: String): List<Trade>
