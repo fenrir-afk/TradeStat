@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TradeStat"
         tools:targetApi="31">
         <activity
+            android:name=".ui.strategyStatistic.StrategyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.instrumentStatistic.InstrumentActivity"
             android:exported="false" />
         <activity

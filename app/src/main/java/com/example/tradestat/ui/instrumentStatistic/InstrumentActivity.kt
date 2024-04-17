@@ -1,9 +1,19 @@
 package com.example.tradestat.ui.instrumentStatistic
 
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable.Orientation
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tradestat.R
 import com.example.tradestat.databinding.ActivityInstrumentBinding
 import com.github.mikephil.charting.components.XAxis
@@ -26,7 +36,65 @@ class InstrumentActivity : AppCompatActivity() {
         instrumentViewModel.getWinRateList.observe(this) {
             setChart(it,instrumentViewModel.instrumentsNames)
         }
+        instrumentViewModel.getWinRateListShort.observe(this) {
+            setTexts(it,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames)
+        }
     }
+
+    private fun setTexts(
+        winRateListShort: List<Int>,
+        winRateListLong: MutableList<Int>,
+        instrumentsNames: MutableList<String>
+    ){
+        for (i in 0 until instrumentsNames.size-1){
+            var layout = LinearLayout(this)
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, // CardView width
+                LinearLayout.LayoutParams.MATCH_PARENT // CardView height
+            )
+            layout.layoutParams = layoutParams
+            layout.orientation = LinearLayout.HORIZONTAL
+
+            layout.addView( createText("${instrumentsNames[i]}: ",1))
+            layout.addView( createText("Short rate:${winRateListShort[i]}%",0))
+            layout.addView( createText("Long rate:${winRateListLong[i]}%",0))
+
+            val card = CardView(this)
+            val cardParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, // CardView width
+               80 // CardView height
+            )
+            cardParams.setMargins(20, 20, 0, 0)
+            card.layoutParams = cardParams
+            card.radius = 16f
+            card.addView(layout)
+            binding.parentLayout.addView(card)
+
+        }
+    }
+    private fun createText(string: String,counter:Int): TextView {
+        var text = TextView(this)
+        var textParams = LinearLayout.LayoutParams(
+            300, // CardView width
+            LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
+        )
+        if (counter == 1){
+             textParams = LinearLayout.LayoutParams(
+                140, // CardView width
+                LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
+            )
+            textParams.setMargins(10, 0, 0, 0)
+        }
+        textParams.gravity = Gravity.CENTER_VERTICAL
+        text.layoutParams = textParams
+        text.textSize = 14f
+        text.setTextColor(Color.WHITE)
+        val typeFace: Typeface? = ResourcesCompat.getFont(this.applicationContext, R.font.oxygen)
+        text.typeface = typeFace
+        text.text = string
+        return text
+    }
+
     private fun setChart(winRateList: List<Int>, instrumentsNames: MutableList<String>) {
         val chart = binding.chart2
         chart.setDrawBarShadow(false)
@@ -43,11 +111,11 @@ class InstrumentActivity : AppCompatActivity() {
         xAxis.isEnabled = true
         xAxis.labelCount = instrumentsNames.size
         xAxis.textColor = ContextCompat.getColor(this, R.color.lightGray)
-        xAxis.setTextSize(11f);
+        xAxis.setTextSize(13f);
 
 
         val yLeft = chart.axisLeft
-        yLeft.axisMaximum = 100f
+        yLeft.axisMaximum = 110f
         yLeft.axisMinimum = 0f
         yLeft.isEnabled = true
         yLeft.textColor = ContextCompat.getColor(this, R.color.lightGray)

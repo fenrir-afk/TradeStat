@@ -47,6 +47,9 @@ class HomeFragment : Fragment() {
         binding.indicatorCard.setOnClickListener{
             view?.findNavController()?.navigate(R.id.action_navigation_home_to_instrumentActivity)
         }
+        binding.strategyCard.setOnClickListener{
+            view?.findNavController()?.navigate(R.id.action_navigation_home_to_strategyActivity)
+        }
         val root: View = binding.root
         return root
     }

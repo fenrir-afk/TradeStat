@@ -35,6 +35,9 @@ interface TradesDao {
     @Query("SELECT * FROM trade_table WHERE trade_date == :dayOfWeek")
     fun getTradesByDay(dayOfWeek: String): List<Trade>
 
+    @Query("SELECT * FROM trade_table WHERE trade_result == :result")
+    fun getTradesByResult(result: String): List<Trade>
+
 
 
     @Insert

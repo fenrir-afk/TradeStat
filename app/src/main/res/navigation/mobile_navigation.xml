@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_navigation_home_to_instrumentActivity"
             app:destination="@id/instrumentActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_strategyActivity"
+            app:destination="@id/strategyActivity" />
     </fragment>
 
     <fragment
@@ -37,4 +40,9 @@
         android:id="@+id/instrumentActivity"
         android:name="com.example.tradestat.ui.instrumentStatistic.InstrumentActivity"
         android:label="InstrumentActivity" />
+    <activity
+        android:id="@+id/strategyActivity"
+        android:name="com.example.tradestat.ui.strategyStatistic.StrategyActivity"
+        android:label="activity_strategy"
+        tools:layout="@layout/activity_strategy" />
 </navigation>

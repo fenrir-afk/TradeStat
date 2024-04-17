@@ -22,7 +22,7 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val newsViewModel =
-            ViewModelProvider(this).get(NewsViewModel::class.java)
+            ViewModelProvider(this)[NewsViewModel::class.java]
 
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
         val root: View = binding.root

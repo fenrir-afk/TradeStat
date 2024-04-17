@@ -28,8 +28,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             shortNumber = repository.getShortPos()
             longNumber = repository.getLongPos()
-            winNumber = repository.getWinNumber()
-            defeatNumber = repository.getDefNumber()
+            winNumber = repository.getWinNumber() // победу
+            defeatNumber = repository.getDefNumber() //поражение
             getNumberList.postValue(listOf(shortNumber,longNumber,winNumber,defeatNumber))
         }
     }

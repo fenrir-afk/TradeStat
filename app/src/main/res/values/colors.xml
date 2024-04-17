@@ -23,4 +23,7 @@
 
     <color name="myTextColor">#000000</color>
     <color name="myHintColor">#808080</color>
+
+    <color name="darkWhite">#D3C0C0</color>
+
 </resources>
