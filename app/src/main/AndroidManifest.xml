@@ -17,9 +17,11 @@
             android:exported="false" />
         <activity
             android:name=".ui.instrumentStatistic.InstrumentActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.dateStatistic.DateActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

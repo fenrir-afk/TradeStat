@@ -2,10 +2,8 @@ package com.example.tradestat.ui.instrumentStatistic
 
 import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.GradientDrawable.Orientation
 import android.os.Bundle
 import android.view.Gravity
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +11,6 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.tradestat.R
 import com.example.tradestat.databinding.ActivityInstrumentBinding
 import com.github.mikephil.charting.components.XAxis
@@ -46,14 +43,15 @@ class InstrumentActivity : AppCompatActivity() {
         winRateListLong: MutableList<Int>,
         instrumentsNames: MutableList<String>
     ){
-        for (i in 0 until instrumentsNames.size-1){
-            var layout = LinearLayout(this)
+        for (i in instrumentsNames.size-1 downTo  0){
+            val layout = LinearLayout(this)
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, // CardView width
                 LinearLayout.LayoutParams.MATCH_PARENT // CardView height
             )
             layout.layoutParams = layoutParams
             layout.orientation = LinearLayout.HORIZONTAL
+            layout.setBackgroundColor(resources.getColor(R.color.black_grey))
 
             layout.addView( createText("${instrumentsNames[i]}: ",1))
             layout.addView( createText("Short rate:${winRateListShort[i]}%",0))
@@ -61,29 +59,29 @@ class InstrumentActivity : AppCompatActivity() {
 
             val card = CardView(this)
             val cardParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, // CardView width
-               80 // CardView height
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                resources.getDimension(R.dimen.instrument_card_height).toInt()
             )
-            cardParams.setMargins(20, 20, 0, 0)
+            cardParams.setMargins(resources.getDimension(R.dimen.base_start_maring).toInt(), resources.getDimension(R.dimen.base_start_maring).toInt(), 0, 0)
             card.layoutParams = cardParams
-            card.radius = 16f
+            card.radius = resources.getDimension(R.dimen.card_corner_radius)
             card.addView(layout)
             binding.parentLayout.addView(card)
 
         }
     }
     private fun createText(string: String,counter:Int): TextView {
-        var text = TextView(this)
+        val text = TextView(this)
         var textParams = LinearLayout.LayoutParams(
-            300, // CardView width
+            resources.getDimension(R.dimen.instrumentCard_Basetext_width).toInt(), // CardView width
             LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
         )
         if (counter == 1){
              textParams = LinearLayout.LayoutParams(
-                140, // CardView width
+                 resources.getDimension(R.dimen.instrumentCard_text_width).toInt(), // CardView width
                 LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
             )
-            textParams.setMargins(10, 0, 0, 0)
+            textParams.setMargins(resources.getDimension(R.dimen.base_start_maring).toInt(), 0, 0, 0)
         }
         textParams.gravity = Gravity.CENTER_VERTICAL
         text.layoutParams = textParams
@@ -110,22 +108,25 @@ class InstrumentActivity : AppCompatActivity() {
         xAxis.setDrawGridLines(false)
         xAxis.isEnabled = true
         xAxis.labelCount = instrumentsNames.size
-        xAxis.textColor = ContextCompat.getColor(this, R.color.lightGray)
+        xAxis.textColor = Color.WHITE
         xAxis.setTextSize(13f);
+        val typeFace: Typeface? = ResourcesCompat.getFont(this.applicationContext, R.font.oxygen)
+        xAxis.typeface = typeFace
+
 
 
         val yLeft = chart.axisLeft
         yLeft.axisMaximum = 110f
         yLeft.axisMinimum = 0f
         yLeft.isEnabled = true
-        yLeft.textColor = ContextCompat.getColor(this, R.color.lightGray)
+        yLeft.textColor = Color.WHITE
         yLeft.setTextSize(11f);
 
 
         val  yRight = chart.axisRight
         yRight.setDrawAxisLine(true)
         yRight.isEnabled = true
-        yRight.textColor = ContextCompat.getColor(this, R.color.lightGray)
+        yRight.textColor = Color.WHITE
         yRight.setTextSize(11f);
 
 
@@ -148,9 +149,9 @@ class InstrumentActivity : AppCompatActivity() {
         xAxis.isGranularityEnabled = true
 
 
-        chart.getXAxis().setDrawGridLines(false);
-        chart.getAxisLeft().setDrawGridLines(false);
-        chart.getAxisRight().setDrawGridLines(false);
+        chart.xAxis.setDrawGridLines(false);
+        chart.axisLeft.setDrawGridLines(false);
+        chart.axisRight.setDrawGridLines(false);
 
 
         setData(winRateList)
