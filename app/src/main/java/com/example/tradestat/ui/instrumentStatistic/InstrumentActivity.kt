@@ -28,21 +28,42 @@ class InstrumentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityInstrumentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
         val instrumentViewModel =
             ViewModelProvider(this)[InstrumentViewModel::class.java]
+        binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
+        instrumentViewModel.getData()
         instrumentViewModel.getWinRateList.observe(this) {
-            setChart(it,instrumentViewModel.instrumentsNames)
+            setChart(it,instrumentViewModel.instrumentsNames,1)
         }
         instrumentViewModel.getWinRateListShort.observe(this) {
-            setTexts(it,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames)
+            setTexts(it,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames,1)
+        }
+        binding.amountCard.setOnClickListener{
+            binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.black_grey))
+            binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
+            binding.textView.text = "Graph of number of trades"
+
+            setChart(instrumentViewModel.tradeNumbers,instrumentViewModel.instrumentsNames,2)
+            setTexts(instrumentViewModel.tradeShortNumbers,instrumentViewModel.tradeLongNumbers,instrumentViewModel.instrumentsNames,2)
+        }
+        binding.ratingCard.setOnClickListener{
+            binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
+            binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.black_grey))
+            binding.textView.text = "Graph of instrument rating"
+
+            setChart(instrumentViewModel.getWinRateList.value!!,instrumentViewModel.instrumentsNames,1)
+            setTexts(instrumentViewModel.getWinRateListShort.value!!,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames,1)
         }
     }
 
     private fun setTexts(
         winRateListShort: List<Int>,
         winRateListLong: MutableList<Int>,
-        instrumentsNames: MutableList<String>
+        instrumentsNames: MutableList<String>,
+        token: Int
     ){
+        binding.parentLayout.removeAllViews()
         for (i in instrumentsNames.size-1 downTo  0){
             val layout = LinearLayout(this)
             val layoutParams = LinearLayout.LayoutParams(
@@ -52,10 +73,15 @@ class InstrumentActivity : AppCompatActivity() {
             layout.layoutParams = layoutParams
             layout.orientation = LinearLayout.HORIZONTAL
             layout.setBackgroundColor(resources.getColor(R.color.black_grey))
-
-            layout.addView( createText("${instrumentsNames[i]}: ",1))
-            layout.addView( createText("Short rate:${winRateListShort[i]}%",0))
-            layout.addView( createText("Long rate:${winRateListLong[i]}%",0))
+            if (token == 1){
+                layout.addView( createText("${instrumentsNames[i]}: ",1))
+                layout.addView( createText("Short rate:${winRateListShort[i]}%",0))
+                layout.addView( createText("Long rate:${winRateListLong[i]}%",0))
+            }else{
+                layout.addView( createText("${instrumentsNames[i]}: ",1))
+                layout.addView( createText("Short number:${winRateListShort[i]}",0))
+                layout.addView( createText("Long number:${winRateListLong[i]}",0))
+            }
 
             val card = CardView(this)
             val cardParams = LinearLayout.LayoutParams(
@@ -93,7 +119,7 @@ class InstrumentActivity : AppCompatActivity() {
         return text
     }
 
-    private fun setChart(winRateList: List<Int>, instrumentsNames: MutableList<String>) {
+    private fun setChart(baseList: List<Int>, instrumentsNames: MutableList<String>, token: Int) {
         val chart = binding.chart2
         chart.setDrawBarShadow(false)
         chart.setDrawValueAboveBar(true)
@@ -116,7 +142,15 @@ class InstrumentActivity : AppCompatActivity() {
 
 
         val yLeft = chart.axisLeft
-        yLeft.axisMaximum = 110f
+        if (token==1){
+            yLeft.axisMaximum = 110f
+        }else{
+            var mySize = 0
+            for (i in baseList){
+                mySize+=i
+            }
+            yLeft.axisMaximum = mySize.toFloat()
+        }
         yLeft.axisMinimum = 0f
         yLeft.isEnabled = true
         yLeft.textColor = Color.WHITE
@@ -154,7 +188,7 @@ class InstrumentActivity : AppCompatActivity() {
         chart.axisRight.setDrawGridLines(false);
 
 
-        setData(winRateList)
+        setData(baseList)
         chart.invalidate()
     }
     private fun setData(winRateList: List<Int>) {

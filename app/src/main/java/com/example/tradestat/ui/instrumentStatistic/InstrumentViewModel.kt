@@ -18,15 +18,18 @@ class InstrumentViewModel(application: Application) : AndroidViewModel(applicati
         var getWinRateListLong: MutableList<Int> = mutableListOf()
         val getWinRateListShort: MutableLiveData<List<Int> > = MutableLiveData()
         var instrumentsNames: MutableList<String> = mutableListOf()
+
+        var tradeNumbers = mutableListOf<Int>()
+        var tradeShortNumbers = mutableListOf<Int>()
+        var tradeLongNumbers = mutableListOf<Int>()
         private val repository: TradesRepository
         init {
             val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
             val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
             val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
             repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
-            getData()
         }
-    private fun getData(){
+     fun getData(){
         viewModelScope.launch(Dispatchers.IO) {
             val instruments = repository.getInstrumentList()
             instruments.forEach{
@@ -39,6 +42,10 @@ class InstrumentViewModel(application: Application) : AndroidViewModel(applicati
             getWinRateListLong = ratingObj.longWinRateList
             getWinRateListShort.postValue(ratingObj.shortWinRateList)
             getWinRateList.postValue(ratingObj.winRateList)//общий
+
+            tradeNumbers = ratingObj.tradeNumbers
+            tradeShortNumbers = ratingObj.tradeShortNumbers
+            tradeLongNumbers = ratingObj.tradeLongNumbers
 
         }
     }

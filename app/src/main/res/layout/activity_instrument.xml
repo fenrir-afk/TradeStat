@@ -30,43 +30,15 @@
         tools:layout_editor_absoluteX="0dp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/ratingCard"
             android:layout_width="100dp"
             android:layout_height="67dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_weight="1"
             app:cardCornerRadius="14dp">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@color/black_grey" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/instrumentcard_vector1"
-                app:tint="@color/white" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="47dp"
-                android:text="Rating"
-                android:textColor="@color/white"
-                android:textSize="13sp" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="100dp"
-            android:layout_height="67dp"
-            android:layout_weight="1"
-            app:cardCornerRadius="14dp">
-
-            <ImageView
+                android:id="@+id/rating_ImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@color/black_grey" />
@@ -84,6 +56,38 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="45dp"
+                android:text="Rating"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/amountCard"
+            android:layout_width="100dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="10dp"
+
+            android:layout_weight="1"
+            app:cardCornerRadius="14dp">
+
+            <ImageView
+                android:id="@+id/amount_ImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@color/black_grey" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/instrumentcard_vector1"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="47dp"
                 android:text="Amount"
                 android:textColor="@color/white"
                 android:textSize="13sp" />

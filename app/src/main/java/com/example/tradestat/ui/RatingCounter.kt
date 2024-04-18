@@ -12,6 +12,10 @@ class RatingCounter(
     val winRateList = mutableListOf<Int>()
     val shortWinRateList = mutableListOf<Int>()
     val longWinRateList = mutableListOf<Int>()
+
+    val tradeNumbers = mutableListOf<Int>()
+    val tradeShortNumbers = mutableListOf<Int>()
+    val tradeLongNumbers = mutableListOf<Int>()
     fun updateData(){
             instrumentsNames.forEach{
                 var wins = 0
@@ -46,6 +50,9 @@ class RatingCounter(
                         }
                     }
                 }
+                tradeNumbers.add(wins+defeats)
+                tradeShortNumbers.add(shortWins+shortDefeats)
+                tradeLongNumbers.add(longDefeats+longWins)
                 if (wins + defeats != 0){
                     winRateList.add(
                         (wins*100)/(wins + defeats)
