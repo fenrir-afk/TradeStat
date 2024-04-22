@@ -73,7 +73,7 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun redStrategiesFromRepository(){
         viewModelScope.launch(Dispatchers.IO) {
-            getStrategyList = repository.readStrategies()
+            getStrategyList = repository.getAllStrategies()
         }
     }
     fun addStrategy(strategy: Strategy){

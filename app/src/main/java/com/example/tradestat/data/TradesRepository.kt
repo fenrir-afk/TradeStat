@@ -67,7 +67,7 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     //Strategy part
 
 
-    fun readStrategies(): List<Strategy> {
+    fun getAllStrategies(): List<Strategy> {
         return strategiesDao.getAllStrategies()
     }
 

@@ -4,20 +4,16 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
 import com.example.tradestat.databinding.ActivityStrategyBinding
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.data.RadarData
-import com.github.mikephil.charting.data.RadarDataSet
-import com.github.mikephil.charting.data.RadarEntry
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet
 import java.util.ArrayList
-import java.util.Arrays
+import java.util.Random
 
 class StrategyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStrategyBinding
@@ -25,13 +21,15 @@ class StrategyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStrategyBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setChart()
-
+        var strategyViewModel = ViewModelProvider(this)[StrategyViewModel::class.java]
+        strategyViewModel.entriesList.observe(this){
+            setChart(strategyViewModel.strategiesNames,it)
+        }
     }
 
 
 
-    private fun setChart() {
+    private fun setChart(strategiesNames: MutableList<String>, lists: MutableList<List<Entry>>) {
         // Получение левой оси
         val leftAxis = binding.chart.axisLeft
         leftAxis.textColor = ContextCompat.getColor(this, R.color.lightGray)
@@ -49,35 +47,31 @@ class StrategyActivity : AppCompatActivity() {
         val description = Description()
         description.text = ""
         description.textColor = resources.getColor(R.color.lightGray)
+        var lineDataSetList = mutableListOf<LineDataSet>()
+        var colorArr = getColorArr(strategiesNames)
 
+       lists.forEachIndexed { index, entries ->
+           val lineDataSet1 = LineDataSet(entries,strategiesNames[index])
+           lineDataSet1.color = colorArr[index]
+           lineDataSet1.setCircleColor(colorArr[index])
+           lineDataSet1.valueTextColor = colorArr[index]
+           lineDataSetList.add(lineDataSet1)
+       }
 
-        var list1 = ArrayList<Entry>();
-        list1.add(Entry(0f,10f))
-        list1.add(Entry(1f,10f))
-        list1.add(Entry(2f,15f))
-        list1.add(Entry(3f,20f))
-
-        var list2 = ArrayList<Entry>();
-        list2.add(Entry(0f,5f))
-        list2.add(Entry(1f,20f))
-        list2.add(Entry(2f,25f))
-        list2.add(Entry(3f,30f))
-
-
-        val lineDataSet1 = LineDataSet(list1,"First")
-        lineDataSet1.color = Color.GREEN
-        lineDataSet1.setCircleColor(Color.GREEN)
-        lineDataSet1.valueTextColor = Color.GREEN
-
-        val lineDataSet2 = LineDataSet(list2,"Second")
-
-
-        val data = LineData(lineDataSet1,lineDataSet2)
+        val data = LineData(lineDataSetList as List<ILineDataSet>?)
 
         binding.chart.data = data
         binding.chart.setNoDataText("No data")
         binding.chart.setNoDataTextColor(resources.getColor(R.color.lightGray))
         binding.chart.description = description
         binding.chart.invalidate()
+    }
+    private fun getColorArr(strategiesNames: MutableList<String>): MutableList<Int> {
+        val colors = mutableListOf<Int>()
+        val rnd = Random()
+        for (i in strategiesNames.indices){
+            colors.add(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+        }
+        return colors
     }
 }
