@@ -5,9 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.strategyStatistic.StrategyActivity">
-    <com.github.mikephil.charting.charts.RadarChart
-        android:id="@+id/bubble_chart"
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
