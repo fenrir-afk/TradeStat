@@ -6,9 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.TradeDatabase
 import com.example.tradestat.data.TradesRepository
-import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Results
-import com.example.tradestat.data.model.Trade
 import com.example.tradestat.ui.RatingCounter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +29,7 @@ class InstrumentViewModel(application: Application) : AndroidViewModel(applicati
         }
      fun getData(){
         viewModelScope.launch(Dispatchers.IO) {
-            val instruments = repository.getInstrumentList()
+            val instruments = repository.getAllInstruments()
             instruments.forEach{
                 instrumentsNames.add(it.instrumentName)
             }

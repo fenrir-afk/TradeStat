@@ -2,7 +2,6 @@
     <string name="app_name">TradeStat</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Trades</string>
-    <string name="title_notifications">Notifications</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -16,6 +15,7 @@
     <string name="direction">Direction</string>
     <string name="result">Result</string>
     <string name="add">Add</string>
+    <string name="News">News</string>
     <string-array name="weekDays">
         <item>Day of the week:</item>
         <item>Sunday</item>

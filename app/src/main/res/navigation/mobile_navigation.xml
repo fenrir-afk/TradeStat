@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.tradestat.ui.News.NewsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/News"
         tools:layout="@layout/fragment_news" />
     <activity
         android:id="@+id/dateActivity"

@@ -4,7 +4,7 @@ import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Trade
 
 class RatingCounter(
-    private val instrumentsNames: MutableList<String>,
+    private val names: MutableList<String>,
     private val winTrades: List<Trade>,
     private val defeatTrades: List<Trade>,
     private val token: Int
@@ -17,7 +17,7 @@ class RatingCounter(
     val tradeShortNumbers = mutableListOf<Int>()
     val tradeLongNumbers = mutableListOf<Int>()
     fun updateData(){
-            instrumentsNames.forEach{
+            names.forEach{
                 var wins = 0
                 var defeats = 0
                 var shortWins = 0
@@ -36,10 +36,32 @@ class RatingCounter(
                             wins++
                         }
                     }
+                    if (token == 2){
+                        if (it == trade.strategy){
+                            if (trade.tradeDirection == Directions.Long.name){
+                                longWins ++
+                            }
+                            if (trade.tradeDirection == Directions.Short.name){
+                                shortWins ++
+                            }
+                            wins++
+                        }
+                    }
                 }
                 defeatTrades.forEach{trade: Trade ->
                     if (token == 1){
                         if (it == trade.instrument){
+                            if (trade.tradeDirection == Directions.Long.name){
+                                longDefeats ++
+                            }
+                            if (trade.tradeDirection == Directions.Short.name){
+                                shortDefeats ++
+                            }
+                            defeats++
+                        }
+                    }
+                    if (token == 2){
+                        if (it == trade.strategy){
                             if (trade.tradeDirection == Directions.Long.name){
                                 longDefeats ++
                             }

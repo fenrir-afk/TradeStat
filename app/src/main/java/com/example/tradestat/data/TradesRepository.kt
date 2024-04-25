@@ -15,13 +15,13 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     fun deleteTrade(trade: Trade){
         tradesDao.delete(trade)
     }
-    fun getSortedByDateDescending():List<Trade>{
+    fun getTradesSortedByDateDescending():List<Trade>{
         return tradesDao.sortByDate()
     }
-    fun getSortedByDateAscending():List<Trade>{
+    fun getTradesSortedByDateAscending():List<Trade>{
         return tradesDao.getAll()
     }
-    fun getSortedByStrategList(strategy: String):List<Trade>{
+    fun getSortedByStrategiesList(strategy: String):List<Trade>{
         return tradesDao.sortByStrategy(strategy)
     }
 
@@ -59,9 +59,7 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     fun countTradesByResultAndDate(results: Results,day:DaysOfWeek): Int {
         return  tradesDao.countTradesByResultAndDate(results.name,day.name)
     }
-    fun getCountTradesByInstrumentAndResult(result:String,instrument: String): Int {
-        return tradesDao.countTradesByResultAndInstrument(result,instrument)
-    }
+
 
 
     //Strategy part
@@ -74,23 +72,27 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     fun addStrategy(strategy: Strategy) {
         strategiesDao.insertStrategy(strategy)
     }
+    fun deleteStrategy(name: String) {
+        strategiesDao.deleteStrategyByName(name)
+    }
 
 
 
     //instrument part
 
 
-    fun readInstruments(): List<Instrument> {
+    fun getAllInstruments(): List<Instrument> {
         return instrumentsDao.getAllInstruments()
     }
 
     fun addInstrument(instrument: Instrument) {
         instrumentsDao.insertInstrument(instrument)
     }
-
-
-    fun getInstrumentList(): List<Instrument> {
-        return instrumentsDao.getAllInstruments()
+    fun deleteInstrument(name: String) {
+        instrumentsDao.deleteInstrumentByName(name)
     }
+
+
+
 
 }

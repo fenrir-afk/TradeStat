@@ -68,7 +68,7 @@ class TradeFragment : Fragment() {
             tradeDialog()
         }
         binding.DateCard.setOnClickListener{
-            if (binding.dateArrow.drawable.constantState == resources.getDrawable( R.drawable.arrow).constantState){
+            if (binding.dateArrow.drawable.constantState == resources.getDrawable(R.drawable.arrow).constantState){
                 tradeViewModel.updateListByDateDescending() // wait until we get the data and update UI
                 binding.dateArrow.setImageResource(R.drawable.arrow_up)
             }else{
@@ -329,7 +329,7 @@ class TradeFragment : Fragment() {
 
 
     }
-    fun updateDb(trade: Trade,strategy: String,instrument: String){
+    private fun updateDb(trade: Trade, strategy: String, instrument: String){
         tradeViewModel.addInstrument(Instrument(0,instrument))
         tradeViewModel.addStrategy(Strategy(0,strategy))
         tradeViewModel.addTrade(trade)

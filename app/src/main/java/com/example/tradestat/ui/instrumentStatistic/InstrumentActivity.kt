@@ -28,6 +28,8 @@ class InstrumentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityInstrumentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.background)
+        setSupportActionBar(binding.myToolBar)
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
         val instrumentViewModel =
             ViewModelProvider(this)[InstrumentViewModel::class.java]
@@ -111,7 +113,7 @@ class InstrumentActivity : AppCompatActivity() {
         }
         textParams.gravity = Gravity.CENTER_VERTICAL
         text.layoutParams = textParams
-        text.textSize = 14f
+        text.textSize = 13.5f
         text.setTextColor(Color.WHITE)
         val typeFace: Typeface? = ResourcesCompat.getFont(this.applicationContext, R.font.oxygen)
         text.typeface = typeFace

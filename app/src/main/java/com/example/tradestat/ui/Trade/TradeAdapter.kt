@@ -66,7 +66,7 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
 
             // Delete trade
             deleteButton.setOnClickListener {
-                val tradeViewModel = ViewModelProvider(viewModelStoreOwner).get(TradeViewModel::class.java)
+                val tradeViewModel = ViewModelProvider(viewModelStoreOwner)[TradeViewModel::class.java]
                 tradeViewModel.deleteTrade(trade)
                 notifyItemRemoved(position)
             }

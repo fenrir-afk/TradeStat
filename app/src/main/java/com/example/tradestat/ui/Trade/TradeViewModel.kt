@@ -39,29 +39,45 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
     fun addTrade(trade: Trade){
         viewModelScope.launch(Dispatchers.IO) {
             repository.addTrade(trade)
-            sortedTradeList.postValue(repository.getSortedByDateAscending())//Update list
+            sortedTradeList.postValue(repository.getTradesSortedByDateAscending())//Update list
         }
     }
     fun deleteTrade(trade: Trade){
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteTrade(trade)
-            sortedTradeList.postValue(repository.getSortedByDateAscending())//Update list
+            var instrumentCounter =0
+            var strategyCounter =0
+            repository.getTradesSortedByDateDescending().forEach{
+                if (it.strategy == trade.strategy){
+                    strategyCounter++
+                }
+                if (it.instrument == trade.instrument){
+                    instrumentCounter++
+                }
+            }
+            if (strategyCounter == 0){
+                repository.deleteStrategy(trade.strategy)
+            }
+            if (instrumentCounter == 0){
+                repository.deleteInstrument(trade.instrument)
+            }
+            sortedTradeList.postValue(repository.getTradesSortedByDateAscending())//Update list
         }
     }
 
     fun updateListByDateDescending(){ //in this method we get actual trade list sorted by date
         viewModelScope.launch(Dispatchers.IO) {
-            getTradesList.postValue(repository.getSortedByDateDescending())
+            getTradesList.postValue(repository.getTradesSortedByDateDescending())
         }
     }
     fun updateListByDateAscending(){ //in this method we get actual trade list sorted by date
         viewModelScope.launch(Dispatchers.IO) {
-            sortedTradeList.postValue(repository.getSortedByDateAscending())
+            sortedTradeList.postValue(repository.getTradesSortedByDateAscending())
         }
     }
     fun updateListByStrategy(strategy: String){ //in this method we get actual trade list sorted by strategy
       viewModelScope.launch(Dispatchers.IO) {
-            sortedTradeList.postValue(repository.getSortedByStrategList(strategy))
+            sortedTradeList.postValue(repository.getSortedByStrategiesList(strategy))
         }
     }
     fun updateListByInstrument(instrument: String){ //in this method we get actual trade list sorted by instument
@@ -86,7 +102,7 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun readInstrumentsFromRepository(){
         viewModelScope.launch(Dispatchers.IO) {
-            getInstrumentList = repository.readInstruments()
+            getInstrumentList = repository.getAllInstruments()
         }
     }
     fun addInstrument(instrument: Instrument){

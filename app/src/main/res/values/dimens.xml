@@ -8,7 +8,7 @@
     <dimen name="dialog_text_size">16sp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
     <dimen name="instrument_card_height">50dp</dimen>
-    <dimen name="instrumentCard_text_width">70dp</dimen>
+    <dimen name="instrumentCard_text_width">75dp</dimen>
     <dimen name="instrumentCard_Basetext_width">150dp</dimen>
     <dimen name="base_start_maring">10dp</dimen>
     <dimen name="big_start_maring">20dp</dimen>

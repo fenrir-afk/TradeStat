@@ -2,9 +2,7 @@ package com.example.tradestat.ui.dateStatistic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
 import com.example.tradestat.data.model.DaysOfWeek
@@ -22,6 +20,8 @@ class DateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.background)
+        setSupportActionBar(binding.myToolBar)
         val dateViewModel = ViewModelProvider(this)[DateViewModel::class.java]
         dateViewModel.updateDay()
         dateViewModel.getRatingList()
