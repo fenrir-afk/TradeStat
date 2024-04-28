@@ -1,8 +1,10 @@
 package com.example.tradestat.ui.News
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -73,7 +75,7 @@ class NewsFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                 }
             }else{
-                addNewsCards(it,newsViewModel.imgUrls,newsViewModel.dateArr)
+                addNewsCards(it,newsViewModel.imgUrls,newsViewModel.dateArr,newsViewModel.linkArr)
             }
         }
 
@@ -104,7 +106,8 @@ class NewsFragment : Fragment() {
     private fun addNewsCards(
         article: List<String>,
         imgUrls: MutableList<String>,
-        dateArr: MutableList<String>
+        dateArr: MutableList<String>,
+        linkArr: MutableList<String>
 
     ) {
         for (i in imgUrls.indices){
@@ -113,6 +116,10 @@ class NewsFragment : Fragment() {
                 LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width
                 LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
             )
+            cardView.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(linkArr[i]))
+                startActivity(intent)
+            }
             cardParams.setMargins(60, 60, 60, 0)
             cardView.layoutParams = cardParams
             cardView.radius = 30F
