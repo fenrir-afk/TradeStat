@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +18,9 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.example.tradestat.R
 import com.example.tradestat.databinding.FragmentNewsBinding
 import com.google.android.material.snackbar.Snackbar
-import java.time.Instant
 
 
 class NewsFragment : Fragment() {
@@ -72,7 +73,7 @@ class NewsFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                 }
             }else{
-                addNewsCards(it,newsViewModel.imgUrls)
+                addNewsCards(it,newsViewModel.imgUrls,newsViewModel.dateArr)
             }
         }
 
@@ -102,10 +103,11 @@ class NewsFragment : Fragment() {
 
     private fun addNewsCards(
         article: List<String>,
-        imgUrls: MutableList<String>
+        imgUrls: MutableList<String>,
+        dateArr: MutableList<String>
 
     ) {
-        for (i in article.indices){
+        for (i in imgUrls.indices){
             val cardView = CardView(requireContext())
             val cardParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width
@@ -152,6 +154,19 @@ class NewsFragment : Fragment() {
             linearLayout.addView(image)
             linearLayout.addView(text)
             cardView.addView(linearLayout)
+            val dateText = TextView(context)
+            dateText.setTextColor(Color.WHITE)
+            val dateTextParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width
+                LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
+            ).apply {
+                setMargins(resources.getDimension(R.dimen.base_start_maring).toInt(), resources.getDimension(R.dimen.big_start_maring).toInt(), resources.getDimension(R.dimen.base_start_maring).toInt(), 0)
+                gravity = Gravity.CENTER
+            }
+            dateText.text = "Date:${dateArr[i]}"
+            dateText.layoutParams = dateTextParams
+            dateText.textSize = 16f
+            binding.cardsLayout.addView(dateText)
             binding.cardsLayout.addView(cardView)
         }
         val view = View(context)
