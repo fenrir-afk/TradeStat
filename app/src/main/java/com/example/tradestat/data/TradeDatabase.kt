@@ -17,7 +17,9 @@ abstract class TradeDatabase: RoomDatabase() {
     companion object{
         @Volatile
         private var INSTANSE: TradeDatabase? = null
-
+        /**
+         * In this method we are creating an instance of db
+         * */
         fun getDatabase(context:Context):TradeDatabase{
             var tempInstance = INSTANSE
             if (tempInstance != null){

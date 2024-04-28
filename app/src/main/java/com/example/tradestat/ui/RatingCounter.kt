@@ -2,7 +2,14 @@ package com.example.tradestat.ui
 
 import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Trade
-
+/**
+*In this class we are getting a rating of each instrument and strategy and
+* count short and long number of trades of instruments and strategies
+*  @param [names] is a list of Instruments or strategies
+ * @param [winTrades] is a list all trades with result: Victory
+ * @param [defeatTrades] is a list all trades with result: Defeat
+ * @param [token] is an int value which is used to change the instrument count logic to strategy
+* */
 class RatingCounter(
     private val names: MutableList<String>,
     private val winTrades: List<Trade>,
@@ -16,6 +23,9 @@ class RatingCounter(
     val tradeNumbers = mutableListOf<Int>()
     val tradeShortNumbers = mutableListOf<Int>()
     val tradeLongNumbers = mutableListOf<Int>()
+    /**
+    * Updates rating lists with new rating data and number of longs and shorts
+    * */
     fun updateData(){
             names.forEach{
                 var wins = 0

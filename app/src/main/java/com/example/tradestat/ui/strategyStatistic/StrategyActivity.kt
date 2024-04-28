@@ -27,7 +27,7 @@ class StrategyActivity : AppCompatActivity() {
         binding = ActivityStrategyBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
-        setSupportActionBar(binding.myToolBar)
+        setSupportActionBar(binding.include.myToolBar)
         val strategyViewModel = ViewModelProvider(this)[StrategyViewModel::class.java]
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
         strategyViewModel.entriesList.observe(this){
@@ -52,7 +52,11 @@ class StrategyActivity : AppCompatActivity() {
     }
 
 
-
+    /**
+     * In this method we provide data to the chart
+     * @param strategiesNames names of strategies
+     * @param lists list of points on graph
+     * */
     private fun setChart(strategiesNames: MutableList<String>, lists: MutableList<List<Entry>>) {
         // Получение левой оси
         val leftAxis = binding.chart.axisLeft
@@ -89,6 +93,10 @@ class StrategyActivity : AppCompatActivity() {
         binding.chart.description = description
         binding.chart.invalidate()
     }
+    /**
+     * In this method we generate arr of random colors
+     * @param strategiesNames number of strategies. We need it to know the number of strategies
+     * */
     private fun getColorArr(strategiesNames: MutableList<String>): MutableList<Int> {
         val colors = mutableListOf<Int>()
         val rnd = Random()
@@ -98,14 +106,21 @@ class StrategyActivity : AppCompatActivity() {
         }
         return colors
     }
+    /**
+     * In this method we generate cards with texts which represent long and short trades numbers and rating
+     * @param winRateListShort number of all trades which direction is short and result is Victory
+     * @param winRateListLong number of all trades which direction is Long and result is Victory
+     * @param strategiesNames names of all strategies
+     * @param token int value that help us to change rating mode of cards and amount trades mode of cards
+     * */
     private fun setTexts(
         winRateListShort: List<Int>,
         winRateListLong: MutableList<Int>,
-        instrumentsNames: MutableList<String>,
+        strategiesNames: MutableList<String>,
         token: Int
     ){
         binding.parentLayout.removeAllViews()
-        for (i in instrumentsNames.size-1 downTo  0){
+        for (i in strategiesNames.size-1 downTo  0){
             val layout = LinearLayout(this)
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, // CardView width
@@ -115,11 +130,11 @@ class StrategyActivity : AppCompatActivity() {
             layout.orientation = LinearLayout.HORIZONTAL
             layout.setBackgroundColor(resources.getColor(R.color.black_grey))
             if (token == 1){
-                layout.addView( createText("${instrumentsNames[i]}: ",1))
+                layout.addView( createText("${strategiesNames[i]}: ",1))
                 layout.addView( createText("Short rate:${winRateListShort[i]}%",0))
                 layout.addView( createText("Long rate:${winRateListLong[i]}%",0))
             }else{
-                layout.addView( createText("${instrumentsNames[i]}: ",1))
+                layout.addView( createText("${strategiesNames[i]}: ",1))
                 layout.addView( createText("Short number:${winRateListShort[i]}",0))
                 layout.addView( createText("Long number:${winRateListLong[i]}",0))
             }
@@ -137,6 +152,11 @@ class StrategyActivity : AppCompatActivity() {
 
         }
     }
+    /**
+     * In this method we generate cards for setTexts()
+     * @param string  string value for the text in the card
+     * @param counter  int value for changing params for different card in aa row. 1 is the 2 and 3. Another number represents first card
+     * */
     private fun createText(string: String,counter:Int): TextView {
         val text = TextView(this)
         var textParams = LinearLayout.LayoutParams(

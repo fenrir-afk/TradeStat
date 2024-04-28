@@ -1,14 +1,10 @@
 package com.example.tradestat.ui.home
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.TradeDatabase
 import com.example.tradestat.data.TradesRepository
-import com.example.tradestat.data.model.Instrument
-import com.example.tradestat.data.model.Strategy
-import com.example.tradestat.data.model.Trade
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -24,6 +20,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
         repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
     }
+    /**
+     * In this method we are getting  data from bd
+     * */
    fun updateNumbers(){
         viewModelScope.launch(Dispatchers.IO) {
             shortNumber = repository.getShortPos()

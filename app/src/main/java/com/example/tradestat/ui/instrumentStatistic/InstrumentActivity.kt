@@ -29,7 +29,7 @@ class InstrumentActivity : AppCompatActivity() {
         binding = ActivityInstrumentBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
-        setSupportActionBar(binding.myToolBar)
+        setSupportActionBar(binding.include.myToolBar)
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
         val instrumentViewModel =
             ViewModelProvider(this)[InstrumentViewModel::class.java]
@@ -58,7 +58,13 @@ class InstrumentActivity : AppCompatActivity() {
             setTexts(instrumentViewModel.getWinRateListShort.value!!,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames,1)
         }
     }
-
+    /**
+     * In this method we generate cards with texts which represent long and short trades numbers and rating
+     * @param winRateListShort number of all trades which direction is short and result is Victory
+     * @param winRateListLong number of all trades which direction is Long and result is Victory
+     * @param instrumentsNames names of all instruments
+     * @param token int value that help us to change rating mode of cards and amount trades mode of cards
+     * */
     private fun setTexts(
         winRateListShort: List<Int>,
         winRateListLong: MutableList<Int>,
@@ -98,6 +104,11 @@ class InstrumentActivity : AppCompatActivity() {
 
         }
     }
+    /**
+     * In this method we generate cards for setTexts()
+     * @param string  string value for the text in the card
+     * @param counter  int value for changing params for different card in aa row. 1 is the 2 and 3. Another number represents first card
+     * */
     private fun createText(string: String,counter:Int): TextView {
         val text = TextView(this)
         var textParams = LinearLayout.LayoutParams(
@@ -120,7 +131,12 @@ class InstrumentActivity : AppCompatActivity() {
         text.text = string
         return text
     }
-
+    /**
+     * In this method we provide data to the chart
+     * @param instrumentsNames names of instruments
+     * @param baseList list of rating of each instruments (in this case it also for each horizontal bar)
+     * @param token is the int value. We need no change value  and rating mode of the graph
+     * */
     private fun setChart(baseList: List<Int>, instrumentsNames: MutableList<String>, token: Int) {
         val chart = binding.chart2
         chart.setDrawBarShadow(false)
@@ -193,6 +209,9 @@ class InstrumentActivity : AppCompatActivity() {
         setData(baseList)
         chart.invalidate()
     }
+    /**
+     * In this method we set data to the graph
+     * */
     private fun setData(winRateList: List<Int>) {
         val values = ArrayList<BarEntry>()
         repeat(winRateList.size) {

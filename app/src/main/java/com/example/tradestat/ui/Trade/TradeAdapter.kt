@@ -99,7 +99,6 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
         tradeList = trades
         notifyDataSetChanged()
     }
-
     fun getTrade(position: Int): Trade {
         return tradeList[position]
     }

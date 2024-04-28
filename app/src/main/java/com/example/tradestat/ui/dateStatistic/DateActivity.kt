@@ -21,7 +21,7 @@ class DateActivity : AppCompatActivity() {
         binding = ActivityDateBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
-        setSupportActionBar(binding.myToolBar)
+        setSupportActionBar(binding.include.myToolBar)
         val dateViewModel = ViewModelProvider(this)[DateViewModel::class.java]
         dateViewModel.updateDay()
         dateViewModel.getRatingList()
@@ -57,6 +57,11 @@ class DateActivity : AppCompatActivity() {
 
         }
     }
+    /**
+     * In this method we provide data for each graph which represents days of week
+     * @param list coordinates for the graph
+     * @param chart view in which we provide data
+     * */
     private fun updateChart(list: MutableList<Entry>, chart: LineChart){
 
         val lineDataSet = LineDataSet(list,"Victory/defeat")

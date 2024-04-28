@@ -1,6 +1,7 @@
 package com.example.tradestat
 
 import android.os.Bundle
+import android.view.Menu
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -10,6 +11,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.tradestat.databinding.ActivityMainBinding
 
+/**
+* This is a fist point of app
+* */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -19,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.myToolBar)
+        setSupportActionBar(binding.include.myToolBar)
 
         val navView: BottomNavigationView = binding.navView
 
@@ -34,5 +38,10 @@ class MainActivity : AppCompatActivity() {
 
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.app_bar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }

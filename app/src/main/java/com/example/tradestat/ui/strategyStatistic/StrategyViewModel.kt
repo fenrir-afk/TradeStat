@@ -28,7 +28,10 @@ class StrategyViewModel(application: Application) : AndroidViewModel(application
         val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
         repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
     }
-     fun updateData(){ // in this method we get coordinates relatively to the trade list
+    /**
+     * In this method we get coordinates relatively to the trade list
+    * */
+     fun updateData(){
         viewModelScope.launch(Dispatchers.IO) {
             val strategies = repository.getAllStrategies()
             val trades =repository.getTradesSortedByDateDescending()
@@ -56,6 +59,10 @@ class StrategyViewModel(application: Application) : AndroidViewModel(application
         }
 
     }
+    /**
+     * In this method we update rating data int the viewModel
+     * @param strategiesNames all strategies
+     * */
     private  fun updateRatingData(strategiesNames: MutableList<String>) {
         val winTrades = repository.getTradesByResult(Results.Victory.name)
         val defeatTrades = repository.getTradesByResult(Results.Defeat.name)

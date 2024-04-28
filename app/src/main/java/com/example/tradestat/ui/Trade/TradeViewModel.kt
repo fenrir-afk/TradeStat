@@ -64,23 +64,34 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
             sortedTradeList.postValue(repository.getTradesSortedByDateAscending())//Update list
         }
     }
-
-    fun updateListByDateDescending(){ //in this method we get actual trade list sorted by date
+    /**
+     * In this method we get actual trade list sorted by date
+     * */
+    fun updateListByDateDescending(){
         viewModelScope.launch(Dispatchers.IO) {
             getTradesList.postValue(repository.getTradesSortedByDateDescending())
         }
     }
-    fun updateListByDateAscending(){ //in this method we get actual trade list sorted by date
+    /**
+     * In this method we get actual trade list sorted by date
+     * */
+    fun updateListByDateAscending(){
         viewModelScope.launch(Dispatchers.IO) {
             sortedTradeList.postValue(repository.getTradesSortedByDateAscending())
         }
     }
-    fun updateListByStrategy(strategy: String){ //in this method we get actual trade list sorted by strategy
+    /**
+     * In this method we get actual trade list sorted by strategy
+     * */
+    fun updateListByStrategy(strategy: String){
       viewModelScope.launch(Dispatchers.IO) {
             sortedTradeList.postValue(repository.getSortedByStrategiesList(strategy))
         }
     }
-    fun updateListByInstrument(instrument: String){ //in this method we get actual trade list sorted by instument
+    /**
+     * In this method we get actual trade list sorted by instrument
+     * */
+    fun updateListByInstrument(instrument: String){
         viewModelScope.launch(Dispatchers.IO) {
             sortedTradeList.postValue(repository.getSortedByInstrumenList(instrument))
         }

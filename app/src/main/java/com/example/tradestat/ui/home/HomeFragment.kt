@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import app.futured.donut.DonutSection
@@ -53,6 +52,9 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
         return root
     }
+    /**
+     * In this method we provide data to the donut graph that represents number of short and long trades
+     * */
     private fun donut1(){
         //The first pie chart and its labels
         val section1 = DonutSection(
@@ -72,6 +74,9 @@ class HomeFragment : Fragment() {
         binding.shortNumber.text = "Short positions: $shorts"
         binding.longNumber.text = "Long positions: $longs"
     }
+    /**
+     * In this method we provide data to the donut graph that represents number of win and lose trades
+     * */
     private fun donut2() {
         //The second pie chart and its labels
         val amount1  = if (this.wins + this.defeats != 0) ((this.wins * 100)/(this.wins + this.defeats)).toFloat() else 0f

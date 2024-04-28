@@ -27,6 +27,9 @@ class InstrumentViewModel(application: Application) : AndroidViewModel(applicati
             val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
             repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
         }
+    /**
+     * In this method we update  data int the viewModel.It need for button realization
+     * */
      fun getData(){
         viewModelScope.launch(Dispatchers.IO) {
             val instruments = repository.getAllInstruments()

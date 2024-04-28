@@ -89,10 +89,11 @@ class TradeFragment : Fragment() {
         }
 
         return root
+
     }
-    /*
-            In this method, we implement the strategy dialog and its position
-    */
+    /**
+     * In this method, we implement the strategy dialog and its position
+     * */
     private fun strategyDialog() {
         val dialog = Dialog(requireContext())
         with(dialog) {
@@ -123,6 +124,11 @@ class TradeFragment : Fragment() {
         }
 
     }
+    /**
+     * In this method, we create item for strategies table (Sorting table)
+     * @param strategy is the name of the  strategy
+     * @param dialog is dialog window
+     * */
     private fun createBaseStrategyItem(strategy: String, dialog: Dialog): TextView {
         val textSizeInPx = resources.getDimensionPixelSize(R.dimen.dialog_text_size)
         val text = TextView(context)
@@ -136,9 +142,10 @@ class TradeFragment : Fragment() {
         }
         return text
     }
-    /*
-        In this method, we update RecyclerVIew list with data from dialogs (strategy and instument)
-   */
+    /**
+     *In this method, we update RecyclerVIew list with data from dialogs (strategy and instument)
+     * @param i is an int value for changing  strategy dialog and  instrument dialog
+     * */
     private fun updateRecyclerVIew(view: View, i: Int) {
         if (i == 1){ // code of strategyDialog
             val text =  (view as TextView).text.toString()
@@ -148,6 +155,9 @@ class TradeFragment : Fragment() {
             tradeViewModel.updateListByInstrument(text)
         }
     }
+    /**
+     *In this method, we set the adaptive position for strategies dialog
+     * */
     private fun setTheStrategyDialogPosition(dialog: Dialog): WindowManager.LayoutParams {
         //in this place we set the strategy dialog characteristics
         val window: Window = dialog.window!!
@@ -166,9 +176,9 @@ class TradeFragment : Fragment() {
         wlp.y = yMarginInPx
         return wlp
     }
-    /*
-         In this method, we dynamically create card representations representing instruments
-    */
+    /**
+     *In this method, we dynamically create card representations representing instruments
+     * */
     private fun instrumentDialog() {
         val dialog = Dialog(requireContext())
         with(dialog) {
@@ -214,9 +224,9 @@ class TradeFragment : Fragment() {
         val scale = resources.displayMetrics.density
         return (dp * scale + 0.5f).toInt()
     }
-    /*
-        In this method, we create cards for strategy dialog
-   */
+    /**
+     *In this method, we create cards for strategy dialog
+     * */
     private fun createCardsForList(arr: List<Instrument>, dialog: Dialog): LinearLayout {
         var counter = 0 // count the index of current strategy
         var globalCharNumber = 0
@@ -259,9 +269,9 @@ class TradeFragment : Fragment() {
         }
         return globalLayout
     }
-    /*
-       In this method, we create a base card for Instrument Dialog
-  */
+    /**
+     *In this method, we create a base card for Instrument Dialog
+     * */
     private fun createBaseInstrumentCard(instrumentName: String, dialog: Dialog): CardView {
         val cardView = CardView(requireContext())
         val cardParams = LinearLayout.LayoutParams(
@@ -285,9 +295,9 @@ class TradeFragment : Fragment() {
         cardView.addView(textView)
         return cardView
     }
-    /*
-         In this method, we create and display dialog for adding trade to the main trade list
-    */
+    /**
+     * In this method, we create and display dialog for adding trade to the main trade list
+     * */
     private fun tradeDialog() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -303,11 +313,9 @@ class TradeFragment : Fragment() {
             insertDataToDb(dialog)
         }
     }
-
-
-    /*
-         In this method, we insert data to data base
-    */
+    /**
+     * In this method, we insert data to data base
+     * */
     private fun insertDataToDb(dialog:Dialog){
         val direction = dialog.findViewById<Spinner>(R.id.directionSpinner).selectedItem.toString()
         val date = dialog.findViewById<Spinner>(R.id.daysSpinner).selectedItem.toString()

@@ -4,6 +4,15 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * @param tradeDirection the direction of the trade
+ * @param tradeDate the day when the position was opened
+ * @param strategy the name of strategy
+ * @param tradeResult the result of the trade Victory/Defeat
+ * @param instrument the name of instrument on which trade was done
+ * @param ADDate the day when the trade was added to the aapp
+ * @param description description for the trade
+ * */
 @Entity(tableName = "trade_table")
 data class Trade(
     @PrimaryKey(autoGenerate = true) val id: Int,
