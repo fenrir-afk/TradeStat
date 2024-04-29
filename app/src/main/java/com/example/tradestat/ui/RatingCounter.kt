@@ -16,18 +16,23 @@ class RatingCounter(
     private val defeatTrades: List<Trade>,
     private val token: Int
 ) {
-    val winRateList = mutableListOf<Int>()
-    val shortWinRateList = mutableListOf<Int>()
-    val longWinRateList = mutableListOf<Int>()
-
-    val tradeNumbers = mutableListOf<Int>()
-    val tradeShortNumbers = mutableListOf<Int>()
-    val tradeLongNumbers = mutableListOf<Int>()
+    var winRateList = mutableListOf<Int>()
+    var shortWinRateList = mutableListOf<Int>()
+    var longWinRateList = mutableListOf<Int>()
+    var tradeNumbers = mutableListOf<Int>()
+    var tradeShortNumbers = mutableListOf<Int>()
+    var tradeLongNumbers = mutableListOf<Int>()
     /**
     * Updates rating lists with new rating data and number of longs and shorts
     * */
     fun updateData(){
-            names.forEach{
+         winRateList = mutableListOf()
+         shortWinRateList = mutableListOf()
+         longWinRateList = mutableListOf()
+         tradeNumbers = mutableListOf()
+         tradeShortNumbers = mutableListOf()
+         tradeLongNumbers = mutableListOf()
+            names.forEach label@{
                 var wins = 0
                 var defeats = 0
                 var shortWins = 0
@@ -93,6 +98,7 @@ class RatingCounter(
                     winRateList.add(0)
                     longWinRateList.add(0)
                     shortWinRateList.add(0)
+                    return@label
                 }
 
 

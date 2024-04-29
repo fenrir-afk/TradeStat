@@ -81,7 +81,9 @@ class NewsFragment : Fragment() {
 
         return binding.root
     }
-
+    /**
+     * In this method we are checking the network and if it is available call getNews or call showSnackBar() another time
+     * */
     private fun showSnackBar(){
         val snackBar = Snackbar.make(requireView(), "Something went wrong,internet is gone", Snackbar.LENGTH_LONG)
         binding.progressBar.visibility = View.INVISIBLE
@@ -95,14 +97,22 @@ class NewsFragment : Fragment() {
         }
         snackBar.show()
     }
-
+    /**
+     * In this method we check is the network available
+     * */
     private fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connectivityManager.activeNetworkInfo
         return activeNetwork != null && activeNetwork.isConnected
     }
 
-
+    /**
+     * In this method we are creating views
+     * @param article list of news articles
+     * @param imgUrls list of all images attached to articles
+     * @param dateArr list of all dates attached to articles
+     * @param linkArr list of all links to full article(attached to our articles)
+     * */
     private fun addNewsCards(
         article: List<String>,
         imgUrls: MutableList<String>,
@@ -167,7 +177,7 @@ class NewsFragment : Fragment() {
                 LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width
                 LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
             ).apply {
-                setMargins(resources.getDimension(R.dimen.base_start_maring).toInt(), resources.getDimension(R.dimen.big_start_maring).toInt(), resources.getDimension(R.dimen.base_start_maring).toInt(), 0)
+                setMargins(resources.getDimension(R.dimen.base_margin).toInt(), resources.getDimension(R.dimen.big_margin).toInt(), resources.getDimension(R.dimen.base_margin).toInt(), 0)
                 gravity = Gravity.CENTER
             }
             dateText.text = "Date:${dateArr[i]}"

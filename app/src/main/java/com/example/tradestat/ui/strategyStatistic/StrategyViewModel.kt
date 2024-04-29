@@ -14,11 +14,15 @@ import kotlinx.coroutines.launch
 
 class StrategyViewModel(application: Application) : AndroidViewModel(application) {
     var getWinRateListLong: MutableList<Int> = mutableListOf()
+
     var tradeLongNumbers: MutableList<Int> = mutableListOf()
     var tradeShortNumbers: MutableList<Int> =  mutableListOf()
+
     var tradeNumbers: MutableList<Int> =  mutableListOf()
+
     val getWinRateListShort:MutableLiveData<MutableList<Int>> = MutableLiveData()
-    val strategiesNames: MutableList<String> = mutableListOf()
+
+    var strategiesNames: MutableList<String> = mutableListOf()
     val entriesList: MutableLiveData<MutableList<List<Entry>>> =  MutableLiveData()
 
     private val repository: TradesRepository
@@ -33,6 +37,7 @@ class StrategyViewModel(application: Application) : AndroidViewModel(application
     * */
      fun updateData(){
         viewModelScope.launch(Dispatchers.IO) {
+            strategiesNames = mutableListOf()
             val strategies = repository.getAllStrategies()
             val trades =repository.getTradesSortedByDateDescending()
             val strategyLists = mutableListOf<List<Entry>>()

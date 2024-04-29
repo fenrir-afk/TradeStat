@@ -20,7 +20,10 @@ class NewsViewModel : ViewModel() {
     private var articleMap: MutableMap<String,LocalDate> = mutableMapOf()
     private var imageMap: MutableMap<String,LocalDate> = mutableMapOf()
     private var linkMap: MutableMap<String,LocalDate> = mutableMapOf()
-
+    /**
+     * In this method we aare parsing rb.ru
+     * @param url url that we parse https://rb.ru/...
+     * */
     fun getNews(url: String) {
         articleMap.clear()
         imageMap.clear()
@@ -73,7 +76,12 @@ class NewsViewModel : ViewModel() {
             }
         }
     }
-
+    /**
+     * In this method we are getting list and sort it by Date
+     * @return we return sorted by  Date list
+     * @param list unsorted map
+     * @param token there are 2 variants:1 - update date list too,other values mean that we dont update date list
+     * */
     private fun updateDate(list: List<Pair<String, LocalDate>>,token:Int): MutableList<String> {
         val sortedList = list.sortedBy { it.second }
         val articlesArr: MutableList<String> = mutableListOf()

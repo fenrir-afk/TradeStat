@@ -144,7 +144,7 @@ class StrategyActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 resources.getDimension(R.dimen.instrument_card_height).toInt()
             )
-            cardParams.setMargins(resources.getDimension(R.dimen.base_start_maring).toInt(), resources.getDimension(R.dimen.base_start_maring).toInt(), 0, 0)
+            cardParams.setMargins(resources.getDimension(R.dimen.base_margin).toInt(), resources.getDimension(R.dimen.base_margin).toInt(), 0, 0)
             card.layoutParams = cardParams
             card.radius = resources.getDimension(R.dimen.card_corner_radius)
             card.addView(layout)
@@ -168,7 +168,7 @@ class StrategyActivity : AppCompatActivity() {
                 resources.getDimension(R.dimen.instrumentCard_text_width).toInt(), // CardView width
                 LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
             )
-            textParams.setMargins(resources.getDimension(R.dimen.base_start_maring).toInt(), 0, 0, 0)
+            textParams.setMargins(resources.getDimension(R.dimen.base_margin).toInt(), 0, 0, 0)
         }
         textParams.gravity = Gravity.CENTER_VERTICAL
         text.layoutParams = textParams

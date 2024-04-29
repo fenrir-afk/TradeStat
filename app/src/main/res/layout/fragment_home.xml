@@ -12,10 +12,10 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="110dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="16dp">
+            android:layout_marginTop="@dimen/base_margin"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            app:cardCornerRadius="@dimen/card_radius">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -28,7 +28,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="@dimen/base_margin"
                     android:layout_gravity="center_vertical">
                     <app.futured.donut.DonutProgressView
                         android:id="@+id/donut_view"
@@ -43,16 +43,16 @@
                         android:id="@+id/Donut_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/base_text_size"
                         android:layout_marginBottom="7dp"
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
-                        android:text="55"/>
+                        android:text="X"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/small_text_size"
                         android:layout_marginTop="13dp"
                         android:layout_gravity="center"
                         android:textColor="@color/white"
@@ -69,8 +69,8 @@
                         android:id="@+id/long_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:layout_marginEnd="10dp"
+                        android:textSize="@dimen/base_text_size"
+                        android:layout_marginEnd="@dimen/base_margin"
                         android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
                         android:text="Long positions: "/>
@@ -78,8 +78,8 @@
                         android:id="@+id/short_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:layout_marginEnd="10dp"
+                        android:textSize="@dimen/base_text_size"
+                        android:layout_marginEnd="@dimen/base_margin"
                         android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
                         android:text="Short positions: "/>
@@ -93,16 +93,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginStart="@dimen/big_margin"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="@dimen/card_radius">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -110,7 +110,7 @@
                     android:src="@color/black_grey" />
 
                 <ImageView
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/base_margin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
@@ -123,15 +123,15 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
                     android:text="Календарь"
-                    android:textSize="13sp"/>
+                    android:textSize="@dimen/small_text_size"/>
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="20dp"
                 android:layout_height="80dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="@dimen/big_margin"
                 android:layout_weight="1"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="@dimen/card_radius">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                     android:src="@color/black_grey" />
 
                 <ImageView
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/base_margin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
@@ -159,9 +159,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="80dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="@dimen/big_margin"
                 android:layout_weight="1"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="@dimen/card_radius">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -169,7 +169,7 @@
                     android:src="@color/black_grey" />
 
                 <ImageView
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/base_margin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
@@ -182,7 +182,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
                     android:text="Анализ"
-                    android:textSize="13sp"/>
+                    android:textSize="@dimen/small_text_size"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -190,10 +190,10 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="95dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="16dp">
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            app:cardCornerRadius="@dimen/card_radius">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -204,30 +204,29 @@
                 android:layout_width="120dp"
                 android:layout_height="95dp"
                 android:layout_gravity="end"
-
                 android:padding="7dp"
                 android:src="@drawable/courses" />
 
             <TextView
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/base_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/proback"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="@dimen/medium_margin"
                 android:layout_gravity="center_vertical"
                 android:text="Полезные материалы"
                 android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:textSize="@dimen/base_text_size"/>
             <TextView
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/base_margin"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/book_italic"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/medium_margin"
                 android:layout_gravity="center_vertical"
                 android:text="База,стратегии,полезные советы"
                 android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:textSize="@dimen/base_text_size"/>
 
 
         </androidx.cardview.widget.CardView>
@@ -235,9 +234,9 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="16dp"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            app:cardCornerRadius="@dimen/card_radius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.295"
             app:layout_constraintStart_toStartOf="parent"
@@ -255,7 +254,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="@dimen/base_margin"
                     android:layout_gravity="center_vertical">
                     <app.futured.donut.DonutProgressView
                         android:id="@+id/donut_view_second"
@@ -270,7 +269,7 @@
                         android:id="@+id/Donut_text_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/base_text_size"
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
@@ -286,9 +285,9 @@
                         android:id="@+id/Win_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/base_text_size"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="@dimen/big_margin"
                         android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
                         android:text="Win positions: "/>
@@ -296,9 +295,9 @@
                         android:id="@+id/Def_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/base_text_size"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="@dimen/big_margin"
                         android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
                         android:text="Defeat positions: "/>
@@ -315,9 +314,9 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="16dp"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            app:cardCornerRadius="@dimen/card_radius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.295"
             app:layout_constraintStart_toStartOf="parent"
@@ -341,7 +340,7 @@
                 android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="28dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/base_margin"
                 android:textSize="24sp"
                 android:layout_height="wrap_content"/>
 
@@ -350,10 +349,10 @@
             android:id="@+id/indicator_card"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="16dp">
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            app:cardCornerRadius="@dimen/card_radius">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -373,7 +372,7 @@
                 android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="28dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/base_margin"
                 android:textSize="24sp"
                 android:layout_height="wrap_content"/>
 
@@ -382,10 +381,10 @@
             android:id="@+id/strategy_card"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="16dp"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            app:cardCornerRadius="@dimen/card_radius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.295"
             app:layout_constraintStart_toStartOf="parent"
@@ -409,7 +408,7 @@
                 android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="34dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/base_margin"
                 android:textSize="24sp"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -420,16 +419,13 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="17dp"
                 android:layout_marginStart="12dp"
-                android:textSize="17sp"
+                android:textSize="@dimen/base_text_size"
                 android:layout_height="wrap_content"/>
 
         </androidx.cardview.widget.CardView>
         <View
             android:layout_width="match_parent"
             android:layout_height="64dp"/>
-
-
-
     </LinearLayout>
 </ScrollView>
 
