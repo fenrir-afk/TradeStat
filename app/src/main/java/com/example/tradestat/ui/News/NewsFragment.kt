@@ -85,7 +85,7 @@ class NewsFragment : Fragment() {
      * In this method we are checking the network and if it is available call getNews or call showSnackBar() another time
      * */
     private fun showSnackBar(){
-        val snackBar = Snackbar.make(requireView(), "Something went wrong,internet is gone", Snackbar.LENGTH_LONG)
+        val snackBar = Snackbar.make(requireView(), "Something went wrong,internet connection is gone", Snackbar.LENGTH_LONG)
         binding.progressBar.visibility = View.INVISIBLE
         snackBar.setAction("Try again...") {
             if (isNetworkAvailable(requireContext())){
@@ -107,7 +107,7 @@ class NewsFragment : Fragment() {
     }
 
     /**
-     * In this method we are creating views
+     * In this method we are creating news card and date texts
      * @param article list of news articles
      * @param imgUrls list of all images attached to articles
      * @param dateArr list of all dates attached to articles
@@ -150,6 +150,7 @@ class NewsFragment : Fragment() {
 
 
             val text = TextView(context)
+            text.setTextAppearance(R.style.Text)
             text.setTextColor(Color.BLACK)
             val textParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, // CardView width
