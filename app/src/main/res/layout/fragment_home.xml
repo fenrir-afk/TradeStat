@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    android:background="@color/black"
+    style="@style/Background1"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
@@ -102,24 +102,24 @@
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
+                app:cardElevation="0dp"
                 app:cardCornerRadius="@dimen/card_radius">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    style="@style/Background2" />
 
                 <ImageView
                     android:layout_marginTop="@dimen/base_margin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/calendar"
-                    app:tint="@color/white" />
+                    style="@style/calendarImage" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    style="@style/Text"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
                     android:text="Календарь"
@@ -136,19 +136,18 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    style="@style/Background2"  />
 
                 <ImageView
                     android:layout_marginTop="@dimen/base_margin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_recomendation"
-                    app:tint="@color/white" />
+                    style="@style/recommendationsImage" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    style="@style/Text"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
                     android:text="Итоги"
@@ -166,19 +165,19 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    style="@style/Background2"  />
 
                 <ImageView
-                    android:layout_marginTop="@dimen/base_margin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/vector_chart"
-                    app:tint="@color/white" />
+                    android:layout_marginTop="@dimen/base_margin"
+                    style="@style/chartImage"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    style="@style/Text"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
                     android:text="Анализ"
@@ -237,6 +236,7 @@
             android:layout_marginStart="@dimen/big_margin"
             android:layout_marginEnd="@dimen/big_margin"
             app:cardCornerRadius="@dimen/card_radius"
+            app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.295"
             app:layout_constraintStart_toStartOf="parent"
@@ -245,7 +245,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@color/black_grey" />
+                style="@style/Background3" />
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
@@ -261,7 +261,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        app:donut_bgLineColor="@color/MorelightGray"
+                        style="@style/donutCircleColor"
                         app:donut_gapWidth="20"
                         app:donut_gapAngle="270"
                         app:donut_strokeWidth="16dp"/>
@@ -271,7 +271,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/base_text_size"
                         android:layout_gravity="center"
-                        android:textColor="@color/white"
+                        style="@style/Text"
                         android:fontFamily="@font/pro_regular"
                         android:text="X%"/>
 
@@ -288,7 +288,7 @@
                         android:textSize="@dimen/base_text_size"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/big_margin"
-                        android:textColor="@color/white"
+                        style="@style/Text"
                         android:fontFamily="@font/pro_regular"
                         android:text="Win positions: "/>
                     <TextView
@@ -296,9 +296,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/base_text_size"
+                        style="@style/Text"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/big_margin"
-                        android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
                         android:text="Defeat positions: "/>
                 </LinearLayout>
