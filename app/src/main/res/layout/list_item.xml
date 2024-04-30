@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="35dp"
             android:text="trade_strategy"
-            android:textColor="@color/white"
+            style="@style/Text"
             android:textSize="14sp"
             android:layout_weight="1"
             android:gravity="center_vertical"/>
@@ -49,7 +49,7 @@
             android:layout_height="match_parent"
             android:text="instrument"
             android:layout_marginStart="@dimen/base_margin"
-            android:textColor="@color/white"
+            style="@style/Text"
             android:textSize="14sp"
             android:layout_weight="1"
             android:gravity="center_vertical"/>
@@ -74,7 +74,7 @@
             android:layout_marginStart="@dimen/base_margin"
             android:gravity="top"
             android:text="Date: "
-            android:textColor="@color/white"
+            style="@style/Text"
             android:textSize="14sp" />
 
         <TextView
@@ -84,7 +84,7 @@
             android:layout_marginStart="@dimen/base_margin"
             android:gravity="top"
             android:text="Date: "
-            android:textColor="@color/white"
+            style="@style/Text"
             android:textSize="14sp" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:text="Description: "
-                android:textColor="@color/white"
+                style="@style/Text"
                 android:textSize="14sp"
                 android:layout_marginStart="@dimen/base_margin"
                 app:layout_constraintBottom_toBottomOf="parent"

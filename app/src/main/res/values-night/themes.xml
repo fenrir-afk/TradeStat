@@ -16,20 +16,23 @@
     <style name = "Text">
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name = "TextGray">
+        <item name="android:textColor">@color/lightGray</item>
+    </style>
     <style name = "Background1">
         <item name="android:background">@color/black</item>
     </style>
     <style name = "Background2">
-        <item name="android:background">@color/black_grey</item>
+        <item name="android:background">@color/background</item>
+    </style>
+    <style name = "Background3">
+        <item name="android:background">@color/background</item>
     </style>
     <style name = "recommendationsImage">
         <item name="android:src">@drawable/ic_recommendation_light</item>
     </style>
     <style name = "chartImage">
         <item name="android:src">@drawable/vector_chart_light</item>
-    </style>
-    <style name = "Background3">
-        <item name="android:background">@color/black_grey</item>
     </style>
     <style name = "calendarImage">
         <item name="android:src">@drawable/calendar</item>

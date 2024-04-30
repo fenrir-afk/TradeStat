@@ -1,5 +1,8 @@
 package com.example.tradestat.ui.Trade
 
+import android.app.Activity
+import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +38,7 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
         val description: TextView = itemView.findViewById(R.id.Description)
         val deleteButton: FloatingActionButton = itemView.findViewById(R.id.deleteFab)
         val image: ImageView = itemView.findViewById(R.id.img)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TradeViewHolder {
@@ -47,12 +52,17 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
 
     override fun onBindViewHolder(holder: TradeViewHolder, position: Int) {
         val trade = tradeList[position]
+        val context = holder.itemView.context
 
-
-        // Set color according to trade result
+        // Set color according to trade result and theme
         holder.tradeResult.setTextColor(
-            if (trade.tradeResult == Results.Victory.name) Color.GREEN
-            else Color.RED
+            if (isDarkTheme(context)){
+                if (trade.tradeResult == Results.Victory.name) Color.GREEN
+                else Color.RED
+            }else{
+                if (trade.tradeResult == Results.Victory.name) ContextCompat.getColor(context, R.color.green)
+                else Color.RED
+            }
         )
 
         // Set trade information
@@ -70,7 +80,6 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
                 tradeViewModel.deleteTrade(trade)
                 notifyItemRemoved(position)
             }
-
             // Set image resource according to trade direction
             image.setImageResource(
                 if (trade.tradeDirection == Directions.Short.name) R.drawable.bear
@@ -79,8 +88,13 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
 
             // Set background color
             background.setBackgroundResource(
-                if (position % 2 == 1) R.color.background
-                else R.color.black
+                if (isDarkTheme(context)){
+                    if (position % 2 == 1) R.color.background
+                    else R.color.black
+                }else{
+                    if (position % 2 == 1) R.color.Turquoise
+                    else R.color.white
+                }
             )
         }
 
@@ -93,6 +107,10 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
             else expandedPositions.add(position)
             notifyItemChanged(position) // Only notify the changed item
         }
+    }
+    private fun isDarkTheme(context: Context): Boolean {
+        val flag = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return flag == Configuration.UI_MODE_NIGHT_YES
     }
 
     fun setTradesData(trades: List<Trade>) {

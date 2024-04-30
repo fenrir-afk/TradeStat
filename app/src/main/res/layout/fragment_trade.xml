@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/black"
+    style="@style/Background1"
     android:layout_height="match_parent"
     tools:context=".ui.Trade.TradeFragment">
     <LinearLayout
@@ -29,7 +29,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/background"/>
+                    style="@style/Background2"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -44,7 +44,7 @@
                         android:fontFamily="@font/pro_bold"
                         android:gravity="center"
                         android:text="@string/date"
-                        android:textColor="@color/lightGray" />
+                        style="@style/TextGray" />
                     <ImageView
                         android:id="@+id/date_arrow"
                         android:layout_width="15dp"
@@ -69,7 +69,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/background"/>
+                    style="@style/Background2"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -84,7 +84,7 @@
                         android:gravity="center"
                         android:textSize="@dimen/small_text_size"
                         android:text="@string/strategy"
-                        android:textColor="@color/lightGray" />
+                        style="@style/TextGray" />
                     <ImageView
                         android:id="@+id/strategy_arrow"
                         android:layout_width="15dp"
@@ -109,7 +109,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/background"/>
+                    style="@style/Background2"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -123,7 +123,7 @@
                         android:gravity="center"
                         android:textSize="@dimen/small_text_size"
                         android:text="@string/instrument"
-                        android:textColor="@color/lightGray" />
+                        style="@style/TextGray" />
                     <ImageView
                         android:id="@+id/instrument_arrow"
                         android:layout_width="15dp"
@@ -144,7 +144,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/pro_regular"
                 android:layout_marginStart="@dimen/base_margin"
-                android:textColor="@color/lightGray"
+                style="@style/TextGray"
                 android:gravity="center_vertical"
                 android:text="@string/direction"
                />
@@ -154,7 +154,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/pro_regular"
                 android:layout_marginEnd="@dimen/medium_margin"
-                android:textColor="@color/lightGray"
+                style="@style/TextGray"
                 android:gravity="center_vertical"
                 android:text="@string/strategy"
                 />
@@ -163,7 +163,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/pro_regular"
-                android:textColor="@color/lightGray"
+                style="@style/TextGray"
                 android:gravity="center"
                 android:layout_marginEnd="@dimen/medium_margin"
                 android:text="@string/result"
@@ -173,7 +173,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/pro_regular"
                 android:layout_weight="1"
-                android:textColor="@color/lightGray"
+                style="@style/TextGray"
                 android:gravity="center"
                 android:text="@string/instrument"
                 />
