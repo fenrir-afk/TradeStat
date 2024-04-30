@@ -1,5 +1,6 @@
 package com.example.tradestat
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
@@ -24,6 +25,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE)
+        val nightMode = sharedPreferences.getBoolean("night", false)
+        if (nightMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -39,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
     }
@@ -69,6 +76,8 @@ class MainActivity : AppCompatActivity() {
      * In this method we call onPrepareOptionsMenu and change the app theme
      * */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
         when (item.itemId) {
             R.id.Language -> {
                 if (item.icon!!.constantState == ContextCompat.getDrawable(this, R.drawable.ic_ru1)?.constantState) {
@@ -80,8 +89,12 @@ class MainActivity : AppCompatActivity() {
             R.id.Theme -> {
                 if (item.icon!!.constantState == ContextCompat.getDrawable(this, R.drawable.white_sun)?.constantState) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    editor.putBoolean("night",false)
+                    editor.apply()
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    editor.putBoolean("night",true)
+                    editor.apply()
                 }
                 invalidateOptionsMenu() // Обновляем меню после смены темы
             }
