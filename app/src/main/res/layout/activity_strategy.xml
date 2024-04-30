@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/black"
+    style="@style/Background1"
     android:layout_height="match_parent">
 
     <include
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/oxygen"
         android:text="Graph of strategies rating"
-        android:textColor="@color/white"
+        style="@style/Text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,6 +69,7 @@
             android:id="@+id/amountCard"
             android:layout_width="100dp"
             android:layout_height="67dp"
+            android:layout_marginEnd="@dimen/base_margin"
             android:layout_marginStart="@dimen/base_margin"
 
             android:layout_weight="1"
@@ -105,6 +106,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/base_margin"
         android:layout_marginStart="@dimen/base_margin"
         app:cardCornerRadius="@dimen/card_radius"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -136,6 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
+        android:layout_marginEnd="@dimen/base_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
