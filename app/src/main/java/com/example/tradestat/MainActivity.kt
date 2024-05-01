@@ -97,7 +97,6 @@ class MainActivity : AppCompatActivity() {
                 val editor = sharedPreferences.edit()
                 val currentLocale = resources.configuration.locales[0]
                 val newLocale = if (currentLocale.language == "ru") Locale("en") else Locale("ru")
-
                 Locale.setDefault(newLocale)
                 val resources = resources
                 val configuration = resources.configuration

@@ -48,20 +48,28 @@ class NewsViewModel : ViewModel() {
                     parsedMap[newsLink] = LocalDate.parse(date, formatter)
 
                 }
-                val deferredTasks = parsedMap.map { newsLink ->
+                val deferredTasks = parsedMap.entries.map { newsLink ->
                     async {
-                        val newsDoc = Jsoup.connect("https://rb.ru$newsLink").get()
+                        val baseUrl = "https://rb.ru"
+                        var article = ""
+                        var imageUrl: String? = null
+                        val link = "$baseUrl$newsLink"
+                        try {
+                            val newsDoc = Jsoup.connect(link).get()
+                            val metaElement = newsDoc.select("meta[content~=https://media.rbcdn.ru/media/news/]").first()
+                            imageUrl = metaElement?.attr("content")
+                            val divElement = newsDoc.select("div.article__introduction")[1]
+                            //delete last 2 sentences
+                            val lastSentenceIndex = divElement.text().lastIndexOf('.')
+                            val secondToLastSentenceIndex = divElement.text().substring(0, lastSentenceIndex).lastIndexOf('.')
+                            article = divElement.text().substring(0, secondToLastSentenceIndex + 1)
+                            articleMap[article] = newsLink.value
+                            imageUrl?.let { imageMap[it] = newsLink.value }
+                            linkMap[link] = newsLink.value
+                        } catch (e: Exception) {
+                            Log.e("Exception during parsing: ", "Error for $link: ${e.message}")
+                        }
 
-                        val metaElement = newsDoc.select("meta[content~=https://media.rbcdn.ru/media/news/]").first()
-                        val imageUrl = metaElement?.attr("content")
-                        val divElement = newsDoc.select("div.article__introduction")[1]
-                        //delete last 2 sentences
-                        val lastSentenceIndex = divElement.text().lastIndexOf('.')
-                        val secondToLastSentenceIndex = divElement.text().substring(0, lastSentenceIndex).lastIndexOf('.')
-                        val article = divElement.text().substring(0, secondToLastSentenceIndex + 1)
-                        articleMap[article] = newsLink.value
-                        imageMap[imageUrl.toString()] = newsLink.value
-                        linkMap["https://rb.ru$newsLink"] = newsLink.value
                         article
                     }
                 }
