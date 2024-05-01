@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
-import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.databinding.ActivityDateBinding
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
@@ -47,13 +46,13 @@ class DateActivity : AppCompatActivity() {
             updateChart(it, binding.sundayChart)
         }
         dateViewModel.RatingList.observe(this) {
-            binding.mondayText.text = "${DaysOfWeek.Monday} ${it[0]}%"
-            binding.tuesdayText.text = "${DaysOfWeek.Tuesday} ${it[1]}%"
-            binding.wednesdayText.text = "${DaysOfWeek.Wednesday} ${it[2]}%"
-            binding.thursdayText.text = "${DaysOfWeek.Thursday} ${it[3]}%"
-            binding.fridayText.text = "${DaysOfWeek.Friday} ${it[4]}%"
-            binding.saturdayText.text = "${DaysOfWeek.Saturday} ${it[5]}%"
-            binding.sundayText.text = "${DaysOfWeek.Sunday} ${it[6]}%"
+            binding.mondayText.text = resources.getString(R.string.monday) +  " — ${it[0]}%"
+            binding.tuesdayText.text = resources.getString(R.string.tuesday) + " — ${it[1]}%"
+            binding.wednesdayText.text =resources.getString(R.string.wednesday) + " — ${it[2]}%"
+            binding.thursdayText.text =resources.getString(R.string.thursday) +  " — ${it[3]}%"
+            binding.fridayText.text =resources.getString(R.string.friday)  + " — ${it[4]}%"
+            binding.saturdayText.text =resources.getString(R.string.saturday) +" — ${it[5]}%"
+            binding.sundayText.text =resources.getString(R.string.sunday) + " — ${it[6]}%"
 
         }
     }

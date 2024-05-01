@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/oxygen"
-        android:text="Graph of instrument rating"
+        android:text="@string/graph_of_instrument_rating"
         style="@style/Text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="45dp"
-                android:text="Rating"
+                android:text="@string/rating"
                 android:textColor="@color/white"
                 android:textSize="@dimen/small_text_size" />
         </androidx.cardview.widget.CardView>
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="47dp"
-                android:text="Amount"
+                android:text="@string/amount"
                 android:textColor="@color/white"
                 android:textSize="@dimen/small_text_size" />
         </androidx.cardview.widget.CardView>

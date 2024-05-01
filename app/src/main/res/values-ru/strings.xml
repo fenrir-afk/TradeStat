@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">TradeStat</string>
+    <string name="title_home">Домашняя</string>
+    <string name="title_dashboard">Сделки</string>
+    <string name="monday">Понедельник</string>
+    <string name="tuesday">Вторник</string>
+    <string name="wednesday">Среда</string>
+    <string name="thursday">Чертверг</string>
+    <string name="friday">Пятника</string>
+    <string name="saturday">Суббота</string>
+    <string name="sunday">Воскресенье</string>
+    <string name="strategy">Strategy</string>
+    <string name="date">Date</string>
+    <string name="instrument">Instrument</string>
+    <string name="direction">Direction</string>
+    <string name="result">Result</string>
+    <string name="add">Добавить</string>
+    <string name="News">Новости</string>
+    <string name="all">Всего</string>
+    <string name="long_positions">Long позиции:</string>
+    <string name="short_positions">Short позиции:</string>
+    <string name="calendar">Календарь</string>
+    <string name="results">Результаты</string>
+    <string name="analysis">Анализ</string>
+    <string name="useful_materials">Полезные материалы</string>
+    <string name="base_strategies_useful_tips">База,стратегии,полезные советы</string>
+    <string name="win_positions">Win positions:</string>
+    <string name="defeat_positions">Defeat positions:</string>
+    <string name="time_statistics">Статистики по времени</string>
+    <string name="statistics_on_indicators">Статистика по индикаторам</string>
+    <string name="general_statistics">Общая статистка</string>
+    <string name="including_strategies">Включая стратегии</string>
+    <string name="add_trade">Добавить сделку</string>
+    <string name="enter_the_indicator">Введите индикатор:</string>
+    <string name="enter_the_strategy">Введите стратегию:</string>
+    <string name="enter_a_description">Введите описание:</string>
+    <string name="cancel">Отменить</string>
+    <string name="graph_of_strategies_rating">График рейтинга стратегий</string>
+    <string name="rating">Рейтинг</string>
+    <string name="amount">Количество</string>
+    <string name="graph_of_instrument_rating">График рейтинга инструментов</string>
+    <string name="news_search">Поиск новостей</string>
+    <string name="enter_a_company_name">Введите название компании</string>
+    <string name="description">Описание:</string>
+    <string name="instruments">Инструменты:</string>
+    <string name="graph_of_number_of_trades">График количества сделок</string>
+    <string name="short_number">Short позиции:</string>
+    <string name="long_number">Длинные позиции:</string>
+    <string name="short_rate">Short rate:</string>
+    <string name="long_rate">Long rate:</string>
+    <string-array name="weekDays">
+        <item>Дни недели:</item>
+        <item>Воскресенье</item>
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг </item>
+        <item>Суббута</item>
+        <item>Пятница</item>
+    </string-array>
+    <string-array name="results">
+        <item>Результат сделки:</item>
+        <item>Победа</item>
+        <item>Поражение</item>
+    </string-array>
+    <string-array name="direction">
+        <item>Напрвление сделки:</item>
+        <item>Short</item>
+        <item>Long</item>
+    </string-array>
+</resources>

@@ -40,13 +40,13 @@ class StrategyActivity : AppCompatActivity() {
         binding.amountCard.setOnClickListener{
             binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.black_grey))
             binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
-            binding.textView.text = "Graph of number of trades"
+            binding.textView.text = resources.getString(R.string.graph_of_number_of_trades)
             setTexts(strategyViewModel.tradeShortNumbers,strategyViewModel.tradeLongNumbers,strategyViewModel.strategiesNames,2)
         }
         binding.ratingCard.setOnClickListener{
             binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
             binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.black_grey))
-            binding.textView.text = "Graph of strategies rating"
+            binding.textView.text = resources.getString(R.string.graph_of_strategies_rating)
             setTexts(strategyViewModel.getWinRateListShort.value!!,strategyViewModel.getWinRateListLong,strategyViewModel.strategiesNames,1)
         }
     }
@@ -131,12 +131,13 @@ class StrategyActivity : AppCompatActivity() {
             layout.setBackgroundColor(resources.getColor(R.color.black_grey))
             if (token == 1){
                 layout.addView( createText("${strategiesNames[i]}: ",1))
-                layout.addView( createText("Short rate:${winRateListShort[i]}%",0))
+                layout.addView(createText(resources.getString(R.string.short_rate) + winRateListShort[i],0))
+                layout.addView(createText(resources.getString(R.string.long_rate) + winRateListShort[i],0))
                 layout.addView( createText("Long rate:${winRateListLong[i]}%",0))
             }else{
                 layout.addView( createText("${strategiesNames[i]}: ",1))
-                layout.addView( createText("Short number:${winRateListShort[i]}",0))
-                layout.addView( createText("Long number:${winRateListLong[i]}",0))
+                layout.addView(createText(resources.getString(R.string.short_number) + winRateListShort[i],0))
+                layout.addView(createText(resources.getString(R.string.long_number) + winRateListShort[i],0))
             }
 
             val card = CardView(this)

@@ -57,7 +57,7 @@
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
-                        android:text="All"/>
+                        android:text="@string/all"/>
 
                 </FrameLayout>
                 <LinearLayout
@@ -73,7 +73,7 @@
                         android:layout_marginEnd="@dimen/base_margin"
                         android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
-                        android:text="Long positions: "/>
+                        android:text="@string/long_positions"/>
                     <TextView
                         android:id="@+id/short_number"
                         android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
                         android:layout_marginEnd="@dimen/base_margin"
                         android:textColor="@color/white"
                         android:fontFamily="@font/pro_regular"
-                        android:text="Short positions: "/>
+                        android:text="@string/short_positions"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -122,7 +122,7 @@
                     style="@style/Text"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
-                    android:text="Календарь"
+                    android:text="@string/calendar"
                     android:textSize="@dimen/small_text_size"/>
 
             </androidx.cardview.widget.CardView>
@@ -150,7 +150,7 @@
                     style="@style/Text"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
-                    android:text="Итоги"
+                    android:text="@string/results"
                     android:textSize="14sp"/>
 
             </androidx.cardview.widget.CardView>
@@ -180,7 +180,7 @@
                     style="@style/Text"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
-                    android:text="Анализ"
+                    android:text="@string/analysis"
                     android:textSize="@dimen/small_text_size"/>
 
             </androidx.cardview.widget.CardView>
@@ -213,7 +213,7 @@
                 android:fontFamily="@font/proback"
                 android:layout_marginBottom="@dimen/medium_margin"
                 android:layout_gravity="center_vertical"
-                android:text="Полезные материалы"
+                android:text="@string/useful_materials"
                 android:textColor="@color/white"
                 android:textSize="@dimen/base_text_size"/>
             <TextView
@@ -223,7 +223,7 @@
                 android:fontFamily="@font/book_italic"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:layout_gravity="center_vertical"
-                android:text="База,стратегии,полезные советы"
+                android:text="@string/base_strategies_useful_tips"
                 android:textColor="@color/white"
                 android:textSize="@dimen/base_text_size"/>
 
@@ -290,7 +290,7 @@
                         android:layout_marginStart="@dimen/big_margin"
                         style="@style/Text"
                         android:fontFamily="@font/pro_regular"
-                        android:text="Win positions: "/>
+                        android:text="@string/win_positions"/>
                     <TextView
                         android:id="@+id/Def_number"
                         android:layout_width="wrap_content"
@@ -300,7 +300,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/big_margin"
                         android:fontFamily="@font/pro_regular"
-                        android:text="Defeat positions: "/>
+                        android:text="@string/defeat_positions"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -336,7 +336,7 @@
             <TextView
                 android:layout_width="240dp"
                 android:fontFamily="@font/pro_regular"
-                android:text="Статистика по времени"
+                android:text="@string/time_statistics"
                 android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="28dp"
@@ -368,7 +368,7 @@
             <TextView
                 android:layout_width="240dp"
                 android:fontFamily="@font/pro_regular"
-                android:text="Статистика по индикаторам"
+                android:text="@string/statistics_on_indicators"
                 android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="28dp"
@@ -404,7 +404,7 @@
             <TextView
                 android:layout_width="240dp"
                 android:fontFamily="@font/pro_regular"
-                android:text="Общая статистика"
+                android:text="@string/general_statistics"
                 android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="34dp"
@@ -414,7 +414,7 @@
             <TextView
                 android:layout_width="240dp"
                 android:fontFamily="@font/book_italic"
-                android:text="Включая стратегию"
+                android:text="@string/including_strategies"
                 android:textColor="@color/white"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="17dp"
