@@ -187,6 +187,7 @@
 
         </LinearLayout>
         <androidx.cardview.widget.CardView
+            android:id="@+id/materialsCard"
             android:layout_width="match_parent"
             android:layout_height="95dp"
             android:layout_marginTop="@dimen/medium_margin"

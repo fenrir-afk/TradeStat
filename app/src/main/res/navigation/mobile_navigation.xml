@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_home_to_strategyActivity"
             app:destination="@id/strategyActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_materialsActivity"
+            app:destination="@id/materialsActivity" />
     </fragment>
 
     <fragment
@@ -45,4 +48,9 @@
         android:name="com.example.tradestat.ui.strategyStatistic.StrategyActivity"
         android:label="activity_strategy"
         tools:layout="@layout/activity_strategy" />
+    <activity
+        android:id="@+id/materialsActivity"
+        android:name="com.example.tradestat.ui.usefullMaterials.MaterialsActivity"
+        android:label="activity_materials"
+        tools:layout="@layout/activity_materials" />
 </navigation>

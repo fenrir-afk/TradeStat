@@ -40,17 +40,19 @@ class HomeFragment : Fragment() {
             donut1()
             donut2()
         }
-        binding.dateCard.setOnClickListener{
+        binding.dateCard.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_navigation_home_to_dateActivity)
         }
-        binding.indicatorCard.setOnClickListener{
+        binding.materialsCard.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_navigation_home_to_materialsActivity)
+        }
+        binding.indicatorCard.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_navigation_home_to_instrumentActivity)
         }
-        binding.strategyCard.setOnClickListener{
+        binding.strategyCard.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_navigation_home_to_strategyActivity)
         }
-        val root: View = binding.root
-        return root
+        return binding.root
     }
     /**
      * In this method we provide data to the donut graph that represents number of short and long trades
