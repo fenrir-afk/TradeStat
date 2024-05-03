@@ -59,6 +59,7 @@
     <string name="trade_result">Trade result:</string>
     <string name="best_strategy">Best strategy:</string>
     <string name="best_instrument">Best instrument:</string>
+    <string name="wins_defeats">(wins - defeats)</string>
 
     <string-array name="weekDays">
         <item>Day of the week:</item>

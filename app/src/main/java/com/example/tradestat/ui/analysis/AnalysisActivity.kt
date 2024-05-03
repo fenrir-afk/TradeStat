@@ -34,7 +34,7 @@ class AnalysisActivity : AppCompatActivity() {
         analysisViewModel.updateData()
         analysisViewModel.list.observe(this, Observer {
             updateChart(it,binding.lineChart)
-            binding.resultText.text = resources.getString(R.string.trade_result) + analysisViewModel.tradeResult.toString() + " (win - defeat)"
+            binding.resultText.text = resources.getString(R.string.trade_result) + analysisViewModel.tradeResult.toString() + getString(R.string.wins_defeats)
             binding.strategyText.text = resources.getString(R.string.best_strategy) + analysisViewModel.bestStrategy
             binding.instrumentText.text = resources.getString(R.string.best_instrument) + analysisViewModel.bestInstrument
         })
