@@ -55,6 +55,10 @@
     <string name="smart_money_intro">The Smart Money trading strategy remains relevant in today\'s dynamic market. It focuses on identifying and following large capital investments, known as smart money. This strategy assumes that these big players have more information and experience, which gives them an advantage in making the right trading decisions. By combining technical analysis, understanding market behavior and monitoring smart money activity, traders can increase the likelihood of successful trading and maximize profits in various market conditions.</string>
     <string name="tech_analysis_intro">In the dynamic world of trading, understanding technical analysis is an invaluable tool. It gives traders a deep understanding of market dynamics, allowing them to unravel patterns, identify opportunities and make informed decisions. This advantage gives traders confidence and increases their chances of making a profit in the markets. This guide is one of the best among them, as in addition to basic knowledge it gives a genuine understanding of trading.</string>
     <string name="technical_analysis">Technical analysis</string>
+    <string name="all_trades">All trades</string>
+    <string name="trade_result">Trade result:</string>
+    <string name="best_strategy">Best strategy:</string>
+    <string name="best_instrument">Best instrument:</string>
 
     <string-array name="weekDays">
         <item>Day of the week:</item>

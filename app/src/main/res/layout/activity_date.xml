@@ -49,7 +49,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    android:src="@color/background" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/monday_chart"
@@ -85,7 +85,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    android:src="@color/background" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/tuesday_chart"
@@ -121,7 +121,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    android:src="@color/background" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/wednesday_chart"
@@ -157,7 +157,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    android:src="@color/background" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/thursday_chart"
@@ -193,7 +193,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    android:src="@color/background" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/friday_chart"
@@ -229,7 +229,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    android:src="@color/background" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/saturday_chart"
@@ -265,7 +265,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black_grey" />
+                    android:src="@color/background" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/sunday_chart"

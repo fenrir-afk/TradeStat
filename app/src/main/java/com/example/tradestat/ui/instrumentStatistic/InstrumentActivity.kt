@@ -80,7 +80,7 @@ class InstrumentActivity : AppCompatActivity() {
             )
             layout.layoutParams = layoutParams
             layout.orientation = LinearLayout.HORIZONTAL
-            layout.setBackgroundColor(resources.getColor(R.color.black_grey))
+            layout.setBackgroundColor(resources.getColor(R.color.background))
             if (token == 1){
                 layout.addView( createText("${instrumentsNames[i]}: ",1))
                 layout.addView( createText("Short rate:${winRateListShort[i]}%",0))

@@ -3,7 +3,7 @@ package com.example.tradestat.ui
 import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Trade
 /**
-*In this class we are getting a rating of each instrument and strategy and
+*In this class we are getting a rating of each instrument or strategy and
 * count short and long number of trades of instruments and strategies
 *  @param [names] is a list of Instruments or strategies
  * @param [winTrades] is a list all trades with result: Victory
@@ -22,6 +22,9 @@ class RatingCounter(
     var tradeNumbers = mutableListOf<Int>()
     var tradeShortNumbers = mutableListOf<Int>()
     var tradeLongNumbers = mutableListOf<Int>()
+    init {
+        updateData()
+    }
     /**
     * Updates rating lists with new rating data and number of longs and shorts
     * */
@@ -120,5 +123,6 @@ class RatingCounter(
 
                 }
             }
+        println("He")
     }
 }

@@ -17,8 +17,8 @@
     <string name="add">Добавить</string>
     <string name="News">Новости</string>
     <string name="all">Всего</string>
-    <string name="long_positions">Long позиции:</string>
-    <string name="short_positions">Short позиции:</string>
+    <string name="long_positions">Long number:</string>
+    <string name="short_positions">Short number:</string>
     <string name="calendar">Календарь</string>
     <string name="results">Результаты</string>
     <string name="analysis">Анализ</string>
@@ -44,8 +44,8 @@
     <string name="description">Описание:</string>
     <string name="instruments">Инструменты:</string>
     <string name="graph_of_number_of_trades">График количества сделок</string>
-    <string name="short_number">Short позиции:</string>
-    <string name="long_number">Длинные позиции:</string>
+    <string name="short_number">Short number:</string>
+    <string name="long_number">Long number:</string>
     <string name="short_rate">Short rate:</string>
     <string name="long_rate">Long rate:</string>
     <string name="materials_intro">Трейдинг – это высокорискованный мир финансовых рынков, где открываются широкие возможности для заработка. Однако успех в этой сфере требует глубоких знаний и постоянного совершенствования навыков. Обучение трейдингу – это необходимость для тех, кто стремится добиться финансовой независимости и стабильного дохода в этой сфере. Только вооружившись необходимыми знаниями и приобретя практический опыт, вы сможете грамотно управлять рисками и максимизировать свои доходы на волатильных рынках.</string>

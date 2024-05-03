@@ -46,7 +46,7 @@
                 android:id="@+id/rating_ImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@color/black_grey" />
+                android:src="@color/background" />
 
             <ImageView
                 android:layout_width="40dp"
@@ -80,7 +80,7 @@
                 android:id="@+id/amount_ImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@color/black_grey" />
+                android:src="@color/background" />
 
             <ImageView
                 android:layout_width="40dp"
@@ -121,7 +121,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black_grey" />
+            android:background="@color/background" />
 
         <com.github.mikephil.charting.charts.HorizontalBarChart
             android:id="@+id/chart2"

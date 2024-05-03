@@ -52,6 +52,9 @@ class HomeFragment : Fragment() {
         binding.strategyCard.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_navigation_home_to_strategyActivity)
         }
+        binding.analysisCard.setOnClickListener{
+            view?.findNavController()?.navigate(R.id.action_navigation_home_to_analysisActivity)
+        }
         return binding.root
     }
     /**

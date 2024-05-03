@@ -120,6 +120,11 @@ class NewsFragment : Fragment() {
         linkArr: MutableList<String>
 
     ) {
+        if (imgUrls.size > article.size){
+            Toast.makeText(context,"Nothing wos found",Toast.LENGTH_LONG).show()
+            binding.progressBar.visibility = View.GONE
+            return
+        }
         for (i in imgUrls.indices){
             val cardView = CardView(requireContext())
             val cardParams = LinearLayout.LayoutParams(

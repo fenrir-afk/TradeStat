@@ -128,7 +128,7 @@ class StrategyActivity : AppCompatActivity() {
             )
             layout.layoutParams = layoutParams
             layout.orientation = LinearLayout.HORIZONTAL
-            layout.setBackgroundColor(resources.getColor(R.color.black_grey))
+            layout.setBackgroundColor(resources.getColor(R.color.background))
             if (token == 1){
                 layout.addView( createText("${strategiesNames[i]}: ",1))
                 layout.addView(createText(resources.getString(R.string.short_rate) + winRateListShort[i],0))
