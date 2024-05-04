@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_navigation_home_to_analysisActivity"
             app:destination="@id/analysisActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_resultsActivity"
+            app:destination="@id/resultsActivity" />
     </fragment>
 
     <fragment
@@ -61,4 +64,9 @@
         android:name="com.example.tradestat.ui.analysis.AnalysisActivity"
         android:label="activity_analysis"
         tools:layout="@layout/activity_analysis" />
+    <activity
+        android:id="@+id/resultsActivity"
+        android:name="com.example.tradestat.ui.results.ResultsActivity"
+        android:label="activity_results"
+        tools:layout="@layout/activity_results" />
 </navigation>

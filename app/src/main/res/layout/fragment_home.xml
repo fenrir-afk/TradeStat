@@ -127,6 +127,7 @@
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/results_card"
                 android:layout_width="20dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="@dimen/big_margin"

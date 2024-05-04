@@ -18,10 +18,10 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
 
     private val binding get() = _binding!!
-    var shorts:Int = 0
-    var longs:Int = 0
-    var wins:Int = 0
-    var defeats:Int = 0
+    private var shorts:Int = 0
+    private var longs:Int = 0
+    private var wins:Int = 0
+    private var defeats:Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +54,9 @@ class HomeFragment : Fragment() {
         }
         binding.analysisCard.setOnClickListener{
             view?.findNavController()?.navigate(R.id.action_navigation_home_to_analysisActivity)
+        }
+        binding.resultsCard.setOnClickListener{
+            view?.findNavController()?.navigate(R.id.action_navigation_home_to_resultsActivity)
         }
         return binding.root
     }
