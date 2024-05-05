@@ -38,14 +38,14 @@ class StrategyActivity : AppCompatActivity() {
             setTexts(it,strategyViewModel.getWinRateListLong,strategyViewModel.strategiesNames,1)
         }
         binding.amountCard.setOnClickListener{
-            binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.black_grey))
+            binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
             binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
             binding.textView.text = resources.getString(R.string.graph_of_number_of_trades)
             setTexts(strategyViewModel.tradeShortNumbers,strategyViewModel.tradeLongNumbers,strategyViewModel.strategiesNames,2)
         }
         binding.ratingCard.setOnClickListener{
             binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
-            binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.black_grey))
+            binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
             binding.textView.text = resources.getString(R.string.graph_of_strategies_rating)
             setTexts(strategyViewModel.getWinRateListShort.value!!,strategyViewModel.getWinRateListLong,strategyViewModel.strategiesNames,1)
         }

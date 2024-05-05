@@ -2,6 +2,7 @@ package com.example.tradestat.ui.results
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.TradeDatabase
 import com.example.tradestat.data.TradesRepository
@@ -16,11 +17,13 @@ import java.util.Locale
 
 class ResultsViewModel(application: Application): AndroidViewModel(application) {
     private val repository: TradesRepository
+    var namesList = mutableSetOf<String>()
+
     private var currentMonthTrades: MutableList<Trade> = mutableListOf()
-    private var currentMonthStrategiesRating: MutableList<Int> = mutableListOf()
+    var currentMonthStrategiesRating: MutableLiveData<MutableList<Int>> = MutableLiveData()
 
     private var previousMonthTrades: MutableList<Trade> = mutableListOf()
-    private var previousMonthStrategiesRating: MutableList<Int> = mutableListOf()
+    var previousMonthStrategiesRating: MutableList<Int> = mutableListOf()
     init {
         val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
         val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
@@ -30,7 +33,7 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
     }
 
     private fun updateStrategiesLists() {
-        val namesList = mutableSetOf<String>()
+        namesList = mutableSetOf()
         val currentRating = mutableListOf<Int>()
         val previousRating = mutableListOf<Int>()
         currentMonthTrades.forEach {
@@ -43,7 +46,8 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
             currentRating.add(getRating(currentMonthTrades,it,2))
             previousRating.add(getRating(previousMonthTrades,it,2))
         }
-        println()
+        previousMonthStrategiesRating = previousRating
+        currentMonthStrategiesRating.postValue(currentRating)
 
     }
     private fun getRating(list: MutableList<Trade>, name: String,token:Int): Int {

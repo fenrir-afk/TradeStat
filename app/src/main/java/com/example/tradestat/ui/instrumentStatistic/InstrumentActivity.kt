@@ -42,17 +42,17 @@ class InstrumentActivity : AppCompatActivity() {
             setTexts(it,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames,1)
         }
         binding.amountCard.setOnClickListener{
-            binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.black_grey))
+            binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
             binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
-            binding.textView.text = "Graph of number of trades"
+            binding.textView.text = getString(R.string.graph_of_number_of_trades)
 
             setChart(instrumentViewModel.tradeNumbers,instrumentViewModel.instrumentsNames,2)
             setTexts(instrumentViewModel.tradeShortNumbers,instrumentViewModel.tradeLongNumbers,instrumentViewModel.instrumentsNames,2)
         }
         binding.ratingCard.setOnClickListener{
             binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
-            binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.black_grey))
-            binding.textView.text = "Graph of instrument rating"
+            binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
+            binding.textView.text = getString(R.string.graph_of_instrument_rating)
 
             setChart(instrumentViewModel.getWinRateList.value!!,instrumentViewModel.instrumentsNames,1)
             setTexts(instrumentViewModel.getWinRateListShort.value!!,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames,1)

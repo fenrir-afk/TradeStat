@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.results
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +12,8 @@ import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
 import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import java.util.Calendar
+import java.util.Locale
 
 class ResultsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultsBinding
@@ -28,19 +29,34 @@ class ResultsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        updateChart()
+        resultsViewModel.currentMonthStrategiesRating.observe(this){
+            updateChart(it,resultsViewModel.previousMonthStrategiesRating,resultsViewModel.namesList)
+        }
+    }
+    /**
+    *In this method we are getting the months by number.
+    * */
+    private fun getMonthName(month: Int): String {
+        val monthNames = listOf(
+            "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+            "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+        )
+        return monthNames[month]
     }
 
-    private fun updateChart() {
+    private fun updateChart(
+        currentMonthStrategiesRating: MutableList<Int>,
+        previousMonthStrategiesRating: MutableList<Int>,
+        labels: MutableSet<String>
+    ) {
         var arr1 = ArrayList<RadarEntry>()
-        arr1.add(RadarEntry(420F))
-        arr1.add(RadarEntry(475F))
-        arr1.add(RadarEntry(508F))
-        arr1.add(RadarEntry(660F))
-        arr1.add(RadarEntry(550F))
-        arr1.add(RadarEntry(630F))
-        arr1.add(RadarEntry(470F))
-        var dataSet1 = RadarDataSet(arr1,"Dataset 1")
+        currentMonthStrategiesRating.forEach {
+            arr1.add(RadarEntry(it.toFloat()))
+        }
+        val calendar = Calendar.getInstance()
+        val currentMonth = getMonthName(calendar.get(Calendar.MONTH))
+        val previousMonth = getMonthName(calendar.get(Calendar.MONTH) - 1)
+        var dataSet1 = RadarDataSet(arr1,currentMonth)
         dataSet1.color = getColor(R.color.purple_200)
         dataSet1.lineWidth = 2F
         dataSet1.valueTextColor = getColor(R.color.purple_200)
@@ -49,14 +65,10 @@ class ResultsActivity : AppCompatActivity() {
         dataSet1.setDrawFilled(true)
 
         var arr2 = ArrayList<RadarEntry>()
-        arr2.add(RadarEntry(310F))
-        arr2.add(RadarEntry(420F))
-        arr2.add(RadarEntry(685F))
-        arr2.add(RadarEntry(820F))
-        arr2.add(RadarEntry(490F))
-        arr2.add(RadarEntry(730F))
-        arr2.add(RadarEntry(200F))
-        var dataSet2 = RadarDataSet(arr2,"Dataset 1")
+        previousMonthStrategiesRating.forEach {
+            arr2.add(RadarEntry(it.toFloat()))
+        }
+        var dataSet2 = RadarDataSet(arr2,previousMonth)
         dataSet2.color = getColor(R.color.green)
         dataSet2.lineWidth = 2F
         dataSet2.valueTextColor =getColor(R.color.green)
@@ -67,18 +79,20 @@ class ResultsActivity : AppCompatActivity() {
         var radarData = RadarData()
         radarData.addDataSet(dataSet1)
         radarData.addDataSet(dataSet2)
-
-        var labels = listOf("2014","2015","2016","2017","2018","2019","2020")
-
         binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
         binding.chart.xAxis.textColor = getColor(R.color.white)
-        binding.chart.yAxis.isEnabled = false
+        binding.chart.yAxis.axisMinimum = 0f
+        binding.chart.yAxis.axisMaximum = 110f
+        binding.chart.xAxis.axisMinimum = 0f
+        binding.chart.xAxis.axisMaximum = 110f
         binding.chart.description.text = ""
         binding.chart.data = radarData
+        binding.chart.legend.textColor = getColor(R.color.white)
 
-
-
-
+        binding.chart.xAxis.setDrawAxisLine(false)
+        binding.chart.xAxis.setDrawLabels(true)
+        binding.chart.yAxis.setDrawAxisLine(false)
+        binding.chart.yAxis.setDrawLabels(false)
 
 
     }
