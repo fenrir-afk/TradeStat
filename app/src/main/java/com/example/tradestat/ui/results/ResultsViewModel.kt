@@ -33,7 +33,9 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
         val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
         repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
     }
-
+    /**
+     * In this method we are getting all unique strategies and update instruments lists
+     * */
     private fun updateStrategiesLists() {
         strategiesNames = mutableSetOf()
         val currentRating = mutableListOf<Int>()
@@ -52,6 +54,9 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
         currentMonthStrategiesRating.postValue(currentRating)
 
     }
+    /**
+     * In this method we are getting all unique instruments and update instruments lists
+     * */
     private fun updateInstrumentsLists() {
         instrumentNames = mutableSetOf()
         val currentRating = mutableListOf<Int>()
@@ -70,6 +75,13 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
         currentMonthInstrumentsRating = currentRating
 
     }
+    /**
+     * In this method we are getting rating for the single instrument of strategy
+     * @param list list of trades(current month or previous month)
+     * @param name name of the strategy or instrument
+     * @toke 1 is a token for instruments other numbers for strategies
+     * @return returns rating of name param
+     * */
     private fun getRating(list: MutableList<Trade>, name: String,token:Int): Int {
         var wins = 0
         var defeats = 0
@@ -99,6 +111,12 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
             return (wins * 100)/(wins + defeats)
         }
     }
+    /**
+     * In this method we are getting array of previous month or current month based on token
+     * @param token 1 mean current month other numbers mean previous month
+     * @return return all trades added in the month
+     * @param trades all trades of app
+     * */
     private fun updateTradesLists(trades: List<Trade>,token: Int): MutableList<Trade> {
         val currentMonth = Calendar.getInstance().get(Calendar.MONTH)
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
@@ -116,7 +134,9 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
         }
         return dealsThisMonth as MutableList<Trade>
     }
-
+    /**
+     * In this method we are getting arrays of current and previous months and update strategies and instruments list
+     * */
      fun updateLists() {
         viewModelScope.launch(Dispatchers.IO) {
             val trades = repository.getTradesSortedByDateAscending()

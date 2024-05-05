@@ -120,6 +120,9 @@ class ResultsActivity : AppCompatActivity() {
         binding.chart.animateXY(1000,1400)
         binding.chart.invalidate()
     }
+    /**
+     * In this method we are creating cards with 2 texts and 1 image (arrow)
+     * */
     private fun setTexts(
         currentRating: List<Int>,
         previousRating: MutableList<Int>,
