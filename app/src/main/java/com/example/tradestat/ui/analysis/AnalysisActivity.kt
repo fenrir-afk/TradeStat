@@ -21,9 +21,9 @@ class AnalysisActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnalysisBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityAnalysisBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         setSupportActionBar(binding.include.myToolBar)
         val analysisViewModel = ViewModelProvider(this)[AnalysisViewModel::class.java]
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

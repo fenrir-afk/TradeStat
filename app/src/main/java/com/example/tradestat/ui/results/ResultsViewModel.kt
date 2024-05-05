@@ -17,13 +17,16 @@ import java.util.Locale
 
 class ResultsViewModel(application: Application): AndroidViewModel(application) {
     private val repository: TradesRepository
-    var namesList = mutableSetOf<String>()
+    var strategiesNames = mutableSetOf<String>()
+    var instrumentNames = mutableSetOf<String>()
 
     private var currentMonthTrades: MutableList<Trade> = mutableListOf()
     var currentMonthStrategiesRating: MutableLiveData<MutableList<Int>> = MutableLiveData()
+    var currentMonthInstrumentsRating: MutableList<Int> = mutableListOf()
 
     private var previousMonthTrades: MutableList<Trade> = mutableListOf()
     var previousMonthStrategiesRating: MutableList<Int> = mutableListOf()
+    var previousMonthInstrumentsRating: MutableList<Int> = mutableListOf()
     init {
         val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
         val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
@@ -32,16 +35,16 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
     }
 
     private fun updateStrategiesLists() {
-        namesList = mutableSetOf()
+        strategiesNames = mutableSetOf()
         val currentRating = mutableListOf<Int>()
         val previousRating = mutableListOf<Int>()
         currentMonthTrades.forEach {
-            namesList.add(it.strategy)
+            strategiesNames.add(it.strategy)
         }
         previousMonthTrades.forEach {
-            namesList.add(it.strategy)
+            strategiesNames.add(it.strategy)
         }
-        namesList.forEach{
+        strategiesNames.forEach{
             currentRating.add(getRating(currentMonthTrades,it,2))
             previousRating.add(getRating(previousMonthTrades,it,2))
         }
@@ -49,16 +52,34 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
         currentMonthStrategiesRating.postValue(currentRating)
 
     }
+    private fun updateInstrumentsLists() {
+        instrumentNames = mutableSetOf()
+        val currentRating = mutableListOf<Int>()
+        val previousRating = mutableListOf<Int>()
+        currentMonthTrades.forEach {
+            instrumentNames.add(it.instrument)
+        }
+        previousMonthTrades.forEach {
+            instrumentNames.add(it.instrument)
+        }
+        instrumentNames.forEach{
+            currentRating.add(getRating(currentMonthTrades,it,1))
+            previousRating.add(getRating(previousMonthTrades,it,1))
+        }
+        previousMonthInstrumentsRating = previousRating
+        currentMonthInstrumentsRating = currentRating
+
+    }
     private fun getRating(list: MutableList<Trade>, name: String,token:Int): Int {
         var wins = 0
-        var defests = 0
+        var defeats = 0
         list.forEach {
             if (token == 1){
                 if (it.instrument == name){
                     if (it.tradeResult == Results.Victory.name){
                         wins++
                     }else{
-                        defests++
+                        defeats++
                     }
                 }
             }else{
@@ -66,16 +87,16 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
                     if (it.tradeResult == Results.Victory.name){
                         wins++
                     }else{
-                        defests++
+                        defeats++
                     }
                 }
             }
 
         }
-        if (wins + defests == 0){
+        if (wins + defeats == 0){
             return 0
         }else{
-            return (wins * 100)/(wins + defests)
+            return (wins * 100)/(wins + defeats)
         }
     }
     private fun updateTradesLists(trades: List<Trade>,token: Int): MutableList<Trade> {
@@ -101,6 +122,7 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
             val trades = repository.getTradesSortedByDateAscending()
             currentMonthTrades =  updateTradesLists(trades,1) //1 is a token for current month
             previousMonthTrades = updateTradesLists(trades,2) //2 is a token for previous month
+            updateInstrumentsLists()
             updateStrategiesLists()
         }
     }

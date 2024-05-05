@@ -92,6 +92,7 @@ class StrategyActivity : AppCompatActivity() {
         binding.chart.setNoDataTextColor(resources.getColor(R.color.lightGray))
         binding.chart.description = description
         binding.chart.invalidate()
+        binding.chart.animateXY(2000,0)
     }
     /**
      * In this method we generate arr of random colors
@@ -131,9 +132,8 @@ class StrategyActivity : AppCompatActivity() {
             layout.setBackgroundColor(resources.getColor(R.color.background))
             if (token == 1){
                 layout.addView( createText("${strategiesNames[i]}: ",1))
-                layout.addView(createText(resources.getString(R.string.short_rate) + winRateListShort[i],0))
-                layout.addView(createText(resources.getString(R.string.long_rate) + winRateListShort[i],0))
-                layout.addView( createText("Long rate:${winRateListLong[i]}%",0))
+                layout.addView(createText(resources.getString(R.string.short_rate) + winRateListShort[i] + "%",0))
+                layout.addView( createText(resources.getString(R.string.long_rate) + "${winRateListLong[i]}%",0))
             }else{
                 layout.addView( createText("${strategiesNames[i]}: ",1))
                 layout.addView(createText(resources.getString(R.string.short_number) + winRateListShort[i],0))

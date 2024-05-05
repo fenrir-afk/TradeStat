@@ -111,11 +111,11 @@
         app:cardCornerRadius="@dimen/card_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.60"
+        app:layout_constraintHeight_percent="0.58"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633">
+        app:layout_constraintVertical_bias="0.602">
 
         <ImageView
             android:layout_width="match_parent"

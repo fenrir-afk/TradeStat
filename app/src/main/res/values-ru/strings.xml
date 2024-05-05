@@ -9,9 +9,9 @@
     <string name="friday">Пятника</string>
     <string name="saturday">Суббота</string>
     <string name="sunday">Воскресенье</string>
-    <string name="strategy">Strategy</string>
+    <string name="strategy">Стратегии</string>
     <string name="date">Date</string>
-    <string name="instrument">Instrument</string>
+    <string name="instrument">Инструменты</string>
     <string name="direction">Direction</string>
     <string name="result">Result</string>
     <string name="add">Добавить</string>
@@ -59,6 +59,8 @@
     <string name="best_strategy">Лучшая стратегия:</string>
     <string name="best_instrument">Лучший инструмент:</string>
     <string name="wins_defeats">(победы-поражения)</string>
+    <string name="trade_dynamic">Динамика торговли</string>
+
     <string-array name="weekDays">
         <item>Дни недели:</item>
         <item>Воскресенье</item>
@@ -68,6 +70,20 @@
         <item>Четверг</item>
         <item>Суббота</item>
         <item>Пятница</item>
+    </string-array>
+    <string-array name="month_names">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
     </string-array>
     <string-array name="results">
         <item>Результат сделки:</item>

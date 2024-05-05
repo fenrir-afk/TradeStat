@@ -60,6 +60,7 @@
     <string name="best_strategy">Best strategy:</string>
     <string name="best_instrument">Best instrument:</string>
     <string name="wins_defeats">(wins - defeats)</string>
+    <string name="trade_dynamic">The dynamics of trade</string>
 
     <string-array name="weekDays">
         <item>Day of the week:</item>
@@ -70,6 +71,20 @@
         <item>Thursday </item>
         <item>Saturday</item>
         <item>Friday</item>
+    </string-array>
+    <string-array name="month_names">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
     <string-array name="results">
         <item>Trade result:</item>
