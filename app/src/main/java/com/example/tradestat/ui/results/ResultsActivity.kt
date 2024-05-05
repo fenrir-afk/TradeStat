@@ -8,12 +8,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
 import com.example.tradestat.databinding.ActivityResultsBinding
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
 import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import java.util.Calendar
-import java.util.Locale
+
 
 class ResultsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultsBinding
@@ -24,6 +25,7 @@ class ResultsActivity : AppCompatActivity() {
         binding = ActivityResultsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         resultsViewModel = ViewModelProvider(this)[ResultsViewModel::class.java]
+        resultsViewModel.updateLists()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -93,7 +95,5 @@ class ResultsActivity : AppCompatActivity() {
         binding.chart.xAxis.setDrawLabels(true)
         binding.chart.yAxis.setDrawAxisLine(false)
         binding.chart.yAxis.setDrawLabels(false)
-
-
     }
 }

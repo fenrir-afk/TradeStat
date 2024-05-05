@@ -24,7 +24,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradestat.R
+import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Instrument
+import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
@@ -318,9 +320,26 @@ class TradeFragment : Fragment() {
      * */
     private fun insertDataToDb(dialog:Dialog){
         val direction = dialog.findViewById<Spinner>(R.id.directionSpinner).selectedItem.toString()
-        val date = dialog.findViewById<Spinner>(R.id.daysSpinner).selectedItem.toString()
+
+        var date = dialog.findViewById<Spinner>(R.id.daysSpinner).selectedItem.toString()
+        when (date) {
+            "Воскресенье" -> date = DaysOfWeek.Sunday.name
+            "Понедельник" -> date = DaysOfWeek.Monday.name
+            "Вторник" -> date = DaysOfWeek.Thursday.name
+            "Среда" -> date = DaysOfWeek.Wednesday.name
+            "Четверг" -> date = DaysOfWeek.Thursday.name
+            "Пятница" -> date = DaysOfWeek.Friday.name
+            "Суббота" -> date = DaysOfWeek.Saturday.name
+        }
         val strategy = dialog.findViewById<EditText>(R.id.strategy).text.toString()
-        val result = dialog.findViewById<Spinner>(R.id.resultSpinner).selectedItem.toString()
+
+        var result = dialog.findViewById<Spinner>(R.id.resultSpinner).selectedItem.toString()
+        if (result == "Победа"){
+            result = Results.Victory.name
+        }else{
+            result = Results.Defeat.name
+        }
+
         val instrument = dialog.findViewById<EditText>(R.id.instrument).text.toString()
         val description = dialog.findViewById<EditText>(R.id.description).text.toString()
         if (direction == "Trade direction:" || date == "Day of the week:" || strategy.isEmpty() || result=="Trade result:" || instrument.isEmpty()){

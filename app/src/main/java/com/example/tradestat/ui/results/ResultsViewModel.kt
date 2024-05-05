@@ -29,7 +29,6 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
         val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
         val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
         repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
-        updateLists()
     }
 
     private fun updateStrategiesLists() {
@@ -97,7 +96,7 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
         return dealsThisMonth as MutableList<Trade>
     }
 
-    private fun updateLists() {
+     fun updateLists() {
         viewModelScope.launch(Dispatchers.IO) {
             val trades = repository.getTradesSortedByDateAscending()
             currentMonthTrades =  updateTradesLists(trades,1) //1 is a token for current month
