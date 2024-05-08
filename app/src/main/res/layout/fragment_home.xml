@@ -99,6 +99,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/calendar_card"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
@@ -106,9 +107,9 @@
                 app:cardCornerRadius="@dimen/card_radius">
 
                 <ImageView
+                    style="@style/Background2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/Background2" />
+                    android:layout_height="match_parent" />
 
                 <ImageView
                     android:layout_marginTop="@dimen/base_margin"

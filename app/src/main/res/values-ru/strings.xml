@@ -9,11 +9,11 @@
     <string name="friday">Пятника</string>
     <string name="saturday">Суббота</string>
     <string name="sunday">Воскресенье</string>
-    <string name="strategy">Стратегии</string>
-    <string name="date">Date</string>
-    <string name="instrument">Инструменты</string>
-    <string name="direction">Direction</string>
-    <string name="result">Result</string>
+    <string name="strategy">Страт</string>
+    <string name="date">Дата</string>
+    <string name="instrument">Инстр</string>
+    <string name="direction">Направ</string>
+    <string name="result">Результат</string>
     <string name="add">Добавить</string>
     <string name="News">Новости</string>
     <string name="all">Всего</string>

@@ -23,18 +23,20 @@ class AnalysisViewModel(application: Application) : AndroidViewModel(application
         val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
         val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
         val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
-        repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
+        val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
+        repository = TradesRepository(tradeDao,strategyDao,instrumentDao,noteDao)
     }
     fun updateData(){ // in this method we get coordinates relatively to the trade list
         viewModelScope.launch(Dispatchers.IO) {
             val allTrades  = repository.getTradesSortedByDateDescending()
-            val winTrades  = repository.getTradesByResult(Results.Victory.name)
-            val defeatTrades  = repository.getTradesByResult(Results.Defeat.name)
-            tradeResult = winTrades.size - defeatTrades.size
-            bestInstrument = getMaxName(winTrades,defeatTrades,1)
-            bestStrategy = getMaxName(winTrades,defeatTrades,2)
-            getCoordinates(allTrades,list)
-
+            if (allTrades.isNotEmpty()){
+                val winTrades  = repository.getTradesByResult(Results.Victory.name)
+                val defeatTrades  = repository.getTradesByResult(Results.Defeat.name)
+                tradeResult = winTrades.size - defeatTrades.size
+                bestInstrument = getMaxName(winTrades,defeatTrades,1)
+                bestStrategy = getMaxName(winTrades,defeatTrades,2)
+                getCoordinates(allTrades,list)
+            }
         }
     }
     private fun getMaxName(winTrades:List<Trade>, defeatTrades: List<Trade>, token:Int): String {

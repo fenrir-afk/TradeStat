@@ -58,6 +58,9 @@ class HomeFragment : Fragment() {
         binding.resultsCard.setOnClickListener{
             view?.findNavController()?.navigate(R.id.action_navigation_home_to_resultsActivity)
         }
+        binding.calendarCard.setOnClickListener{
+            view?.findNavController()?.navigate(R.id.action_navigation_home_to_calendarActivity)
+        }
         return binding.root
     }
     /**

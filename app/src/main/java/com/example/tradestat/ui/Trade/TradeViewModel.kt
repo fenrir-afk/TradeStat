@@ -27,7 +27,8 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
         val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
         val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
         val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
-        repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
+        val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
+        repository = TradesRepository(tradeDao,strategyDao,instrumentDao,noteDao)
         finalList.addSource(getTradesList){
             finalList.value = it
         }
@@ -93,7 +94,7 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
      * */
     fun updateListByInstrument(instrument: String){
         viewModelScope.launch(Dispatchers.IO) {
-            sortedTradeList.postValue(repository.getSortedByInstrumenList(instrument))
+            sortedTradeList.postValue(repository.getSortedByInstrumentList(instrument))
         }
     }
     //strategies section

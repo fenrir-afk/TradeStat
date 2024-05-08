@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
  * @param strategy the name of strategy
  * @param tradeResult the result of the trade Victory/Defeat
  * @param instrument the name of instrument on which trade was done
- * @param ADDate the day when the trade was added to the aapp
+ * @param ADDate the day when the trade was added to the app
  * @param description description for the trade
  * */
 @Entity(tableName = "trade_table")

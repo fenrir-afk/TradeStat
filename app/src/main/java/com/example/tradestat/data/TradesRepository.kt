@@ -3,11 +3,12 @@ package com.example.tradestat.data
 import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Instrument
+import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 
-class TradesRepository(private val tradesDao: TradesDao,private val strategiesDao: StrategiesDao,private val instrumentsDao: InstrumentDao) {
+class TradesRepository(private val tradesDao: TradesDao,private val strategiesDao: StrategiesDao,private val instrumentsDao: InstrumentDao,private val noteDao: NoteDao) {
     //Trade part
     fun addTrade(trade: Trade){
         tradesDao.insert(trade)
@@ -34,7 +35,7 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
 
 
 
-    fun getSortedByInstrumenList(instrument: String):List<Trade>{
+    fun getSortedByInstrumentList(instrument: String):List<Trade>{
         return tradesDao.sortByInstrument(instrument)
     }
     fun getShortPos(): Int {
@@ -92,7 +93,13 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
         instrumentsDao.deleteInstrumentByName(name)
     }
 
+    //Note part
+    fun getAllNotes(): List<NoteCard> {
+        return noteDao.getAllNotes()
+    }
 
-
+    fun addNote(noteCard: NoteCard) {
+        noteDao.insertNote(noteCard)
+    }
 
 }

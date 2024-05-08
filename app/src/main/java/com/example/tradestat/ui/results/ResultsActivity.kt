@@ -73,7 +73,7 @@ class ResultsActivity : AppCompatActivity() {
         previousMonthStrategiesRating: MutableList<Int>,
         labels: MutableSet<String>
     ) {
-        var arr1 = ArrayList<RadarEntry>()
+        val arr1 = ArrayList<RadarEntry>()
         currentMonthStrategiesRating.forEach {
             arr1.add(RadarEntry(it.toFloat()))
         }

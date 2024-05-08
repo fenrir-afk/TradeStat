@@ -30,7 +30,8 @@ class StrategyViewModel(application: Application) : AndroidViewModel(application
         val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
         val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
         val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
-        repository = TradesRepository(tradeDao,strategyDao,instrumentDao)
+        val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
+        repository = TradesRepository(tradeDao,strategyDao,instrumentDao,noteDao)
     }
     /**
      * In this method we get coordinates relatively to the trade list

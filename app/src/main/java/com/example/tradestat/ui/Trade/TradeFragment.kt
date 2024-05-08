@@ -336,7 +336,7 @@ class TradeFragment : Fragment() {
         var result = dialog.findViewById<Spinner>(R.id.resultSpinner).selectedItem.toString()
         if (result == "Победа"){
             result = Results.Victory.name
-        }else{
+        }else if(result == "Поражение"){
             result = Results.Defeat.name
         }
 
