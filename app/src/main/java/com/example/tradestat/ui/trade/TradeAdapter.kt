@@ -1,6 +1,5 @@
-package com.example.tradestat.ui.Trade
+package com.example.tradestat.ui.trade
 
-import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color

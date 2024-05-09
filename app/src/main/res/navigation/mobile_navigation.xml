@@ -35,13 +35,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.tradestat.ui.Trade.TradeFragment"
+        android:name="com.example.tradestat.ui.trade.TradeFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_trade" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.tradestat.ui.News.NewsFragment"
+        android:name="com.example.tradestat.ui.news.NewsFragment"
         android:label="@string/News"
         tools:layout="@layout/fragment_news" />
     <activity

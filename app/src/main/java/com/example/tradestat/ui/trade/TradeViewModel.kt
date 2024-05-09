@@ -1,4 +1,4 @@
-package com.example.tradestat.ui.Trade
+package com.example.tradestat.ui.trade
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

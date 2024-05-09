@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.TypeConverter
+import androidx.room.Update
 import com.example.tradestat.data.model.NoteCard
 
 @Dao
@@ -13,15 +14,6 @@ interface NoteDao {
     fun getAllNotes(): List<NoteCard>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNote(vararg noteCard: NoteCard)
-}
-class Converters {
-    @TypeConverter
-    fun fromStringList(value: List<String>): String {
-        return value.joinToString(",")
-    }
-
-    @TypeConverter
-    fun toStringList(value: String): List<String> {
-        return value.split(",")
-    }
+    @Update
+    fun update(vararg noteCard: NoteCard)
 }

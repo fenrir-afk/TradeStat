@@ -1,4 +1,4 @@
-package com.example.tradestat.ui.News
+package com.example.tradestat.ui.news
 
 import android.content.Context
 import android.content.Intent

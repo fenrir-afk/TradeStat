@@ -1,4 +1,4 @@
-package com.example.tradestat.ui.News
+package com.example.tradestat.ui.news
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
