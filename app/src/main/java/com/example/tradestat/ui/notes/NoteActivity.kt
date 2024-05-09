@@ -48,6 +48,9 @@ class NoteActivity : AppCompatActivity() {
             }
         }
     }
+    /**
+    * In this method we aare getting image from the gallery and push it to the db and adapter
+    * */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {

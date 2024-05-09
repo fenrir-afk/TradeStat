@@ -139,6 +139,12 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
         })
         return editText
     }
+    /**
+     * In this method we are creating an ImageView
+     * @param context is the app context
+     * @param position the position of the card int the noteList
+     * @param counter is  the special int value helps us provide necessary number of images
+     * */
     private fun createImage(position: Int, counter: Int, context: Context): ImageView? {
         if (noteList[position].noteImages.isNotEmpty() and (counter < noteList[position].noteTexts.size-1)){
             val image = ImageView(context)
@@ -155,6 +161,11 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
             return null
         }
     }
+    /**
+     * In this method we are updating cards with image
+     * @param position the position of the card int the noteList
+     * @param imageUri is the url of the image
+     * */
     fun updateImage(position: Int, imageUri: String) {
         val note = noteList[position]
         val updatedNoteImages = note.noteImages.toMutableList() // Создаем изменяемую копию списка изображений
