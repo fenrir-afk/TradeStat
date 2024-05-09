@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -28,6 +29,7 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
         val parentLayout = itemView.findViewById<LinearLayout>(R.id.parent_layout)!!
         val imageButton = itemView.findViewById<FloatingActionButton>(R.id.add_image_Fab)!!
         val text1 = itemView.findViewById<EditText>(R.id.edit_text)!!
+        val deleteButton = itemView.findViewById<FloatingActionButton>(R.id.deleteFab)!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
@@ -61,6 +63,11 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
                 }
             }
         })
+        holder.deleteButton.setOnClickListener{
+            noteViewModel.deleteNote(noteList[position])
+            noteList.removeAt(position)
+            notifyItemRemoved(position)
+        }
         holder.text1.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }

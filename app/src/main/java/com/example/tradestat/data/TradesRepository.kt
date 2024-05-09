@@ -104,5 +104,8 @@ class TradesRepository(private val tradesDao: TradesDao,private val strategiesDa
     fun updateNote(noteCard: NoteCard) {
         noteDao.update(noteCard)
     }
+    fun deleteNote(noteCard: NoteCard) {
+        noteDao.delete(noteCard)
+    }
 
 }
