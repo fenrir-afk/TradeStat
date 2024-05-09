@@ -45,6 +45,7 @@ class StrategyViewModel(application: Application) : AndroidViewModel(application
             for (i in strategies.indices){
                 strategiesNames.add(strategies[i].strategyName)
                 val entryList = mutableListOf<Entry>()
+                entryList.add(Entry(0f, 0f))
                 var counter1 = 0f
                 var counter2 = 0f
                 for (b in trades.indices){
