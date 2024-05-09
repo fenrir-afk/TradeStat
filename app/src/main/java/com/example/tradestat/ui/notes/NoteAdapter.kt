@@ -103,6 +103,13 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
             }
         }
     }
+    /**
+     * In this method we are creating an EditText
+     * @param context is the app context
+     * @param position the position of the card int the noteList
+     * @param index is the position of EditText in thee textsList of the card
+     * @param noteViewModel is the link to NoteViewModel
+    * */
     private fun  createText(context: Context,position: Int,index:Int,noteViewModel:NoteViewModel): EditText {
         val editText = EditText(context)
         val textParams = LinearLayout.LayoutParams(

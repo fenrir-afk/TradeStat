@@ -34,8 +34,8 @@
     <style name = "chartImage">
         <item name="android:src">@drawable/vector_chart_light</item>
     </style>
-    <style name = "calendarImage">
-        <item name="android:src">@drawable/calendar</item>
+    <style name = "noteImage">
+        <item name="android:src">@drawable/ic_note_light</item>
     </style>
     <style name = "donutCircleColor">
         <item name="donut_bgLineColor">@color/MorelightGray</item>

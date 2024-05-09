@@ -33,8 +33,8 @@
         <item name="android:background">@color/white</item>
     </style>
 
-    <style name = "calendarImage">
-        <item name="android:src">@drawable/calendar_dark</item>
+    <style name = "noteImage">
+        <item name="android:src">@drawable/ic_note_dark</item>
     </style>
     <style name = "recommendationsImage">
         <item name="android:src">@drawable/ic_recommendation_dark</item>

@@ -60,7 +60,7 @@
     <string name="best_instrument">Лучший инструмент:</string>
     <string name="wins_defeats">(победы-поражения)</string>
     <string name="trade_dynamic">Динамика торговли</string>
-
+    <string name="notes">Записи</string>
     <string-array name="weekDays">
         <item>Дни недели:</item>
         <item>Воскресенье</item>

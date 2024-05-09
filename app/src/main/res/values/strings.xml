@@ -61,6 +61,7 @@
     <string name="best_instrument">Best instrument:</string>
     <string name="wins_defeats">(wins - defeats)</string>
     <string name="trade_dynamic">The dynamics of trade</string>
+    <string name="notes">Notes</string>
 
     <string-array name="weekDays">
         <item>Day of the week:</item>
