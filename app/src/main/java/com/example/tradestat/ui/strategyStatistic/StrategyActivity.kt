@@ -137,7 +137,7 @@ class StrategyActivity : AppCompatActivity() {
             }else{
                 layout.addView( createText("${strategiesNames[i]}: ",1))
                 layout.addView(createText(resources.getString(R.string.short_number) + winRateListShort[i],0))
-                layout.addView(createText(resources.getString(R.string.long_number) + winRateListShort[i],0))
+                layout.addView(createText(resources.getString(R.string.long_number) + winRateListLong[i],0))
             }
 
             val card = CardView(this)
