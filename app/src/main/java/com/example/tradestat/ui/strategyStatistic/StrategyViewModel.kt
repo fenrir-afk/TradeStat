@@ -4,15 +4,14 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tradestat.data.TradeDatabase
-import com.example.tradestat.data.TradesRepository
 import com.example.tradestat.data.model.Results
-import com.example.tradestat.ui.RatingCounter
+import com.example.tradestat.repository.BaseRepository
+import com.example.tradestat.utils.RatingCounter
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class StrategyViewModel(application: Application) : AndroidViewModel(application) {
+class StrategyViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
     var getWinRateListLong: MutableList<Int> = mutableListOf()
 
     var tradeLongNumbers: MutableList<Int> = mutableListOf()
@@ -25,14 +24,7 @@ class StrategyViewModel(application: Application) : AndroidViewModel(application
     var strategiesNames: MutableList<String> = mutableListOf()
     val entriesList: MutableLiveData<MutableList<List<Entry>>> =  MutableLiveData()
 
-    private val repository: TradesRepository
-    init {
-        val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
-        val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
-        val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
-        val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
-        repository = TradesRepository(tradeDao,strategyDao,instrumentDao,noteDao)
-    }
+    private val repository: BaseRepository = rep
     /**
      * In this method we get coordinates relatively to the trade list
     * */

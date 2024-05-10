@@ -4,28 +4,20 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tradestat.data.TradeDatabase
-import com.example.tradestat.data.TradesRepository
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Trade
-import com.example.tradestat.ui.RatingCounter
+import com.example.tradestat.repository.BaseRepository
+import com.example.tradestat.utils.RatingCounter
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AnalysisViewModel(application: Application) : AndroidViewModel(application)  {
+class AnalysisViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application)  {
     val  list: MutableLiveData<MutableList<Entry>> = MutableLiveData()
     var bestStrategy:String = ""
     var bestInstrument:String = ""
     var tradeResult:Int = 0
-    private val repository: TradesRepository
-    init {
-        val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
-        val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
-        val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
-        val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
-        repository = TradesRepository(tradeDao,strategyDao,instrumentDao,noteDao)
-    }
+    private val repository: BaseRepository = rep
     fun updateData(){ // in this method we get coordinates relatively to the trade list
         viewModelScope.launch(Dispatchers.IO) {
             val allTrades  = repository.getTradesSortedByDateDescending()
@@ -66,7 +58,7 @@ class AnalysisViewModel(application: Application) : AndroidViewModel(application
         tradeArr: List<Trade>,
         finalList: MutableLiveData<MutableList<Entry>>
     ) {
-        var list:MutableList<Entry> = mutableListOf()
+        val list:MutableList<Entry> = mutableListOf()
         list.add(Entry(0f,0f))
         var verticalCounter = 0f
         var horizontalCounter: Float

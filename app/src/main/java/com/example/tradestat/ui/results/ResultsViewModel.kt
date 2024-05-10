@@ -4,10 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tradestat.data.TradeDatabase
-import com.example.tradestat.data.TradesRepository
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Trade
+import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -15,8 +14,8 @@ import java.util.Calendar
 import java.util.Locale
 
 
-class ResultsViewModel(application: Application): AndroidViewModel(application) {
-    private val repository: TradesRepository
+class ResultsViewModel(application: Application,rep: BaseRepository): AndroidViewModel(application) {
+    private val repository: BaseRepository = rep
     var strategiesNames = mutableSetOf<String>()
     var instrumentNames = mutableSetOf<String>()
 
@@ -27,13 +26,7 @@ class ResultsViewModel(application: Application): AndroidViewModel(application) 
     private var previousMonthTrades: MutableList<Trade> = mutableListOf()
     var previousMonthStrategiesRating: MutableList<Int> = mutableListOf()
     var previousMonthInstrumentsRating: MutableList<Int> = mutableListOf()
-    init {
-        val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
-        val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
-        val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
-        val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
-        repository = TradesRepository(tradeDao,strategyDao,instrumentDao,noteDao)
-    }
+
     /**
      * In this method we are getting all unique strategies and update instruments lists
      * */

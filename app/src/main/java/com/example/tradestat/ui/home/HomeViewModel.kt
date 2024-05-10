@@ -3,24 +3,16 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tradestat.data.TradeDatabase
-import com.example.tradestat.data.TradesRepository
+import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-class HomeViewModel(application: Application) : AndroidViewModel(application) {
+class HomeViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
     val getNumberList:MutableLiveData<List<Int>> = MutableLiveData()
     private var shortNumber: Int = 0
     private var longNumber: Int = 0
     private var winNumber: Int = 0
     private var defeatNumber: Int = 0
-    private val repository:TradesRepository
-    init {
-        val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
-        val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
-        val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
-        val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
-        repository = TradesRepository(tradeDao,strategyDao,instrumentDao,noteDao)
-    }
+    private val repository: BaseRepository = rep
     /**
      * In this method we are getting  data from bd
      * */

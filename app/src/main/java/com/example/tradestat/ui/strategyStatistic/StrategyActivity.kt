@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.strategyStatistic
 
+import android.app.Application
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -12,7 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
+import com.example.tradestat.data.TradeDatabase
 import com.example.tradestat.databinding.ActivityStrategyBinding
+import com.example.tradestat.repository.TradesRepository
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -28,7 +31,13 @@ class StrategyActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         setSupportActionBar(binding.include.myToolBar)
-        val strategyViewModel = ViewModelProvider(this)[StrategyViewModel::class.java]
+
+
+        val repository = TradesRepository(TradeDatabase.getDatabase(application))
+        val viewModelProvideFactory = StrategyViewModelFactory(Application(),repository)
+        val strategyViewModel = ViewModelProvider(this,viewModelProvideFactory)[StrategyViewModel::class.java]
+
+
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
         strategyViewModel.entriesList.observe(this){
             setChart(strategyViewModel.strategiesNames,it)

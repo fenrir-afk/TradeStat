@@ -1,4 +1,4 @@
-package com.example.tradestat.ui
+package com.example.tradestat.utils
 
 import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Trade
@@ -19,6 +19,7 @@ class RatingCounter(
     var winRateList = mutableListOf<Int>()
     var shortWinRateList = mutableListOf<Int>()
     var longWinRateList = mutableListOf<Int>()
+
     var tradeNumbers = mutableListOf<Int>()
     var tradeShortNumbers = mutableListOf<Int>()
     var tradeLongNumbers = mutableListOf<Int>()
@@ -35,7 +36,7 @@ class RatingCounter(
          tradeNumbers = mutableListOf()
          tradeShortNumbers = mutableListOf()
          tradeLongNumbers = mutableListOf()
-            names.forEach label@{
+         names.forEach label@{
                 var wins = 0
                 var defeats = 0
                 var shortWins = 0

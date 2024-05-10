@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.instrumentStatistic
 
+import android.app.Application
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -12,7 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
+import com.example.tradestat.data.TradeDatabase
 import com.example.tradestat.databinding.ActivityInstrumentBinding
+import com.example.tradestat.repository.TradesRepository
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -31,8 +34,13 @@ class InstrumentActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         setSupportActionBar(binding.include.myToolBar)
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
-        val instrumentViewModel =
-            ViewModelProvider(this)[InstrumentViewModel::class.java]
+
+
+        val repository = TradesRepository(TradeDatabase.getDatabase(application))
+        val viewModelProvideFactory = InstrumentViewModelFactory(Application(),repository)
+        val instrumentViewModel = ViewModelProvider(this,viewModelProvideFactory)[InstrumentViewModel::class.java]
+
+
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
         instrumentViewModel.getData()
         instrumentViewModel.getWinRateList.observe(this) {

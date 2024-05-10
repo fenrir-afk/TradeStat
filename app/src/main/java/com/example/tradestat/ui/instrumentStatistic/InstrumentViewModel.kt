@@ -4,14 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tradestat.data.TradeDatabase
-import com.example.tradestat.data.TradesRepository
 import com.example.tradestat.data.model.Results
-import com.example.tradestat.ui.RatingCounter
+import com.example.tradestat.repository.BaseRepository
+import com.example.tradestat.utils.RatingCounter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class InstrumentViewModel(application: Application) : AndroidViewModel(application){
+class InstrumentViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application){
         val getWinRateList: MutableLiveData<List<Int> > = MutableLiveData()
         var getWinRateListLong: MutableList<Int> = mutableListOf()
         val getWinRateListShort: MutableLiveData<List<Int> > = MutableLiveData()
@@ -20,14 +19,8 @@ class InstrumentViewModel(application: Application) : AndroidViewModel(applicati
         var tradeNumbers = mutableListOf<Int>()
         var tradeShortNumbers = mutableListOf<Int>()
         var tradeLongNumbers = mutableListOf<Int>()
-        private val repository: TradesRepository
-        init {
-            val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
-            val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
-            val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
-            val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
-            repository = TradesRepository(tradeDao,strategyDao,instrumentDao,noteDao)
-        }
+        private val repository: BaseRepository = rep
+
     /**
      * In this method we update  data int the viewModel.It need for button realization
      * */

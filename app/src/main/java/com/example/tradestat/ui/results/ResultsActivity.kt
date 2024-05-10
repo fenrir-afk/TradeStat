@@ -1,14 +1,13 @@
 package com.example.tradestat.ui.results
 
+import android.app.Application
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -17,7 +16,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
+import com.example.tradestat.data.TradeDatabase
 import com.example.tradestat.databinding.ActivityResultsBinding
+import com.example.tradestat.repository.TradesRepository
 import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
 import com.github.mikephil.charting.data.RadarEntry
@@ -35,7 +36,13 @@ class ResultsActivity : AppCompatActivity() {
         setSupportActionBar(binding.include2.myToolBar)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        resultsViewModel = ViewModelProvider(this)[ResultsViewModel::class.java]
+
+
+        val repository = TradesRepository(TradeDatabase.getDatabase(application))
+        val viewModelProvideFactory = ResultViewModelFactory(Application(),repository)
+        resultsViewModel = ViewModelProvider(this,viewModelProvideFactory)[ResultsViewModel::class.java]
+
+
         resultsViewModel.updateLists()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -80,7 +87,7 @@ class ResultsActivity : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         val currentMonth = getMonthName(calendar.get(Calendar.MONTH))
         val previousMonth = getMonthName(calendar.get(Calendar.MONTH) - 1)
-        var dataSet1 = RadarDataSet(arr1,currentMonth)
+        val dataSet1 = RadarDataSet(arr1,currentMonth)
         dataSet1.color = getColor(R.color.purple_200)
         dataSet1.lineWidth = 2F
         dataSet1.valueTextColor = getColor(R.color.purple_200)
@@ -88,11 +95,11 @@ class ResultsActivity : AppCompatActivity() {
         dataSet1.valueTextSize = 14f
         dataSet1.setDrawFilled(true)
 
-        var arr2 = ArrayList<RadarEntry>()
+        val arr2 = ArrayList<RadarEntry>()
         previousMonthStrategiesRating.forEach {
             arr2.add(RadarEntry(it.toFloat()))
         }
-        var dataSet2 = RadarDataSet(arr2,previousMonth)
+        val dataSet2 = RadarDataSet(arr2,previousMonth)
         dataSet2.color = getColor(R.color.green)
         dataSet2.lineWidth = 2F
         dataSet2.valueTextColor =getColor(R.color.green)
@@ -100,7 +107,7 @@ class ResultsActivity : AppCompatActivity() {
         dataSet2.valueTextSize = 14f
         dataSet2.setDrawFilled(true)
 
-        var radarData = RadarData()
+        val radarData = RadarData()
         radarData.addDataSet(dataSet1)
         radarData.addDataSet(dataSet2)
         binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)

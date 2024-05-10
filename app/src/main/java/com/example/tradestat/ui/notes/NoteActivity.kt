@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.notes
 import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -9,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tradestat.R
+import com.example.tradestat.data.TradeDatabase
 import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.databinding.ActivityNoteBinding
+import com.example.tradestat.repository.TradesRepository
 
 class NoteActivity : AppCompatActivity() {
 
@@ -27,7 +30,14 @@ class NoteActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         setSupportActionBar(binding.include.myToolBar)
-        noteViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
+
+
+        val repository = TradesRepository(TradeDatabase.getDatabase(application))
+        val viewModelProvideFactory = NoteViewModelFactory(Application(),repository)
+        noteViewModel =ViewModelProvider(this,viewModelProvideFactory)[NoteViewModel::class.java]
+
+
+
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         noteViewModel.getAllNotes()
         recyclerView.adapter = adapter

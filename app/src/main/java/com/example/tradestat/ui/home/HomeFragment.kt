@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.home
 
+import android.app.Application
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import app.futured.donut.DonutSection
 import com.example.tradestat.R
+import com.example.tradestat.data.TradeDatabase
 import com.example.tradestat.databinding.FragmentHomeBinding
+import com.example.tradestat.repository.TradesRepository
+
 
 
 class HomeFragment : Fragment() {
@@ -28,8 +32,11 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
+
+        val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
+        val viewModelProvideFactory = HomeViewModelFactory(Application(),repository)
+        val homeViewModel = ViewModelProvider(this,viewModelProvideFactory)[HomeViewModel::class.java]
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeViewModel.updateNumbers()
         homeViewModel.getNumberList.observe(viewLifecycleOwner) {

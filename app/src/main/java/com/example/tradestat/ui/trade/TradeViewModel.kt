@@ -7,13 +7,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.data.TradeDatabase
-import com.example.tradestat.data.TradesRepository
 import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.Strategy
+import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TradeViewModel(application: Application) : AndroidViewModel(application) {
+class TradeViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
 
     private val getTradesList:MutableLiveData<List<Trade>> = MutableLiveData()
     private var sortedTradeList:MutableLiveData<List<Trade>> = MutableLiveData()
@@ -21,17 +21,14 @@ class TradeViewModel(application: Application) : AndroidViewModel(application) {
 
     var getStrategyList:List<Strategy> = arrayListOf()
     var getInstrumentList:List<Instrument> = arrayListOf()
-    private val repository:TradesRepository
+    private val repository: BaseRepository
 
     init {
         val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
         val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
         val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
         val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
-        repository = TradesRepository(tradeDao,strategyDao,instrumentDao,noteDao)
-        finalList.addSource(getTradesList){
-            finalList.value = it
-        }
+        repository = rep
         finalList.addSource(sortedTradeList){
             finalList.value = it
         }
