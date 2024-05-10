@@ -124,6 +124,5 @@ class RatingCounter(
 
                 }
             }
-        println("He")
     }
 }

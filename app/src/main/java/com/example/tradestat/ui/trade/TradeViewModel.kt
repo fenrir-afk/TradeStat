@@ -15,20 +15,14 @@ import kotlinx.coroutines.launch
 
 class TradeViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
 
-    private val getTradesList:MutableLiveData<List<Trade>> = MutableLiveData()
     private var sortedTradeList:MutableLiveData<List<Trade>> = MutableLiveData()
     var finalList:MediatorLiveData<List<Trade>> = MediatorLiveData()
 
     var getStrategyList:List<Strategy> = arrayListOf()
     var getInstrumentList:List<Instrument> = arrayListOf()
-    private val repository: BaseRepository
+    private val repository: BaseRepository = rep
 
     init {
-        val tradeDao = TradeDatabase.getDatabase(application).getTradeDao()
-        val strategyDao = TradeDatabase.getDatabase(application).getStrategyDao()
-        val instrumentDao = TradeDatabase.getDatabase(application).getInstrumentDao()
-        val noteDao = TradeDatabase.getDatabase(application).getNoteDao()
-        repository = rep
         finalList.addSource(sortedTradeList){
             finalList.value = it
         }
@@ -67,7 +61,7 @@ class TradeViewModel(application: Application,rep: BaseRepository) : AndroidView
      * */
     fun updateListByDateDescending(){
         viewModelScope.launch(Dispatchers.IO) {
-            getTradesList.postValue(repository.getTradesSortedByDateDescending())
+            sortedTradeList.postValue(repository.getTradesSortedByDateDescending())
         }
     }
     /**
