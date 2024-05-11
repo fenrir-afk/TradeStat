@@ -2,6 +2,7 @@ package com.example.tradestat.ui.trade
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class TradeViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
 
-    private var sortedTradeList:MutableLiveData<List<Trade>> = MutableLiveData()
+    var sortedTradeList:MutableLiveData<List<Trade>> = MutableLiveData()
     var finalList:MediatorLiveData<List<Trade>> = MediatorLiveData()
 
     var getStrategyList:List<Strategy> = arrayListOf()

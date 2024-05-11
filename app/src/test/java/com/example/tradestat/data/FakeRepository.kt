@@ -7,90 +7,112 @@ import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.repository.BaseRepository
+import java.text.SimpleDateFormat
 
 class FakeRepository(): BaseRepository {
+    var trades:MutableList<Trade> = mutableListOf()
+    private val strategies:MutableList<Strategy> = mutableListOf()
+    private val instruments:MutableList<Instrument> = mutableListOf()
+    private val notes:MutableList<NoteCard> = mutableListOf()
     override fun addTrade(trade: Trade) {
-        TODO("Not yet implemented")
+        trades.add(trade)
+        strategies.add(Strategy(0,trade.strategy))
+        instruments.add(Instrument(0,trade.instrument))
     }
 
     override fun deleteTrade(trade: Trade) {
-        TODO("Not yet implemented")
+        trades.remove(trade)
     }
 
     override fun getTradesSortedByDateDescending(): List<Trade> {
-        TODO("Not yet implemented")
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+        trades.sortByDescending {
+            sdf.parse(it.ADDate)
+        }
+        return trades
     }
 
     override fun getTradesSortedByDateAscending(): List<Trade> {
-        TODO("Not yet implemented")
+        val sortedTrades = trades.toMutableList() // Создаем копию списка trades
+        sortedTrades.sortBy { it.ADDate } // Сортируем копию списка
+        return sortedTrades // Возвращаем отсортированный список
     }
 
     override fun getSortedByStrategiesList(strategy: String): List<Trade> {
-        TODO("Not yet implemented")
+        val arr = trades.filter { it.strategy == strategy }
+        return arr
     }
 
     override fun getTradesByResult(result: String): List<Trade> {
-        TODO("Not yet implemented")
+        val arr = trades.filter { it.tradeResult == result }
+        return arr
     }
 
     override fun getSortedByInstrumentList(instrument: String): List<Trade> {
-        TODO("Not yet implemented")
+        val arr = trades.filter { it.instrument == instrument }
+        return arr
     }
 
     override fun getShortPos(): Int {
-        TODO("Not yet implemented")
+        val arr = trades.count{ it.tradeDirection == "Short" }
+        return arr
     }
 
     override fun getLongPos(): Int {
-        TODO("Not yet implemented")
+        val arr = trades.count{ it.tradeDirection == "Long" }
+        return arr
     }
 
     override fun getWinNumber(): Int {
-        TODO("Not yet implemented")
+        val arr = trades.count{ it.tradeResult == "Victory" }
+        return arr
     }
 
     override fun getDefNumber(): Int {
-        TODO("Not yet implemented")
+        val arr = trades.count{ it.tradeResult == "Defeat" }
+        return arr
     }
 
     override fun getDayStatistic(day: DaysOfWeek): List<Trade> {
-        TODO("Not yet implemented")
+        val arr = trades.filter{ it.tradeDate == day.name }
+        return arr
     }
 
     override fun countTradesByResultAndDate(results: Results, day: DaysOfWeek): Int {
-        TODO("Not yet implemented")
+        val arr = trades.count { it.tradeResult == results.name && it.tradeDate == day.name }
+        return arr
     }
 
     override fun getAllStrategies(): List<Strategy> {
-        TODO("Not yet implemented")
+        return strategies
     }
 
     override fun addStrategy(strategy: Strategy) {
-        TODO("Not yet implemented")
+        strategies.add(strategy)
     }
 
     override fun deleteStrategy(name: String) {
-        TODO("Not yet implemented")
+        strategies.remove(Strategy(0,name))
     }
 
     override fun getAllInstruments(): List<Instrument> {
-        TODO("Not yet implemented")
+        return instruments
     }
 
     override fun addInstrument(instrument: Instrument) {
-        TODO("Not yet implemented")
+        instruments.add(instrument)
     }
 
     override fun deleteInstrument(name: String) {
-        TODO("Not yet implemented")
+        instruments.remove(Instrument(0,name))
     }
 
     override fun getAllNotes(): List<NoteCard> {
-        TODO("Not yet implemented")
+       return notes
     }
 
     override fun addNote(noteCard: NoteCard) {
-        TODO("Not yet implemented")
+        notes.add(noteCard)
     }
 
     override fun updateNote(noteCard: NoteCard) {
@@ -98,7 +120,7 @@ class FakeRepository(): BaseRepository {
     }
 
     override fun deleteNote(noteCard: NoteCard) {
-        TODO("Not yet implemented")
+        notes.remove(noteCard)
     }
 
 }
