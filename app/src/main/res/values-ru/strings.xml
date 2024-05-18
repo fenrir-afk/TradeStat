@@ -26,7 +26,7 @@
     <string name="base_strategies_useful_tips">База,стратегии,полезные советы</string>
     <string name="win_positions">Win positions:</string>
     <string name="defeat_positions">Defeat positions:</string>
-    <string name="time_statistics">Статистики по времени</string>
+    <string name="time_statistics">Статистика по времени</string>
     <string name="statistics_on_indicators">Статистика по индикаторам</string>
     <string name="general_statistics">Общая статистка</string>
     <string name="including_strategies">Включая стратегии</string>

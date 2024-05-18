@@ -4,99 +4,90 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.tradestat.data.FakeRepository
+import com.example.tradestat.data.TradeDatabase
+import com.example.tradestat.data.TradesDao
 import com.example.tradestat.data.model.Trade
+import com.example.tradestat.repository.TradesRepository
+import io.mockk.Awaits
+import io.mockk.MockKAnnotations
+import io.mockk.Runs
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.just
+import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
-import java.text.SimpleDateFormat
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class TradeViewModelTest {
     // Set the main coroutine dispatcher for unit testing
-    private val testDispatcher = TestCoroutineDispatcher()
+    private val testDispatcher = StandardTestDispatcher()
     // Set the main coroutine scope for unit testing
-    private val testScope = TestCoroutineScope(testDispatcher)
-    // Mock any dependencies using Mockito
-    @Mock
-    lateinit var observer: Observer<List<Trade>>
     @get:Rule var rule: TestRule = InstantTaskExecutorRule()
-
-
-
-
-    private lateinit var trades: MutableList<Trade>
+    @MockK
+    private lateinit var mockRepository: TradesRepository
     private lateinit var viewModel: TradeViewModel
-    private lateinit var repository: FakeRepository
 
     @Before
     fun setup() {
-        // Initialize Mockito
-        MockitoAnnotations.openMocks(this)
-        // Provide the test dispatcher to Coroutines
+        MockKAnnotations.init(this, relaxed = true)
         Dispatchers.setMain(testDispatcher)
-        repository = FakeRepository()
-        viewModel = TradeViewModel(Application(), repository)
-        trades = mutableListOf(
-            Trade(0, "Short", "Monday", "Strategy1", "Victory", "Instrument1", "9/05/2024 15:15:25", ""),
-            Trade(1, "Long", "Monday", "Strategy1", "Defeat", "Instrument1", "9/05/2024 15:16:25", ""),
-            Trade(2, "Long", "Wednesday", "Strategy1", "Victory", "Instrument1", "9/05/2024 15:17:25", ""),
-            Trade(3, "Long", "Friday", "Strategy2", "Defeat", "Instrument1", "9/05/2024 15:18:25", ""),
-            Trade(4, "Long", "Monday", "Strategy1", "Victory", "Instrument2", "9/05/2024 15:19:25", ""),
-            Trade(5, "Short", "Monday", "Strategy2", "Victory", "Instrument1", "9/05/2024 15:20:25", "")
-        )
-        runBlocking {
-            trades.forEach {
-                viewModel.addTrade(it)
-            }
-        }
+        viewModel = TradeViewModel(Application(), mockRepository)
     }
     @After
     fun cleanup() {
-        // Clean up Coroutines
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
-        testScope.cleanupTestCoroutines()
     }
 
     @Test
-    fun addTrade() = runBlocking{
+    fun addTrade() = runTest {
         val trade = Trade(6, "Long", "Friday", "Strategy2", "Victory", "Instrument1", "9/05/2024 15:21:25", "")
-        var job = async {
-            viewModel.addTrade(trade)
-        }
-        job.await()
-        assert(repository.trades.size == 7)
+        coEvery { mockRepository.addTrade(any()) } just Runs
+        launch { viewModel.addTrade(trade) }
+        advanceUntilIdle()
+        coVerify(exactly = 1) { mockRepository.addTrade(any()) }
     }
     @Test
-    fun deleteData() = runBlocking{
-        val trade =  Trade(5,"Short","Monday","Strategy2","Victory","Instrument1","9/05/2024 15:20:25","")
-        var job = async {
+    fun deleteTrade() = runTest {
+        val trade = Trade(6, "Long", "Friday", "Strategy2", "Victory", "Instrument1", "9/05/2024 15:21:25", "")
+        coEvery { mockRepository.deleteTrade(any()) } just Runs
+        launch {
             viewModel.deleteTrade(trade)
         }
-        job.await()
-        assert(repository.trades.size == 6)
+        advanceUntilIdle()
+        coVerify(exactly = 1) { mockRepository.deleteTrade(any()) }
     }
     @Test
-    fun getDescendingList() = runBlocking{
-        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-        var sortedArr = viewModel.sortedTradeList.value?.toMutableList()
-        sortedArr?.sortBy { sdf.parse(it.ADDate) }
-        viewModel.sortedTradeList.observeForever(observer)
-        Mockito.verify(observer).onChanged(sortedArr!!.toList())
-        viewModel.updateListByDateDescending()
-    }
+    fun updateDescending() = runTest {
+        coEvery { mockRepository.getTradesSortedByDateDescending() } returns listOf()
+        launch {
+            viewModel.updateListByDateDescending()
+        }
+        advanceUntilIdle()
 
+        coVerify(exactly = 1) { mockRepository.getTradesSortedByDateDescending() }
+    }
+    @Test
+    fun updateAscending() = runTest {
+        coEvery { mockRepository.getTradesSortedByDateAscending() } returns listOf()
+        launch {
+            viewModel.updateListByDateAscending()
+        }
+        advanceUntilIdle()
+
+        coVerify(exactly = 1) { mockRepository.getTradesSortedByDateAscending() }
+    }
 }

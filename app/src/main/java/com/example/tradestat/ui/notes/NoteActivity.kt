@@ -38,11 +38,11 @@ class NoteActivity : AppCompatActivity() {
 
 
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        val recyclerView: RecyclerView = findViewById(R.id.noteList)
         noteViewModel.getAllNotes()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.fab.setOnClickListener{
+        binding.addNoteFab.setOnClickListener{
             val note = NoteCard(0, mutableListOf(""), mutableListOf(),"Title")
             noteViewModel.addNote(note)
         }

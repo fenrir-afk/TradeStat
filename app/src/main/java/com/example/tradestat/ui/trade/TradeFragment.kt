@@ -70,7 +70,7 @@ class TradeFragment : Fragment() {
             binding.recyclerView.adapter = adapter
         }
 
-        binding.fab.setOnClickListener{
+        binding.addTradeFab.setOnClickListener{
             tradeDialog()
         }
         binding.DateCard.setOnClickListener{
@@ -114,6 +114,7 @@ class TradeFragment : Fragment() {
 
         val arr: List<Strategy> = tradeViewModel.getStrategyList
         val parentLayout = dialog.findViewById<LinearLayout>(R.id.parent_layout)
+        parentLayout.id =  R.id.strategy_sort_layout_id
         if (arr.isNotEmpty()){
             for (strategy in arr) {
                 val text = createBaseStrategyItem(strategy.strategyName,dialog)
@@ -335,7 +336,7 @@ class TradeFragment : Fragment() {
             "Пятница" -> date = DaysOfWeek.Friday.name
             "Суббота" -> date = DaysOfWeek.Saturday.name
         }
-        val strategy = dialog.findViewById<EditText>(R.id.strategy).text.toString()
+        val strategy = dialog.findViewById<EditText>(R.id.strategy_field).text.toString()
 
         var result = dialog.findViewById<Spinner>(R.id.resultSpinner).selectedItem.toString()
         if (result == "Победа"){
@@ -344,7 +345,7 @@ class TradeFragment : Fragment() {
             result = Results.Defeat.name
         }
 
-        val instrument = dialog.findViewById<EditText>(R.id.instrument).text.toString()
+        val instrument = dialog.findViewById<EditText>(R.id.instrument_field).text.toString()
         val description = dialog.findViewById<EditText>(R.id.description).text.toString()
         if (direction == "Trade direction:" || date == "Day of the week:" || strategy.isEmpty() || result=="Trade result:" || instrument.isEmpty()){
             Toast.makeText(this.context,"Some fields was not written",Toast.LENGTH_LONG).show()

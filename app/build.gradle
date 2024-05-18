@@ -31,7 +31,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     buildFeatures {
         viewBinding true
@@ -51,15 +51,13 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
     implementation 'androidx.activity:activity-ktx:1.9.0'
     implementation 'androidx.test.ext:junit-ktx:1.1.5'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 
     // Room components
     implementation "androidx.room:room-runtime:2.6.1"
+    implementation 'androidx.test.espresso:espresso-intents:3.5.1'
     kapt "androidx.room:room-compiler:2.6.1"
     implementation "androidx.room:room-ktx:2.6.1"
-    androidTestImplementation "androidx.room:room-testing:2.6.1"
     //Dialog
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
@@ -69,17 +67,20 @@ dependencies {
     //charts
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     //for work with image urls
-    implementation("com.github.bumptech.glide:glide:4.13.2")
+    implementation('com.github.bumptech.glide:glide:4.16.0')
     //parsing lib
     implementation("org.jsoup:jsoup:1.17.2")
-    //calendar
-    // The view calendar library
-    implementation("com.kizitonwose.calendar:view:2.1.1")
     //tests
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
+    testImplementation 'io.mockk:mockk:1.13.10'
+    testImplementation "com.google.truth:truth:1.4.2"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1'
+    //ui test
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    testImplementation 'org.mockito:mockito-core:3.12.1'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0'
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'
+    testImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
 }

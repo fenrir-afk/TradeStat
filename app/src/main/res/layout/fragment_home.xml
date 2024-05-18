@@ -99,7 +99,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/calendar_card"
+                android:id="@+id/note_card"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"

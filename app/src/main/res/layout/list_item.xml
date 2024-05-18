@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/bear"/>
         <TextView
-            android:id="@+id/strategy"
+            android:id="@+id/strategy_field"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_marginStart="35dp"
@@ -43,7 +43,7 @@
             android:layout_weight="1"
             android:gravity="center"/>
         <TextView
-            android:id="@+id/instrument"
+            android:id="@+id/instrument_field"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:text="instrument"

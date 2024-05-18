@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/trade_dialog"
     android:layout_width="300dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -16,7 +17,7 @@
             android:textSize="35sp"/>
 
         <EditText
-            android:id="@+id/instrument"
+            android:id="@+id/instrument_field"
             android:layout_marginTop="@dimen/base_margin"
             android:maxLength="8"
             android:layout_width="match_parent"
@@ -27,7 +28,7 @@
             android:textSize="15sp"
             android:layout_weight="1"/>
         <EditText
-            android:id="@+id/strategy"
+            android:id="@+id/strategy_field"
             android:layout_marginTop="10sp"
             android:maxLength="8"
             android:layout_width="match_parent"
