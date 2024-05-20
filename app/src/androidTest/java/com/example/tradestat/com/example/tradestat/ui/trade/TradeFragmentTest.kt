@@ -22,6 +22,8 @@ import org.hamcrest.CoreMatchers.anything
 import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
+import org.hamcrest.Matchers.anyOf
+import org.hamcrest.Matchers.equalTo
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,12 +49,13 @@ class TradeFragmentTest {
         onView(withId(R.id.daysSpinner)).perform(click())
         onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
         onView(withId(R.id.daysSpinner))
-            .check(matches(withSpinnerText(containsString("Sunday"))))
+            .check(matches(withSpinnerText(anyOf(equalTo("Sunday"), equalTo("Воскресенье")))))
 
         onView(withId(R.id.resultSpinner)).perform(click())
         onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
+
         onView(withId(R.id.resultSpinner))
-            .check(matches(withSpinnerText(containsString("Victory"))))
+            .check(matches(withSpinnerText(anyOf(equalTo("Victory"), equalTo("Победа")))))
 
         onView(withId(R.id.directionSpinner)).perform(click())
         onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
@@ -84,12 +87,13 @@ class TradeFragmentTest {
             onView(withId(R.id.daysSpinner)).perform(click())
             onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
             onView(withId(R.id.daysSpinner))
-                .check(matches(withSpinnerText(containsString("Sunday"))))
+                .check(matches(withSpinnerText(anyOf(equalTo("Sunday"), equalTo("Воскресенье")))))
 
             onView(withId(R.id.resultSpinner)).perform(click())
             onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
+
             onView(withId(R.id.resultSpinner))
-                .check(matches(withSpinnerText(containsString("Victory"))))
+                .check(matches(withSpinnerText(anyOf(equalTo("Victory"), equalTo("Победа")))))
 
             onView(withId(R.id.directionSpinner)).perform(click())
             onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
@@ -120,12 +124,14 @@ class TradeFragmentTest {
             onView(withId(R.id.daysSpinner)).perform(click())
             onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
             onView(withId(R.id.daysSpinner))
-                .check(matches(withSpinnerText(containsString("Sunday"))))
+                .check(matches(withSpinnerText(anyOf(equalTo("Sunday"), equalTo("Воскресенье")))))
 
             onView(withId(R.id.resultSpinner)).perform(click())
             onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
+
             onView(withId(R.id.resultSpinner))
-                .check(matches(withSpinnerText(containsString("Victory"))))
+                .check(matches(withSpinnerText(anyOf(equalTo("Victory"), equalTo("Победа")))))
+
 
             onView(withId(R.id.directionSpinner)).perform(click())
             onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
@@ -153,12 +159,13 @@ class TradeFragmentTest {
         onView(withId(R.id.daysSpinner)).perform(click())
         onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
         onView(withId(R.id.daysSpinner))
-            .check(matches(withSpinnerText(containsString("Sunday"))))
+            .check(matches(withSpinnerText(anyOf(equalTo("Sunday"), equalTo("Воскресенье")))))
 
         onView(withId(R.id.resultSpinner)).perform(click())
         onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
+
         onView(withId(R.id.resultSpinner))
-            .check(matches(withSpinnerText(containsString("Victory"))))
+            .check(matches(withSpinnerText(anyOf(equalTo("Victory"), equalTo("Победа")))))
 
         onView(withId(R.id.directionSpinner)).perform(click())
         onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
@@ -195,12 +202,13 @@ class TradeFragmentTest {
             onView(withId(R.id.daysSpinner)).perform(click())
             onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
             onView(withId(R.id.daysSpinner))
-                .check(matches(withSpinnerText(containsString("Sunday"))))
+                .check(matches(withSpinnerText(anyOf(equalTo("Sunday"), equalTo("Воскресенье")))))
 
             onView(withId(R.id.resultSpinner)).perform(click())
             onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
+
             onView(withId(R.id.resultSpinner))
-                .check(matches(withSpinnerText(containsString("Victory"))))
+                .check(matches(withSpinnerText(anyOf(equalTo("Victory"), equalTo("Победа")))))
 
             onView(withId(R.id.directionSpinner)).perform(click())
             onData(anything()).inRoot(isPlatformPopup()).atPosition(1).perform(click())
