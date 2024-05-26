@@ -62,6 +62,10 @@
     <string name="wins_defeats">(wins - defeats)</string>
     <string name="trade_dynamic">The dynamics of trade</string>
     <string name="notes">Notes</string>
+    <string name="email">Enter email</string>
+    <string name="password">Enter password</string>
+    <string name="new_to_here">New to here?</string>
+    <string name="sign_up">sign up</string>
 
     <string-array name="weekDays">
         <item>Day of the week:</item>

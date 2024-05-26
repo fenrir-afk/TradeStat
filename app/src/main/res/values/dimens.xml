@@ -18,4 +18,6 @@
     <dimen name="small_text_size">13sp</dimen>
     <dimen name="result_text_card_width">160dp</dimen>
     <dimen name="note_text">7sp</dimen>
+    <dimen name="base_padding">5dp</dimen>
+    <dimen name="biggest_text">25sp</dimen>
 </resources>
