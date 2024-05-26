@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.repository.BaseRepository
-import com.example.tradestat.ui.login.LoginViewModel
 
 class RegistryViewModelFactory(val application: Application, private val repository: BaseRepository):
     ViewModelProvider.Factory {

@@ -24,18 +24,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         initNightMode()
-        val current = Locale.getDefault()
-        val sharedPreferences = getSharedPreferences("Language", Context.MODE_PRIVATE)
-        val language = sharedPreferences.getString("language", "en")
-        if (current != Locale(language!!)){
-                val newLocale = Locale(language)
-                Locale.setDefault(newLocale)
-                val resources = resources
-                val configuration = resources.configuration
-                configuration.setLocale(newLocale)
-                resources.updateConfiguration(configuration, resources.displayMetrics)
-                recreate()
-        }
         setContentView(binding.root)
         setSupportActionBar(binding.include.myToolBar)
 

@@ -16,5 +16,5 @@
     <dimen name="card_radius">16dp</dimen>
     <dimen name="base_text_size">16sp</dimen>
     <dimen name="small_text_size">13sp</dimen>
-    <dimen name="note_text">7sp</dimen>
+    <dimen name="note_text">5sp</dimen>
 </resources>
