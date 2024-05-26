@@ -66,6 +66,9 @@
     <string name="password">Enter password</string>
     <string name="new_to_here">New to here?</string>
     <string name="sign_up">sign up</string>
+    <string name="enter_login">Enter login</string>
+    <string name="registry">Registry</string>
+    <string name="login">Login</string>
 
     <string-array name="weekDays">
         <item>Day of the week:</item>

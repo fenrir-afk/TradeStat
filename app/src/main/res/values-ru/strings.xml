@@ -61,6 +61,13 @@
     <string name="wins_defeats">(победы-поражения)</string>
     <string name="trade_dynamic">Динамика торговли</string>
     <string name="notes">Записи</string>
+    <string name="email">Введите почту</string>
+    <string name="password">Введите пароль</string>
+    <string name="new_to_here">Новенький?</string>
+    <string name="sign_up">зарегестрироваться</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="registry">Регистрация</string>
+    <string name="login">Авторизация</string>
     <string-array name="weekDays">
         <item>Дни недели:</item>
         <item>Воскресенье</item>
