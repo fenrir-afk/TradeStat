@@ -89,16 +89,18 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
             onImageClickListener?.onImageClick(position)
         }
         noteList[position].noteTexts.forEachIndexed { index, s ->
-            var image = createImage(position,index,context)
-            if (index == noteList[position].noteTexts.size -1){ //in this condition we fix the bag of 2 edit text at the bottom of the card
-                return@forEachIndexed
-            }
-            if (noteList[position].noteTexts.size > 1){
-                val editText = createText(context,position,index,noteViewModel)
-                if (image != null){
-                    holder.parentLayout.addView(image)
+            if (noteList[position].noteImages.size > index){
+                val image = createImage(position,index,context)
+                if (index == noteList[position].noteTexts.size -1){ //in this condition we fix the bag of 2 edit text at the bottom of the card
+                    return@forEachIndexed
                 }
-                holder.parentLayout.addView(editText)
+                if (noteList[position].noteTexts.size > 1){
+                    val editText = createText(context,position,index,noteViewModel)
+                    if (image != null){
+                        holder.parentLayout.addView(image)
+                    }
+                    holder.parentLayout.addView(editText)
+                }
             }
         }
     }
