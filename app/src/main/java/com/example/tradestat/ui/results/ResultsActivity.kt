@@ -16,7 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
-import com.example.tradestat.data.TradeDatabase
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityResultsBinding
 import com.example.tradestat.repository.TradesRepository
 import com.github.mikephil.charting.data.RadarData

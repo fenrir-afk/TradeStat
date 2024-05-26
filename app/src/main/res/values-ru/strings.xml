@@ -64,10 +64,11 @@
     <string name="email">Введите почту</string>
     <string name="password">Введите пароль</string>
     <string name="new_to_here">Новенький?</string>
-    <string name="sign_up">зарегестрироваться</string>
+    <string name="sign_up">sign_up</string>
     <string name="enter_login">Введите логин</string>
     <string name="registry">Регистрация</string>
     <string name="login">Авторизация</string>
+    <string name="continue_mine">Продолжить</string>
     <string-array name="weekDays">
         <item>Дни недели:</item>
         <item>Воскресенье</item>

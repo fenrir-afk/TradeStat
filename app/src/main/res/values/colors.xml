@@ -12,6 +12,7 @@
     <color name="Invisible">#00332F2F</color>
     <color name="MediumGray">#4B836B6B</color>
     <color name="background">#2B2020</color>
+    <color name="transparentFull">#00FFFFFF</color>
     <color name="lightGray">#94E4D2D2</color>
     <color name="transparentGray">#662B2020</color>
     <color name="MorelightGray">#94FFFFFF</color>

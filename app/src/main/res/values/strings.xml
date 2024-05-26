@@ -69,6 +69,7 @@
     <string name="enter_login">Enter login</string>
     <string name="registry">Registry</string>
     <string name="login">Login</string>
+    <string name="continue_mine">Continue</string>
 
     <string-array name="weekDays">
         <item>Day of the week:</item>

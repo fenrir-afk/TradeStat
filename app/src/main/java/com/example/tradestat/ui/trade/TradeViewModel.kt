@@ -2,12 +2,10 @@ package com.example.tradestat.ui.trade
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Trade
-import com.example.tradestat.data.TradeDatabase
 import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.repository.BaseRepository

@@ -6,6 +6,7 @@ import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
+import com.example.tradestat.data.model.User
 
 interface BaseRepository {
     fun addTrade(trade: Trade)
@@ -43,4 +44,9 @@ interface BaseRepository {
     fun addNote(noteCard: NoteCard)
     fun updateNote(noteCard: NoteCard)
     fun deleteNote(noteCard: NoteCard)
+
+    //login and register part
+    fun getUser(email:String,pass:String):User?
+    fun insertUser(user: User)
+    fun getAllUsers(): List<User>
 }

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tradestat.R
-import com.example.tradestat.data.TradeDatabase
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.databinding.ActivityNoteBinding
 import com.example.tradestat.repository.TradesRepository

@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
  * @param email is the email address of the user
  * @param pass is the users password
 * */
-@Entity(tableName = "user_tabel")
+@Entity(tableName = "user_table")
 data class User(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "login") val login: String,

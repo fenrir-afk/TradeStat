@@ -24,7 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradestat.R
-import com.example.tradestat.data.TradeDatabase
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.Results

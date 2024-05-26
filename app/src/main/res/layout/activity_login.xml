@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:fitsSystemWindows="true"
+    android:windowTranslucentStatus = "true"
+    android:windowTranslucentNavigation = "true"
     android:background="@drawable/reg_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,13 +19,14 @@
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/transparentGray"
+        app:cardBackgroundColor="@color/MediumGray"
         app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintWidth_percent="0.87"
         >
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:layout_margin="@dimen/base_margin">
             <TextView
                 android:id="@+id/title"
@@ -74,12 +78,10 @@
                     android:textSize="@dimen/base_text_size" />
 
             </TableRow>
-
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_button"
                 android:layout_width="match_parent"
-                android:text="Continue"
+                android:text="@string/continue_mine"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/background"
                 android:textColor="@color/white"

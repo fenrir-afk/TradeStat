@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import app.futured.donut.DonutSection
 import com.example.tradestat.R
-import com.example.tradestat.data.TradeDatabase
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.FragmentHomeBinding
 import com.example.tradestat.repository.TradesRepository
 

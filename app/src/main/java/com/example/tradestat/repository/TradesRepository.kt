@@ -1,6 +1,6 @@
 package com.example.tradestat.repository
 
-import com.example.tradestat.data.TradeDatabase
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Instrument
@@ -8,6 +8,7 @@ import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
+import com.example.tradestat.data.model.User
 
 open class TradesRepository(private val db: TradeDatabase):BaseRepository {
     //Trade part
@@ -105,4 +106,15 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
         db.getNoteDao().delete(noteCard)
     }
 
+    //login and reg part
+    override fun getUser(email:String,pass:String):User? {
+        return db.getUserDao().getUser(email,pass)
+    }
+
+    override fun insertUser(user: User) {
+        db.getUserDao().insertUser(user)
+    }
+    override fun getAllUsers():List<User> {
+        return db.getUserDao().getAllUsers()
+    }
 }
