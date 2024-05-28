@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.tradestat.R
 import com.example.tradestat.data.model.NoteCard
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.io.File
 
 class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
     : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
@@ -56,7 +57,7 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
                 val enteredText = s.toString()
                 if (enteredText.isNotEmpty()) {
                     val note =  noteList[position]
-                    var noteTexts = note.noteTexts.toMutableList()
+                    val noteTexts = note.noteTexts.toMutableList()
                     noteList[position] = NoteCard(noteList[position].id,noteTexts,noteList[position].noteImages,enteredText)
                     noteViewModel.updateNote(NoteCard(noteList[position].id,noteTexts,noteList[position].noteImages,enteredText))
                 }
@@ -65,6 +66,12 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
         holder.deleteButton.setOnClickListener{
             noteViewModel.deleteNote(noteList[position])
             noteList.removeAt(position)
+            for (imagePath in noteList[position].noteImages) {
+                val file = File(imagePath)
+                if (file.exists()) {
+                    file.delete()
+                }
+            }
             notifyItemRemoved(position)
         }
         holder.text1.addTextChangedListener(object: TextWatcher {
@@ -78,7 +85,7 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
                 val enteredText = s.toString()
                 if (enteredText.isNotEmpty()) {
                     val note =  noteList[position]
-                    var noteTexts = note.noteTexts.toMutableList()
+                    val noteTexts = note.noteTexts.toMutableList()
                     noteTexts[0] = enteredText
                     noteList[position] = NoteCard(noteList[position].id,noteTexts,noteList[position].noteImages,noteList[position].title)
                     noteViewModel.updateNote(NoteCard(noteList[position].id,noteTexts,noteList[position].noteImages,noteList[position].title))
@@ -88,7 +95,7 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
         holder.imageButton.setOnClickListener{
             onImageClickListener?.onImageClick(position)
         }
-        noteList[position].noteTexts.forEachIndexed { index, s ->
+        noteList[position].noteTexts.forEachIndexed { index, _ ->
             if (noteList[position].noteImages.size > index){
                 val image = createImage(position,index,context)
                 if (index == noteList[position].noteTexts.size -1){ //in this condition we fix the bag of 2 edit text at the bottom of the card
@@ -131,7 +138,7 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
                 val enteredText = s.toString()
                 if (enteredText.isNotEmpty()) {
                     val note =  noteList[position]
-                    var noteTexts = note.noteTexts.toMutableList()
+                    val noteTexts = note.noteTexts.toMutableList()
                     noteTexts[index+1] = enteredText
                     noteList[position] = NoteCard(noteList[position].id,noteTexts,noteList[position].noteImages,noteList[position].title)
                     noteViewModel.updateNote(noteList[position])
