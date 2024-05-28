@@ -14,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.tradestat.databinding.ActivityMainBinding
+import java.time.LocalDateTime
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
@@ -117,6 +118,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sharedPreferences = getSharedPreferences("TIME", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putLong("EXIT_TIME", System.currentTimeMillis())
+        editor.apply()
     }
 
 }

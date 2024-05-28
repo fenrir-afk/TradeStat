@@ -8,12 +8,15 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.MainActivity
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityLoginBinding
 import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.ui.registry.RegistryActivity
+import java.time.Duration
+import java.time.LocalDateTime
 import java.util.Locale
 
 
@@ -21,21 +24,11 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
+        setLanguage()
+        checkCurrentLoginSession()
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val current = Locale.getDefault()
-        val sharedPreferences = getSharedPreferences("Language", Context.MODE_PRIVATE)
-        val language = sharedPreferences.getString("language", "en")
-        if (current != Locale(language!!)){
-            val newLocale = Locale(language)
-            Locale.setDefault(newLocale)
-            val resources = resources
-            val configuration = resources.configuration
-            configuration.setLocale(newLocale)
-            resources.updateConfiguration(configuration, resources.displayMetrics)
-            recreate()
-        }
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
         val viewModelProvideFactory = LoginViewModelFactory(Application(),repository)
         loginViewModel = ViewModelProvider(this,viewModelProvideFactory)[LoginViewModel::class.java]
@@ -67,6 +60,33 @@ class LoginActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             )
+        }
+    }
+
+    private fun checkCurrentLoginSession() {
+        val sharedPreferences = getSharedPreferences("TIME", Context.MODE_PRIVATE)
+        val exitTime = sharedPreferences.getLong("EXIT_TIME", 0L)
+        if (exitTime != 0L) {
+            val currentTime = System.currentTimeMillis()
+            val duration = currentTime - exitTime
+            if (duration < 30 * 60 * 1000) { // 30 minutes in milliseconds
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        }
+    }
+
+    private fun setLanguage(){
+        val current = Locale.getDefault()
+        val sharedPreferences = getSharedPreferences("Language", Context.MODE_PRIVATE)
+        val language = sharedPreferences.getString("language", "en")
+        if (current != Locale(language!!)){
+            val newLocale = Locale(language)
+            Locale.setDefault(newLocale)
+            val resources = resources
+            val configuration = resources.configuration
+            configuration.setLocale(newLocale)
+            resources.updateConfiguration(configuration, resources.displayMetrics)
+            recreate()
         }
     }
 
