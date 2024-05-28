@@ -65,13 +65,13 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
         })
         holder.deleteButton.setOnClickListener{
             noteViewModel.deleteNote(noteList[position])
-            noteList.removeAt(position)
             for (imagePath in noteList[position].noteImages) {
                 val file = File(imagePath)
                 if (file.exists()) {
                     file.delete()
                 }
             }
+            noteList.removeAt(position)
             notifyItemRemoved(position)
         }
         holder.text1.addTextChangedListener(object: TextWatcher {
