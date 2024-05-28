@@ -2,6 +2,7 @@ package com.example.tradestat.ui.notes
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,8 @@ import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.databinding.ActivityNoteBinding
 import com.example.tradestat.repository.TradesRepository
+import java.io.File
+import java.io.FileOutputStream
 
 class NoteActivity : AppCompatActivity() {
 
@@ -65,9 +68,24 @@ class NoteActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             val imageUri = data.data
-            adapter.updateImage(selectedPosition, imageUri.toString())
+            val imageName = "note_image_${System.currentTimeMillis()}.jpg" // Сгенерируйте уникальное имя файла
+            val savedImagePath = saveImageToDevice(imageUri!!, imageName) // Сохраните изображение на устройстве
+
+            adapter.updateImage(selectedPosition, savedImagePath)
             noteViewModel.updateNote(adapter.noteList[selectedPosition])
         }
+    }
+
+    private fun saveImageToDevice(imageUri: Uri, imageName: String): String {
+        // Сохраните изображение на устройство и верните путь к файлу
+        val inputStream = contentResolver.openInputStream(imageUri)
+        val file = File(filesDir, imageName)
+        val outputStream = FileOutputStream(file)
+        inputStream?.copyTo(outputStream)
+        inputStream?.close()
+        outputStream.flush()
+        outputStream.close()
+        return file.absolutePath
     }
 
 
