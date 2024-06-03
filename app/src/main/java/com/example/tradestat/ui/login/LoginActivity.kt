@@ -32,14 +32,6 @@ class LoginActivity : AppCompatActivity() {
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
         val viewModelProvideFactory = LoginViewModelFactory(Application(),repository)
         loginViewModel = ViewModelProvider(this,viewModelProvideFactory)[LoginViewModel::class.java]
-        loginViewModel.checkUserResult.observe(this){
-            if (it){
-                Toast.makeText(this,"No such user",Toast.LENGTH_SHORT).show()
-            }else{
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        }
         binding.loginButton.setOnClickListener{
             val email = binding.email.text.toString()
             val pass = binding.password.text.toString()
@@ -47,6 +39,14 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.checkUser(email,pass)
             }else{
                 Toast.makeText(this,"Fields mush not be empty",Toast.LENGTH_SHORT).show()
+            }
+            loginViewModel.checkUserResult.observe(this){
+                if (it){
+                    Toast.makeText(this,"No such user",Toast.LENGTH_SHORT).show()
+                }else{
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
             }
         }
         binding.sendToSighUp.setOnClickListener{

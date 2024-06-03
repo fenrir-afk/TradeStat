@@ -24,7 +24,7 @@ class RegistryViewModel(application: Application, rep: BaseRepository): ViewMode
     }
     fun getUsers(){
         viewModelScope.launch(Dispatchers.IO) {
-            var list = repository.getAllUsers()
+            val list = repository.getAllUsers()
             println(list)
         }
     }
