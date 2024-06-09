@@ -6,7 +6,9 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.tradestat.R
-
+/**
+ *We use this class to make images of the app scalable
+ * */
 class FullscreenImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

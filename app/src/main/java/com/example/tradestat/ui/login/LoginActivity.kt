@@ -71,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
             val duration = currentTime - exitTime
             if (duration < 30 * 60 * 1000) { // 30 minutes in milliseconds
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         }
     }
