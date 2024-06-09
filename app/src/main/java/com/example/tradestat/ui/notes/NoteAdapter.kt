@@ -1,6 +1,7 @@
 package com.example.tradestat.ui.notes
 
 import android.content.Context
+import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tradestat.R
 import com.example.tradestat.data.model.NoteCard
+import com.example.tradestat.utils.FullscreenImageActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.File
 
@@ -161,6 +163,11 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
                 500 // Image height
             )
             image.layoutParams = imageParams
+            image.setOnClickListener{
+                val intent = Intent(context, FullscreenImageActivity::class.java)
+                intent.putExtra("image_url", noteList[position].noteImages[counter])
+                context.startActivity(intent)
+            }
             Glide.with(context)
                 .load(noteList[position].noteImages[counter])
                 .into(image)
