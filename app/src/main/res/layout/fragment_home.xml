@@ -11,7 +11,7 @@
         >
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="120dp"
             android:layout_marginTop="@dimen/base_margin"
             android:layout_marginStart="@dimen/big_margin"
             android:layout_marginEnd="@dimen/big_margin"
@@ -279,7 +279,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/materialsCard"
             android:layout_width="match_parent"
-            android:layout_height="95dp"
+            android:layout_height="112dp"
             android:layout_marginTop="@dimen/medium_margin"
             android:layout_marginStart="@dimen/big_margin"
             android:layout_marginEnd="@dimen/big_margin"
