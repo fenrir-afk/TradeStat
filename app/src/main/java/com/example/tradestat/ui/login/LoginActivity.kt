@@ -8,15 +8,12 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.MainActivity
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityLoginBinding
 import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.ui.registry.RegistryActivity
-import java.time.Duration
-import java.time.LocalDateTime
 import java.util.Locale
 
 
@@ -27,6 +24,11 @@ class LoginActivity : AppCompatActivity() {
         setLanguage()
         checkCurrentLoginSession()
         super.onCreate(savedInstanceState)
+        //we need this to set transparent status bar
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
@@ -51,15 +53,6 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.sendToSighUp.setOnClickListener{
             startActivity(Intent(this, RegistryActivity::class.java))
-        }
-
-        //we need this to set transparent status bar
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            val w = window
-            w.setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-            )
         }
     }
 

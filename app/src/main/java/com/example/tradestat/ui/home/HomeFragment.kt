@@ -77,13 +77,13 @@ class HomeFragment : Fragment() {
         //The first pie chart and its labels
         val section1 = DonutSection(
             name = "Short_section",
-            color = Color.parseColor("#DC143C"),
+            color = Color.parseColor("#FF0000"),
             amount = shorts.toFloat()
         )
 
         val section2 = DonutSection(
             name = "Long_section",
-            color = Color.parseColor("#00FF00"),
+            color = Color.parseColor("#00BD00"),
             amount = longs.toFloat()
         )
         binding.donutView.cap = (longs+shorts).toFloat()
@@ -100,13 +100,13 @@ class HomeFragment : Fragment() {
         val amount1  = if (this.wins + this.defeats != 0) ((this.wins * 100)/(this.wins + this.defeats)).toFloat() else 0f
         val section1 = DonutSection(
             name = "Win_section",
-            color = Color.parseColor("#00FF00"),
+            color = Color.parseColor("#00BD00"),
             amount =  amount1
         )
         val amount2  = if (this.wins + this.defeats != 0) ((this.defeats * 100)/(this.wins + this.defeats)).toFloat() else 0f
         val section2 = DonutSection(
             name = "Defeat_section",
-            color = Color.parseColor("#DC143C"),
+            color = Color.parseColor("#FF0000"),
             amount = amount2
         )
         binding.donutViewSecond.cap = 100F // 100% is all
