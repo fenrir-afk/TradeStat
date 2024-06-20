@@ -1,78 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    style="@style/Background1"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:fontFamily="@font/oxygen"
-        android:text="@string/news_search"
-        style="@style/Text"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/editTextSearch"
-        android:layout_width="250dp"
-        android:layout_height="48dp"
-        android:background="@color/lightGray"
-        android:fontFamily="@font/oxygen"
-        android:gravity="center"
-        android:hint="@string/enter_a_company_name"
-        android:inputType="text"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.153" />
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
-
-    <ScrollView
-        android:id="@+id/scrollView2"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/base_margin"
-        app:layout_constraintBottom_toTopOf="@+id/view1"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSearch">
-
+        style="@style/Background1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
         <LinearLayout
-            android:id="@+id/cardsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginStart="@dimen/big_margin"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/note_card"
+                android:layout_width="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/MediumGray"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/card_radius">
+
+                <ImageView
+                    style="@style/Background2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/analysis_card"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="@dimen/big_margin"
+                android:layout_weight="1"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/MediumGray"
+                app:cardCornerRadius="@dimen/card_radius">
+
+
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
-    </ScrollView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="340dp"
+            android:layout_margin="@dimen/big_margin"
+            android:background="@drawable/future"
+            app:cardCornerRadius="30dp">
 
-    <View
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/future" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="@dimen/big_margin"
+                android:background="@drawable/question" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/big_margin"
+                android:layout_marginBottom="55dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/oxygen"
+                    android:text="Предстоящие события"
+
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/biggest_text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/oxygen"
+                    android:text="(Календарь БКС)"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/biggest_text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/big_margin"
+                    android:fontFamily="@font/book"
+                    android:text="Актуальные новости разбитые по дате и помеченные степенями важности"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/base_text_size" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="340dp"
+            android:layout_margin="@dimen/big_margin"
+            app:cardCornerRadius="30dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/forex" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="@dimen/big_margin"
+                android:background="@drawable/question" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/big_margin"
+                android:layout_marginBottom="55dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/oxygen"
+                    android:text="Предстоящие события"
+
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/biggest_text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/oxygen"
+                    android:text="(Календарь БКС)"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/biggest_text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/big_margin"
+                    android:fontFamily="@font/book"
+                    android:text="Актуальные новости разбитые по дате и помеченные степенями важности"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/base_text_size" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</ScrollView>
