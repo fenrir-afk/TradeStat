@@ -152,7 +152,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen"
-                            android:text="Предстоящие события"
+                            android:text="Новости Forex"
 
                             android:textColor="@color/white"
                             android:textSize="@dimen/biggest_text" />
@@ -162,7 +162,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/oxygen"
-                            android:text="(Календарь БКС)"
+                            android:text="(Investing)"
                             android:textColor="@color/white"
                             android:textSize="@dimen/biggest_text" />
 
@@ -171,7 +171,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/big_margin"
                             android:fontFamily="@font/book"
-                            android:text="Актуальные новости разбитые по дате и помеченные степенями важности"
+                            android:text="Актуальные новости рынка forex,разбитые оп датам, котировки"
                             android:textColor="@color/white"
                             android:textSize="@dimen/base_text_size" />
                     </LinearLayout>
@@ -212,7 +212,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen"
-                            android:text="Предстоящие события"
+                            android:text="Новости крипты"
 
                             android:textColor="@color/white"
                             android:textSize="@dimen/biggest_text" />
@@ -222,7 +222,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/oxygen"
-                            android:text="(Календарь БКС)"
+                            android:text="(Investing)"
                             android:textColor="@color/white"
                             android:textSize="@dimen/biggest_text" />
 
@@ -231,7 +231,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/big_margin"
                             android:fontFamily="@font/book"
-                            android:text="Актуальные новости разбитые по дате и помеченные степенями важности"
+                            android:text="Актуальные новости рынка криптовалют разбитых по датам,котировик"
                             android:textColor="@color/white"
                             android:textSize="@dimen/base_text_size" />
                     </LinearLayout>

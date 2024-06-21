@@ -3,6 +3,7 @@ package com.example.tradestat.repository
 import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.NoteCard
+import com.example.tradestat.data.model.Quotes
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
@@ -49,4 +50,5 @@ interface BaseRepository {
     fun getUser(email:String,pass:String):User?
     fun insertUser(user: User)
     fun getAllUsers(): List<User>
+    fun getForexData(callback: (Quotes) -> Unit)
 }

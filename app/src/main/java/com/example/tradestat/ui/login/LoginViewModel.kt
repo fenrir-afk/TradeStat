@@ -8,7 +8,7 @@ import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel(application: Application,rep: BaseRepository):ViewModel() {
+class LoginViewModel(rep: BaseRepository):ViewModel() {
     private val repository: BaseRepository = rep
     var checkUserResult = MutableLiveData<Boolean>()
     fun checkUser(email:String,pass:String){

@@ -1,14 +1,22 @@
 package com.example.tradestat.repository
 
+import android.util.Log
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Directions
 import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.NoteCard
+import com.example.tradestat.data.model.Quotes
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.data.model.User
+import com.example.tradestat.data.retrofit.QuotesApi
+import com.example.tradestat.data.retrofit.RetrofitHelper
+import com.example.tradestat.repository.TradesRepository.Key.API_IPO_KEY
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 open class TradesRepository(private val db: TradeDatabase):BaseRepository {
     //Trade part
@@ -116,5 +124,27 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
     }
     override fun getAllUsers():List<User> {
         return db.getUserDao().getAllUsers()
+    }
+
+    //news retrofit
+    object Key{
+        const val API_IPO_KEY = "Zzw4tq1NzNxOdiSOdwEWkJm6T"
+    }
+    override fun getForexData(callback: (Quotes) -> Unit){
+        val ipoApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
+        ipoApi.getForexData("USD/RUB","1h",API_IPO_KEY).enqueue(object : Callback<Quotes> {
+            override fun onResponse(call: Call<Quotes>, response: Response<Quotes>) {
+                if (response.isSuccessful) {
+                    val incomeResponse = response.body()
+                    callback(incomeResponse!!)
+                } else {
+                    Log.d("Retrofit","Response is not successful")
+                }
+            }
+
+            override fun onFailure(call: Call<Quotes>, t: Throwable) {
+                println(t.message)
+            }
+        })
     }
 }

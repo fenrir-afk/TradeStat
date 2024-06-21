@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        val viewModelProvideFactory = LoginViewModelFactory(Application(),repository)
+        val viewModelProvideFactory = LoginViewModelFactory(repository)
         loginViewModel = ViewModelProvider(this,viewModelProvideFactory)[LoginViewModel::class.java]
         binding.loginButton.setOnClickListener{
             val email = binding.email.text.toString()

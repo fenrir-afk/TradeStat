@@ -1,17 +1,27 @@
 package com.example.tradestat.ui.news
 
-import android.util.Log
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
-import org.jsoup.Jsoup
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-
-class NewsViewModel : ViewModel() {
-
+class NewsViewModel(rep: BaseRepository) : ViewModel() {
+    private val repository: BaseRepository = rep
+    var quote: String = ""
+    val direction: MutableLiveData<Boolean> = MutableLiveData()
+    fun updateQuotes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getForexData {
+                quote = it.response[0].c
+                var directionNumber = it.response[0].cp
+                if (directionNumber.first() == ('-')){
+                    direction.postValue(false)
+                }else{
+                    direction.postValue(true)
+                }
+            }
+        }
+    }
 }
