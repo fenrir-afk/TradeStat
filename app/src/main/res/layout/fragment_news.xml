@@ -3,6 +3,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:scrollbars="none"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +46,10 @@
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/MediumGray"
                 app:cardCornerRadius="@dimen/card_radius">
-
+                <ImageView
+                    style="@style/Background2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
 
             </com.google.android.material.card.MaterialCardView>
@@ -107,60 +111,139 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="340dp"
-            android:layout_margin="@dimen/big_margin"
-            app:cardCornerRadius="30dp">
-            <ImageView
-                android:layout_width="match_parent"
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:scrollbars="none"
+            android:layout_height="360dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/forex" />
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="@dimen/big_margin"
-                android:background="@drawable/question" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/forex"
+                    android:layout_width="300dp"
+                    android:layout_height="340dp"
+                    android:layout_margin="@dimen/big_margin"
+                    app:cardCornerRadius="30dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="@dimen/big_margin"
-                android:layout_marginBottom="55dp"
-                android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/forex" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/oxygen"
-                    android:text="Предстоящие события"
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="@dimen/big_margin"
+                        android:background="@drawable/question" />
 
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/biggest_text" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/big_margin"
+                        android:layout_marginBottom="55dp"
+                        android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/oxygen"
-                    android:text="(Календарь БКС)"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/biggest_text" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen"
+                            android:text="Предстоящие события"
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/big_margin"
-                    android:fontFamily="@font/book"
-                    android:text="Актуальные новости разбитые по дате и помеченные степенями важности"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/base_text_size" />
-            </LinearLayout>
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/biggest_text" />
 
-        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/oxygen"
+                            android:text="(Календарь БКС)"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/biggest_text" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/big_margin"
+                            android:fontFamily="@font/book"
+                            android:text="Актуальные новости разбитые по дате и помеченные степенями важности"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/base_text_size" />
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/crypta"
+                    android:layout_width="300dp"
+                    android:layout_height="340dp"
+                    app:layout_constraintStart_toEndOf="@id/forex"
+                    android:layout_margin="@dimen/big_margin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardCornerRadius="30dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/crypta" />
+
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="@dimen/big_margin"
+                        android:background="@drawable/question" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/big_margin"
+                        android:layout_marginBottom="55dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen"
+                            android:text="Предстоящие события"
+
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/biggest_text" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/oxygen"
+                            android:text="(Календарь БКС)"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/biggest_text" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/big_margin"
+                            android:fontFamily="@font/book"
+                            android:text="Актуальные новости разбитые по дате и помеченные степенями важности"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/base_text_size" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </HorizontalScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="70dp"/>
     </LinearLayout>
 
 </ScrollView>
