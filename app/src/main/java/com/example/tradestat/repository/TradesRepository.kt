@@ -130,9 +130,9 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
     object Key{
         const val API_IPO_KEY = "Zzw4tq1NzNxOdiSOdwEWkJm6T"
     }
-    override fun getForexData(callback: (Quotes) -> Unit){
+    override fun getForexData(quotePair:String, time:String, callback: (Quotes) -> Unit){
         val ipoApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
-        ipoApi.getForexData("USD/RUB","1h",API_IPO_KEY).enqueue(object : Callback<Quotes> {
+        ipoApi.getForexData(quotePair,time,API_IPO_KEY).enqueue(object : Callback<Quotes> {
             override fun onResponse(call: Call<Quotes>, response: Response<Quotes>) {
                 if (response.isSuccessful) {
                     val incomeResponse = response.body()
@@ -147,4 +147,5 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
             }
         })
     }
+    
 }

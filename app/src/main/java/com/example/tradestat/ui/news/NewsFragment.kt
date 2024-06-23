@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.FragmentNewsBinding
 import com.example.tradestat.repository.TradesRepository
@@ -26,15 +27,28 @@ class NewsFragment : Fragment() {
         val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
         val viewModelProviderFactory = NewsViewModelFactory(repository)
         val newsViewModel = ViewModelProvider(this, viewModelProviderFactory)[NewsViewModel::class.java]
-        if (counter == 0){
-            newsViewModel.updateQuotes()
-        }
-        counter++
-        newsViewModel.direction.observe(viewLifecycleOwner,Observer{
-            var a = newsViewModel.quote
-            var bool = it
+        newsViewModel.quotesLiveData.observe(viewLifecycleOwner,Observer{
+            updateQuotes(it)
         })
         return binding.root
+    }
+    private fun updateQuotes(triples: MutableList<Triple<String, Boolean, String>>) {
+        if (triples.size >= 1) {
+            binding.quote1.text = "${triples[0].third} ${triples[0].first}"
+        }
+        if (triples.size >= 2) {
+            binding.quote2.text = "${triples[1].third} ${triples[1].first}"
+        }
+        if (triples[0].second){
+            binding.quoteIm1.setImageResource(R.drawable.greenarrow)
+        }else{
+            binding.quoteIm1.setImageResource(R.drawable.redarrow)
+        }
+        if (triples[1].second){
+            binding.quoteIm2.setImageResource(R.drawable.greenarrow)
+        }else{
+            binding.quoteIm2.setImageResource(R.drawable.redarrow)
+        }
     }
 
     override fun onDestroyView() {
