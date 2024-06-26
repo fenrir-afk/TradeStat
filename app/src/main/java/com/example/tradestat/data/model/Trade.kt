@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
 data class Trade(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "trade_direction") val tradeDirection: String,
-    @ColumnInfo(name = "trade_date") val tradeDate: String,//day of postion oppening
+    @ColumnInfo(name = "trade_date") val tradeDate: String,//day of position opening
     @ColumnInfo(name = "trade_strategy") val strategy: String,
     @ColumnInfo(name = "trade_result") val tradeResult: String,
     @ColumnInfo(name = "Instrument") val instrument: String,

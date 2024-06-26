@@ -147,5 +147,4 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
             }
         })
     }
-    
 }

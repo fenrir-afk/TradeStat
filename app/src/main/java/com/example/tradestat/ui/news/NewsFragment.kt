@@ -27,17 +27,18 @@ class NewsFragment : Fragment() {
         val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
         val viewModelProviderFactory = NewsViewModelFactory(repository)
         val newsViewModel = ViewModelProvider(this, viewModelProviderFactory)[NewsViewModel::class.java]
+        newsViewModel.getMoexData(context!!.filesDir)
         newsViewModel.quotesLiveData.observe(viewLifecycleOwner,Observer{
             updateQuotes(it)
         })
         return binding.root
     }
     private fun updateQuotes(triples: MutableList<Triple<String, Boolean, String>>) {
-        if (triples.size >= 1) {
-            binding.quote1.text = "${triples[0].third} ${triples[0].first}"
-        }
-        if (triples.size >= 2) {
-            binding.quote2.text = "${triples[1].third} ${triples[1].first}"
+        if (triples.size > 0){
+           binding.quote1.text = "${triples[0].third} ${triples[0].first}"
+           binding.quote2.text = "${triples[1].third} ${triples[1].first}"
+        }else{
+           return
         }
         if (triples[0].second){
             binding.quoteIm1.setImageResource(R.drawable.greenarrow)
