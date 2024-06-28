@@ -43,7 +43,7 @@ class NewsViewModel(rep: BaseRepository) : ViewModel() {
             }
         }
     }
-    fun getMoexData() {
+    private fun getMoexData() {
         viewModelScope.launch(Dispatchers.IO) {
             val url = URL("https://iss.moex.com/iss/engines/stock/markets/shares/boards/TQBR/securities.xml?iss.meta=off&iss.only=securities&securities.columns=SECID,PREVLEGALCLOSEPRICE")
 

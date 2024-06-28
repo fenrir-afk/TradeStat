@@ -46,21 +46,21 @@ class NewsFragment : Fragment() {
        }
     }
     private fun updateQuotes(triples: MutableList<Triple<String, Boolean, String>>) {
-        if (triples.size > 0){
+        if (triples.size == 2){
            binding.quote1.text = "${triples[0].third} ${triples[0].first}"
            binding.quote2.text = "${triples[1].third} ${triples[1].first}"
+            if (triples[0].second){
+                binding.quoteIm1.setImageResource(R.drawable.greenarrow)
+            }else{
+                binding.quoteIm1.setImageResource(R.drawable.redarrow)
+            }
+            if (triples[1].second){
+                binding.quoteIm2.setImageResource(R.drawable.greenarrow)
+            }else{
+                binding.quoteIm2.setImageResource(R.drawable.redarrow)
+            }
         }else{
            return
-        }
-        if (triples[0].second){
-            binding.quoteIm1.setImageResource(R.drawable.greenarrow)
-        }else{
-            binding.quoteIm1.setImageResource(R.drawable.redarrow)
-        }
-        if (triples[1].second){
-            binding.quoteIm2.setImageResource(R.drawable.greenarrow)
-        }else{
-            binding.quoteIm2.setImageResource(R.drawable.redarrow)
         }
     }
 
