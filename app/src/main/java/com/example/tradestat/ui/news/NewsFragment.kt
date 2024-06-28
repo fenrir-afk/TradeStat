@@ -27,11 +27,23 @@ class NewsFragment : Fragment() {
         val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
         val viewModelProviderFactory = NewsViewModelFactory(repository)
         val newsViewModel = ViewModelProvider(this, viewModelProviderFactory)[NewsViewModel::class.java]
-        newsViewModel.getMoexData(context!!.filesDir)
+        newsViewModel.stockMarketValues.observe(viewLifecycleOwner,Observer{
+            updateStockMarketQuotes(it)
+        })
         newsViewModel.quotesLiveData.observe(viewLifecycleOwner,Observer{
             updateQuotes(it)
         })
         return binding.root
+    }
+    private fun updateStockMarketQuotes(mutableMap: MutableMap<String, String>) {
+       if (mutableMap.isNotEmpty()){
+           binding.firstMoexTitle.text = "MOEX"
+           binding.secondMoexTitle.text = "SBER"
+           binding.thirdMoexTitle.text = "GAZP"
+           binding.firstMoexValue.text = mutableMap["MOEX"]
+           binding.secondMoexValue.text = mutableMap["SBER"]
+           binding.thirdMoexValue.text = mutableMap["GAZP"]
+       }
     }
     private fun updateQuotes(triples: MutableList<Triple<String, Boolean, String>>) {
         if (triples.size > 0){

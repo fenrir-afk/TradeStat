@@ -6,23 +6,26 @@ import androidx.lifecycle.viewModelScope
 import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.w3c.dom.Document
+import org.w3c.dom.NodeList
+import org.xml.sax.InputSource
 import java.io.BufferedReader
 import java.io.File
-import java.io.FileOutputStream
 import java.io.InputStreamReader
-import java.net.HttpURLConnection
+import java.io.StringReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 import javax.xml.parsers.DocumentBuilderFactory
-import kotlin.system.exitProcess
 
 class NewsViewModel(rep: BaseRepository) : ViewModel() {
     private val repository: BaseRepository = rep
     var quote: MutableList<Triple<String,Boolean,String>> = mutableListOf()
     val quotesLiveData: MutableLiveData<MutableList<Triple<String,Boolean,String>>> = MutableLiveData()
+    val stockMarketValues: MutableLiveData<MutableMap<String,String>> = MutableLiveData()
     init {
         updateQuotes("USD/RUB","1h")
         updateQuotes("CNY/RUB","1h")
+        getMoexData()
     }
     private fun updateQuotes(quotePair:String, time:String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -40,7 +43,7 @@ class NewsViewModel(rep: BaseRepository) : ViewModel() {
             }
         }
     }
-    fun getMoexData(filesDir: File) {
+    fun getMoexData() {
         viewModelScope.launch(Dispatchers.IO) {
             val url = URL("https://iss.moex.com/iss/engines/stock/markets/shares/boards/TQBR/securities.xml?iss.meta=off&iss.only=securities&securities.columns=SECID,PREVLEGALCLOSEPRICE")
 
@@ -52,9 +55,16 @@ class NewsViewModel(rep: BaseRepository) : ViewModel() {
                     val inputStream = connection.inputStream
                     val reader = BufferedReader(InputStreamReader(inputStream))
                     val xmlString = reader.readText()
-                    val file = File(filesDir, "data.xml")
-                    file.writeText(xmlString)
-
+                    // Парсинг XML и поиск нужного значения
+                    val document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
+                        InputSource(StringReader(xmlString))
+                    )
+                    val nodeList = document.getElementsByTagName("row")
+                    val map = mutableMapOf<String,String>()
+                    map["MOEX"] = getValueByName(nodeList,"MOEX")
+                    map["SBER"] = getValueByName(nodeList,"SBER")
+                    map["GAZP"] = getValueByName(nodeList,"GAZP")
+                    stockMarketValues.postValue(map)
                 } else {
                     println("Ошибка: код ответа ${connection.responseCode}")
                 }
@@ -65,5 +75,16 @@ class NewsViewModel(rep: BaseRepository) : ViewModel() {
                 // Обработка ошибок SSL: проверка сертификатов, обновление стека SSL/TLS
             }
         }
+    }
+    private fun getValueByName(nodeList: NodeList, name: String): String {
+        for (i in 0 until nodeList.length) {
+            val node = nodeList.item(i)
+            val secId = node.attributes.getNamedItem("SECID").nodeValue
+            if (secId == name) {
+                val prevLegalClosePrice = node.attributes.getNamedItem("PREVLEGALCLOSEPRICE").nodeValue
+                return prevLegalClosePrice
+            }
+        }
+        return ""
     }
 }
