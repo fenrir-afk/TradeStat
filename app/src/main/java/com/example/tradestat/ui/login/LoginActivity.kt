@@ -1,25 +1,22 @@
 package com.example.tradestat.ui.login
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.MainActivity
-import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityLoginBinding
-import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.ui.registry.RegistryActivity
+import com.example.tradestat.utils.BaseViewModelFactory
 import java.util.Locale
 
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels{ BaseViewModelFactory}
     override fun onCreate(savedInstanceState: Bundle?) {
         setLanguage()
         checkCurrentLoginSession()
@@ -31,9 +28,6 @@ class LoginActivity : AppCompatActivity() {
         )
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        val viewModelProvideFactory = LoginViewModelFactory(repository)
-        loginViewModel = ViewModelProvider(this,viewModelProvideFactory)[LoginViewModel::class.java]
         binding.loginButton.setOnClickListener{
             val email = binding.email.text.toString()
             val pass = binding.password.text.toString()

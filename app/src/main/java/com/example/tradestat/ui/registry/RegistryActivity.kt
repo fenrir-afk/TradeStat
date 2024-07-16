@@ -1,28 +1,23 @@
 package com.example.tradestat.ui.registry
 
-import android.app.Application
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.MainActivity
-import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.User
 import com.example.tradestat.databinding.ActivityRegistryBinding
-import com.example.tradestat.repository.TradesRepository
+import com.example.tradestat.utils.BaseViewModelFactory
 
 class RegistryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegistryBinding
-    private lateinit var registerViewModel: RegistryViewModel
+    private  val registerViewModel: RegistryViewModel by viewModels{ BaseViewModelFactory}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistryBinding.inflate(layoutInflater)
-        val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        val viewModelProvideFactory = RegistryViewModelFactory(Application(),repository)
-        registerViewModel = ViewModelProvider(this,viewModelProvideFactory)[RegistryViewModel::class.java]
         setContentView(binding.root)
         registerViewModel.addUserResult.observe(this){
             if (it){

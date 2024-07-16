@@ -3,12 +3,14 @@ package com.example.tradestat.ui.dateStatistic
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityDateBinding
 import com.example.tradestat.repository.TradesRepository
+import com.example.tradestat.utils.BaseViewModelFactory
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
@@ -18,18 +20,13 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 
 class DateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDateBinding
+    private val dateViewModel:DateViewModel by viewModels{ BaseViewModelFactory }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDateBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         setSupportActionBar(binding.include.myToolBar)
-
-
-        val repository = TradesRepository(TradeDatabase.getDatabase(application))
-        val viewModelProvideFactory = DateViewModelFactory(Application(),repository)
-        val dateViewModel = ViewModelProvider(this,viewModelProvideFactory)[DateViewModel::class.java]
-
 
         dateViewModel.updateDay()
         dateViewModel.getRatingList()

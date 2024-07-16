@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import app.futured.donut.DonutSection
 import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.FragmentHomeBinding
 import com.example.tradestat.repository.TradesRepository
-
 
 
 class HomeFragment : Fragment() {
@@ -26,17 +25,15 @@ class HomeFragment : Fragment() {
     private var longs:Int = 0
     private var wins:Int = 0
     private var defeats:Int = 0
-
+    private val homeViewModel:HomeViewModel by viewModels{
+        val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
+        HomeViewModelFactory(Application(),repository)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
-        val viewModelProvideFactory = HomeViewModelFactory(Application(),repository)
-        val homeViewModel = ViewModelProvider(this,viewModelProvideFactory)[HomeViewModel::class.java]
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeViewModel.updateNumbers()
         homeViewModel.getNumberList.observe(viewLifecycleOwner) {

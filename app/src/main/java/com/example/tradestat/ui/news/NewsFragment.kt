@@ -4,29 +4,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
-import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.FragmentNewsBinding
-import com.example.tradestat.repository.TradesRepository
+import com.example.tradestat.utils.BaseViewModelFactory
 
 class NewsFragment : Fragment() {
 
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
-    var counter = 0
-
+    private val newsViewModel:NewsViewModel by viewModels{ BaseViewModelFactory }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
-
-        val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
-        val viewModelProviderFactory = NewsViewModelFactory(repository)
-        val newsViewModel = ViewModelProvider(this, viewModelProviderFactory)[NewsViewModel::class.java]
         newsViewModel.stockMarketValues.observe(viewLifecycleOwner,Observer{
             updateStockMarketQuotes(it)
         })

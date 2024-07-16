@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.trade
 
-import android.app.Application
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
@@ -21,17 +20,16 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradestat.R
-import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
-import com.example.tradestat.repository.TradesRepository
+import com.example.tradestat.utils.BaseViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -47,8 +45,7 @@ class TradeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var tradeViewModel:TradeViewModel
-
+    private val tradeViewModel:TradeViewModel by viewModels{ BaseViewModelFactory }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,9 +53,6 @@ class TradeFragment : Fragment() {
     ): View {
         _binding = FragmentTradeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
-        val viewModelProvideFactory = TradeViewModelFactory(Application(),repository)
-        tradeViewModel = ViewModelProvider(this,viewModelProvideFactory)[TradeViewModel::class.java]
         tradeViewModel.updateListByDateAscending()
         val adapter = TradeAdapter(this)
         val manager = LinearLayoutManager(this.context)

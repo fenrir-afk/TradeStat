@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -16,6 +17,7 @@ import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityInstrumentBinding
 import com.example.tradestat.repository.TradesRepository
+import com.example.tradestat.utils.BaseViewModelFactory
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -27,6 +29,8 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 class InstrumentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInstrumentBinding
 
+    private val instrumentViewModel:InstrumentViewModel by viewModels{ BaseViewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInstrumentBinding.inflate(layoutInflater)
@@ -36,9 +40,6 @@ class InstrumentActivity : AppCompatActivity() {
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
 
 
-        val repository = TradesRepository(TradeDatabase.getDatabase(application))
-        val viewModelProvideFactory = InstrumentViewModelFactory(Application(),repository)
-        val instrumentViewModel = ViewModelProvider(this,viewModelProvideFactory)[InstrumentViewModel::class.java]
 
 
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))

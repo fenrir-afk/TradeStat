@@ -9,7 +9,7 @@ import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RegistryViewModel(application: Application, rep: BaseRepository): ViewModel() {
+class RegistryViewModel(rep: BaseRepository): ViewModel() {
     private val repository: BaseRepository = rep
     var addUserResult = MutableLiveData<Boolean>()
     fun addUser(user: User){

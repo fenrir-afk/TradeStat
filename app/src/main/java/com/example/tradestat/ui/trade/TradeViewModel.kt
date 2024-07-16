@@ -21,6 +21,7 @@ class TradeViewModel(application: Application,rep: BaseRepository) : AndroidView
     var getInstrumentList:List<Instrument> = arrayListOf()
     private val repository: BaseRepository = rep
 
+
     init {
         finalList.addSource(sortedTradeList){
             finalList.value = it

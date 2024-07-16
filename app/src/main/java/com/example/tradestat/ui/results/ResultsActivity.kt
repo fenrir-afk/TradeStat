@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.results
 
-import android.app.Application
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -8,17 +7,16 @@ import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
-import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityResultsBinding
-import com.example.tradestat.repository.TradesRepository
+import com.example.tradestat.utils.BaseViewModelFactory
 import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
 import com.github.mikephil.charting.data.RadarEntry
@@ -28,20 +26,13 @@ import java.util.Calendar
 
 class ResultsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultsBinding
-    private lateinit var resultsViewModel: ResultsViewModel
+    private  val resultsViewModel: ResultsViewModel by viewModels{ BaseViewModelFactory}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.include2.myToolBar)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
-        //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-
-
-        val repository = TradesRepository(TradeDatabase.getDatabase(application))
-        val viewModelProvideFactory = ResultViewModelFactory(Application(),repository)
-        resultsViewModel = ViewModelProvider(this,viewModelProvideFactory)[ResultsViewModel::class.java]
-
 
         resultsViewModel.updateLists()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

@@ -1,27 +1,25 @@
 package com.example.tradestat.ui.notes
 import android.app.Activity
-import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tradestat.R
-import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.databinding.ActivityNoteBinding
-import com.example.tradestat.repository.TradesRepository
+import com.example.tradestat.utils.BaseViewModelFactory
 import java.io.File
 import java.io.FileOutputStream
 
 class NoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNoteBinding
-    private lateinit var noteViewModel: NoteViewModel
+    private  val noteViewModel: NoteViewModel by viewModels{ BaseViewModelFactory}
     private val adapter = NoteAdapter(this)
     private var selectedPosition: Int = -1
     companion object {
@@ -33,13 +31,6 @@ class NoteActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         setSupportActionBar(binding.include.myToolBar)
-
-
-        val repository = TradesRepository(TradeDatabase.getDatabase(application))
-        val viewModelProvideFactory = NoteViewModelFactory(Application(),repository)
-        noteViewModel =ViewModelProvider(this,viewModelProvideFactory)[NoteViewModel::class.java]
-
-
 
         val recyclerView: RecyclerView = findViewById(R.id.noteList)
         noteViewModel.getAllNotes()

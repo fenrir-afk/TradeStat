@@ -1,17 +1,15 @@
 package com.example.tradestat.ui.analysis
 
-import android.app.Application
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.tradestat.R
-import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityAnalysisBinding
-import com.example.tradestat.repository.TradesRepository
+import com.example.tradestat.utils.BaseViewModelFactory
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
@@ -21,20 +19,13 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 
 class AnalysisActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnalysisBinding
+    private val analysisViewModel:AnalysisViewModel by viewModels{ BaseViewModelFactory  }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAnalysisBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         setSupportActionBar(binding.include.myToolBar)
-
-
-        val repository = TradesRepository(TradeDatabase.getDatabase(application))
-        val viewModelProvideFactory = AnalysisViewModelFactory(Application(),repository)
-        val analysisViewModel = ViewModelProvider(this,viewModelProvideFactory)[AnalysisViewModel::class.java]
-
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
