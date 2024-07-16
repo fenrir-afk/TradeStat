@@ -46,8 +46,6 @@ val BaseViewModelFactory = object : ViewModelProvider.Factory {
                     AnalysisViewModel(application,tradesRepository)
                 isAssignableFrom(HomeViewModel::class.java) ->
                     HomeViewModel(application,tradesRepository)
-
-
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
