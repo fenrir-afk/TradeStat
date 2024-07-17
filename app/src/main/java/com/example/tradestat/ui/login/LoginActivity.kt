@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.login
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +9,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tradestat.MainActivity
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityLoginBinding
+import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.ui.registry.RegistryActivity
 import com.example.tradestat.utils.BaseViewModelFactory
 import java.util.Locale
@@ -16,7 +19,10 @@ import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private val loginViewModel: LoginViewModel by viewModels{ BaseViewModelFactory}
+    private val loginViewModel: LoginViewModel by viewModels {
+        val repository = TradesRepository(TradeDatabase.getDatabase(this))
+        BaseViewModelFactory(repository, Application())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         setLanguage()
         checkCurrentLoginSession()

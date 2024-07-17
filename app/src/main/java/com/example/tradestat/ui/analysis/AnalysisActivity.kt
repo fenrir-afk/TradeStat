@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.analysis
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +9,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import com.example.tradestat.R
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityAnalysisBinding
+import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
@@ -19,7 +22,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 
 class AnalysisActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnalysisBinding
-    private val analysisViewModel:AnalysisViewModel by viewModels{ BaseViewModelFactory  }
+    private val analysisViewModel:AnalysisViewModel by viewModels {
+        val repository = TradesRepository(TradeDatabase.getDatabase(this))
+        BaseViewModelFactory(repository, Application())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAnalysisBinding.inflate(layoutInflater)

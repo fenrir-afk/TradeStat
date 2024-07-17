@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.notes
 import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,8 +11,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tradestat.R
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.databinding.ActivityNoteBinding
+import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
 import java.io.File
 import java.io.FileOutputStream
@@ -19,7 +22,10 @@ import java.io.FileOutputStream
 class NoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNoteBinding
-    private  val noteViewModel: NoteViewModel by viewModels{ BaseViewModelFactory}
+    private  val noteViewModel: NoteViewModel by viewModels {
+        val repository = TradesRepository(TradeDatabase.getDatabase(this))
+        BaseViewModelFactory(repository, Application())
+    }
     private val adapter = NoteAdapter(this)
     private var selectedPosition: Int = -1
     companion object {

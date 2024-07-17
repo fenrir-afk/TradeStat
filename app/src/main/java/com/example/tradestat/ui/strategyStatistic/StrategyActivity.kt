@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.strategyStatistic
 
+import android.app.Application
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -12,7 +13,9 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.tradestat.R
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityStrategyBinding
+import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
@@ -23,7 +26,10 @@ import java.util.Random
 
 class StrategyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStrategyBinding
-    private val strategyViewModel: StrategyViewModel by viewModels { BaseViewModelFactory }
+    private val strategyViewModel: StrategyViewModel by viewModels {
+        val repository = TradesRepository(TradeDatabase.getDatabase(this))
+        BaseViewModelFactory(repository, Application())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStrategyBinding.inflate(layoutInflater)

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -14,6 +15,7 @@ import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.FragmentHomeBinding
 import com.example.tradestat.repository.TradesRepository
+import com.example.tradestat.utils.BaseViewModelFactory
 
 
 class HomeFragment : Fragment() {
@@ -25,9 +27,9 @@ class HomeFragment : Fragment() {
     private var longs:Int = 0
     private var wins:Int = 0
     private var defeats:Int = 0
-    private val homeViewModel:HomeViewModel by viewModels{
+    private val homeViewModel:HomeViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
-        HomeViewModelFactory(Application(),repository)
+        BaseViewModelFactory(repository, Application())
     }
     override fun onCreateView(
         inflater: LayoutInflater,

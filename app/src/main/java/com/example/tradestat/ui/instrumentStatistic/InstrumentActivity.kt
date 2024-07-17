@@ -29,7 +29,10 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 class InstrumentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInstrumentBinding
 
-    private val instrumentViewModel:InstrumentViewModel by viewModels{ BaseViewModelFactory }
+    private val instrumentViewModel:InstrumentViewModel by viewModels {
+        val repository = TradesRepository(TradeDatabase.getDatabase(this))
+        BaseViewModelFactory(repository, Application())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

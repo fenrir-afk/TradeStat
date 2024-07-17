@@ -20,7 +20,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 
 class DateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDateBinding
-    private val dateViewModel:DateViewModel by viewModels{ BaseViewModelFactory }
+    private val dateViewModel:DateViewModel by viewModels {
+        val repository = TradesRepository(TradeDatabase.getDatabase(this))
+        BaseViewModelFactory(repository, Application())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDateBinding.inflate(layoutInflater)

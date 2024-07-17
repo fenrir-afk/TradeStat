@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.trade
 
+import android.app.Application
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
@@ -23,12 +24,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradestat.R
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
+import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -45,7 +48,10 @@ class TradeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val tradeViewModel:TradeViewModel by viewModels{ BaseViewModelFactory }
+    private val tradeViewModel:TradeViewModel by viewModels{
+        val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
+        BaseViewModelFactory(repository, Application())
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

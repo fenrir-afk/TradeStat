@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.registry
 
+import android.app.Application
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -8,13 +9,18 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tradestat.MainActivity
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.data.model.User
 import com.example.tradestat.databinding.ActivityRegistryBinding
+import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
 
 class RegistryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegistryBinding
-    private  val registerViewModel: RegistryViewModel by viewModels{ BaseViewModelFactory}
+    private  val registerViewModel: RegistryViewModel by viewModels {
+        val repository = TradesRepository(TradeDatabase.getDatabase(this))
+        BaseViewModelFactory(repository, Application())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistryBinding.inflate(layoutInflater)
@@ -50,7 +56,7 @@ class RegistryActivity : AppCompatActivity() {
             )
         }
     }
-    fun isValidEmail(email: String): Boolean {
+    private fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\$")
         return emailRegex.matches(email)
     }

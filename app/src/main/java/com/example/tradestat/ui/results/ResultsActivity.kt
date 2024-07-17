@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.results
 
+import android.app.Application
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -15,7 +16,9 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tradestat.R
+import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityResultsBinding
+import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
 import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
@@ -26,7 +29,10 @@ import java.util.Calendar
 
 class ResultsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultsBinding
-    private  val resultsViewModel: ResultsViewModel by viewModels{ BaseViewModelFactory}
+    private  val resultsViewModel: ResultsViewModel by viewModels {
+        val repository = TradesRepository(TradeDatabase.getDatabase(this))
+        BaseViewModelFactory(repository, Application())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultsBinding.inflate(layoutInflater)
