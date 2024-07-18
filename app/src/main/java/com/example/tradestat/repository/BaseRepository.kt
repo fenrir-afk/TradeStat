@@ -8,6 +8,7 @@ import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.data.model.User
+import kotlinx.coroutines.flow.Flow
 
 interface BaseRepository {
     fun addTrade(trade: Trade)
@@ -21,7 +22,7 @@ interface BaseRepository {
     fun getLongPos(): Int
     fun getWinNumber(): Int
     fun getDefNumber(): Int
-    fun getDayStatistic(day: DaysOfWeek): List<Trade>
+    fun getDayStatistic(): Flow<List<Trade>>
     fun countTradesByResultAndDate(results: Results, day: DaysOfWeek): Int
 
     //Strategy part

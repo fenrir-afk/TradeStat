@@ -9,36 +9,47 @@ import com.example.tradestat.data.model.Trade
 import com.example.tradestat.repository.BaseRepository
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DateViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
     val  RatingList: MutableLiveData<MutableList<Int>> = MutableLiveData()
-    val  mondayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
-    val  thursdayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
-    val  tuesdayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
-    val  wednesdayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
-    val  fridayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
-    val  saturdayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
-    val  sundayList: MutableLiveData<MutableList<Entry>> = MutableLiveData()
+
+    private val _combinedDayFlow = MutableStateFlow(mutableListOf<MutableList<Entry>>()) // private mutable state flow
+    private val arr = mutableListOf<MutableList<Entry>>()
+    val combinedDayFlow = _combinedDayFlow.asStateFlow() // publicly exposed as read-only state flow
 
     private val repository: BaseRepository = rep
     fun updateDay(){ // in this method we get coordinates relatively to the trade list
-        viewModelScope.launch(Dispatchers.IO) {
-            val mondayArr  = repository.getDayStatistic(DaysOfWeek.Monday)
-            val thursdayArr  = repository.getDayStatistic(DaysOfWeek.Thursday)
-            val tuesdayArr  = repository.getDayStatistic(DaysOfWeek.Tuesday)
-            val wednesdayArr  = repository.getDayStatistic(DaysOfWeek.Wednesday)
-            val fridayArr  = repository.getDayStatistic(DaysOfWeek.Friday)
-            val saturdayArr  = repository.getDayStatistic(DaysOfWeek.Saturday)
-            val sundayArr  = repository.getDayStatistic(DaysOfWeek.Sunday)
-            getCoordinates(mondayArr,mondayList)
-            getCoordinates(thursdayArr, thursdayList)
-            getCoordinates(tuesdayArr, tuesdayList)
-            getCoordinates(wednesdayArr, wednesdayList)
-            getCoordinates(fridayArr, fridayList)
-            getCoordinates(saturdayArr, saturdayList)
-            getCoordinates(sundayArr, sundayList)
+        viewModelScope.launch(Dispatchers.Main) {
+            repository.getDayStatistic()
+                .flowOn(Dispatchers.IO)
+                .collect {
+                    getCoordinates1(it)
+                }
+            _combinedDayFlow.value = arr
         }
+    }
+    private fun getCoordinates1(
+        tradeArr: List<Trade>
+    ) {
+        val list:MutableList<Entry> = mutableListOf()
+        list.add(Entry(0f,0f))
+        var verticalCounter = 0f
+        var horizontalCounter: Float
+        repeat(tradeArr.size) {
+            horizontalCounter = it.toFloat() + 1f
+            if (tradeArr[it].tradeResult == Results.Victory.name){
+                verticalCounter++
+            }else{
+                verticalCounter--
+            }
+            list.add(Entry(horizontalCounter,verticalCounter))
+        }
+        arr.add(list)
     }
     private fun getCoordinates(
         tradeArr: List<Trade>,

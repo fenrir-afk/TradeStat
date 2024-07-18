@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.tradestat.data.model.Trade
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TradesDao {
@@ -32,8 +33,13 @@ interface TradesDao {
     fun countTradesByResultAndInstrument(result:String,instrument:String): Int
 
 
+
+
     @Query("SELECT * FROM trade_table WHERE trade_date == :dayOfWeek")
     fun getTradesByDay(dayOfWeek: String): List<Trade>
+
+
+
 
     @Query("SELECT * FROM trade_table WHERE trade_result == :result")
     fun getTradesByResult(result: String): List<Trade>

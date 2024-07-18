@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityDateBinding
@@ -17,6 +20,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import kotlinx.coroutines.launch
 
 class DateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDateBinding
@@ -33,26 +37,22 @@ class DateActivity : AppCompatActivity() {
 
         dateViewModel.updateDay()
         dateViewModel.getRatingList()
-        dateViewModel.mondayList.observe(this) {
-            updateChart(it, binding.mondayChart)
-        }
-        dateViewModel.tuesdayList.observe(this) {
-            updateChart(it, binding.tuesdayChart)
-        }
-        dateViewModel.wednesdayList.observe(this) {
-            updateChart(it, binding.wednesdayChart)
-        }
-        dateViewModel.thursdayList.observe(this) {
-            updateChart(it, binding.thursdayChart)
-        }
-        dateViewModel.fridayList.observe(this) {
-            updateChart(it, binding.fridayChart)
-        }
-        dateViewModel.saturdayList.observe(this) {
-            updateChart(it, binding.saturdayChart)
-        }
-        dateViewModel.sundayList.observe(this) {
-            updateChart(it, binding.sundayChart)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                dateViewModel.combinedDayFlow.collect{
+                    it.forEachIndexed{index, dayEntries ->
+                        when(index){
+                            0 -> updateChart(dayEntries, binding.mondayChart)
+                            1 -> updateChart(dayEntries, binding.tuesdayChart)
+                            2 -> updateChart(dayEntries, binding.wednesdayChart)
+                            3 -> updateChart(dayEntries, binding.thursdayChart)
+                            4 -> updateChart(dayEntries, binding.fridayChart)
+                            5 -> updateChart(dayEntries, binding.saturdayChart)
+                            6 -> updateChart(dayEntries, binding.sundayChart)
+                        }
+                    }
+                }
+            }
         }
         dateViewModel.RatingList.observe(this) {
             binding.mondayText.text = resources.getString(R.string.monday) +  " — ${it[0]}%"

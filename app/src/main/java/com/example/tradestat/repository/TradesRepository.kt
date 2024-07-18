@@ -14,6 +14,7 @@ import com.example.tradestat.data.model.User
 import com.example.tradestat.data.retrofit.QuotesApi
 import com.example.tradestat.data.retrofit.RetrofitHelper
 import com.example.tradestat.repository.TradesRepository.Key.API_IPO_KEY
+import kotlinx.coroutines.flow.flow
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,8 +61,10 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
         return  db.getTradeDao().countTradesByResult(Results.Defeat.name)
     }
 
-    override fun getDayStatistic(day:DaysOfWeek): List<Trade> {
-        return  db.getTradeDao().getTradesByDay(day.name)
+    override fun getDayStatistic() =  flow{
+        DaysOfWeek.entries.forEach {
+            emit(db.getTradeDao().getTradesByDay(it.toString()))
+        }
     }
     override fun countTradesByResultAndDate(results: Results, day:DaysOfWeek): Int {
         return  db.getTradeDao().countTradesByResultAndDate(results.name,day.name)

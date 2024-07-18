@@ -15,6 +15,7 @@ import com.example.tradestat.ui.registry.RegistryViewModel
 import com.example.tradestat.ui.results.ResultsViewModel
 import com.example.tradestat.ui.strategyStatistic.StrategyViewModel
 import com.example.tradestat.ui.trade.TradeViewModel
+@Suppress("UNCHECKED_CAST")
 class BaseViewModelFactory(
     private val tradesRepository: TradesRepository,
     private val app: Application
