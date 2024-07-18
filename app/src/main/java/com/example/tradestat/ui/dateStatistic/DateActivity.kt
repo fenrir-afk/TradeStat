@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.tradestat.R
@@ -20,6 +19,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 class DateActivity : AppCompatActivity() {
@@ -34,9 +34,9 @@ class DateActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         setSupportActionBar(binding.include.myToolBar)
-
-        dateViewModel.updateDay()
-        dateViewModel.getRatingList()
+        setFlowCollectors()
+    }
+    private fun setFlowCollectors(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 dateViewModel.combinedDayFlow.collect{
@@ -54,15 +54,18 @@ class DateActivity : AppCompatActivity() {
                 }
             }
         }
-        dateViewModel.RatingList.observe(this) {
-            binding.mondayText.text = resources.getString(R.string.monday) +  " — ${it[0]}%"
-            binding.tuesdayText.text = resources.getString(R.string.tuesday) + " — ${it[1]}%"
-            binding.wednesdayText.text =resources.getString(R.string.wednesday) + " — ${it[2]}%"
-            binding.thursdayText.text =resources.getString(R.string.thursday) +  " — ${it[3]}%"
-            binding.fridayText.text =resources.getString(R.string.friday)  + " — ${it[4]}%"
-            binding.saturdayText.text =resources.getString(R.string.saturday) +" — ${it[5]}%"
-            binding.sundayText.text =resources.getString(R.string.sunday) + " — ${it[6]}%"
-
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                dateViewModel.ratingFlow.filter { it.isNotEmpty() }.collect{//filter cause emptyList is the start value
+                    binding.mondayText.text = resources.getString(R.string.monday) +  " — ${it[0]}%"
+                    binding.tuesdayText.text = resources.getString(R.string.tuesday) + " — ${it[1]}%"
+                    binding.wednesdayText.text =resources.getString(R.string.wednesday) + " — ${it[2]}%"
+                    binding.thursdayText.text =resources.getString(R.string.thursday) +  " — ${it[3]}%"
+                    binding.fridayText.text =resources.getString(R.string.friday)  + " — ${it[4]}%"
+                    binding.saturdayText.text =resources.getString(R.string.saturday) +" — ${it[5]}%"
+                    binding.sundayText.text =resources.getString(R.string.sunday) + " — ${it[6]}%"
+                }
+            }
         }
     }
     /**
@@ -77,7 +80,6 @@ class DateActivity : AppCompatActivity() {
         val dataSets:MutableList<LineDataSet> = mutableListOf()
         dataSets.add(lineDataSet)
         val data = LineData(dataSets as List<ILineDataSet>?)
-
 
         // Получение левой оси
         val leftAxis = chart.axisLeft
