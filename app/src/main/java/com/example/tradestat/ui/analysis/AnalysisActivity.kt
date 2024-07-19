@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityAnalysisBinding
@@ -19,6 +21,9 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 
 class AnalysisActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnalysisBinding
@@ -39,12 +44,18 @@ class AnalysisActivity : AppCompatActivity() {
             insets
         }
         analysisViewModel.updateData()
-        analysisViewModel.list.observe(this, Observer {
-            updateChart(it,binding.lineChart)
-            binding.resultText.text = resources.getString(R.string.trade_result) + analysisViewModel.tradeResult.toString() + getString(R.string.wins_defeats)
-            binding.strategyText.text = resources.getString(R.string.best_strategy) + analysisViewModel.bestStrategy
-            binding.instrumentText.text = resources.getString(R.string.best_instrument) + analysisViewModel.bestInstrument
-        })
+        lifecycleScope.launch(Dispatchers.Main){
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                analysisViewModel.entryListFlow
+                    .filter { it.isNotEmpty() }
+                    .collect{
+                        updateChart(it,binding.lineChart)
+                        binding.resultText.text = getString(R.string.trade_result, analysisViewModel.tradeResult)
+                        binding.strategyText.text = resources.getString(R.string.best_strategy,analysisViewModel.bestStrategy)
+                        binding.instrumentText.text = resources.getString(R.string.best_instrument,analysisViewModel.bestInstrument)
+                }
+            }
+        }
     }
     private fun updateChart(list: MutableList<Entry>, chart: LineChart){
 
@@ -55,11 +66,11 @@ class AnalysisActivity : AppCompatActivity() {
         val data = LineData(dataSets as List<ILineDataSet>?)
 
 
-        // Получение левой оси
+        // Getting left axis
         val leftAxis = chart.axisLeft
         leftAxis.textColor = ContextCompat.getColor(this, R.color.lightGray)
 
-        // Получение правой оси
+        // Getting right axis
         val rightAxis = chart.axisRight
         rightAxis.textColor = ContextCompat.getColor(this, R.color.lightGray)
 
@@ -71,11 +82,11 @@ class AnalysisActivity : AppCompatActivity() {
 
         val description = Description()
         description.text = ""
-        description.textColor = resources.getColor(R.color.lightGray)
+        description.textColor = ContextCompat.getColor(this,R.color.lightGray)
 
         chart.data = data
         chart.setNoDataText("No data")
-        chart.setNoDataTextColor(resources.getColor(R.color.lightGray))
+        chart.setNoDataTextColor(ContextCompat.getColor(this,R.color.lightGray))
         chart.description = description
         chart.invalidate()
     }

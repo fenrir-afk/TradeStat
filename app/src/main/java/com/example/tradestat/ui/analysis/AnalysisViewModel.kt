@@ -2,7 +2,6 @@ package com.example.tradestat.ui.analysis
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Trade
@@ -10,10 +9,13 @@ import com.example.tradestat.repository.BaseRepository
 import com.example.tradestat.utils.RatingCounter
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AnalysisViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application)  {
-    val  list: MutableLiveData<MutableList<Entry>> = MutableLiveData()
+    private val _entryListFlow = MutableStateFlow<MutableList<Entry>>(mutableListOf())
+    val entryListFlow = _entryListFlow.asStateFlow()
     var bestStrategy:String = ""
     var bestInstrument:String = ""
     var tradeResult:Int = 0
@@ -27,7 +29,7 @@ class AnalysisViewModel(application: Application,rep: BaseRepository) : AndroidV
                 tradeResult = winTrades.size - defeatTrades.size
                 bestInstrument = getMaxName(winTrades,defeatTrades,1)
                 bestStrategy = getMaxName(winTrades,defeatTrades,2)
-                getCoordinates(allTrades,list)
+                getCoordinates(allTrades)
             }
         }
     }
@@ -56,21 +58,22 @@ class AnalysisViewModel(application: Application,rep: BaseRepository) : AndroidV
     }
     private fun getCoordinates(
         tradeArr: List<Trade>,
-        finalList: MutableLiveData<MutableList<Entry>>
     ) {
-        val list:MutableList<Entry> = mutableListOf()
-        list.add(Entry(0f,0f))
-        var verticalCounter = 0f
-        var horizontalCounter: Float
-        repeat(tradeArr.size) {
-            horizontalCounter = it.toFloat() + 1f
-            if (tradeArr[it].tradeResult == Results.Victory.name){
-                verticalCounter++
-            }else{
-                verticalCounter--
+        viewModelScope.launch(Dispatchers.Default){
+            val list:MutableList<Entry> = mutableListOf()
+            list.add(Entry(0f,0f))
+            var verticalCounter = 0f
+            var horizontalCounter: Float
+            repeat(tradeArr.size) {
+                horizontalCounter = it.toFloat() + 1f
+                if (tradeArr[it].tradeResult == Results.Victory.name){
+                    verticalCounter++
+                }else{
+                    verticalCounter--
+                }
+                list.add(Entry(horizontalCounter,verticalCounter))
             }
-            list.add(Entry(horizontalCounter,verticalCounter))
+            _entryListFlow.emit(list)
         }
-        finalList.postValue(list)
     }
 }

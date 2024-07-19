@@ -62,10 +62,9 @@
     <string name="tech_analysis_intro">В динамичном мире трейдинга понимание технического анализа является бесценным инструментом. Он дает трейдерам глубокое понимание рыночной динамики, позволяя им разгадывать паттерны, выявлять возможности и принимать обоснованные решения. Это преимущество дает трейдерам уверенность и повышает их шансы на получение прибыли на рынках. Данное руководсвто является одним из лучших среди,так как помимо базовых знаний даёт подлинное понимание трейдинга.</string>
     <string name="technical_analysis">Технический анализ</string>
     <string name="all_trades">Все сделки</string>
-    <string name="trade_result">Торговый результат:</string>
-    <string name="best_strategy">Лучшая стратегия:</string>
-    <string name="best_instrument">Лучший инструмент:</string>
-    <string name="wins_defeats">(победы-поражения)</string>
+    <string name="trade_result">Торговый результат: %1$d (Победы - Поражения)</string>
+    <string name="best_strategy">Лучшая стратегия: %1$s</string>
+    <string name="best_instrument">Лучший инструмент: %1$s</string>
     <string name="trade_dynamic">Динамика торговли</string>
     <string name="notes">Записи</string>
     <string name="email">Введите почту</string>
