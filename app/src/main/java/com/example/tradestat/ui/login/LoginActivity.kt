@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.login
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -27,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         setLanguage()

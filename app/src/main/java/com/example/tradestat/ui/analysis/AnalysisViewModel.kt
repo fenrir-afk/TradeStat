@@ -1,7 +1,7 @@
 package com.example.tradestat.ui.analysis
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Trade
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class AnalysisViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application)  {
+class AnalysisViewModel(rep: BaseRepository) : ViewModel()  {
     private val _entryListFlow = MutableStateFlow<MutableList<Entry>>(mutableListOf())
     val entryListFlow = _entryListFlow.asStateFlow()
     var bestStrategy:String = ""

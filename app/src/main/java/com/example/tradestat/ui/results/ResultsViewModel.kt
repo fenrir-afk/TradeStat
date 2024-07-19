@@ -1,8 +1,8 @@
 package com.example.tradestat.ui.results
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Trade
@@ -14,7 +14,7 @@ import java.util.Calendar
 import java.util.Locale
 
 
-class ResultsViewModel(application: Application,rep: BaseRepository): AndroidViewModel(application) {
+class ResultsViewModel(rep: BaseRepository): ViewModel() {
     private val repository: BaseRepository = rep
     var strategiesNames = mutableSetOf<String>()
     var instrumentNames = mutableSetOf<String>()
@@ -99,10 +99,10 @@ class ResultsViewModel(application: Application,rep: BaseRepository): AndroidVie
             }
 
         }
-        if (wins + defeats == 0){
-            return 0
+        return if (wins + defeats == 0){
+            0
         }else{
-            return (wins * 100)/(wins + defeats)
+            (wins * 100)/(wins + defeats)
         }
     }
     /**

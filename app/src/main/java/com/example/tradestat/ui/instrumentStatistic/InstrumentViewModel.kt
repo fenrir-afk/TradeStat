@@ -1,7 +1,6 @@
 package com.example.tradestat.ui.instrumentStatistic
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.repository.BaseRepository
@@ -11,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class InstrumentViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application){
+class InstrumentViewModel(rep: BaseRepository) : ViewModel(){
         private var _winRateFlow = MutableStateFlow<List<Int>>(emptyList())
         val winRateFlow = _winRateFlow.asStateFlow()
 

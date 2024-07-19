@@ -31,7 +31,7 @@ class ResultsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultsBinding
     private  val resultsViewModel: ResultsViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

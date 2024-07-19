@@ -1,6 +1,6 @@
 package com.example.tradestat.ui.dateStatistic
 
-import android.app.Application
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -26,7 +26,7 @@ class DateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDateBinding
     private val dateViewModel:DateViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

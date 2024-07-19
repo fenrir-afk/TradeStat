@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.trade
 
-import android.app.Application
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
@@ -50,7 +49,7 @@ class TradeFragment : Fragment() {
     private val binding get() = _binding!!
     private val tradeViewModel:TradeViewModel by viewModels{
         val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
     override fun onCreateView(
         inflater: LayoutInflater,

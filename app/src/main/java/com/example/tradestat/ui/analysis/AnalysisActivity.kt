@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.analysis
 
-import android.app.Application
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +28,7 @@ class AnalysisActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnalysisBinding
     private val analysisViewModel:AnalysisViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

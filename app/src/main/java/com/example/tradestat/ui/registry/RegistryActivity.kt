@@ -19,7 +19,7 @@ class RegistryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegistryBinding
     private  val registerViewModel: RegistryViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

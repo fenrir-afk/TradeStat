@@ -28,7 +28,7 @@ class StrategyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStrategyBinding
     private val strategyViewModel: StrategyViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

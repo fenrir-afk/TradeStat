@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel:HomeViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
     override fun onCreateView(
         inflater: LayoutInflater,

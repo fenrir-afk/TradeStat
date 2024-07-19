@@ -35,7 +35,7 @@ class InstrumentActivity : AppCompatActivity() {
 
     private val instrumentViewModel:InstrumentViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

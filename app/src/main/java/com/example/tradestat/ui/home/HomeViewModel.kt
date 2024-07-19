@@ -1,14 +1,12 @@
 package com.example.tradestat.ui.home
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-class HomeViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
+class HomeViewModel(rep: BaseRepository) : ViewModel() {
     private val _numberListFlow = MutableStateFlow<List<Int>>(emptyList())
     val numberListFlow = _numberListFlow.asStateFlow()
 
@@ -24,8 +22,8 @@ class HomeViewModel(application: Application,rep: BaseRepository) : AndroidViewM
         viewModelScope.launch(Dispatchers.IO) {
             shortNumber = repository.getShortPos()
             longNumber = repository.getLongPos()
-            winNumber = repository.getWinNumber() // победу
-            defeatNumber = repository.getDefNumber() //поражение
+            winNumber = repository.getWinNumber() // Victories
+            defeatNumber = repository.getDefNumber() //Defeats
             _numberListFlow.emit(listOf(shortNumber,longNumber,winNumber,defeatNumber))
         }
     }

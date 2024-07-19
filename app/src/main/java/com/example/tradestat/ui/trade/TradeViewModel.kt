@@ -1,9 +1,9 @@
 package com.example.tradestat.ui.trade
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.data.model.Instrument
@@ -12,7 +12,7 @@ import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TradeViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
+class TradeViewModel(rep: BaseRepository) : ViewModel() {
 
     var sortedTradeList:MutableLiveData<List<Trade>> = MutableLiveData()
     var finalList:MediatorLiveData<List<Trade>> = MediatorLiveData()

@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.dateStatistic
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.DaysOfWeek
 import com.example.tradestat.data.model.Results
@@ -13,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
-class DateViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
+class DateViewModel(rep: BaseRepository) : ViewModel(){
 
     private val _dayEntriesFlow = MutableStateFlow(mutableListOf<MutableList<Entry>>()) // private mutable state flow
     private val daysEntriesArr = mutableListOf<MutableList<Entry>>() //list of lists each of which represent entries of single day

@@ -1,8 +1,8 @@
 package com.example.tradestat.ui.strategyStatistic
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.repository.BaseRepository
@@ -11,7 +11,7 @@ import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class StrategyViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
+class StrategyViewModel(rep: BaseRepository) : ViewModel() {
     var getWinRateListLong: MutableList<Int> = mutableListOf()
 
     var tradeLongNumbers: MutableList<Int> = mutableListOf()

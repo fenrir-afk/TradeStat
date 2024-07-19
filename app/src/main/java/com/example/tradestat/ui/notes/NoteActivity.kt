@@ -24,7 +24,7 @@ class NoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNoteBinding
     private  val noteViewModel: NoteViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(this))
-        BaseViewModelFactory(repository, Application())
+        BaseViewModelFactory(repository)
     }
     private val adapter = NoteAdapter(this)
     private var selectedPosition: Int = -1
