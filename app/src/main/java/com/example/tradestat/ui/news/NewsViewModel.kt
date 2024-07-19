@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import org.w3c.dom.Document
 import org.w3c.dom.NodeList
@@ -19,9 +22,13 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 class NewsViewModel(rep: BaseRepository) : ViewModel() {
     private val repository: BaseRepository = rep
-    var quote: MutableList<Triple<String,Boolean,String>> = mutableListOf()
-    val quotesLiveData: MutableLiveData<MutableList<Triple<String,Boolean,String>>> = MutableLiveData()
-    val stockMarketValues: MutableLiveData<MutableMap<String,String>> = MutableLiveData()
+
+    private var quote: MutableList<Triple<String,Boolean,String>> = mutableListOf()//Intermediate value for _quitesFlow
+    private var _quitesFlow = MutableStateFlow<MutableList<Triple<String,Boolean,String>>>(mutableListOf())
+    val quitesFlow = _quitesFlow.asStateFlow()
+
+    private var _stockMarketValuesFlow = MutableStateFlow<MutableMap<String,String>>(mutableMapOf())
+    val stockMarketValuesFlow = _stockMarketValuesFlow.asStateFlow()
     init {
         updateQuotes("USD/RUB","1h")
         updateQuotes("CNY/RUB","1h")
@@ -29,7 +36,7 @@ class NewsViewModel(rep: BaseRepository) : ViewModel() {
     }
     private fun updateQuotes(quotePair:String, time:String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getForexData(quotePair,time){
+            repository.getForexData(quotePair,time).flowOn(Dispatchers.IO).collect{
                 val directionNumber = it.response[0].cp
                 val formattedQuote = "%.1f".format(it.response[0].c.toDouble())
                 if (directionNumber.first() == ('-')){
@@ -37,8 +44,8 @@ class NewsViewModel(rep: BaseRepository) : ViewModel() {
                 }else{
                     quote.add(Triple(formattedQuote,true,quotePair))
                 }
-                if (quote.size == 2){
-                    quotesLiveData.postValue(quote)
+                if (quote.size == 2){// ONLY when this method finish twice
+                    _quitesFlow.emit(quote)
                 }
             }
         }
@@ -64,7 +71,7 @@ class NewsViewModel(rep: BaseRepository) : ViewModel() {
                     map["MOEX"] = getValueByName(nodeList,"MOEX")
                     map["SBER"] = getValueByName(nodeList,"SBER")
                     map["GAZP"] = getValueByName(nodeList,"GAZP")
-                    stockMarketValues.postValue(map)
+                    _stockMarketValuesFlow.emit(map)
                 } else {
                     println("Ошибка: код ответа ${connection.responseCode}")
                 }

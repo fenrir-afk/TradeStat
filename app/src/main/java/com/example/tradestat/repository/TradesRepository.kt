@@ -14,10 +14,9 @@ import com.example.tradestat.data.model.User
 import com.example.tradestat.data.retrofit.QuotesApi
 import com.example.tradestat.data.retrofit.RetrofitHelper
 import com.example.tradestat.repository.TradesRepository.Key.API_IPO_KEY
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 open class TradesRepository(private val db: TradeDatabase):BaseRepository {
     //Trade part
@@ -137,21 +136,13 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
     object Key{
         const val API_IPO_KEY = "Zzw4tq1NzNxOdiSOdwEWkJm6T"
     }
-    override fun getForexData(quotePair:String, time:String, callback: (Quotes) -> Unit){
-        val ipoApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
-        ipoApi.getForexData(quotePair,time,API_IPO_KEY).enqueue(object : Callback<Quotes> {
-            override fun onResponse(call: Call<Quotes>, response: Response<Quotes>) {
-                if (response.isSuccessful) {
-                    val incomeResponse = response.body()
-                    callback(incomeResponse!!)
-                } else {
-                    Log.d("Retrofit","Response is not successful")
-                }
+    override fun getForexData(quotePair: String, time: String): Flow<Quotes> = flow {
+            val ipoApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
+            val response = ipoApi.getForexData(quotePair, time, API_IPO_KEY).execute()
+            if (response.isSuccessful) {
+                emit(response.body()!!)
+            } else {
+                Log.d("Retrofit", "Response is not successful")
             }
-
-            override fun onFailure(call: Call<Quotes>, t: Throwable) {
-                println(t.message)
-            }
-        })
     }
 }

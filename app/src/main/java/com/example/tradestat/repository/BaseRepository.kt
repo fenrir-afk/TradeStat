@@ -51,5 +51,5 @@ interface BaseRepository {
     fun getUser(email:String,pass:String):User?
     fun insertUser(user: User)
     fun getAllUsers(): List<User>
-    fun getForexData(quotePair: String, time: String, callback: (Quotes) -> Unit)
+    fun getForexData(quotePair: String, time: String): Flow<Quotes>
 }

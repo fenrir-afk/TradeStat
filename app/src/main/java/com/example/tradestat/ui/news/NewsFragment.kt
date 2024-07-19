@@ -1,18 +1,19 @@
 package com.example.tradestat.ui.news
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.FragmentNewsBinding
 import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
+import kotlinx.coroutines.launch
 
 class NewsFragment : Fragment() {
 
@@ -28,12 +29,21 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
-        newsViewModel.stockMarketValues.observe(viewLifecycleOwner,Observer{
-            updateStockMarketQuotes(it)
-        })
-        newsViewModel.quotesLiveData.observe(viewLifecycleOwner,Observer{
-            updateQuotes(it)
-        })
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                newsViewModel.stockMarketValuesFlow.collect{
+                    updateStockMarketQuotes(it)
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                newsViewModel.quitesFlow.collect{
+                    updateQuotes(it)
+                }
+            }
+        }
         return binding.root
     }
     private fun updateStockMarketQuotes(mutableMap: MutableMap<String, String>) {
