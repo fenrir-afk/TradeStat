@@ -2,6 +2,9 @@
     <string name="app_name">TradeStat</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Trades</string>
+
+
+
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -9,6 +12,14 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
+    <string name="monday_with_rating">Monday — %1$d%%</string>
+    <string name="tuesday_with_rating">Tuesday — %1$d%%</string>
+    <string name="wednesday_with_rating">Wednesday — %1$d%%</string>
+    <string name="thursday_with_rating">Thursday — %1$d%%</string>
+    <string name="friday_with_rating">Friday — %1$d%%</string>
+    <string name="saturday_with_rating">Saturday — %1$d%%</string>
+    <string name="sunday_with_rating">Sunday — %1$d%%</string>
+
     <string name="strategy">Strategy</string>
     <string name="date">Date</string>
     <string name="instrument">Instrument</string>

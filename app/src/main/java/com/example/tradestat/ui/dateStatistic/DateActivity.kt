@@ -56,14 +56,14 @@ class DateActivity : AppCompatActivity() {
         }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                dateViewModel.ratingFlow.filter { it.isNotEmpty() }.collect{//filter cause emptyList is the start value
-                    binding.mondayText.text = resources.getString(R.string.monday) +  " — ${it[0]}%"
-                    binding.tuesdayText.text = resources.getString(R.string.tuesday) + " — ${it[1]}%"
-                    binding.wednesdayText.text =resources.getString(R.string.wednesday) + " — ${it[2]}%"
-                    binding.thursdayText.text =resources.getString(R.string.thursday) +  " — ${it[3]}%"
-                    binding.fridayText.text =resources.getString(R.string.friday)  + " — ${it[4]}%"
-                    binding.saturdayText.text =resources.getString(R.string.saturday) +" — ${it[5]}%"
-                    binding.sundayText.text =resources.getString(R.string.sunday) + " — ${it[6]}%"
+                dateViewModel.ratingFlow.filter { it.isNotEmpty() }.collect{ratings->    //filter cause emptyList is the start value
+                    binding.mondayText.text = getString(R.string.monday_with_rating, ratings[0])
+                    binding.tuesdayText.text = getString(R.string.tuesday_with_rating, ratings[1])
+                    binding.wednesdayText.text = getString(R.string.wednesday_with_rating, ratings[2])
+                    binding.thursdayText.text = getString(R.string.thursday_with_rating, ratings[3])
+                    binding.fridayText.text = getString(R.string.friday_with_rating, ratings[4])
+                    binding.saturdayText.text = getString(R.string.saturday_with_rating, ratings[5])
+                    binding.sundayText.text = getString(R.string.sunday_with_rating, ratings[6])
                 }
             }
         }
@@ -97,11 +97,11 @@ class DateActivity : AppCompatActivity() {
 
         val description = Description()
         description.text = ""
-        description.textColor = resources.getColor(R.color.lightGray)
+        description.textColor = ContextCompat.getColor(this,R.color.lightGray)
 
         chart.data = data
         chart.setNoDataText("No data")
-        chart.setNoDataTextColor(resources.getColor(R.color.lightGray))
+        chart.setNoDataTextColor(ContextCompat.getColor(this,R.color.lightGray))
         chart.description = description
         chart.invalidate()
     }

@@ -9,6 +9,13 @@
     <string name="friday">Пятника</string>
     <string name="saturday">Суббота</string>
     <string name="sunday">Воскресенье</string>
+    <string name="monday_with_rating">Понедельник — %1$d%%</string>
+    <string name="tuesday_with_rating">Вторник — %1$d%%</string>
+    <string name="wednesday_with_rating">Среда — %1$d%%</string>
+    <string name="thursday_with_rating">Четверг — %1$d%%</string>
+    <string name="friday_with_rating">Пятница — %1$d%%</string>
+    <string name="saturday_with_rating">Суббота — %1$d%%</string>
+    <string name="sunday_with_rating">Воскресенье — %1$d%%</string>
     <string name="strategy">Страт</string>
     <string name="date">Дата</string>
     <string name="instrument">Инстр</string>
