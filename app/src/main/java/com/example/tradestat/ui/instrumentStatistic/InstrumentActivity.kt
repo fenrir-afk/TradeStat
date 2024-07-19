@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityInstrumentBinding
@@ -24,6 +26,8 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 
 
 class InstrumentActivity : AppCompatActivity() {
@@ -42,16 +46,21 @@ class InstrumentActivity : AppCompatActivity() {
         setSupportActionBar(binding.include.myToolBar)
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
 
-
-
-
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
         instrumentViewModel.getData()
-        instrumentViewModel.getWinRateList.observe(this) {
-            setChart(it,instrumentViewModel.instrumentsNames,1)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                instrumentViewModel.winRateFlow.filter { it.isNotEmpty() }.collect{
+                    setChart(it,instrumentViewModel.instrumentsNames,1)
+                }
+            }
         }
-        instrumentViewModel.getWinRateListShort.observe(this) {
-            setTexts(it,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames,1)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                instrumentViewModel.winRateShortFlow.filter { it.isNotEmpty() }.collect{
+                    setTexts(it,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames,1)
+                }
+            }
         }
         binding.amountCard.setOnClickListener{
             binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
@@ -66,8 +75,8 @@ class InstrumentActivity : AppCompatActivity() {
             binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
             binding.textView.text = getString(R.string.graph_of_instrument_rating)
 
-            setChart(instrumentViewModel.getWinRateList.value!!,instrumentViewModel.instrumentsNames,1)
-            setTexts(instrumentViewModel.getWinRateListShort.value!!,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames,1)
+            setChart(instrumentViewModel.winRateFlow.value,instrumentViewModel.instrumentsNames,1)
+            setTexts(instrumentViewModel.winRateShortFlow.value,instrumentViewModel.getWinRateListLong,instrumentViewModel.instrumentsNames,1)
         }
     }
     /**
@@ -92,7 +101,7 @@ class InstrumentActivity : AppCompatActivity() {
             )
             layout.layoutParams = layoutParams
             layout.orientation = LinearLayout.HORIZONTAL
-            layout.setBackgroundColor(resources.getColor(R.color.background))
+            layout.setBackgroundColor(ContextCompat.getColor(this,R.color.background))
             if (token == 1){
                 layout.addView( createText("${instrumentsNames[i]}: ",1))
                 layout.addView( createText("Short rate:${winRateListShort[i]}%",0))
@@ -165,7 +174,7 @@ class InstrumentActivity : AppCompatActivity() {
         xAxis.isEnabled = true
         xAxis.labelCount = instrumentsNames.size
         xAxis.textColor = Color.WHITE
-        xAxis.setTextSize(13f);
+        xAxis.setTextSize(13f)
         val typeFace: Typeface? = ResourcesCompat.getFont(this.applicationContext, R.font.oxygen)
         xAxis.typeface = typeFace
 
@@ -184,18 +193,18 @@ class InstrumentActivity : AppCompatActivity() {
         yLeft.axisMinimum = 0f
         yLeft.isEnabled = true
         yLeft.textColor = Color.WHITE
-        yLeft.setTextSize(11f);
+        yLeft.setTextSize(11f)
 
 
         val  yRight = chart.axisRight
         yRight.setDrawAxisLine(true)
         yRight.isEnabled = true
         yRight.textColor = Color.WHITE
-        yRight.setTextSize(11f);
+        yRight.setTextSize(11f)
 
 
         chart.setNoDataText("No data")
-        chart.setNoDataTextColor(resources.getColor(R.color.lightGray))
+        chart.setNoDataTextColor(ContextCompat.getColor(this,R.color.lightGray))
 
 
         chart.setFitBars(true)
@@ -213,9 +222,9 @@ class InstrumentActivity : AppCompatActivity() {
         xAxis.isGranularityEnabled = true
 
 
-        chart.xAxis.setDrawGridLines(false);
-        chart.axisLeft.setDrawGridLines(false);
-        chart.axisRight.setDrawGridLines(false);
+        chart.xAxis.setDrawGridLines(false)
+        chart.axisLeft.setDrawGridLines(false)
+        chart.axisRight.setDrawGridLines(false)
 
 
         setData(baseList)
