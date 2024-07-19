@@ -8,12 +8,18 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.tradestat.MainActivity
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityLoginBinding
 import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.ui.registry.RegistryActivity
 import com.example.tradestat.utils.BaseViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 
@@ -42,14 +48,19 @@ class LoginActivity : AppCompatActivity() {
             }else{
                 Toast.makeText(this,"Fields mush not be empty",Toast.LENGTH_SHORT).show()
             }
-            loginViewModel.checkUserResult.observe(this){
-                if (it){
-                    Toast.makeText(this,"No such user",Toast.LENGTH_SHORT).show()
-                }else{
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+            lifecycleScope.launch(Dispatchers.Main){
+                repeatOnLifecycle(Lifecycle.State.STARTED){
+                    loginViewModel.checkUserResultFlow.filter { it != null }.collect{
+                        if (it!!){
+                            Toast.makeText(applicationContext,"No such user",Toast.LENGTH_SHORT).show()
+                        }else{
+                            startActivity(Intent(applicationContext, MainActivity::class.java))
+                            finish()
+                        }
+                    }
                 }
             }
+
         }
         binding.sendToSighUp.setOnClickListener{
             startActivity(Intent(this, RegistryActivity::class.java))
@@ -79,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
             val resources = resources
             val configuration = resources.configuration
             configuration.setLocale(newLocale)
-            resources.updateConfiguration(configuration, resources.displayMetrics)
+            this.createConfigurationContext(configuration)
             recreate()
         }
     }
