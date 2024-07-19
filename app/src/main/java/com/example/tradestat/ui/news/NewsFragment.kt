@@ -16,6 +16,11 @@ import com.example.tradestat.utils.BaseViewModelFactory
 import kotlinx.coroutines.launch
 
 class NewsFragment : Fragment() {
+    enum class Stocks{
+        MOEX,
+        SBER,
+        GAZP
+    }
 
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
@@ -48,12 +53,25 @@ class NewsFragment : Fragment() {
     }
     private fun updateStockMarketQuotes(mutableMap: MutableMap<String, String>) {
        if (mutableMap.isNotEmpty()){
-           binding.firstMoexTitle.text = "MOEX"
-           binding.secondMoexTitle.text = "SBER"
-           binding.thirdMoexTitle.text = "GAZP"
-           binding.firstMoexValue.text = mutableMap["MOEX"]
-           binding.secondMoexValue.text = mutableMap["SBER"]
-           binding.thirdMoexValue.text = mutableMap["GAZP"]
+           Stocks.entries.forEachIndexed{ index, stocks ->
+               when(index){
+                   0 -> {
+                       binding.firstMoexTitle.text = stocks.toString()
+                       binding.firstMoexValue.text = mutableMap[stocks.toString()]
+                   }
+                   1 -> {
+                       binding.secondMoexTitle.text = stocks.toString()
+                       binding.secondMoexValue.text = mutableMap[stocks.toString()]
+                   }
+                   2 -> {
+                       binding.thirdMoexTitle.text = stocks.toString()
+                       binding.thirdMoexValue.text = mutableMap[stocks.toString()]
+                   }
+                   else ->{
+                       println("Error: there are only 3 views for stocks")
+                   }
+               }
+           }
        }
     }
     private fun updateQuotes(triples: MutableList<Triple<String, Boolean, String>>) {
