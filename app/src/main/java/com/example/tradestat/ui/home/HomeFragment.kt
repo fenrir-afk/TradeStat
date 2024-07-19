@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeViewModel.updateNumbers()
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 homeViewModel.numberListFlow.filter { it.isNotEmpty() }.collect{
                     val shorts = it[0]

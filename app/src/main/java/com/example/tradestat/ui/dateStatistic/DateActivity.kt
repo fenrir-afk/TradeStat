@@ -38,7 +38,7 @@ class DateActivity : AppCompatActivity() {
     }
 
     private fun setFlowCollectors(){
-        lifecycleScope.launch {
+         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 dateViewModel.combinedDayFlow.collect{
                     it.forEachIndexed{index, dayEntries ->
