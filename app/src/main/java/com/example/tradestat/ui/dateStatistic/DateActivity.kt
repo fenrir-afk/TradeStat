@@ -36,6 +36,7 @@ class DateActivity : AppCompatActivity() {
         setSupportActionBar(binding.include.myToolBar)
         setFlowCollectors()
     }
+
     private fun setFlowCollectors(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
@@ -56,7 +57,7 @@ class DateActivity : AppCompatActivity() {
         }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                dateViewModel.ratingFlow.filter { it.isNotEmpty() }.collect{ratings->    //filter cause emptyList is the start value
+                dateViewModel.ratingFlow.filter { it.isNotEmpty() }.collect{ratings->    //filter cause the start value is emptyList
                     binding.mondayText.text = getString(R.string.monday_with_rating, ratings[0])
                     binding.tuesdayText.text = getString(R.string.tuesday_with_rating, ratings[1])
                     binding.wednesdayText.text = getString(R.string.wednesday_with_rating, ratings[2])

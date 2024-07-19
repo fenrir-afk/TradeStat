@@ -45,6 +45,8 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
     override fun getSortedByInstrumentList(instrument: String):List<Trade>{
         return db.getTradeDao().sortByInstrument(instrument)
     }
+
+
     override fun getShortPos(): Int {
         return db.getTradeDao().countTradesByDirection(Directions.Short.name)
     }
@@ -60,6 +62,8 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
     override fun getDefNumber(): Int {
         return  db.getTradeDao().countTradesByResult(Results.Defeat.name)
     }
+
+
 
     override fun getDayStatistic() =  flow{
         DaysOfWeek.entries.forEach {

@@ -5,9 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 class HomeViewModel(application: Application,rep: BaseRepository) : AndroidViewModel(application) {
-    val getNumberList:MutableLiveData<List<Int>> = MutableLiveData()
+    private val _numberListFlow = MutableStateFlow<List<Int>>(emptyList())
+    val numberListFlow = _numberListFlow.asStateFlow()
+
     private var shortNumber: Int = 0
     private var longNumber: Int = 0
     private var winNumber: Int = 0
@@ -16,14 +20,13 @@ class HomeViewModel(application: Application,rep: BaseRepository) : AndroidViewM
     /**
      * In this method we are getting  data from bd
      * */
-   fun updateNumbers(){
+    fun updateNumbers(){
         viewModelScope.launch(Dispatchers.IO) {
             shortNumber = repository.getShortPos()
             longNumber = repository.getLongPos()
             winNumber = repository.getWinNumber() // победу
             defeatNumber = repository.getDefNumber() //поражение
-            getNumberList.postValue(listOf(shortNumber,longNumber,winNumber,defeatNumber))
+            _numberListFlow.emit(listOf(shortNumber,longNumber,winNumber,defeatNumber))
         }
     }
-
 }

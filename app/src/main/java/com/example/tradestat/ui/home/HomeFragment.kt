@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import app.futured.donut.DonutSection
 import com.example.tradestat.R
@@ -16,6 +18,8 @@ import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.FragmentHomeBinding
 import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -23,10 +27,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
 
     private val binding get() = _binding!!
-    private var shorts:Int = 0
-    private var longs:Int = 0
-    private var wins:Int = 0
-    private var defeats:Int = 0
     private val homeViewModel:HomeViewModel by viewModels {
         val repository = TradesRepository(TradeDatabase.getDatabase(requireContext()))
         BaseViewModelFactory(repository, Application())
@@ -38,13 +38,17 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeViewModel.updateNumbers()
-        homeViewModel.getNumberList.observe(viewLifecycleOwner) {
-            shorts = it[0]
-            longs = it[1]
-            wins = it[2]
-            defeats = it[3]
-            donut1()
-            donut2()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                homeViewModel.numberListFlow.filter { it.isNotEmpty() }.collect{
+                    val shorts = it[0]
+                    val longs = it[1]
+                    val wins = it[2]
+                    val defeats = it[3]
+                    donut1(shorts,longs)
+                    donut2(wins,defeats)
+                }
+            }
         }
         binding.dateCard.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_navigation_home_to_dateActivity)
@@ -72,7 +76,7 @@ class HomeFragment : Fragment() {
     /**
      * In this method we provide data to the donut graph that represents number of short and long trades
      * */
-    private fun donut1(){
+    private fun donut1(shorts: Int, longs: Int) {
         //The first pie chart and its labels
         val section1 = DonutSection(
             name = "Short_section",
@@ -94,15 +98,15 @@ class HomeFragment : Fragment() {
     /**
      * In this method we provide data to the donut graph that represents number of win and lose trades
      * */
-    private fun donut2() {
+    private fun donut2(wins: Int, defeats: Int) {
         //The second pie chart and its labels
-        val amount1  = if (this.wins + this.defeats != 0) ((this.wins * 100)/(this.wins + this.defeats)).toFloat() else 0f
+        val amount1  = if (wins + defeats != 0) ((wins * 100)/(wins + defeats)).toFloat() else 0f
         val section1 = DonutSection(
             name = "Win_section",
             color = Color.parseColor("#00BD00"),
             amount =  amount1
         )
-        val amount2  = if (this.wins + this.defeats != 0) ((this.defeats * 100)/(this.wins + this.defeats)).toFloat() else 0f
+        val amount2  = if (wins + defeats != 0) ((defeats * 100)/(wins + defeats)).toFloat() else 0f
         val section2 = DonutSection(
             name = "Defeat_section",
             color = Color.parseColor("#FF0000"),
@@ -111,9 +115,9 @@ class HomeFragment : Fragment() {
         binding.donutViewSecond.cap = 100F // 100% is all
         binding.donutViewSecond.submitData(listOf(section1, section2))
         binding.DonutTextRating.text = "$amount1%"
-        binding.WinNumber.text = "Win positions: ${this.wins}"
+        binding.WinNumber.text = "Win positions: $wins"
         binding.WinNumber.setTextColor(Color.GREEN)
-        binding.DefNumber.text = "Defeat positions: ${this.defeats}"
+        binding.DefNumber.text = "Defeat positions: $defeats"
         binding.DefNumber.setTextColor(Color.RED)
     }
 
