@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.strategyStatistic
 
-import android.app.Application
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -12,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityStrategyBinding
@@ -22,6 +24,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import kotlinx.coroutines.launch
 import java.util.Random
 
 class StrategyActivity : AppCompatActivity() {
@@ -37,12 +40,20 @@ class StrategyActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
         setSupportActionBar(binding.include.myToolBar)
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
-        strategyViewModel.entriesList.observe(this){
-            setChart(strategyViewModel.strategiesNames,it)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                strategyViewModel.entriesFlow.collect{
+                    setChart(strategyViewModel.strategiesNames,it)
+                }
+            }
         }
         strategyViewModel.updateData()
-        strategyViewModel.getWinRateListShort.observe(this) {
-            setTexts(it,strategyViewModel.getWinRateListLong,strategyViewModel.strategiesNames,1)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                strategyViewModel.winRateShortFlow.collect{
+                    setTexts(it,strategyViewModel.getWinRateListLong,strategyViewModel.strategiesNames,1)
+                }
+            }
         }
         binding.amountCard.setOnClickListener{
             binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
@@ -54,7 +65,7 @@ class StrategyActivity : AppCompatActivity() {
             binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
             binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
             binding.textView.text = resources.getString(R.string.graph_of_strategies_rating)
-            setTexts(strategyViewModel.getWinRateListShort.value!!,strategyViewModel.getWinRateListLong,strategyViewModel.strategiesNames,1)
+            setTexts(strategyViewModel.winRateShortFlow.value,strategyViewModel.getWinRateListLong,strategyViewModel.strategiesNames,1)
         }
     }
 
@@ -65,11 +76,11 @@ class StrategyActivity : AppCompatActivity() {
      * @param lists list of points on graph
      * */
     private fun setChart(strategiesNames: MutableList<String>, lists: MutableList<List<Entry>>) {
-        // Получение левой оси
+        // Getting left axis
         val leftAxis = binding.chart.axisLeft
         leftAxis.textColor = ContextCompat.getColor(this, R.color.lightGray)
 
-        // Получение правой оси
+        // Getting right axis
         val rightAxis = binding.chart.axisRight
         rightAxis.textColor = ContextCompat.getColor(this, R.color.lightGray)
 
@@ -81,7 +92,7 @@ class StrategyActivity : AppCompatActivity() {
 
         val description = Description()
         description.text = ""
-        description.textColor = resources.getColor(R.color.lightGray)
+        description.textColor = ContextCompat.getColor(this,R.color.lightGray)
         val lineDataSetList = mutableListOf<LineDataSet>()
         val colorArr = getColorArr(strategiesNames)
 
@@ -96,7 +107,7 @@ class StrategyActivity : AppCompatActivity() {
         val data = LineData(lineDataSetList as List<ILineDataSet>?)
         binding.chart.data = data
         binding.chart.setNoDataText("No data")
-        binding.chart.setNoDataTextColor(resources.getColor(R.color.lightGray))
+        binding.chart.setNoDataTextColor(ContextCompat.getColor(this,R.color.lightGray))
         binding.chart.description = description
         binding.chart.invalidate()
         binding.chart.animateXY(2000,0)
@@ -136,7 +147,7 @@ class StrategyActivity : AppCompatActivity() {
             )
             layout.layoutParams = layoutParams
             layout.orientation = LinearLayout.HORIZONTAL
-            layout.setBackgroundColor(resources.getColor(R.color.background))
+            layout.setBackgroundColor(ContextCompat.getColor(this,R.color.background))
             if (token == 1){
                 layout.addView( createText("${strategiesNames[i]}: ",1))
                 layout.addView(createText(resources.getString(R.string.short_rate) + winRateListShort[i] + "%",0))

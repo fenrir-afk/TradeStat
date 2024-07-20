@@ -1,7 +1,7 @@
 package com.example.tradestat.ui.strategyStatistic
 
 
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Results
@@ -9,20 +9,23 @@ import com.example.tradestat.repository.BaseRepository
 import com.example.tradestat.utils.RatingCounter
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class StrategyViewModel(rep: BaseRepository) : ViewModel() {
-    var getWinRateListLong: MutableList<Int> = mutableListOf()
+    private var _winRateShortFlow = MutableStateFlow<MutableList<Int>>(mutableListOf())
+    val winRateShortFlow = _winRateShortFlow.asStateFlow()
 
+    private var _entriesFlow = MutableStateFlow<MutableList<List<Entry>>>(mutableListOf())
+    val entriesFlow = _entriesFlow.asStateFlow()
+
+
+    var getWinRateListLong: MutableList<Int> = mutableListOf()
     var tradeLongNumbers: MutableList<Int> = mutableListOf()
     var tradeShortNumbers: MutableList<Int> =  mutableListOf()
-
-    var tradeNumbers: MutableList<Int> =  mutableListOf()
-
-    val getWinRateListShort:MutableLiveData<MutableList<Int>> = MutableLiveData()
-
+    private var tradeNumbers: MutableList<Int> =  mutableListOf()
     var strategiesNames: MutableList<String> = mutableListOf()
-    val entriesList: MutableLiveData<MutableList<List<Entry>>> =  MutableLiveData()
 
     private val repository: BaseRepository = rep
     /**
@@ -53,7 +56,7 @@ class StrategyViewModel(rep: BaseRepository) : ViewModel() {
                 }
                 strategyLists.add(entryList)
             }
-            entriesList.postValue(strategyLists)
+            _entriesFlow.emit(strategyLists)
             updateRatingData(strategiesNames)
         }
 
@@ -63,15 +66,17 @@ class StrategyViewModel(rep: BaseRepository) : ViewModel() {
      * @param strategiesNames all strategies
      * */
     private  fun updateRatingData(strategiesNames: MutableList<String>) {
-        val winTrades = repository.getTradesByResult(Results.Victory.name)
-        val defeatTrades = repository.getTradesByResult(Results.Defeat.name)
-        val ratingObj = RatingCounter(strategiesNames,winTrades,defeatTrades,2)
-        ratingObj.updateData()
-        getWinRateListLong = ratingObj.longWinRateList
-        getWinRateListShort.postValue(ratingObj.shortWinRateList)
+        viewModelScope.launch(Dispatchers.IO){
+            val winTrades = repository.getTradesByResult(Results.Victory.name)
+            val defeatTrades = repository.getTradesByResult(Results.Defeat.name)
+            val ratingObj = RatingCounter(strategiesNames,winTrades,defeatTrades,2)
+            ratingObj.updateData()
+            getWinRateListLong = ratingObj.longWinRateList
+            _winRateShortFlow.emit(ratingObj.shortWinRateList)
 
-        tradeNumbers = ratingObj.tradeNumbers
-        tradeShortNumbers = ratingObj.tradeShortNumbers
-        tradeLongNumbers = ratingObj.tradeLongNumbers
+            tradeNumbers = ratingObj.tradeNumbers
+            tradeShortNumbers = ratingObj.tradeShortNumbers
+            tradeLongNumbers = ratingObj.tradeLongNumbers
+        }
     }
 }
