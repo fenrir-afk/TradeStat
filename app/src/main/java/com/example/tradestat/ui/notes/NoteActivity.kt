@@ -21,6 +21,7 @@ import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.databinding.ActivityNoteBinding
 import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -55,7 +56,7 @@ class NoteActivity : AppCompatActivity() {
         pickImage()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                noteViewModel.notesFlow.collect{
+                noteViewModel.notesFlow.filter { it.isNotEmpty() }.collect{
                     adapter.setData(it)
                     recyclerView.adapter = adapter
                 }

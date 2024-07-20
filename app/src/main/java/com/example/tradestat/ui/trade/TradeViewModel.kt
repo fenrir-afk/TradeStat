@@ -1,8 +1,6 @@
 package com.example.tradestat.ui.trade
 
 
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Trade
@@ -10,28 +8,25 @@ import com.example.tradestat.data.model.Instrument
 import com.example.tradestat.data.model.Strategy
 import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class TradeViewModel(rep: BaseRepository) : ViewModel() {
 
-    var sortedTradeList:MutableLiveData<List<Trade>> = MutableLiveData()
-    var finalList:MediatorLiveData<List<Trade>> = MediatorLiveData()
+    private var _sortedTradesListFlow = MutableStateFlow<List<Trade>>(emptyList())
+    val sortedTradesListFlow = _sortedTradesListFlow.asStateFlow()
 
     var getStrategyList:List<Strategy> = arrayListOf()
     var getInstrumentList:List<Instrument> = arrayListOf()
     private val repository: BaseRepository = rep
 
 
-    init {
-        finalList.addSource(sortedTradeList){
-            finalList.value = it
-        }
-    }
     //trade section
     fun addTrade(trade: Trade){
         viewModelScope.launch(Dispatchers.IO) {
             repository.addTrade(trade)
-            sortedTradeList.postValue(repository.getTradesSortedByDateAscending())//Update list
+            _sortedTradesListFlow.emit(repository.getTradesSortedByDateAscending())
         }
     }
     fun deleteTrade(trade: Trade){
@@ -53,7 +48,7 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
             if (instrumentCounter == 0){
                 repository.deleteInstrument(trade.instrument)
             }
-            sortedTradeList.postValue(repository.getTradesSortedByDateAscending())//Update list
+            _sortedTradesListFlow.emit(repository.getTradesSortedByDateAscending())//update list
         }
     }
     /**
@@ -61,7 +56,7 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
      * */
     fun updateListByDateDescending(){
         viewModelScope.launch(Dispatchers.IO) {
-            sortedTradeList.postValue(repository.getTradesSortedByDateDescending())
+            _sortedTradesListFlow.emit(repository.getTradesSortedByDateDescending())
         }
     }
     /**
@@ -69,7 +64,7 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
      * */
     fun updateListByDateAscending(){
         viewModelScope.launch(Dispatchers.IO) {
-            sortedTradeList.postValue(repository.getTradesSortedByDateAscending())
+            _sortedTradesListFlow.emit(repository.getTradesSortedByDateAscending())
         }
     }
     /**
@@ -77,7 +72,7 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
      * */
     fun updateListByStrategy(strategy: String){
       viewModelScope.launch(Dispatchers.IO) {
-            sortedTradeList.postValue(repository.getSortedByStrategiesList(strategy))
+          _sortedTradesListFlow.emit(repository.getSortedByStrategiesList(strategy))
         }
     }
     /**
@@ -85,7 +80,7 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
      * */
     fun updateListByInstrument(instrument: String){
         viewModelScope.launch(Dispatchers.IO) {
-            sortedTradeList.postValue(repository.getSortedByInstrumentList(instrument))
+            _sortedTradesListFlow.emit(repository.getSortedByInstrumentList(instrument))
         }
     }
     //strategies section

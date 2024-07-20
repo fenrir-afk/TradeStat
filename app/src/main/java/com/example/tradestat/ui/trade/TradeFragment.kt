@@ -1,6 +1,7 @@
 package com.example.tradestat.ui.trade
 
 import android.app.Dialog
+import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -21,6 +22,9 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
@@ -32,8 +36,10 @@ import com.example.tradestat.data.model.Trade
 import com.example.tradestat.databinding.FragmentTradeBinding
 import com.example.tradestat.repository.TradesRepository
 import com.example.tradestat.utils.BaseViewModelFactory
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 
 class TradeFragment : Fragment() {
@@ -62,18 +68,22 @@ class TradeFragment : Fragment() {
         val adapter = TradeAdapter(this)
         val manager = LinearLayoutManager(this.context)
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                tradeViewModel.sortedTradesListFlow.collect{
+                    adapter.setTradesData(it)
+                    binding.recyclerView.layoutManager = manager // Assigning LayoutManager to RecyclerView
+                    binding.recyclerView.adapter = adapter
+                }
 
-        tradeViewModel.finalList.observe(viewLifecycleOwner) {
-            adapter.setTradesData(it)
-            binding.recyclerView.layoutManager = manager // Assigning LayoutManager to RecyclerView
-            binding.recyclerView.adapter = adapter
+            }
         }
 
         binding.addTradeFab.setOnClickListener{
             tradeDialog()
         }
         binding.DateCard.setOnClickListener{
-            if (binding.dateArrow.drawable.constantState == resources.getDrawable(R.drawable.arrow).constantState){
+            if (binding.dateArrow.drawable.constantState == ContextCompat.getDrawable(requireContext(),R.drawable.arrow)!!.constantState){
                 tradeViewModel.updateListByDateDescending() // wait until we get the data and update UI
                 binding.dateArrow.setImageResource(R.drawable.arrow_up)
             }else{
@@ -149,7 +159,7 @@ class TradeFragment : Fragment() {
         return text
     }
     /**
-     *In this method, we update RecyclerVIew list with data from dialogs (strategy and instument)
+     *In this method, we update RecyclerVIew list with data from dialogs (strategy and instrument)
      * @param i is an int value for changing  strategy dialog and  instrument dialog
      * */
     private fun updateRecyclerVIew(view: View, i: Int) {
@@ -168,8 +178,15 @@ class TradeFragment : Fragment() {
         //in this place we set the strategy dialog characteristics
         val window: Window = dialog.window!!
         val wlp: WindowManager.LayoutParams = window.attributes
-        val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+        var displayMetrics = DisplayMetrics()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            displayMetrics = Resources.getSystem().displayMetrics
+        } else {
+            @Suppress("DEPRECATION")
+            val display = requireActivity().windowManager.defaultDisplay
+            @Suppress("DEPRECATION")
+            display.getMetrics(displayMetrics)
+        }
         val screenWidth = displayMetrics.widthPixels
         val dialogWidth = (screenWidth * 0.5).toInt()
         val dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT
@@ -200,10 +217,6 @@ class TradeFragment : Fragment() {
 
         if (arr.isNotEmpty()) {
             layout.addView(createCardsForList(arr,dialog))
-
-            val displayMetrics = DisplayMetrics()
-            requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-
             val marginFromRight = convertDpToPixels(10f) // Convert dp to pixels
             val marginFromTop = convertDpToPixels(115f) // Convert dp to pixels
 
@@ -351,7 +364,7 @@ class TradeFragment : Fragment() {
 
         }else{
             //getting current date
-            val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+            val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()) // Use Locale.getDefault() for the local format or Locale.US for ASCII format
             val currentDate = sdf.format(Date())
             val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description)
             updateDb(trade,strategy,instrument)

@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.trade
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
@@ -26,7 +27,7 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
     private val expandedPositions = mutableSetOf<Int>()
 
     class TradeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val childLayout = itemView.findViewById<LinearLayout>(R.id.child_layout)
+        val childLayout:LinearLayout = itemView.findViewById(R.id.child_layout)
         val background: ImageView = itemView.findViewById(R.id.background)
         val parentLayout: LinearLayout = itemView.findViewById(R.id.parent_layout)
         val strategyName: TextView = itemView.findViewById(R.id.strategy_field)
@@ -112,6 +113,7 @@ class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
         return flag == Configuration.UI_MODE_NIGHT_YES
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setTradesData(trades: List<Trade>) {
         tradeList = trades
         notifyDataSetChanged()
