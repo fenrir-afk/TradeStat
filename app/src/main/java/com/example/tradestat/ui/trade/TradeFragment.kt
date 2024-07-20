@@ -178,6 +178,7 @@ class TradeFragment : Fragment() {
         //in this place we set the strategy dialog characteristics
         val window: Window = dialog.window!!
         val wlp: WindowManager.LayoutParams = window.attributes
+
         var displayMetrics = DisplayMetrics()
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
             displayMetrics = Resources.getSystem().displayMetrics
@@ -187,6 +188,7 @@ class TradeFragment : Fragment() {
             @Suppress("DEPRECATION")
             display.getMetrics(displayMetrics)
         }
+
         val screenWidth = displayMetrics.widthPixels
         val dialogWidth = (screenWidth * 0.5).toInt()
         val dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT
@@ -226,7 +228,6 @@ class TradeFragment : Fragment() {
             lp.x = marginFromRight
             lp.y = marginFromTop
             window.attributes = lp
-
             dialog.show()
         } else {
             binding.instrumentArrow.setImageResource(R.drawable.arrow)

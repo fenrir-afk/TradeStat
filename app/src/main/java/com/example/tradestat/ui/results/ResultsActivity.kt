@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
 import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -52,7 +53,7 @@ class ResultsActivity : AppCompatActivity() {
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                resultsViewModel.currentMonthStrategiesRatingFlow.collect{
+                resultsViewModel.currentMonthStrategiesRatingFlow.filter { it.isNotEmpty() }.collect{
                     updateChart(it,resultsViewModel.previousMonthStrategiesRating,resultsViewModel.strategiesNames)
                     setTexts(it, resultsViewModel.previousMonthStrategiesRating, resultsViewModel.strategiesNames.toMutableList())
                 }

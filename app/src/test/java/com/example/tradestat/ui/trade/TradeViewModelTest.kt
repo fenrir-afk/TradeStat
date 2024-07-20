@@ -37,7 +37,7 @@ class TradeViewModelTest {
     fun setup() {
         MockKAnnotations.init(this, relaxed = true)
         Dispatchers.setMain(testDispatcher)
-        viewModel = TradeViewModel(Application(), mockRepository)
+        viewModel = TradeViewModel(mockRepository)
     }
     @After
     fun cleanup() {
