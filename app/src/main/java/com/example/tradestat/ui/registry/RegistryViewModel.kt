@@ -1,24 +1,27 @@
 package com.example.tradestat.ui.registry
 
-import android.app.Application
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.User
 import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class RegistryViewModel(rep: BaseRepository): ViewModel() {
     private val repository: BaseRepository = rep
-    var addUserResult = MutableLiveData<Boolean>()
+    private var _userResultFow = MutableStateFlow<Boolean?>(null)
+    val userResultFow = _userResultFow.asStateFlow()
+
     fun addUser(user: User){
         viewModelScope.launch(Dispatchers.IO) {
             if(repository.getUser(user.email,user.pass) == null){
                 repository.insertUser(user)
-                addUserResult.postValue(true)
+                _userResultFow.emit(true)
             }else{
-                addUserResult.postValue(false)
+                _userResultFow.emit(false)
             }
         }
     }

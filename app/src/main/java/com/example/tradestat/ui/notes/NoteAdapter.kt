@@ -1,5 +1,6 @@
 package com.example.tradestat.ui.notes
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.text.Editable
@@ -195,6 +196,7 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
         notifyItemChanged(position)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(noteCards: List<NoteCard>) {
         noteList = noteCards as ArrayList<NoteCard>
         notifyDataSetChanged()
