@@ -1,13 +1,14 @@
 package com.example.tradestat.ui.results
 
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.Results
 import com.example.tradestat.data.model.Trade
 import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -19,8 +20,9 @@ class ResultsViewModel(rep: BaseRepository): ViewModel() {
     var strategiesNames = mutableSetOf<String>()
     var instrumentNames = mutableSetOf<String>()
 
+    private var _currentMonthStrategiesRatingFlow = MutableStateFlow<MutableList<Int>>(mutableListOf())
+    var currentMonthStrategiesRatingFlow = _currentMonthStrategiesRatingFlow.asStateFlow()
     private var currentMonthTrades: MutableList<Trade> = mutableListOf()
-    var currentMonthStrategiesRating: MutableLiveData<MutableList<Int>> = MutableLiveData()
     var currentMonthInstrumentsRating: MutableList<Int> = mutableListOf()
 
     private var previousMonthTrades: MutableList<Trade> = mutableListOf()
@@ -31,21 +33,23 @@ class ResultsViewModel(rep: BaseRepository): ViewModel() {
      * In this method we are getting all unique strategies and update instruments lists
      * */
     private fun updateStrategiesLists() {
-        strategiesNames = mutableSetOf()
-        val currentRating = mutableListOf<Int>()
-        val previousRating = mutableListOf<Int>()
-        currentMonthTrades.forEach {
-            strategiesNames.add(it.strategy)
+        viewModelScope.launch(Dispatchers.Default){
+            strategiesNames = mutableSetOf()
+            val currentRating = mutableListOf<Int>()
+            val previousRating = mutableListOf<Int>()
+            currentMonthTrades.forEach {
+                strategiesNames.add(it.strategy)
+            }
+            previousMonthTrades.forEach {
+                strategiesNames.add(it.strategy)
+            }
+            strategiesNames.forEach{
+                currentRating.add(getRating(currentMonthTrades,it,2))
+                previousRating.add(getRating(previousMonthTrades,it,2))
+            }
+            previousMonthStrategiesRating = previousRating
+            _currentMonthStrategiesRatingFlow.emit(currentRating)
         }
-        previousMonthTrades.forEach {
-            strategiesNames.add(it.strategy)
-        }
-        strategiesNames.forEach{
-            currentRating.add(getRating(currentMonthTrades,it,2))
-            previousRating.add(getRating(previousMonthTrades,it,2))
-        }
-        previousMonthStrategiesRating = previousRating
-        currentMonthStrategiesRating.postValue(currentRating)
 
     }
     /**

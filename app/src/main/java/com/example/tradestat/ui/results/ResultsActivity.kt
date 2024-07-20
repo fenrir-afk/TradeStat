@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.results
 
-import android.app.Application
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -15,6 +14,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.tradestat.R
 import com.example.tradestat.data.database.TradeDatabase
 import com.example.tradestat.databinding.ActivityResultsBinding
@@ -24,6 +26,7 @@ import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
 import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 
@@ -47,9 +50,13 @@ class ResultsActivity : AppCompatActivity() {
             insets
         }
         binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
-        resultsViewModel.currentMonthStrategiesRating.observe(this){
-            updateChart(it,resultsViewModel.previousMonthStrategiesRating,resultsViewModel.strategiesNames)
-            setTexts(it, resultsViewModel.previousMonthStrategiesRating, resultsViewModel.strategiesNames.toMutableList())
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                resultsViewModel.currentMonthStrategiesRatingFlow.collect{
+                    updateChart(it,resultsViewModel.previousMonthStrategiesRating,resultsViewModel.strategiesNames)
+                    setTexts(it, resultsViewModel.previousMonthStrategiesRating, resultsViewModel.strategiesNames.toMutableList())
+                }
+            }
         }
         binding.amountCard.setOnClickListener{
             binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
@@ -60,8 +67,8 @@ class ResultsActivity : AppCompatActivity() {
         binding.ratingCard.setOnClickListener{
             binding.ratingImageView.setColorFilter(ContextCompat.getColor(this, R.color.MediumGray))
             binding.amountImageView.setColorFilter(ContextCompat.getColor(this, R.color.background))
-            updateChart(resultsViewModel.currentMonthStrategiesRating.value!!,resultsViewModel.previousMonthStrategiesRating,resultsViewModel.strategiesNames)
-            setTexts(resultsViewModel.currentMonthStrategiesRating.value!!, resultsViewModel.previousMonthStrategiesRating, resultsViewModel.strategiesNames.toMutableList())
+            updateChart(resultsViewModel.currentMonthStrategiesRatingFlow.value,resultsViewModel.previousMonthStrategiesRating,resultsViewModel.strategiesNames)
+            setTexts(resultsViewModel.currentMonthStrategiesRatingFlow.value, resultsViewModel.previousMonthStrategiesRating, resultsViewModel.strategiesNames.toMutableList())
         }
     }
     /**
@@ -82,8 +89,8 @@ class ResultsActivity : AppCompatActivity() {
             arr1.add(RadarEntry(it.toFloat()))
         }
         val calendar = Calendar.getInstance()
-        val currentMonth = getMonthName(calendar.get(Calendar.MONTH))
-        val previousMonth = getMonthName(calendar.get(Calendar.MONTH) - 1)
+        val currentMonth = getMonthName(calendar.get(Calendar.MONTH)+1)
+        val previousMonth = getMonthName(calendar.get(Calendar.MONTH) )
         val dataSet1 = RadarDataSet(arr1,currentMonth)
         dataSet1.color = getColor(R.color.purple_200)
         dataSet1.lineWidth = 2F
@@ -141,7 +148,7 @@ class ResultsActivity : AppCompatActivity() {
             )
             layout.layoutParams = layoutParams
             layout.orientation = LinearLayout.HORIZONTAL
-            layout.setBackgroundColor(resources.getColor(R.color.background))
+            layout.setBackgroundColor(ContextCompat.getColor(this,R.color.background))
             layout.addView( createText("${names[i]}: ",1))
             layout.addView(createText("Result: " + previousRating[i].toString() + "%->" + currentRating[i].toString()+"%",0))
             val image = ImageView(this)
