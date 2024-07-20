@@ -1,25 +1,29 @@
 package com.example.tradestat.ui.notes
 
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.data.model.NoteCard
 import com.example.tradestat.repository.BaseRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class NoteViewModel(rep: BaseRepository): ViewModel(){
     private val repository: BaseRepository = rep
-    val notes: MutableLiveData<List<NoteCard>> = MutableLiveData()
+    private var _notesFlow = MutableStateFlow<List<NoteCard>>(emptyList())
+    val notesFlow = _notesFlow.asStateFlow()
+
     fun addNote(noteCard: NoteCard){
         viewModelScope.launch(Dispatchers.IO) {
             repository.addNote(noteCard)
-            notes.postValue(repository.getAllNotes())
+            _notesFlow.emit(repository.getAllNotes())
         }
     }
     fun getAllNotes(){
         viewModelScope.launch(Dispatchers.IO) {
-            notes.postValue(repository.getAllNotes())
+            _notesFlow.emit(repository.getAllNotes())
         }
     }
     fun updateNote(noteCard: NoteCard){

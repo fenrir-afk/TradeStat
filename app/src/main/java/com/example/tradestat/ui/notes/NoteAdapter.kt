@@ -44,67 +44,67 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
+        var adapterPosition = holder.adapterPosition
         val context = holder.itemView.context
         val noteViewModel = ViewModelProvider(viewModelStoreOwner)[NoteViewModel::class.java]
-        holder.text1.setText(noteList[position].noteTexts[0])
-        holder.title.setText(noteList[position].title)
+        holder.text1.setText(noteList[adapterPosition].noteTexts[0])
+        holder.title.setText(noteList[adapterPosition].title)
         holder.title.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Неиспользуемый метод
             }
             override fun afterTextChanged(s: Editable?) {
                 val enteredText = s.toString()
                 if (enteredText.isNotEmpty()) {
-                    val note =  noteList[position]
+                    val note =  noteList[adapterPosition]
                     val noteTexts = note.noteTexts.toMutableList()
-                    noteList[position] = NoteCard(noteList[position].id,noteTexts,noteList[position].noteImages,enteredText)
-                    noteViewModel.updateNote(NoteCard(noteList[position].id,noteTexts,noteList[position].noteImages,enteredText))
+                    noteList[adapterPosition] = NoteCard(noteList[adapterPosition].id,noteTexts,noteList[adapterPosition].noteImages,enteredText)
+                    noteViewModel.updateNote(NoteCard(noteList[adapterPosition].id,noteTexts,noteList[adapterPosition].noteImages,enteredText))
                 }
             }
         })
         holder.deleteButton.setOnClickListener{
-            noteViewModel.deleteNote(noteList[position])
-            for (imagePath in noteList[position].noteImages) {
+            adapterPosition = holder.adapterPosition
+            noteViewModel.deleteNote(noteList[adapterPosition])
+            for (imagePath in noteList[adapterPosition].noteImages) {
                 val file = File(imagePath)
                 if (file.exists()) {
                     file.delete()
                 }
             }
-            noteList.removeAt(position)
-            notifyItemRemoved(position)
+            noteList.removeAt(adapterPosition)
+            notifyItemRemoved(adapterPosition)
         }
         holder.text1.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Неиспользуемый метод
             }
             override fun afterTextChanged(s: Editable?) {
                 val enteredText = s.toString()
                 if (enteredText.isNotEmpty()) {
-                    val note =  noteList[position]
+                    val note =  noteList[adapterPosition]
                     val noteTexts = note.noteTexts.toMutableList()
                     noteTexts[0] = enteredText
-                    noteList[position] = NoteCard(noteList[position].id,noteTexts,noteList[position].noteImages,noteList[position].title)
-                    noteViewModel.updateNote(NoteCard(noteList[position].id,noteTexts,noteList[position].noteImages,noteList[position].title))
+                    noteList[adapterPosition] = NoteCard(noteList[adapterPosition].id,noteTexts,noteList[adapterPosition].noteImages,noteList[adapterPosition].title)
+                    noteViewModel.updateNote(NoteCard(noteList[adapterPosition].id,noteTexts,noteList[adapterPosition].noteImages,noteList[adapterPosition].title))
                 }
             }
         })
         holder.imageButton.setOnClickListener{
-            onImageClickListener?.onImageClick(position)
+            onImageClickListener?.onImageClick(adapterPosition)
         }
-        noteList[position].noteTexts.forEachIndexed { index, _ ->
-            if (noteList[position].noteImages.size > index){
-                val image = createImage(position,index,context)
-                if (index == noteList[position].noteTexts.size -1){ //in this condition we fix the bag of 2 edit text at the bottom of the card
+        noteList[adapterPosition].noteTexts.forEachIndexed { index, _ ->
+            if (noteList[adapterPosition].noteImages.size > index){
+                val image = createImage(adapterPosition,index,context)
+                if (index == noteList[adapterPosition].noteTexts.size -1){ //in this condition we fix the bag of 2 edit text at the bottom of the card
                     return@forEachIndexed
                 }
-                if (noteList[position].noteTexts.size > 1){
-                    val editText = createText(context,position,index,noteViewModel)
+                if (noteList[adapterPosition].noteTexts.size > 1){
+                    val editText = createText(context,adapterPosition,index,noteViewModel)
                     if (image != null){
                         holder.parentLayout.addView(image)
                     }
@@ -134,7 +134,6 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Неиспользуемый метод
             }
             override fun afterTextChanged(s: Editable?) {
                 val enteredText = s.toString()
@@ -183,13 +182,13 @@ class NoteAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)
      * */
     fun updateImage(position: Int, imageUri: String) {
         val note = noteList[position]
-        val updatedNoteImages = note.noteImages.toMutableList() // Создаем изменяемую копию списка изображений
+        val updatedNoteImages = note.noteImages.toMutableList() // Creating a changeable copy of the list of images
         if (noteList[position].noteImages[0] == ""){
             updatedNoteImages[0] = imageUri
         }else{
             updatedNoteImages.add(imageUri)
         }
-        val updatedNoteTexts = note.noteTexts.toMutableList()  // Создаем изменяемую копию списка текстов
+        val updatedNoteTexts = note.noteTexts.toMutableList()  // Creating a changeable copy of the list of texts
         updatedNoteTexts.add("")
 
         noteList[position] = NoteCard(note.id, updatedNoteTexts, updatedNoteImages,noteList[position].title)

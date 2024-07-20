@@ -53,19 +53,19 @@ class NewsFragment : Fragment() {
     }
     private fun updateStockMarketQuotes(mutableMap: MutableMap<String, String>) {
        if (mutableMap.isNotEmpty()){
-           Stocks.entries.forEachIndexed{ index, stocks ->
+           Stocks.entries.forEachIndexed{ index, stock ->
                when(index){
                    0 -> {
-                       binding.firstMoexTitle.text = stocks.toString()
-                       binding.firstMoexValue.text = mutableMap[stocks.toString()]
+                       binding.firstMoexTitle.text = stock.toString()
+                       binding.firstMoexValue.text = mutableMap[stock.toString()]
                    }
                    1 -> {
-                       binding.secondMoexTitle.text = stocks.toString()
-                       binding.secondMoexValue.text = mutableMap[stocks.toString()]
+                       binding.secondMoexTitle.text = stock.toString()
+                       binding.secondMoexValue.text = mutableMap[stock.toString()]
                    }
                    2 -> {
-                       binding.thirdMoexTitle.text = stocks.toString()
-                       binding.thirdMoexValue.text = mutableMap[stocks.toString()]
+                       binding.thirdMoexTitle.text = stock.toString()
+                       binding.thirdMoexValue.text = mutableMap[stock.toString()]
                    }
                    else ->{
                        println("Error: there are only 3 views for stocks")
