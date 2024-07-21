@@ -93,44 +93,48 @@ class ResultsActivity : AppCompatActivity() {
         val currentMonth = getMonthName(calendar.get(Calendar.MONTH)+1)
         val previousMonth = getMonthName(calendar.get(Calendar.MONTH) )
         val dataSet1 = RadarDataSet(arr1,currentMonth)
-        dataSet1.color = getColor(R.color.purple_200)
-        dataSet1.lineWidth = 2F
-        dataSet1.valueTextColor = getColor(R.color.purple_200)
-        dataSet1.fillColor = getColor(R.color.purple_200)
-        dataSet1.valueTextSize = 14f
-        dataSet1.setDrawFilled(true)
-
+        with(dataSet1){
+            color = getColor(R.color.purple_200)
+            lineWidth = 2F
+            valueTextColor = getColor(R.color.purple_200)
+            fillColor = getColor(R.color.purple_200)
+            valueTextSize = 14f
+            setDrawFilled(true)
+        }
         val arr2 = ArrayList<RadarEntry>()
         previousMonthStrategiesRating.forEach {
             arr2.add(RadarEntry(it.toFloat()))
         }
         val dataSet2 = RadarDataSet(arr2,previousMonth)
-        dataSet2.color = getColor(R.color.green)
-        dataSet2.lineWidth = 2F
-        dataSet2.valueTextColor =getColor(R.color.green)
-        dataSet2.fillColor = getColor(R.color.green)
-        dataSet2.valueTextSize = 14f
-        dataSet2.setDrawFilled(true)
-
+        with(dataSet2){
+            color = getColor(R.color.green)
+            lineWidth = 2F
+            valueTextColor =getColor(R.color.green)
+            fillColor = getColor(R.color.green)
+            valueTextSize = 14f
+            setDrawFilled(true)
+        }
         val radarData = RadarData()
         radarData.addDataSet(dataSet1)
         radarData.addDataSet(dataSet2)
-        binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
-        binding.chart.xAxis.textColor = getColor(R.color.white)
-        binding.chart.yAxis.axisMinimum = 0f
-        binding.chart.yAxis.axisMaximum = 110f
-        binding.chart.xAxis.axisMinimum = 0f
-        binding.chart.xAxis.axisMaximum = 110f
-        binding.chart.description.text = ""
-        binding.chart.data = radarData
-        binding.chart.legend.textColor = getColor(R.color.white)
+        with(binding.chart){
+            xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+            xAxis.textColor = getColor(R.color.white)
+            yAxis.axisMinimum = 0f
+            yAxis.axisMaximum = 110f
+            xAxis.axisMinimum = 0f
+            xAxis.axisMaximum = 110f
+            description.text = ""
+            data = radarData
+            legend.textColor = getColor(R.color.white)
 
-        binding.chart.xAxis.setDrawAxisLine(false)
-        binding.chart.xAxis.setDrawLabels(true)
-        binding.chart.yAxis.setDrawAxisLine(false)
-        binding.chart.yAxis.setDrawLabels(false)
-        binding.chart.animateXY(1000,1400)
-        binding.chart.invalidate()
+            xAxis.setDrawAxisLine(false)
+            xAxis.setDrawLabels(true)
+            yAxis.setDrawAxisLine(false)
+            yAxis.setDrawLabels(false)
+            animateXY(1000,1400)
+            invalidate()
+        }
     }
     /**
      * In this method we are creating cards with 2 texts and 1 image (arrow)
