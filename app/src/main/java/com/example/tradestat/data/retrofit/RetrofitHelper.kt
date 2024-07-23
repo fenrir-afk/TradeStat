@@ -1,9 +1,7 @@
 package com.example.tradestat.data.retrofit
 
-import android.util.Xml
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 object RetrofitHelper {
 
