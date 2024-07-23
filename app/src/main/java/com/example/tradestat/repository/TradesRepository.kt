@@ -140,7 +140,11 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
             val ipoApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
             val response = ipoApi.getForexData(quotePair, time, API_IPO_KEY).execute()
             if (response.isSuccessful) {
-                emit(response.body()!!)
+                if ( response.body() == null){
+                    response.body()!!.response //trigger exception if it is null (we catch it in retry block)
+                }else{
+                    emit(response.body()!!)
+                }
             } else {
                 Log.d("Retrofit", "Response is not successful")
             }

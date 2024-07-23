@@ -1,6 +1,5 @@
 package com.example.tradestat.ui.news
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tradestat.repository.BaseRepository
@@ -8,12 +7,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.launch
-import org.w3c.dom.Document
 import org.w3c.dom.NodeList
 import org.xml.sax.InputSource
 import java.io.BufferedReader
-import java.io.File
 import java.io.InputStreamReader
 import java.io.StringReader
 import java.net.URL
@@ -36,7 +34,7 @@ class NewsViewModel(rep: BaseRepository) : ViewModel() {
     }
     private fun updateQuotes(quotePair:String, time:String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getForexData(quotePair,time).flowOn(Dispatchers.IO).collect{
+            repository.getForexData(quotePair,time).flowOn(Dispatchers.IO).retry(3).collect{
                 val directionNumber = it.response[0].cp
                 val formattedQuote = "%.1f".format(it.response[0].c.toDouble())
                 if (directionNumber.first() == ('-')){
