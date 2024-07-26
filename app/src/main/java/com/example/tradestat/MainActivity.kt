@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        println("Hello")
         binding = ActivityMainBinding.inflate(layoutInflater)
         initNightMode()
         setContentView(binding.root)

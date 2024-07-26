@@ -142,6 +142,7 @@ open class TradesRepository(private val db: TradeDatabase):BaseRepository {
             if (response.isSuccessful) {
                 if ( response.body() == null){
                     response.body()!!.response //trigger exception if it is null (we catch it in retry block)
+                    Log.d("Retrofit", "Response body is null")
                 }else{
                     emit(response.body()!!)
                 }
