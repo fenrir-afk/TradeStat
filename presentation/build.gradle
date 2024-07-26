@@ -9,17 +9,14 @@ plugins {
 }
 
 android {
-    namespace 'com.example.tradestat'
+    namespace 'com.example.presentation'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.tradestat"
-        minSdk 28
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk 24
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -33,11 +30,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-    buildFeatures {
-        viewBinding true
-        dataBinding true
+        jvmTarget = '1.8'
     }
 }
 
@@ -96,5 +89,4 @@ dependencies {
     //dagger 2
     implementation 'com.google.dagger:dagger:2.51.1'
     ksp 'com.google.dagger:dagger-compiler:2.51.1'
-
 }

@@ -14,7 +14,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.tradestat.databinding.ActivityMainBinding
-import java.time.LocalDateTime
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        println("Hello")
         binding = ActivityMainBinding.inflate(layoutInflater)
         initNightMode()
         setContentView(binding.root)
