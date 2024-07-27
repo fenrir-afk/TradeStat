@@ -12,9 +12,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.presentation.MainActivity
 import com.example.presentation.data.model.User
 import com.example.presentation.databinding.ActivityRegistryBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class RegistryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegistryBinding
     private  val registerViewModel: RegistryViewModel by viewModels()
@@ -29,7 +31,6 @@ class RegistryActivity : AppCompatActivity() {
                         val intent = Intent(this@RegistryActivity, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
-                        registerViewModel.getUsers()
                     } else {
                         Toast.makeText(this@RegistryActivity, "Such user is already registered", Toast.LENGTH_SHORT).show()
                     }
@@ -46,19 +47,7 @@ class RegistryActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-                   // registerViewModel.addUser(User(0,login,email,pass))
-
-
-
-
-
+                   registerViewModel.addUser(User(0,login,email,pass))
 
 
                 }else{

@@ -1,4 +1,4 @@
-package com.example.data.login.locale.entity
+package com.example.data.user.locale.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

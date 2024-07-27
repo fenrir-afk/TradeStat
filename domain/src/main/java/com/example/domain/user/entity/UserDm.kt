@@ -1,6 +1,6 @@
-package com.example.domain.login.entity
+package com.example.domain.user.entity
 
-data class User(
+data class UserDm(
     val id: Int,
     val login: String,
     val email: String,

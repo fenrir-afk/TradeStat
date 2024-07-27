@@ -1,8 +1,8 @@
 package com.example.tradestat.di
 
-import com.example.data.login.dataSource.LoginDataSource
-import com.example.data.login.dataSource.LoginDataSourceImp
-import com.example.data.login.locale.dao.UserDao
+import com.example.data.user.dataSource.UserDataSource
+import com.example.data.user.dataSource.UserDataSourceImp
+import com.example.data.user.locale.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 class DataSourceModule {
     @Provides
     @Singleton
-    fun provideLoginDataSource(userDao: UserDao): LoginDataSource {
-        return LoginDataSourceImp(userDao)
+    fun provideLoginDataSource(userDao: UserDao): UserDataSource {
+        return UserDataSourceImp(userDao)
     }
 }

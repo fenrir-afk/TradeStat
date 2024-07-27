@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.data.db.TradeDatabase
 import com.example.data.instrument.locale.dao.InstrumentDao
-import com.example.data.login.locale.dao.UserDao
+import com.example.data.user.locale.dao.UserDao
 import com.example.data.note.locale.dao.NoteDao
 import com.example.data.strategy.locale.dao.StrategiesDao
 import com.example.data.trade.locale.dao.TradesDao

@@ -1,10 +1,10 @@
-package com.example.data.login.locale.dao
+package com.example.data.user.locale.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.data.login.locale.entity.UserDb
+import com.example.data.user.locale.entity.UserDb
 
 
 @Dao

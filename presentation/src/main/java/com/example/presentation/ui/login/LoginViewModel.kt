@@ -2,7 +2,7 @@ package com.example.presentation.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.login.usecase.LoginUseCase
+import com.example.domain.user.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +17,7 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
     fun checkUser(email:String,pass:String){
         viewModelScope.launch(Dispatchers.IO){
             val result = loginUseCase.execute(email,pass)
-            if (!result){
+            if (result){
                 _checkUserResultFlow.emit(true)
             }else{
                 _checkUserResultFlow.emit(false)

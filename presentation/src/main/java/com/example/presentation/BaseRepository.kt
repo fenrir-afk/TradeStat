@@ -1,5 +1,5 @@
 package com.example.presentation
-import com.example.domain.login.entity.User
+import com.example.domain.user.entity.UserDm
 import com.example.presentation.data.model.DaysOfWeek
 import com.example.presentation.data.model.Instrument
 import com.example.presentation.data.model.NoteCard
@@ -47,8 +47,8 @@ interface BaseRepository {
     fun deleteNote(noteCard: NoteCard)
 
     //login and register part
-    fun getUser(email:String,pass:String): User?
-    fun insertUser(user: User)
-    fun getAllUsers(): List<User>
+    fun getUser(email:String,pass:String): UserDm?
+    fun insertUser(user: UserDm)
+    fun getAllUsers(): List<UserDm>
     fun getForexData(quotePair: String, time: String): Flow<Quotes>
 }

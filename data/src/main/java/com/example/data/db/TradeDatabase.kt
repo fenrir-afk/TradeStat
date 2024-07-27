@@ -5,8 +5,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.data.instrument.locale.dao.InstrumentDao
 import com.example.data.instrument.locale.entity.Instrument
-import com.example.data.login.locale.dao.UserDao
-import com.example.data.login.locale.entity.UserDb
+import com.example.data.user.locale.dao.UserDao
+import com.example.data.user.locale.entity.UserDb
 import com.example.data.note.locale.dao.NoteDao
 import com.example.data.note.locale.entity.NoteCard
 import com.example.data.strategy.locale.dao.StrategiesDao

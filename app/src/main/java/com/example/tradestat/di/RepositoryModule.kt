@@ -1,9 +1,9 @@
 package com.example.tradestat.di
 
 
-import com.example.data.login.dataSource.LoginDataSource
-import com.example.data.login.repository.LoginRepositoryImp
-import com.example.domain.login.LoginRepository
+import com.example.data.user.dataSource.UserDataSource
+import com.example.data.user.repository.UserRepositoryImp
+import com.example.domain.user.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +15,8 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideMovieRepository(
-       loginDataSource: LoginDataSource
-    ): LoginRepository {
-        return LoginRepositoryImp(loginDataSource)
+       loginDataSource: UserDataSource
+    ): UserRepository {
+        return UserRepositoryImp(loginDataSource)
     }
 }
