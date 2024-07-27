@@ -1,31 +1,19 @@
 package com.example.tradestat.com.example.tradestat.ui.notes
 
 
-import android.app.Activity
-import android.app.Instrumentation
-import android.content.Intent
-import android.net.Uri
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.intent.Intents
-import androidx.test.espresso.intent.Intents.intending
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.tradestat.MainActivity
+import com.example.presentation.ui.notes.NoteActivity
 import com.example.tradestat.R
-import com.example.tradestat.ui.notes.NoteActivity
 import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
-import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

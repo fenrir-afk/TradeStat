@@ -1,7 +1,6 @@
 package com.example.tradestat.com.example.tradestat.ui.home
 
 import android.content.res.Configuration
-import android.view.View
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -11,14 +10,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.tradestat.MainActivity
+import com.example.presentation.MainActivity
 import com.example.tradestat.R
-import com.example.tradestat.data.model.Trade
-import com.example.tradestat.repository.TradesRepository
-import com.example.tradestat.ui.dateStatistic.DateActivity
-import com.example.tradestat.ui.home.HomeViewModel
-import com.example.tradestat.ui.usefullMaterials.MaterialsActivity
-import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,7 +21,7 @@ import java.util.Locale
 class HomeFragmentTest {
 
     @get:Rule
-    val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
+    val activityScenarioRule = ActivityScenarioRule(com.example.presentation.MainActivity::class.java)
     @Test
     fun testDonutViewIsDisplayed() {
         onView(withId(R.id.donut_view)).check(matches(isDisplayed()))
@@ -101,7 +94,7 @@ class HomeFragmentTest {
             assert(false)
         }
     }
-    private fun getInitialTheme(scenario: ActivityScenario<MainActivity>): Int {
+    private fun getInitialTheme(scenario: ActivityScenario<com.example.presentation.MainActivity>): Int {
         var initialTheme = 0
         scenario.onActivity { activity ->
             initialTheme = activity.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK

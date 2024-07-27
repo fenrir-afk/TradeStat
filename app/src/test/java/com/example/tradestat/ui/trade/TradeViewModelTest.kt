@@ -1,8 +1,9 @@
 package com.example.tradestat.ui.trade
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.tradestat.data.model.Trade
-import com.example.tradestat.repository.TradesRepository
+import com.example.presentation.BaseRepository
+import com.example.presentation.data.model.Trade
+import com.example.presentation.ui.trade.TradeViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.Runs
 import io.mockk.coEvery
@@ -30,7 +31,7 @@ class TradeViewModelTest {
     // Set the main coroutine scope for unit testing
     @get:Rule var rule: TestRule = InstantTaskExecutorRule()
     @MockK
-    private lateinit var mockRepository: TradesRepository
+    private lateinit var mockRepository: BaseRepository
     private lateinit var viewModel: TradeViewModel
 
     @Before

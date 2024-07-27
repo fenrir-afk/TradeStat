@@ -1,11 +1,12 @@
 package com.example.tradestat.utils
 
-import com.example.tradestat.data.model.Trade
+import com.example.presentation.data.model.Trade
+import com.example.presentation.utils.RatingCounter
 import org.junit.Before
 import org.junit.Test
 
 class RatingCounterTest{
-    private lateinit var ratingCounter:RatingCounter
+    private lateinit var ratingCounter: RatingCounter
     private lateinit var strategies: MutableList<String>
     private lateinit var instruments: MutableList<String>
     private lateinit var  winTrades: MutableList<Trade>

@@ -1,0 +1,112 @@
+<resources>
+    <string name="app_name">TradeStat</string>
+    <string name="title_home">Домашняя</string>
+    <string name="title_dashboard">Сделки</string>
+    <string name="monday">Понедельник</string>
+    <string name="tuesday">Вторник</string>
+    <string name="wednesday">Среда</string>
+    <string name="thursday">Чертверг</string>
+    <string name="friday">Пятника</string>
+    <string name="saturday">Суббота</string>
+    <string name="sunday">Воскресенье</string>
+    <string name="monday_with_rating">Понедельник — %1$d%%</string>
+    <string name="tuesday_with_rating">Вторник — %1$d%%</string>
+    <string name="wednesday_with_rating">Среда — %1$d%%</string>
+    <string name="thursday_with_rating">Четверг — %1$d%%</string>
+    <string name="friday_with_rating">Пятница — %1$d%%</string>
+    <string name="saturday_with_rating">Суббота — %1$d%%</string>
+    <string name="sunday_with_rating">Воскресенье — %1$d%%</string>
+    <string name="strategy">Страт</string>
+    <string name="date">Дата</string>
+    <string name="instrument">Инстр</string>
+    <string name="direction">Направ</string>
+    <string name="result">Результат</string>
+    <string name="add">Добавить</string>
+    <string name="News">Новости</string>
+    <string name="all">Всего</string>
+    <string name="long_positions">Long number:</string>
+    <string name="short_positions">Short number:</string>
+    <string name="calendar">Календарь</string>
+    <string name="results">Результаты</string>
+    <string name="analysis">Анализ</string>
+    <string name="useful_materials">Полезные материалы</string>
+    <string name="base_strategies_useful_tips">База,стратегии,полезные советы</string>
+    <string name="win_positions">Win positions:</string>
+    <string name="defeat_positions">Defeat positions:</string>
+    <string name="time_statistics">Статистика по времени</string>
+    <string name="statistics_on_indicators">Статистика по индикаторам</string>
+    <string name="general_statistics">Общая статистка</string>
+    <string name="including_strategies">Включая стратегии</string>
+    <string name="add_trade">Добавить сделку</string>
+    <string name="enter_the_indicator">Введите индикатор:</string>
+    <string name="enter_the_strategy">Введите стратегию:</string>
+    <string name="enter_a_description">Введите описание:</string>
+    <string name="cancel">Отменить</string>
+    <string name="graph_of_strategies_rating">График рейтинга стратегий</string>
+    <string name="rating">Рейтинг</string>
+    <string name="amount">Количество</string>
+    <string name="graph_of_instrument_rating">График рейтинга инструментов</string>
+    <string name="news_search">Поиск новостей</string>
+    <string name="enter_a_company_name">Введите название компании</string>
+    <string name="description">Описание:</string>
+    <string name="instruments">Инструменты:</string>
+    <string name="graph_of_number_of_trades">График количества сделок</string>
+    <string name="short_number">Short number:</string>
+    <string name="long_number">Long number:</string>
+    <string name="short_rate">Short rate:</string>
+    <string name="long_rate">Long rate:</string>
+    <string name="materials_intro">Трейдинг – это высокорискованный мир финансовых рынков, где открываются широкие возможности для заработка. Однако успех в этой сфере требует глубоких знаний и постоянного совершенствования навыков. Обучение трейдингу – это необходимость для тех, кто стремится добиться финансовой независимости и стабильного дохода в этой сфере. Только вооружившись необходимыми знаниями и приобретя практический опыт, вы сможете грамотно управлять рисками и максимизировать свои доходы на волатильных рынках.</string>
+    <string name="trading_materials">Материалы по трейдингу</string>
+    <string name="trading_concepts">Концепции трейдинга</string>
+    <string name="smart_money_intro">Стратегия Smart Money в трейдинге остается актуальной в современном динамичном рынке. Она фокусируется на выявлении и следовании крупным капиталовложениям, известным как smart money. Эта стратегия предполагает, что эти крупные игроки обладают большей информацией и опытом, что дает им преимущество в принятии правильных торговых решений. Сочетая технический анализ, понимание поведения рынка и мониторинг активности smart money, трейдеры могут повысить вероятность успешного трейдинга и максимизировать прибыль в различных рыночных условиях.</string>
+    <string name="tech_analysis_intro">В динамичном мире трейдинга понимание технического анализа является бесценным инструментом. Он дает трейдерам глубокое понимание рыночной динамики, позволяя им разгадывать паттерны, выявлять возможности и принимать обоснованные решения. Это преимущество дает трейдерам уверенность и повышает их шансы на получение прибыли на рынках. Данное руководсвто является одним из лучших среди,так как помимо базовых знаний даёт подлинное понимание трейдинга.</string>
+    <string name="technical_analysis">Технический анализ</string>
+    <string name="all_trades">Все сделки</string>
+    <string name="trade_result">Торговый результат: %1$d (Победы - Поражения)</string>
+    <string name="best_strategy">Лучшая стратегия: %1$s</string>
+    <string name="best_instrument">Лучший инструмент: %1$s</string>
+    <string name="trade_dynamic">Динамика торговли</string>
+    <string name="notes">Записи</string>
+    <string name="email">Введите почту</string>
+    <string name="password">Введите пароль</string>
+    <string name="new_to_here">Новенький?</string>
+    <string name="sign_up">sign_up</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="registry">Регистрация</string>
+    <string name="login">Авторизация</string>
+    <string name="continue_mine">Продолжить</string>
+    <string-array name="weekDays">
+        <item>Дни недели:</item>
+        <item>Воскресенье</item>
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Суббота</item>
+        <item>Пятница</item>
+    </string-array>
+    <string-array name="month_names">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </string-array>
+    <string-array name="results">
+        <item>Результат сделки:</item>
+        <item>Победа</item>
+        <item>Поражение</item>
+    </string-array>
+    <string-array name="direction">
+        <item>Напрвление сделки:</item>
+        <item>Short</item>
+        <item>Long</item>
+    </string-array>
+</resources>

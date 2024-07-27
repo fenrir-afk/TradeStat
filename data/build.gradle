@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     //ksp
     id 'com.google.devtools.ksp'
+    //hilt
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -44,4 +46,7 @@ dependencies {
     // retrofit
     implementation('com.squareup.retrofit2:retrofit:2.11.0')
     implementation('com.squareup.retrofit2:converter-gson:2.11.0')
+    //hilt
+    implementation "com.google.dagger:hilt-android:2.51.1"
+    ksp "com.google.dagger:hilt-compiler:2.51.1"
 }

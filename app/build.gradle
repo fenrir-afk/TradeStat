@@ -1,11 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id "org.jetbrains.kotlin.kapt"
     //documentation
     id("org.jetbrains.dokka") version "1.9.20"
     //ksp
     id("com.google.devtools.ksp")
+    //hilt
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -43,6 +44,8 @@ android {
 
 dependencies {
     api project(":domain")
+    api project(":data")
+    api project(":presentation")
     implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
@@ -96,5 +99,8 @@ dependencies {
     //dagger 2
     implementation 'com.google.dagger:dagger:2.51.1'
     ksp 'com.google.dagger:dagger-compiler:2.51.1'
+    //hilt
+    implementation "com.google.dagger:hilt-android:2.51.1"
+    ksp "com.google.dagger:hilt-compiler:2.51.1"
 
 }

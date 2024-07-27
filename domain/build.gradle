@@ -7,3 +7,6 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
+dependencies {
+    implementation 'androidx.paging:paging-common-ktx:3.3.1'
+}
