@@ -1,5 +1,9 @@
 package com.example.tradestat.di
 
+import com.example.data.trade.dataSource.TradeDataSource
+import com.example.data.trade.dataSource.TradeDataSourceImp
+import com.example.data.trade.locale.dao.TradesDao
+import com.example.data.trade.locale.entity.Trade
 import com.example.data.user.dataSource.UserDataSource
 import com.example.data.user.dataSource.UserDataSourceImp
 import com.example.data.user.locale.dao.UserDao
@@ -16,5 +20,10 @@ class DataSourceModule {
     @Singleton
     fun provideLoginDataSource(userDao: UserDao): UserDataSource {
         return UserDataSourceImp(userDao)
+    }
+    @Provides
+    @Singleton
+    fun provideTradeDataSource(tradeDao: TradesDao): TradeDataSource {
+        return TradeDataSourceImp(tradeDao)
     }
 }

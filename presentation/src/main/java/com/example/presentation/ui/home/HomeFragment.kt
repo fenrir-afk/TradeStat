@@ -1,6 +1,5 @@
 package com.example.presentation.ui.home
 
-import android.app.Application
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,10 +14,11 @@ import androidx.navigation.findNavController
 import app.futured.donut.DonutSection
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
