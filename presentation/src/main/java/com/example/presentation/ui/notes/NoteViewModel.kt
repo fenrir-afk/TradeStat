@@ -4,7 +4,7 @@ package com.example.presentation.ui.notes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.presentation.BaseRepository
-import com.example.presentation.data.model.NoteCard
+import com.example.domain.model.NoteCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

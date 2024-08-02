@@ -27,18 +27,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.presentation.R
-import com.example.presentation.data.model.DaysOfWeek
-import com.example.presentation.data.model.Instrument
-import com.example.presentation.data.model.Results
-import com.example.presentation.data.model.Strategy
-import com.example.presentation.data.model.Trade
+import com.example.domain.model.DaysOfWeek
+import com.example.domain.model.Instrument
+import com.example.domain.model.Results
+import com.example.domain.model.Strategy
+import com.example.domain.model.Trade
 import com.example.presentation.databinding.FragmentTradeBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
+@AndroidEntryPoint
 class TradeFragment : Fragment() {
     companion object CardSettings {
         const val CHAR_NUMBER_IN_ROW = 25

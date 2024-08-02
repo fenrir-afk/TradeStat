@@ -1,7 +1,7 @@
 package com.example.presentation.utils
 
-import com.example.presentation.data.model.Directions
-import com.example.presentation.data.model.Trade
+import com.example.domain.model.Directions
+import com.example.domain.model.Trade
 
 
 /**

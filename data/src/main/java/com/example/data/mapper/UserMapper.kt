@@ -1,9 +1,9 @@
 package com.example.data.mapper
 
-import com.example.data.user.locale.entity.UserDb
-import com.example.domain.user.entity.UserDm
+import com.example.data.entity.UserDb
+import com.example.domain.model.User
 
-fun UserDm.toDbData() = UserDb(
+fun User.toDbData() = UserDb(
     id = id,
     login = login,
     email = email,

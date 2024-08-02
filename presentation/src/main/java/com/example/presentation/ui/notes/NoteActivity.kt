@@ -16,7 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation.R
-import com.example.presentation.data.model.NoteCard
+import com.example.domain.model.NoteCard
 import com.example.presentation.databinding.ActivityNoteBinding
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch

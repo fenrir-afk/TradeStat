@@ -3,11 +3,11 @@ package com.example.tradestat.di
 import android.content.Context
 import androidx.room.Room
 import com.example.data.db.TradeDatabase
-import com.example.data.instrument.locale.dao.InstrumentDao
-import com.example.data.user.locale.dao.UserDao
-import com.example.data.note.locale.dao.NoteDao
-import com.example.data.strategy.locale.dao.StrategiesDao
-import com.example.data.trade.locale.dao.TradesDao
+import com.example.data.instrument.dao.InstrumentDao
+import com.example.data.user.dao.UserDao
+import com.example.data.note.dao.NoteDao
+import com.example.data.strategy.dao.StrategiesDao
+import com.example.data.trade.dao.TradesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

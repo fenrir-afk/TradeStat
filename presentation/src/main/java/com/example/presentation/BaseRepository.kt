@@ -1,12 +1,13 @@
 package com.example.presentation
-import com.example.domain.user.entity.UserDm
-import com.example.presentation.data.model.DaysOfWeek
-import com.example.presentation.data.model.Instrument
-import com.example.presentation.data.model.NoteCard
-import com.example.presentation.data.model.Quotes
-import com.example.presentation.data.model.Results
-import com.example.presentation.data.model.Strategy
-import com.example.presentation.data.model.Trade
+
+import com.example.domain.model.DaysOfWeek
+import com.example.domain.model.Instrument
+import com.example.domain.model.NoteCard
+import com.example.domain.model.Quotes
+import com.example.domain.model.Results
+import com.example.domain.model.Strategy
+import com.example.domain.model.Trade
+import com.example.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface BaseRepository {
@@ -15,8 +16,9 @@ interface BaseRepository {
     fun getTradesSortedByDateDescending():List<Trade>
     fun getTradesSortedByDateAscending():List<Trade>
     fun getSortedByStrategiesList(strategy: String):List<Trade>
-    fun getTradesByResult(result: String): List<Trade>
     fun getSortedByInstrumentList(instrument: String):List<Trade>
+
+    fun getTradesByResult(result: String): List<Trade>
     fun getShortPos(): Int
     fun getLongPos(): Int
     fun getWinNumber(): Int
@@ -47,8 +49,8 @@ interface BaseRepository {
     fun deleteNote(noteCard: NoteCard)
 
     //login and register part
-    fun getUser(email:String,pass:String): UserDm?
-    fun insertUser(user: UserDm)
-    fun getAllUsers(): List<UserDm>
+    fun getUser(email:String,pass:String): User?
+    fun insertUser(user: User)
+    fun getAllUsers(): List<User>
     fun getForexData(quotePair: String, time: String): Flow<Quotes>
 }

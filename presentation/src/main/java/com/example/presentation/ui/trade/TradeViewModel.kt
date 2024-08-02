@@ -3,38 +3,67 @@ package com.example.presentation.ui.trade
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.presentation.BaseRepository
-import com.example.presentation.data.model.Instrument
-import com.example.presentation.data.model.Strategy
-import com.example.presentation.data.model.Trade
+import com.example.domain.main.trade.usecase.AddInstrumentUseCase
+import com.example.domain.main.trade.usecase.AddStrategyUseCase
+import com.example.domain.main.trade.usecase.AddTradeUseCase
+import com.example.domain.main.trade.usecase.DeleteInstrumentUseCase
+import com.example.domain.main.trade.usecase.DeleteStrategyUseCase
+import com.example.domain.main.trade.usecase.DeleteTradeUseCase
+import com.example.domain.main.trade.usecase.GetAllInstrumentsUseCase
+import com.example.domain.main.trade.usecase.GetAllStrategiesUseCase
+import com.example.domain.main.trade.usecase.GetAscendingTradesUseCase
+import com.example.domain.main.trade.usecase.GetDescendingTradesUseCase
+import com.example.domain.main.trade.usecase.SortByInstrumentUseCase
+import com.example.domain.main.trade.usecase.SortByStrategyUseCase
+import com.example.domain.model.Instrument
+import com.example.domain.model.Strategy
+import com.example.domain.model.Trade
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TradeViewModel(rep: BaseRepository) : ViewModel() {
+@HiltViewModel
+class TradeViewModel @Inject constructor(
+    private val addTradeUseCase: AddTradeUseCase,
+    private val deleteTradeUseCase: DeleteTradeUseCase,
+    private val getDescendingTradesUseCase: GetDescendingTradesUseCase,
+    private val getAscendingTradesUseCase: GetAscendingTradesUseCase,
+    private val sortByStrategyUseCase: SortByStrategyUseCase,
+    private val sortByInstrumentUseCase: SortByInstrumentUseCase,
+    private val getAllStrategiesUseCase: GetAllStrategiesUseCase,
+    private val getAllInstrumentsUseCase: GetAllInstrumentsUseCase,
+    private val deleteStrategiesUseCase: DeleteStrategyUseCase,
+    private val deleteInstrumentUseCase: DeleteInstrumentUseCase,
+    private val addStrategyUseCase: AddStrategyUseCase,
+    private val addInstrumentUseCase: AddInstrumentUseCase
+
+) : ViewModel() {
 
     private var _sortedTradesListFlow = MutableStateFlow<List<Trade>>(emptyList())
     val sortedTradesListFlow = _sortedTradesListFlow.asStateFlow()
 
     var getStrategyList:List<Strategy> = arrayListOf()
     var getInstrumentList:List<Instrument> = arrayListOf()
-    private val repository: BaseRepository = rep
+
 
 
     //trade section
     fun addTrade(trade: Trade){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addTrade(trade)
-            _sortedTradesListFlow.emit(repository.getTradesSortedByDateAscending())
+            addTradeUseCase.execute(trade)
+            _sortedTradesListFlow.emit(getAscendingTradesUseCase.execute())
         }
     }
     fun deleteTrade(trade: Trade){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteTrade(trade)
+            deleteTradeUseCase.execute(trade)
             var instrumentCounter =0
             var strategyCounter =0
-            repository.getTradesSortedByDateDescending().forEach{
+            getDescendingTradesUseCase.execute()
+            getDescendingTradesUseCase.execute().forEach{
                 if (it.strategy == trade.strategy){
                     strategyCounter++
                 }
@@ -43,12 +72,12 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
                 }
             }
             if (strategyCounter == 0){
-                repository.deleteStrategy(trade.strategy)
+                deleteStrategiesUseCase.execute(trade.strategy)
             }
             if (instrumentCounter == 0){
-                repository.deleteInstrument(trade.instrument)
+                deleteInstrumentUseCase.execute(trade.instrument)
             }
-            _sortedTradesListFlow.emit(repository.getTradesSortedByDateAscending())//update list
+            _sortedTradesListFlow.emit(getAscendingTradesUseCase.execute())//update list
         }
     }
     /**
@@ -56,7 +85,7 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
      * */
     fun updateListByDateDescending(){
         viewModelScope.launch(Dispatchers.IO) {
-            _sortedTradesListFlow.emit(repository.getTradesSortedByDateDescending())
+            _sortedTradesListFlow.emit(getDescendingTradesUseCase.execute())
         }
     }
     /**
@@ -64,7 +93,7 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
      * */
     fun updateListByDateAscending(){
         viewModelScope.launch(Dispatchers.IO) {
-            _sortedTradesListFlow.emit(repository.getTradesSortedByDateAscending())
+            _sortedTradesListFlow.emit(getAscendingTradesUseCase.execute())
         }
     }
     /**
@@ -72,7 +101,7 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
      * */
     fun updateListByStrategy(strategy: String){
       viewModelScope.launch(Dispatchers.IO) {
-          _sortedTradesListFlow.emit(repository.getSortedByStrategiesList(strategy))
+          _sortedTradesListFlow.emit(sortByStrategyUseCase.execute(strategy))
         }
     }
     /**
@@ -80,19 +109,19 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
      * */
     fun updateListByInstrument(instrument: String){
         viewModelScope.launch(Dispatchers.IO) {
-            _sortedTradesListFlow.emit(repository.getSortedByInstrumentList(instrument))
+            _sortedTradesListFlow.emit(sortByInstrumentUseCase.execute(instrument))
         }
     }
     //strategies section
 
     fun redStrategiesFromRepository(){
         viewModelScope.launch(Dispatchers.IO) {
-            getStrategyList = repository.getAllStrategies()
+            getStrategyList = getAllStrategiesUseCase.execute()
         }
     }
     fun addStrategy(strategy: Strategy){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addStrategy(strategy)
+            addStrategyUseCase.execute(strategy)
         }
     }
 
@@ -100,12 +129,12 @@ class TradeViewModel(rep: BaseRepository) : ViewModel() {
 
     fun readInstrumentsFromRepository(){
         viewModelScope.launch(Dispatchers.IO) {
-            getInstrumentList = repository.getAllInstruments()
+            getInstrumentList = getAllInstrumentsUseCase.execute()
         }
     }
     fun addInstrument(instrument: Instrument){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addInstrument(instrument)
+            addInstrumentUseCase.execute(instrument)
         }
     }
 

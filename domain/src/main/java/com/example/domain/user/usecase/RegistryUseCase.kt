@@ -1,10 +1,10 @@
 package com.example.domain.user.usecase
 
-import com.example.domain.user.UserRepository
-import com.example.domain.user.entity.UserDm
+import com.example.domain.contracts.UserRepository
+import com.example.domain.model.User
 
 class RegistryUseCase(private val userRepository: UserRepository) {
-    fun execute(user: UserDm): Boolean {
+    fun execute(user: User): Boolean {
         val checkUser = userRepository.checkUser(user.email,user.pass)
         if (checkUser){
             return false

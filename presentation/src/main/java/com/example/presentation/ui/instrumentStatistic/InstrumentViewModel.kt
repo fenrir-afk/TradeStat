@@ -3,7 +3,7 @@ package com.example.presentation.ui.instrumentStatistic
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.presentation.BaseRepository
-import com.example.presentation.data.model.Results
+import com.example.domain.model.Results
 import com.example.presentation.utils.RatingCounter
 
 import kotlinx.coroutines.Dispatchers

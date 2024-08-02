@@ -15,9 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation.R
-import com.example.presentation.data.model.Directions
-import com.example.presentation.data.model.Results
-import com.example.presentation.data.model.Trade
+import com.example.domain.model.Directions
+import com.example.domain.model.Results
+import com.example.domain.model.Trade
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class TradeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner)

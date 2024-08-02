@@ -4,8 +4,8 @@ package com.example.presentation.ui.results
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.presentation.BaseRepository
-import com.example.presentation.data.model.Results
-import com.example.presentation.data.model.Trade
+import com.example.domain.model.Results
+import com.example.domain.model.Trade
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -80,7 +80,7 @@ class ResultsViewModel(rep: BaseRepository): ViewModel() {
      * @toke 1 is a token for instruments other numbers for strategies
      * @return returns rating of name param
      * */
-    private fun getRating(list: MutableList<Trade>, name: String,token:Int): Int {
+    private fun getRating(list: MutableList<Trade>, name: String, token:Int): Int {
         var wins = 0
         var defeats = 0
         list.forEach {
@@ -115,7 +115,7 @@ class ResultsViewModel(rep: BaseRepository): ViewModel() {
      * @return return all trades added in the month
      * @param trades all trades of app
      * */
-    private fun updateTradesLists(trades: List<Trade>,token: Int): MutableList<Trade> {
+    private fun updateTradesLists(trades: List<Trade>, token: Int): MutableList<Trade> {
         val currentMonth = Calendar.getInstance().get(Calendar.MONTH)
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
         val lastMonth = if (currentMonth == 0) 11 else currentMonth - 1

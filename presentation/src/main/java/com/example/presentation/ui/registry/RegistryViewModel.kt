@@ -3,11 +3,8 @@ package com.example.presentation.ui.registry
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.user.entity.UserDm
 import com.example.domain.user.usecase.RegistryUseCase
-import com.example.presentation.BaseRepository
-import com.example.presentation.data.model.User
-import com.example.presentation.mapper.toDomain
+import com.example.domain.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +19,7 @@ class RegistryViewModel @Inject constructor(private val useCase: RegistryUseCase
 
     fun addUser(user: User){
         viewModelScope.launch(Dispatchers.IO) {
-            val result = useCase.execute(user.toDomain())
+            val result = useCase.execute(user)
             _userResultFow.emit(result)
         }
     }

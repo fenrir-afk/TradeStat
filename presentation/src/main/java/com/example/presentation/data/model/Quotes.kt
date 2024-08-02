@@ -1,5 +1,8 @@
 package com.example.presentation.data.model
 
+import com.example.domain.model.Info
+import com.example.domain.model.ResponseItem
+
 data class Quotes(
     val status: Boolean,
     val code: Int,

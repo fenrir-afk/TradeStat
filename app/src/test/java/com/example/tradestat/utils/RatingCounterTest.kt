@@ -1,6 +1,6 @@
 package com.example.tradestat.utils
 
-import com.example.presentation.data.model.Trade
+import com.example.domain.model.Trade
 import com.example.presentation.utils.RatingCounter
 import org.junit.Before
 import org.junit.Test

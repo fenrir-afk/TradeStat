@@ -1,13 +1,11 @@
 package com.example.tradestat.di
 
 
-import com.example.data.trade.dataSource.TradeDataSource
-import com.example.data.trade.dataSource.TradeDataSourceImp
-import com.example.data.trade.repository.TradeRepositoryImp
+import com.example.data.main.home.dataSource.HomeDataSource
+import com.example.data.main.home.repository.HomeRepositoryImp
 import com.example.data.user.dataSource.UserDataSource
 import com.example.data.user.repository.UserRepositoryImp
-import com.example.domain.trade.TradeRepository
-import com.example.domain.user.UserRepository
+import com.example.domain.contracts.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,8 +24,8 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideTradeRepository(
-        tradeDataSource: TradeDataSource
-    ): TradeRepository {
-        return TradeRepositoryImp(tradeDataSource)
+        tradeDataSource: HomeDataSource
+    ): HomeRepository {
+        return HomeRepositoryImp(tradeDataSource)
     }
 }

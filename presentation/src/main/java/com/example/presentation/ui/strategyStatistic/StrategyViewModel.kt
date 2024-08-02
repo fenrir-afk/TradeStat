@@ -5,7 +5,7 @@ package com.example.presentation.ui.strategyStatistic
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.presentation.BaseRepository
-import com.example.presentation.data.model.Results
+import com.example.domain.model.Results
 import com.example.presentation.utils.RatingCounter
 
 import com.github.mikephil.charting.data.Entry

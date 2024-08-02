@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.presentation.MainActivity
-import com.example.presentation.data.model.User
+import com.example.domain.model.User
 import com.example.presentation.databinding.ActivityRegistryBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter

@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.presentation.R
-import com.example.presentation.data.model.NoteCard
+import com.example.domain.model.NoteCard
 import com.example.presentation.utils.FullscreenImageActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.File

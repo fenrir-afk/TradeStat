@@ -1,7 +1,7 @@
 package com.example.data.user.dataSource
 
-import com.example.data.user.locale.dao.UserDao
-import com.example.data.user.locale.entity.UserDb
+import com.example.data.user.dao.UserDao
+import com.example.data.entity.UserDb
 import javax.inject.Inject
 
 class UserDataSourceImp @Inject constructor(private val userDao: UserDao):UserDataSource {
