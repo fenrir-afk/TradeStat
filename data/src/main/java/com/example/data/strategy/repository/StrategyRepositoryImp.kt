@@ -1,18 +1,20 @@
 package com.example.data.strategy.repository
 
+import com.example.data.strategy.dataSource.StrategyDataSource
 import com.example.domain.contracts.StrategyRepository
 import com.example.domain.model.Strategy
+import javax.inject.Inject
 
-class StrategyRepositoryImp:StrategyRepository {
+class StrategyRepositoryImp @Inject constructor(private val dataSource: StrategyDataSource):StrategyRepository {
     override fun getAllStrategies(): List<Strategy> {
-        TODO("Not yet implemented")
+        return dataSource.getAllStrategies()
     }
 
     override fun addStrategy(strategy: Strategy) {
-        TODO("Not yet implemented")
+        dataSource.addStrategy(strategy)
     }
 
     override fun deleteStrategy(name: String) {
-        TODO("Not yet implemented")
+       dataSource.deleteStrategy(name)
     }
 }
