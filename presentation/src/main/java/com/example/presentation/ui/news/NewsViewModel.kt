@@ -2,7 +2,9 @@ package com.example.presentation.ui.news
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.main.news.usecase.GetForexDataUseCase
 import com.example.presentation.BaseRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,11 +17,15 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.StringReader
 import java.net.URL
+import javax.inject.Inject
 import javax.net.ssl.HttpsURLConnection
 import javax.xml.parsers.DocumentBuilderFactory
 
-class NewsViewModel(rep: BaseRepository) : ViewModel() {
-    private val repository: BaseRepository = rep
+@HiltViewModel
+class NewsViewModel @Inject constructor(
+    private val getForexDataUseCase: GetForexDataUseCase
+) : ViewModel() {
+
 
     private var quote: MutableList<Triple<String,Boolean,String>> = mutableListOf()//Intermediate value for _quitesFlow
     private var _quitesFlow = MutableStateFlow<MutableList<Triple<String,Boolean,String>>>(mutableListOf())
@@ -34,7 +40,7 @@ class NewsViewModel(rep: BaseRepository) : ViewModel() {
     }
     private fun updateQuotes(quotePair:String, time:String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getForexData(quotePair,time).flowOn(Dispatchers.IO).retry(3).collect{
+            getForexDataUseCase.execute(quotePair,time).flowOn(Dispatchers.IO).retry(3).collect{
                 val directionNumber = it.response[0].cp
                 val formattedQuote = "%.1f".format(it.response[0].c.toDouble())
                 if (directionNumber.first() == ('-')){

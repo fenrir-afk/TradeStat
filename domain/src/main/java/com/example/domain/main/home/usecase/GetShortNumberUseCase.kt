@@ -1,9 +1,10 @@
 package com.example.domain.main.home.usecase
 
-import com.example.domain.model.Directions
+import com.example.domain.contracts.TradeRepository
 
-class GetShortNumberUseCase(val rep: HomeRepository) {
+
+class GetShortNumberUseCase(val rep: TradeRepository) {
     fun execute(): Int{
-        return rep.getNumberByDirection(Directions.Short.toString())
+        return rep.getShortPos()
     }
 }

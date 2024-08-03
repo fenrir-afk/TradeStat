@@ -10,9 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentNewsBinding
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class NewsFragment : Fragment() {
     enum class Stocks{
         MOEX,

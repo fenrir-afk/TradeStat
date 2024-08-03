@@ -52,7 +52,7 @@ class TradeRepositoryImp @Inject constructor(private val dataSource:TradeDataSou
     }
 
     override fun getDefNumber(): Int {
-        return dataSource.getWinNumber()
+        return dataSource.getDefNumber()
     }
 
     override fun getDayStatistic(): Flow<List<Trade>> {

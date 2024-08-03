@@ -1,11 +1,12 @@
 package com.example.tradestat.di.usecase
 
 import com.example.domain.contracts.TradeRepository
-import com.example.domain.main.trade.usecase.AddInstrumentUseCase
-import com.example.domain.main.trade.usecase.AddStrategyUseCase
+import com.example.domain.main.home.usecase.GetDefeatNumberUseCase
+import com.example.domain.main.home.usecase.GetLongNumberUseCase
+import com.example.domain.main.home.usecase.GetShortNumberUseCase
+import com.example.domain.main.home.usecase.GetWinNumberUseCase
 import com.example.domain.main.trade.usecase.AddTradeUseCase
 import com.example.domain.main.trade.usecase.DeleteTradeUseCase
-import com.example.domain.main.trade.usecase.GetAllInstrumentsUseCase
 import com.example.domain.main.trade.usecase.GetAscendingTradesUseCase
 import com.example.domain.main.trade.usecase.GetDescendingTradesUseCase
 import com.example.domain.main.trade.usecase.SortByInstrumentUseCase
@@ -42,17 +43,27 @@ class TradeUseCaseModule {
     fun provideListTradesSortedByInstrument(rep: TradeRepository): SortByInstrumentUseCase {
         return SortByInstrumentUseCase(rep)
     }
+
+
+    //home useCases
+
     @Provides
-    fun provideListInstruments(rep: TradeRepository): GetAllInstrumentsUseCase {
-        return GetAllInstrumentsUseCase(rep)
-    }
-    @Provides
-    fun provideAddStrategyUseCase(rep: TradeRepository): AddStrategyUseCase {
-        return AddStrategyUseCase(rep)
+    fun provideGetDefeatNumberUseCase(rep: TradeRepository): GetDefeatNumberUseCase {
+        return GetDefeatNumberUseCase(rep)
     }
 
     @Provides
-    fun provideAddInstrumentUseCase(rep: TradeRepository): AddInstrumentUseCase {
-        return AddInstrumentUseCase(rep)
+    fun provideGetLongNumberUseCase(rep: TradeRepository): GetLongNumberUseCase {
+        return GetLongNumberUseCase(rep)
     }
+
+    @Provides
+    fun provideGetShortNumberUseCase(rep: TradeRepository): GetShortNumberUseCase {
+        return GetShortNumberUseCase(rep)
+    }
+    @Provides
+    fun provideGetWinNumberUseCase(rep: TradeRepository): GetWinNumberUseCase {
+        return GetWinNumberUseCase(rep)
+    }
+
 }

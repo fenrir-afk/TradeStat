@@ -4,7 +4,7 @@ import com.example.domain.contracts.TradeRepository
 import com.example.domain.model.Trade
 
 class DeleteTradeUseCase(val rep: TradeRepository) {
-    fun execute(trade: Trade):Boolean{
-       return rep.deleteTrade(trade)
+    fun execute(trade: Trade){
+        rep.deleteTrade(trade)
     }
 }

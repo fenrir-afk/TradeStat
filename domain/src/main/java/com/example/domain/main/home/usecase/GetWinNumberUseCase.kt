@@ -1,9 +1,10 @@
 package com.example.domain.main.home.usecase
 
-import com.example.domain.model.Results
+import com.example.domain.contracts.TradeRepository
 
-class GetWinNumberUseCase(val rep: HomeRepository) {
+
+class GetWinNumberUseCase(val rep: TradeRepository) {
     fun execute(): Int{
-        return rep.getNumberByResult(Results.Victory.toString())
+        return rep.getWinNumber()
     }
 }
