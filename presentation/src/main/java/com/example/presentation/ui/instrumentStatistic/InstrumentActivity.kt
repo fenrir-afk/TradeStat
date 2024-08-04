@@ -23,10 +23,11 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class InstrumentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInstrumentBinding
 

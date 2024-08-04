@@ -2,7 +2,6 @@ package com.example.domain.strategy.usecase
 
 import com.example.domain.contracts.StrategyRepository
 import com.example.domain.contracts.TradeRepository
-import com.example.domain.contracts.UserRepository
 import com.example.domain.model.Results
 import com.example.domain.util.RatingCounter
 

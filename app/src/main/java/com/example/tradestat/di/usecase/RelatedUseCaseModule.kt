@@ -1,7 +1,9 @@
 package com.example.tradestat.di.usecase
 
+import com.example.domain.contracts.InstrumentRepository
 import com.example.domain.contracts.StrategyRepository
 import com.example.domain.contracts.TradeRepository
+import com.example.domain.instrument.usecase.GetInstrumentsRatingUseCase
 import com.example.domain.strategy.usecase.GetStrategiesChartUseCase
 import com.example.domain.strategy.usecase.GetStrategiesRatingUseCase
 import dagger.Module
@@ -19,5 +21,11 @@ class RelatedUseCaseModule {
     @Provides
     fun provideGetStrategiesRatingUseCase(rep1: TradeRepository,rep2: StrategyRepository): GetStrategiesRatingUseCase {
         return GetStrategiesRatingUseCase(rep1,rep2)
+    }
+
+
+    @Provides
+    fun provideGetInstrumentsRatingUseCase(rep1: TradeRepository,rep2: InstrumentRepository): GetInstrumentsRatingUseCase {
+        return GetInstrumentsRatingUseCase(rep1,rep2)
     }
 }
