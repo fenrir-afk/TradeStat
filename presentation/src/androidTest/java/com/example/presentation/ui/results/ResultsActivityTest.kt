@@ -1,11 +1,10 @@
-package com.example.tradestat.com.example.tradestat.ui.results
+package com.example.presentation.ui.results
 
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.example.presentation.ui.results.ResultsActivity
-import com.example.tradestat.R
+import com.example.presentation.R
 import org.junit.Rule
 import org.junit.Test
 

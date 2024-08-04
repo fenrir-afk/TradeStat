@@ -12,10 +12,12 @@ import com.example.domain.contracts.NoteRepository
 import com.example.domain.contracts.StrategyRepository
 import com.example.domain.contracts.TradeRepository
 import com.example.domain.contracts.UserRepository
+import com.example.domain.date.usecase.GetCoordinatesByArrUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -38,4 +40,5 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideNewsRepository(newsRepositoryImp: NewsRepositoryImp): NewsRepository
+
 }

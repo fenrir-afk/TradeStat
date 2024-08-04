@@ -16,9 +16,11 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class DateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDateBinding
     private val dateViewModel:DateViewModel by viewModels()

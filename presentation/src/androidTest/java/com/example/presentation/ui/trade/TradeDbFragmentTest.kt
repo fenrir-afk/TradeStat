@@ -1,4 +1,4 @@
-package com.example.tradestat.com.example.tradestat.ui.trade
+package com.example.presentation.ui.trade
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onData
@@ -15,8 +15,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withSpinnerText
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.presentation.MainActivity
-import com.example.tradestat.R
+import com.example.presentation.R
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.anything
 import org.hamcrest.CoreMatchers.containsString

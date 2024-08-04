@@ -1,4 +1,4 @@
-package com.example.tradestat.com.example.tradestat.ui.notes
+package com.example.presentation.ui.notes
 
 
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +10,8 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.presentation.R
 import com.example.presentation.ui.notes.NoteActivity
-import com.example.tradestat.R
 import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
 import org.junit.Rule

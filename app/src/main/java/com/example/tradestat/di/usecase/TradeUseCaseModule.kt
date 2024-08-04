@@ -1,6 +1,8 @@
 package com.example.tradestat.di.usecase
 
 import com.example.domain.contracts.TradeRepository
+import com.example.domain.date.usecase.GetDayStatisticsUseCase
+import com.example.domain.date.usecase.GetWinRateByDayUseCase
 import com.example.domain.main.home.usecase.GetDefeatNumberUseCase
 import com.example.domain.main.home.usecase.GetLongNumberUseCase
 import com.example.domain.main.home.usecase.GetShortNumberUseCase
@@ -66,6 +68,14 @@ class TradeUseCaseModule {
         return GetWinNumberUseCase(rep)
     }
 
+    @Provides
+    fun provideGetDayStatisticsUseCase(rep: TradeRepository): GetDayStatisticsUseCase {
+        return GetDayStatisticsUseCase(rep)
+    }
 
+    @Provides
+    fun provideGetWinRateByDayUseCase(rep: TradeRepository): GetWinRateByDayUseCase {
+        return GetWinRateByDayUseCase(rep)
+    }
 
 }

@@ -1,18 +1,28 @@
 package com.example.presentation.ui.dateStatistic
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.date.usecase.GetCoordinatesByArrUseCase
+import com.example.domain.date.usecase.GetDayStatisticsUseCase
+import com.example.domain.date.usecase.GetWinRateByDayUseCase
 import com.example.presentation.BaseRepository
 import com.example.domain.model.DaysOfWeek
 import com.example.domain.model.Results
 import com.example.domain.model.Trade
 import com.github.mikephil.charting.data.Entry
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DateViewModel(rep: BaseRepository) : ViewModel(){
+@HiltViewModel
+class DateViewModel @Inject constructor(
+    private val getWinRateByDayUseCase: GetWinRateByDayUseCase,
+    private val getCoordinatesByArrUseCase: GetCoordinatesByArrUseCase,
+    private val getDayStatisticsUseCase: GetDayStatisticsUseCase
+) : ViewModel(){
 
     private val _dayEntriesFlow = MutableStateFlow(mutableListOf<MutableList<Entry>>()) // private mutable state flow
     private val daysEntriesArr = mutableListOf<MutableList<Entry>>() //list of lists each of which represent entries of single day
@@ -21,14 +31,13 @@ class DateViewModel(rep: BaseRepository) : ViewModel(){
     private val _ratingFlow = MutableStateFlow(mutableListOf<Int>()) // this flow contains rating of each day
     val ratingFlow = _ratingFlow.asStateFlow()
 
-    private val repository: BaseRepository = rep
     init {
         updateDay()
         getRatingList()
     }
     private fun updateDay(){ // in this method we get coordinates relatively to the trade list
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getDayStatistic()
+            getDayStatisticsUseCase.execute()
                 .flowOn(Dispatchers.IO)
                 .collect {
                     getCoordinates1(it)
@@ -48,31 +57,11 @@ class DateViewModel(rep: BaseRepository) : ViewModel(){
     private fun getCoordinates1(
         tradeArr: List<Trade>
     ) {
-        val list:MutableList<Entry> = mutableListOf()
-        list.add(Entry(0f,0f))
-        var verticalCounter = 0f
-        var horizontalCounter: Float
-        repeat(tradeArr.size) {
-            horizontalCounter = it.toFloat() + 1f
-            if (tradeArr[it].tradeResult == Results.Victory.name){
-                verticalCounter++
-            }else{
-                verticalCounter--
-            }
-            list.add(Entry(horizontalCounter,verticalCounter))
-        }
+        val list = getCoordinatesByArrUseCase.execute(tradeArr).map { Entry(it.first,it.second)}.toMutableList()
         daysEntriesArr.add(list)
     }
     private fun getWinRate(daysOfWeek: DaysOfWeek): Int {
-        val victories  = repository.countTradesByResultAndDate(Results.Victory,daysOfWeek)
-        val defeats  = repository.countTradesByResultAndDate(Results.Defeat,daysOfWeek)
-        if (defeats != 0){
-            return victories*100/(defeats + victories)
-        }
-        if (victories == 0){
-            return 0 //0% win rate
-        }
-        return 100 //100% win rate
+       return getWinRateByDayUseCase.execute(daysOfWeek)
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.tradestat.utils
+package com.example.presentation.utils
 
 import com.example.domain.model.Trade
 import com.example.domain.util.RatingCounter

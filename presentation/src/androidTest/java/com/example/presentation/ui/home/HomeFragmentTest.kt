@@ -1,4 +1,4 @@
-package com.example.tradestat.com.example.tradestat.ui.home
+package com.example.presentation.ui.home
 
 import android.content.res.Configuration
 import androidx.test.core.app.ActivityScenario
@@ -11,7 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.presentation.MainActivity
-import com.example.tradestat.R
+import com.example.presentation.R
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -3,6 +3,7 @@ package com.example.tradestat.di.usecase
 import com.example.domain.contracts.InstrumentRepository
 import com.example.domain.contracts.StrategyRepository
 import com.example.domain.contracts.TradeRepository
+import com.example.domain.date.usecase.GetCoordinatesByArrUseCase
 import com.example.domain.instrument.usecase.GetInstrumentsRatingUseCase
 import com.example.domain.strategy.usecase.GetStrategiesChartUseCase
 import com.example.domain.strategy.usecase.GetStrategiesRatingUseCase
@@ -27,5 +28,10 @@ class RelatedUseCaseModule {
     @Provides
     fun provideGetInstrumentsRatingUseCase(rep1: TradeRepository,rep2: InstrumentRepository): GetInstrumentsRatingUseCase {
         return GetInstrumentsRatingUseCase(rep1,rep2)
+    }
+
+    @Provides
+    fun provideGetCoordinatesByArrUseCase(): GetCoordinatesByArrUseCase {
+        return GetCoordinatesByArrUseCase()
     }
 }
