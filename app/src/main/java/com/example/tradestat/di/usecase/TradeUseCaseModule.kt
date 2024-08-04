@@ -11,6 +11,9 @@ import com.example.domain.main.trade.usecase.GetAscendingTradesUseCase
 import com.example.domain.main.trade.usecase.GetDescendingTradesUseCase
 import com.example.domain.main.trade.usecase.SortByInstrumentUseCase
 import com.example.domain.main.trade.usecase.SortByStrategyUseCase
+import com.example.domain.strategy.usecase.GetAllTradesDescendingUseCase
+import com.example.domain.strategy.usecase.GetDefeatTradesUseCase
+import com.example.domain.strategy.usecase.GetWinTradesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -64,6 +67,23 @@ class TradeUseCaseModule {
     @Provides
     fun provideGetWinNumberUseCase(rep: TradeRepository): GetWinNumberUseCase {
         return GetWinNumberUseCase(rep)
+    }
+
+    //strategies use cases
+
+    @Provides
+    fun provideGetAllTradesDescendingUseCaseUseCase(rep: TradeRepository): GetAllTradesDescendingUseCase {
+        return GetAllTradesDescendingUseCase(rep)
+    }
+
+    @Provides
+    fun provideGetWinTradesUseCaseCaseUseCase(rep: TradeRepository): GetWinTradesUseCase {
+        return GetWinTradesUseCase(rep)
+    }
+
+    @Provides
+    fun provideGetDefeatTradesUseCaseCaseUseCase(rep: TradeRepository): GetDefeatTradesUseCase {
+        return GetDefeatTradesUseCase(rep)
     }
 
 }

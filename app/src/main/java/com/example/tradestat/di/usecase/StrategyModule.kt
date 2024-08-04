@@ -4,6 +4,7 @@ import com.example.domain.contracts.StrategyRepository
 import com.example.domain.main.trade.usecase.AddStrategyUseCase
 import com.example.domain.main.trade.usecase.DeleteStrategyUseCase
 import com.example.domain.main.trade.usecase.GetAllStrategiesUseCase
+import com.example.domain.strategy.usecase.GetStrategiesListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,5 +24,10 @@ class StrategyModule {
     @Provides
     fun provideGetAllStrategiesUseCase(rep: StrategyRepository): GetAllStrategiesUseCase {
         return GetAllStrategiesUseCase(rep)
+    }
+    //strategies page
+    @Provides
+    fun provideGetStrategiesListUseCaseUseCase(rep: StrategyRepository): GetStrategiesListUseCase {
+        return GetStrategiesListUseCase(rep)
     }
 }

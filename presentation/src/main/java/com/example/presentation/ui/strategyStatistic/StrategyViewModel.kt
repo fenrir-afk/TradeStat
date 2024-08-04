@@ -6,15 +6,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.presentation.BaseRepository
 import com.example.domain.model.Results
+import com.example.domain.strategy.usecase.GetAllTradesDescendingUseCase
+import com.example.domain.strategy.usecase.GetDefeatTradesUseCase
+import com.example.domain.strategy.usecase.GetStrategiesListUseCase
+import com.example.domain.strategy.usecase.GetWinTradesUseCase
 import com.example.presentation.utils.RatingCounter
 
 import com.github.mikephil.charting.data.Entry
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class StrategyViewModel(rep: BaseRepository) : ViewModel() {
+@HiltViewModel
+class StrategyViewModel @Inject constructor(
+    private val getAllTradesDescendingUseCase: GetAllTradesDescendingUseCase,
+    private val getDefeatTradesUseCase: GetDefeatTradesUseCase,
+    private val getStrategiesListUseCase: GetStrategiesListUseCase,
+    private val getWinTradesUseCase: GetWinTradesUseCase
+) : ViewModel() {
     private var _winRateShortFlow = MutableStateFlow<MutableList<Int>>(mutableListOf())
     val winRateShortFlow = _winRateShortFlow.asStateFlow()
 
@@ -28,15 +40,15 @@ class StrategyViewModel(rep: BaseRepository) : ViewModel() {
     private var tradeNumbers: MutableList<Int> =  mutableListOf()
     var strategiesNames: MutableList<String> = mutableListOf()
 
-    private val repository: BaseRepository = rep
+
     /**
      * In this method we get coordinates relatively to the trade list
     * */
      fun updateData(){
         viewModelScope.launch(Dispatchers.IO) {
             strategiesNames = mutableListOf()
-            val strategies = repository.getAllStrategies()
-            val trades =repository.getTradesSortedByDateDescending()
+            val strategies = getStrategiesListUseCase.execute()
+            val trades = getAllTradesDescendingUseCase.execute()
             val strategyLists = mutableListOf<List<Entry>>()
             for (i in strategies.indices){
                 strategiesNames.add(strategies[i].strategyName)
@@ -68,8 +80,8 @@ class StrategyViewModel(rep: BaseRepository) : ViewModel() {
      * */
     private  fun updateRatingData(strategiesNames: MutableList<String>) {
         viewModelScope.launch(Dispatchers.IO){
-            val winTrades = repository.getTradesByResult(Results.Victory.name)
-            val defeatTrades = repository.getTradesByResult(Results.Defeat.name)
+            val winTrades = getWinTradesUseCase.execute()
+            val defeatTrades = getDefeatTradesUseCase.execute()
             val ratingObj = RatingCounter(strategiesNames,winTrades,defeatTrades,2)
             ratingObj.updateData()
             getWinRateListLong = ratingObj.longWinRateList

@@ -43,13 +43,8 @@ class RegistryActivity : AppCompatActivity() {
             val pass = binding.password.text.toString()
             val login = binding.login.text.toString()
             if (email.isNotBlank() && pass.isNotBlank() && login.isNotBlank()){
-                if (isValidEmail(email)){
-
-
-
+                if (registerViewModel.isValidEmail(email)){
                    registerViewModel.addUser(User(0,login,email,pass))
-
-
                 }else{
                     Toast.makeText(this,"Email is not valid", Toast.LENGTH_SHORT).show()
                 }
@@ -66,9 +61,5 @@ class RegistryActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
-    }
-    private fun isValidEmail(email: String): Boolean {
-        val emailRegex = Regex("^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\$")
-        return emailRegex.matches(email)
     }
 }
