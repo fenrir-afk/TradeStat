@@ -1,4 +1,4 @@
-package com.example.presentation.utils
+package com.example.domain.util
 
 import com.example.domain.model.Directions
 import com.example.domain.model.Trade
@@ -13,7 +13,7 @@ import com.example.domain.model.Trade
  * @param [token] is an int value which is used to change the instrument count logic to strategy
 * */
 class RatingCounter(
-    private val names: MutableList<String>,
+    val names: List<String>,
     private val winTrades: List<Trade>,
     private val defeatTrades: List<Trade>,
     private val token: Int

@@ -1,7 +1,7 @@
 package com.example.tradestat.utils
 
 import com.example.domain.model.Trade
-import com.example.presentation.utils.RatingCounter
+import com.example.domain.util.RatingCounter
 import org.junit.Before
 import org.junit.Test
 

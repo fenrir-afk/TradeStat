@@ -71,7 +71,7 @@ class StrategyActivity : AppCompatActivity() {
      * @param strategiesNames names of strategies
      * @param lists list of points on graph
      * */
-    private fun setChart(strategiesNames: MutableList<String>, lists: MutableList<List<Entry>>) {
+    private fun setChart(strategiesNames: MutableList<String>, lists: List<List<Entry>>) {
         // Getting left axis
         val leftAxis = binding.chart.axisLeft
         leftAxis.textColor = ContextCompat.getColor(this, R.color.lightGray)

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.presentation.BaseRepository
 import com.example.domain.model.Results
 import com.example.domain.model.Trade
-import com.example.presentation.utils.RatingCounter
+import com.example.domain.util.RatingCounter
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

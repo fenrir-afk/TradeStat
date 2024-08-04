@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.presentation.BaseRepository
 import com.example.domain.model.Results
-import com.example.presentation.utils.RatingCounter
+import com.example.domain.util.RatingCounter
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
