@@ -1,8 +1,11 @@
 package com.example.presentation.ui.news
+import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -32,7 +35,8 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
-
+        val nightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        checkTheme()
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 newsViewModel.stockMarketValuesFlow.collect{
@@ -49,6 +53,24 @@ class NewsFragment : Fragment() {
         }
         return binding.root
     }
+
+    private fun checkTheme() {
+        val nightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            binding.firstMoexValue.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+            binding.secondMoexValue.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+            binding.thirdMoexValue.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+            binding.quote1.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+            binding.quote2.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+        } else {
+            binding.firstMoexValue.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+            binding.secondMoexValue.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+            binding.thirdMoexValue.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+            binding.quote1.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+            binding.quote2.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+        }
+    }
+
     private fun updateStockMarketQuotes(mutableMap: MutableMap<String, String>) {
        if (mutableMap.isNotEmpty()){
            Stocks.entries.forEachIndexed{ index, stock ->

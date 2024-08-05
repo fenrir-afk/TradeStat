@@ -1,7 +1,9 @@
 package com.example.presentation
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -69,8 +71,12 @@ class MainActivity : AppCompatActivity() {
             val nightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
             if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
                 themeItem.setIcon(R.drawable.white_sun)
+                //binding.navView.setBackgroundColor(ContextCompat.getColor(this,R.color.green))
             } else {
                 themeItem.setIcon(R.drawable.sun_light)
+                binding.navView.setBackgroundColor(ContextCompat.getColor(this,R.color.specialWhite))
+                binding.navView.itemIconTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.black))
+                binding.navView.itemTextColor = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.black))
             }
         }
         if (localeItem != null) {
