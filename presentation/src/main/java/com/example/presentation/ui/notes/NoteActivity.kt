@@ -18,11 +18,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation.R
 import com.example.domain.model.NoteCard
 import com.example.presentation.databinding.ActivityNoteBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 
+@AndroidEntryPoint
 class NoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNoteBinding

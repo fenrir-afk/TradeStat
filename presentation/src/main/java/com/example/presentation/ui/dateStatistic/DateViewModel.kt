@@ -4,9 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.date.usecase.GetCoordinatesByArrUseCase
 import com.example.domain.date.usecase.GetDayStatisticsUseCase
 import com.example.domain.date.usecase.GetWinRateByDayUseCase
-import com.example.presentation.BaseRepository
 import com.example.domain.model.DaysOfWeek
-import com.example.domain.model.Results
 import com.example.domain.model.Trade
 import com.github.mikephil.charting.data.Entry
 import dagger.hilt.android.lifecycle.HiltViewModel

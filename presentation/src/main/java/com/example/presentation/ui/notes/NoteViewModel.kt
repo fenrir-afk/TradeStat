@@ -1,39 +1,48 @@
 package com.example.presentation.ui.notes
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.presentation.BaseRepository
 import com.example.domain.model.NoteCard
+import com.example.domain.note.usecase.AddNoteUseCase
+import com.example.domain.note.usecase.DeleteNoteUseCase
+import com.example.domain.note.usecase.GetAllNotesUseCase
+import com.example.domain.note.usecase.UpdateNoteUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NoteViewModel(rep: BaseRepository): ViewModel(){
-    private val repository: BaseRepository = rep
+@HiltViewModel
+class NoteViewModel @Inject constructor(
+    private  val addNoteUseCase: AddNoteUseCase,
+    private  val deleteNoteUseCase: DeleteNoteUseCase,
+    private  val getAllNotesUseCase: GetAllNotesUseCase,
+    private  val updateNoteUseCase: UpdateNoteUseCase
+): ViewModel(){
     private var _notesFlow = MutableStateFlow<List<NoteCard>>(emptyList())
     val notesFlow = _notesFlow.asStateFlow()
 
     fun addNote(noteCard: NoteCard){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addNote(noteCard)
-            _notesFlow.emit(repository.getAllNotes())
+            addNoteUseCase.execute(noteCard)
+            _notesFlow.emit(getAllNotesUseCase.execute())
         }
     }
     fun getAllNotes(){
         viewModelScope.launch(Dispatchers.IO) {
-            _notesFlow.emit(repository.getAllNotes())
+            _notesFlow.emit(getAllNotesUseCase.execute())
         }
     }
     fun updateNote(noteCard: NoteCard){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateNote(noteCard)
+           updateNoteUseCase.execute(noteCard)
         }
     }
     fun deleteNote(noteCard: NoteCard){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteNote(noteCard)
+            deleteNoteUseCase.execute(noteCard)
         }
     }
 
