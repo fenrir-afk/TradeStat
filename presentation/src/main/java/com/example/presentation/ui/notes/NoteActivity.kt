@@ -76,8 +76,7 @@ class NoteActivity : AppCompatActivity() {
             if (result.resultCode == Activity.RESULT_OK) {
                 val imageUri = result.data?.data
                 if (imageUri != null) {
-                    val imageName = "note_image_${System.currentTimeMillis()}.jpg"
-                    val savedImagePath = saveImageToDevice(imageUri, imageName)
+                    val savedImagePath = saveImageToDevice(imageUri)
 
                     adapter.updateImage(selectedPosition, savedImagePath)
                     noteViewModel.updateNote(adapter.noteList[selectedPosition])
@@ -87,7 +86,8 @@ class NoteActivity : AppCompatActivity() {
     }
 
 
-    private fun saveImageToDevice(imageUri: Uri, imageName: String): String {
+    private fun saveImageToDevice(imageUri: Uri): String {
+        val imageName = "note_image_${System.currentTimeMillis()}.jpg"
         // Save the image to your device and return the file path
         val inputStream = contentResolver.openInputStream(imageUri)
         val file = File(filesDir, imageName)

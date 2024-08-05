@@ -5,6 +5,8 @@ import com.example.domain.contracts.StrategyRepository
 import com.example.domain.contracts.TradeRepository
 import com.example.domain.date.usecase.GetCoordinatesByArrUseCase
 import com.example.domain.instrument.usecase.GetInstrumentsRatingUseCase
+import com.example.domain.results.usecase.GetMonthTradesUseCase
+import com.example.domain.results.usecase.GetRatingUseCase
 import com.example.domain.strategy.usecase.GetStrategiesChartUseCase
 import com.example.domain.strategy.usecase.GetStrategiesRatingUseCase
 import dagger.Module
@@ -33,5 +35,15 @@ class RelatedUseCaseModule {
     @Provides
     fun provideGetCoordinatesByArrUseCase(): GetCoordinatesByArrUseCase {
         return GetCoordinatesByArrUseCase()
+    }
+
+    @Provides
+    fun provideGetMonthTradesUseCase(): GetMonthTradesUseCase {
+        return GetMonthTradesUseCase()
+    }
+    
+    @Provides
+    fun provideGetRatingUseCase(): GetRatingUseCase {
+        return GetRatingUseCase()
     }
 }

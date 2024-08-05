@@ -23,11 +23,12 @@ import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
 import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-
+@AndroidEntryPoint
 class ResultsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultsBinding
     private  val resultsViewModel: ResultsViewModel by viewModels()
@@ -88,10 +89,10 @@ class ResultsActivity : AppCompatActivity() {
         val previousMonth = getMonthName(calendar.get(Calendar.MONTH) )
         val dataSet1 = RadarDataSet(arr1,currentMonth)
         with(dataSet1){
-            color = getColor(R.color.purple_200)
+            color = ContextCompat.getColor(this@ResultsActivity,R.color.MorelightGray)
             lineWidth = 2F
-            valueTextColor = getColor(R.color.purple_200)
-            fillColor = getColor(R.color.purple_200)
+            valueTextColor = ContextCompat.getColor(this@ResultsActivity,R.color.MorelightGray)
+            fillColor = ContextCompat.getColor(this@ResultsActivity,R.color.MorelightGray)
             valueTextSize = 14f
             setDrawFilled(true)
         }
@@ -101,10 +102,10 @@ class ResultsActivity : AppCompatActivity() {
         }
         val dataSet2 = RadarDataSet(arr2,previousMonth)
         with(dataSet2){
-            color = getColor(R.color.green)
+            color = ContextCompat.getColor(this@ResultsActivity,R.color.green)
             lineWidth = 2F
-            valueTextColor =getColor(R.color.green)
-            fillColor = getColor(R.color.green)
+            valueTextColor = ContextCompat.getColor(this@ResultsActivity,R.color.green)
+            fillColor = ContextCompat.getColor(this@ResultsActivity,R.color.green)
             valueTextSize = 14f
             setDrawFilled(true)
         }

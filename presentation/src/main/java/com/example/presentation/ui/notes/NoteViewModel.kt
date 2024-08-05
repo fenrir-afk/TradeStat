@@ -1,5 +1,8 @@
 package com.example.presentation.ui.notes
 
+import android.app.Activity
+import android.net.Uri
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.NoteCard
@@ -12,6 +15,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,5 +50,4 @@ class NoteViewModel @Inject constructor(
             deleteNoteUseCase.execute(noteCard)
         }
     }
-
 }
