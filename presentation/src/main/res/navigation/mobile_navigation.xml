@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.presentation.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_dateActivity"
+            app:destination="@id/dateActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_instrumentActivity"
+            app:destination="@id/instrumentActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_strategyActivity"
+            app:destination="@id/strategyActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_materialsActivity"
+            app:destination="@id/materialsActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_analysisActivity"
+            app:destination="@id/analysisActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_resultsActivity"
+            app:destination="@id/resultsActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_calendarActivity"
+            app:destination="@id/calendarActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_trades"
+        android:name="com.example.presentation.ui.trade.TradeFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_trade" />
+
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="com.example.presentation.ui.news.NewsFragment"
+        android:label="@string/News"
+        tools:layout="@layout/fragment_news" />
+    <activity
+        android:id="@+id/dateActivity"
+        android:name="com.example.presentation.ui.dateStatistic.DateActivity"
+        android:label="DateActivity" />
+    <activity
+        android:id="@+id/instrumentActivity"
+        android:name="com.example.presentation.ui.instrumentStatistic.InstrumentActivity"
+        android:label="InstrumentActivity" />
+    <activity
+        android:id="@+id/strategyActivity"
+        android:name="com.example.presentation.ui.strategyStatistic.StrategyActivity"
+        android:label="activity_strategy"
+        tools:layout="@layout/activity_strategy" />
+    <activity
+        android:id="@+id/materialsActivity"
+        android:name="com.example.presentation.ui.usefullMaterials.MaterialsActivity"
+        android:label="activity_materials"
+        tools:layout="@layout/activity_materials" />
+    <activity
+        android:id="@+id/analysisActivity"
+        android:name="com.example.presentation.ui.analysis.AnalysisActivity"
+        android:label="activity_analysis"
+        tools:layout="@layout/activity_analysis" />
+    <activity
+        android:id="@+id/resultsActivity"
+        android:name="com.example.presentation.ui.results.ResultsActivity"
+        android:label="activity_results"
+        tools:layout="@layout/activity_results" />
+    <activity
+        android:id="@+id/calendarActivity"
+        android:name="com.example.presentation.ui.notes.NoteActivity"
+        android:label="activity_calendar"
+        tools:layout="@layout/activity_note" />
+</navigation>

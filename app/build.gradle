@@ -1,11 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id "org.jetbrains.kotlin.kapt"
     //documentation
     id("org.jetbrains.dokka") version "1.9.20"
     //ksp
     id("com.google.devtools.ksp")
+    //hilt
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -37,21 +38,22 @@ android {
     }
     buildFeatures {
         viewBinding true
-        dataBinding true
     }
 }
 
 dependencies {
-
+    api project(":domain")
+    api project(":data")
+    api project(":presentation")
     implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     //implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
-    implementation 'androidx.activity:activity-ktx:1.9.0'
+    implementation 'androidx.activity:activity-ktx:1.9.1'
     implementation 'androidx.test.ext:junit-ktx:1.2.1'
     //scalable image
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
@@ -60,7 +62,7 @@ dependencies {
     // Room components
     implementation "androidx.room:room-runtime:2.6.1"
     implementation 'androidx.test.espresso:espresso-intents:3.6.1'
-    implementation 'androidx.activity:activity-ktx:1.9.0'
+    implementation 'androidx.activity:activity-ktx:1.9.1'
     ksp "androidx.room:room-compiler:2.6.1"
     implementation "androidx.room:room-ktx:2.6.1"
     //Dialog
@@ -94,7 +96,10 @@ dependencies {
     //xml
     implementation('com.squareup.retrofit2:converter-simplexml:2.11.0')
     //dagger 2
-    implementation 'com.google.dagger:dagger:2.28.3'
-    ksp 'com.google.dagger:dagger-compiler:2.28.3'
+    implementation 'com.google.dagger:dagger:2.51.1'
+    ksp 'com.google.dagger:dagger-compiler:2.51.1'
+    //hilt
+    implementation "com.google.dagger:hilt-android:2.51.1"
+    ksp "com.google.dagger:hilt-compiler:2.51.1"
 
 }
