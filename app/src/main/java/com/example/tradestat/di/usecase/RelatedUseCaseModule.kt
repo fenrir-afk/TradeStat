@@ -1,5 +1,6 @@
 package com.example.tradestat.di.usecase
 
+import com.example.domain.analysis.usecase.GetMaxNameUseCase
 import com.example.domain.contracts.InstrumentRepository
 import com.example.domain.contracts.StrategyRepository
 import com.example.domain.contracts.TradeRepository
@@ -45,5 +46,10 @@ class RelatedUseCaseModule {
     @Provides
     fun provideGetRatingUseCase(): GetRatingUseCase {
         return GetRatingUseCase()
+    }
+
+    @Provides
+    fun provideGetMaxNameUseCase(rep1: TradeRepository,rep2: StrategyRepository,rep3:InstrumentRepository): GetMaxNameUseCase {
+        return GetMaxNameUseCase(rep1,rep2,rep3)
     }
 }

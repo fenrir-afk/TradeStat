@@ -17,10 +17,12 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class AnalysisActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnalysisBinding
     private val analysisViewModel:AnalysisViewModel by viewModels()
@@ -50,7 +52,7 @@ class AnalysisActivity : AppCompatActivity() {
             }
         }
     }
-    private fun updateChart(list: MutableList<Entry>, chart: LineChart){
+    private fun updateChart(list: List<Entry>, chart: LineChart){
 
         val lineDataSet = LineDataSet(list,"Victory/defeat")
         lineDataSet.valueTextColor = ContextCompat.getColor(this, R.color.lightGray)
