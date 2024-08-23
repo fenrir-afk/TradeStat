@@ -75,6 +75,17 @@
     <string name="registry">Регистрация</string>
     <string name="login">Авторизация</string>
     <string name="continue_mine">Продолжить</string>
+    <string name="upcoming_events">Предстоящие события</string>
+    <string name="bks_calendar">(Календарь БКС)</string>
+    <string name="first_news_desc">Актуальные новости разбитые по дате и помеченные степенями важности</string>
+    <string name="forex_news">Новости Forex</string>
+    <string name="investing">(Investing)</string>
+    <string name="second_desc">Актуальные новости рынка forex,разбитые оп датам, котировки</string>
+    <string name="crypta_news">Новости крипты</string>
+    <string name="third_news_desc">Актуальные новости рынка криптовалют разбитых по датам,котировик</string>
+
+
+
     <string-array name="weekDays">
         <item>Дни недели:</item>
         <item>Воскресенье</item>

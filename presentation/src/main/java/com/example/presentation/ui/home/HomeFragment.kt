@@ -67,6 +67,7 @@ class HomeFragment : Fragment() {
         }
         return binding.root
     }
+    
     /**
      * In this method we provide data to the donut graph that represents number of short and long trades
      * */

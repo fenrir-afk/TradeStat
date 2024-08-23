@@ -242,7 +242,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/oxygen"
-                    android:text="Предстоящие события"
+                    android:text="@string/upcoming_events"
 
                     android:textColor="@color/white"
                     android:textSize="@dimen/biggest_text" />
@@ -252,7 +252,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/oxygen"
-                    android:text="(Календарь БКС)"
+                    android:text="@string/bks_calendar"
                     android:textColor="@color/white"
                     android:textSize="@dimen/biggest_text" />
 
@@ -261,7 +261,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/big_margin"
                     android:fontFamily="@font/book"
-                    android:text="Актуальные новости разбитые по дате и помеченные степенями важности"
+                    android:text="@string/first_news_desc"
                     android:textColor="@color/white"
                     android:textSize="@dimen/base_text_size" />
             </LinearLayout>
@@ -308,7 +308,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen"
-                            android:text="Новости Forex"
+                            android:text="@string/forex_news"
 
                             android:textColor="@color/white"
                             android:textSize="@dimen/biggest_text" />
@@ -318,7 +318,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/oxygen"
-                            android:text="(Investing)"
+                            android:text="@string/investing"
                             android:textColor="@color/white"
                             android:textSize="@dimen/biggest_text" />
 
@@ -327,7 +327,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/big_margin"
                             android:fontFamily="@font/book"
-                            android:text="Актуальные новости рынка forex,разбитые оп датам, котировки"
+                            android:text="@string/second_desc"
                             android:textColor="@color/white"
                             android:textSize="@dimen/base_text_size" />
                     </LinearLayout>
@@ -368,7 +368,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen"
-                            android:text="Новости крипты"
+                            android:text="@string/crypta_news"
 
                             android:textColor="@color/white"
                             android:textSize="@dimen/biggest_text" />
@@ -378,7 +378,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="@font/oxygen"
-                            android:text="(Investing)"
+                            android:text="@string/investing"
                             android:textColor="@color/white"
                             android:textSize="@dimen/biggest_text" />
 
@@ -387,7 +387,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/big_margin"
                             android:fontFamily="@font/book"
-                            android:text="Актуальные новости рынка криптовалют разбитых по датам,котировик"
+                            android:text="@string/third_news_desc"
                             android:textColor="@color/white"
                             android:textSize="@dimen/base_text_size" />
                     </LinearLayout>

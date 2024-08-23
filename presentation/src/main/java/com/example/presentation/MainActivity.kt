@@ -1,13 +1,13 @@
 package com.example.presentation
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -17,8 +17,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.presentation.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         initNightMode()
+        setLocale(this)
         setContentView(binding.root)
         setSupportActionBar(binding.include.myToolBar)
 
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.background)
     }
 
+
     private fun initNightMode() {
         val sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE)
         val nightMode = sharedPreferences.getBoolean("night", false)
@@ -58,6 +62,22 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
+
+    private fun setLocale(activity: Activity, languageCode: String = "none") {
+        var locale = Locale(languageCode)
+        if (languageCode == "none"){
+            val sharedPreferences = getSharedPreferences("Language", Context.MODE_PRIVATE)
+            val locale1 = sharedPreferences.getString("language", "en")
+            locale = Locale(locale1!!)
+        }
+        Locale.setDefault(locale)
+        val resources = activity.resources
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.app_bar_menu, menu)
@@ -81,9 +101,10 @@ class MainActivity : AppCompatActivity() {
         }
         if (localeItem != null) {
             val locale = Locale.getDefault()
-            if (locale == Locale("ru")) {
+            if (locale.language == "ru") {
                 localeItem.setIcon(R.drawable.ic_ru1)
-            } else {
+            }
+            if(locale.language == "en"){
                 localeItem.setIcon(R.drawable.ic_en1)
             }
         }
@@ -95,13 +116,15 @@ class MainActivity : AppCompatActivity() {
             R.id.Language -> {
                 val sharedPreferences = getSharedPreferences("Language", Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
-                val currentLocale = resources.configuration.locales[0]
-                val newLocale = if (currentLocale.language == "ru") Locale("en") else Locale("ru")
+                val currentLocale = Locale.getDefault()
+                val newLocale = if (currentLocale.language == "ru") {
+                    Locale("en")
+                }
+                else {
+                    Locale("ru")
+                }
                 Locale.setDefault(newLocale)
-                val resources = resources
-                val configuration = resources.configuration
-                configuration.setLocale(newLocale)
-                resources.updateConfiguration(configuration, resources.displayMetrics)
+                setLocale(this,newLocale.language)
                 editor.putString("language", newLocale.language)
                 editor.apply()
                 // Обновляем иконку после смены языка

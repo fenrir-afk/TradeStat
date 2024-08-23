@@ -82,6 +82,15 @@
     <string name="login">Login</string>
     <string name="continue_mine">Continue</string>
 
+    <string name="upcoming_events">Upcoming events</string>
+    <string name="bks_calendar">(BKS calendar)</string>
+    <string name="first_news_desc">Current news broken down by date and marked with degrees of importance</string>
+    <string name="forex_news">Forex news</string>
+    <string name="investing">(Investing)</string>
+    <string name="second_desc">Current forex market news,broken down by dates, quotes</string>
+    <string name="crypta_news">Crypto news</string>
+    <string name="third_news_desc">Current news of the cryptocurrency market broken down by date,quote</string>
+
     <string-array name="weekDays">
         <item>Day of the week:</item>
         <item>Sunday</item>
