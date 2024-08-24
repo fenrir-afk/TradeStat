@@ -1,9 +1,11 @@
 package com.example.presentation.ui.trade
 
 import android.app.Dialog
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.Gravity
@@ -14,6 +16,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
@@ -33,6 +36,7 @@ import com.example.domain.model.Results
 import com.example.domain.model.Strategy
 import com.example.domain.model.Trade
 import com.example.presentation.databinding.FragmentTradeBinding
+import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -328,7 +332,11 @@ class TradeFragment : Fragment() {
             dialog.dismiss()
             insertDataToDb(dialog)
         }
+        dialog.findViewById<MaterialCardView>(R.id.add_image_card).setOnClickListener{
+
+        }
     }
+
     /**
      * In this method, we insert data to data base
      * */

@@ -92,6 +92,7 @@
     <string name="third_news_desc">Current news of the cryptocurrency market broken down by date,quote</string>
     <string name="add_images">Add images</string>
     <string name="add_imaged_description">Here you can add some images if you need it.</string>
+    <string name="image_text">Click if you want to add images to the trade</string>
 
     <string-array name="weekDays">
         <item>Day of the week:</item>

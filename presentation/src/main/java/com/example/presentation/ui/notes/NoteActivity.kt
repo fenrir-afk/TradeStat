@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation.R
 import com.example.domain.model.NoteCard
 import com.example.presentation.databinding.ActivityNoteBinding
+import com.example.presentation.utils.ImageHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
@@ -49,7 +50,7 @@ class NoteActivity : AppCompatActivity() {
             val note = NoteCard(0, mutableListOf(""), mutableListOf(),"Title")
             noteViewModel.addNote(note)
         }
-        pickImage()
+        val pickImageLauncher = setImageLauncher()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 noteViewModel.notesFlow.filter { it.isNotEmpty() }.collect{
@@ -67,37 +68,13 @@ class NoteActivity : AppCompatActivity() {
         }
     }
     /**
-    * In this method we aare getting image from the gallery and push it to the db and adapter
-    * */
-    private fun pickImage(){
-        pickImageLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val imageUri = result.data?.data
-                if (imageUri != null) {
-                    val savedImagePath = saveImageToDevice(imageUri)
-
-                    adapter.updateImage(selectedPosition, savedImagePath)
-                    noteViewModel.updateNote(adapter.noteList[selectedPosition])
-                }
-            }
+     * In this method we  turn on onActivity result method to get the images from gallery
+     * */
+    private fun setImageLauncher(): ActivityResultLauncher<Intent> {
+        return ImageHelper(this@NoteActivity).pickImage(filesDir){savedImagePath ->
+            adapter.updateImage(selectedPosition, savedImagePath)
+            noteViewModel.updateNote(adapter.noteList[selectedPosition])
         }
     }
-
-
-    private fun saveImageToDevice(imageUri: Uri): String {
-        val imageName = "note_image_${System.currentTimeMillis()}.jpg"
-        // Save the image to your device and return the file path
-        val inputStream = contentResolver.openInputStream(imageUri)
-        val file = File(filesDir, imageName)
-        val outputStream = FileOutputStream(file)
-        inputStream?.copyTo(outputStream)
-        inputStream?.close()
-        outputStream.flush()
-        outputStream.close()
-        return file.absolutePath
-    }
-
 
 }
