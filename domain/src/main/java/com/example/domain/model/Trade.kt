@@ -9,5 +9,6 @@ data class Trade(
     val tradeResult: String,
     val instrument: String,
     val ADDate: String, //date of adding to the app
-    val description: String
+    val description: String,
+    val images:List<String>
 )

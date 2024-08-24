@@ -2,6 +2,7 @@ package com.example.tradestat.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.data.db.Migration4To5
 import com.example.data.db.TradeDatabase
 import com.example.data.instrument.dao.InstrumentDao
 import com.example.data.user.dao.UserDao
@@ -28,7 +29,7 @@ class DatabaseModule {
             context.applicationContext,
             TradeDatabase::class.java,
             "trade_database"
-        ).build()
+        ).build() //.addMigrations(Migration4To5()).build() для миграции
     }
     @Provides
     fun provideInstrumentDao(tradeDatabase: TradeDatabase): InstrumentDao {

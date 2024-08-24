@@ -1,6 +1,8 @@
 package com.example.presentation.ui.news
-import android.content.res.ColorStateList
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +16,15 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.presentation.R
 import com.example.presentation.databinding.FragmentNewsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
-
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NewsFragment : Fragment() {
+    companion object{
+        const val BKS_NEWS_URL = "https://bcs-express.ru/ozhidaemye-sobytiya"
+        const val FOREX_NEWS = "https://ru.investing.com/news/forex-news"
+        const val CRYPTO_NEWS = "https://ru.investing.com/news/cryptocurrency-news"
+    }
     enum class Stocks{
         MOEX,
         SBER,
@@ -35,7 +40,6 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
-        val nightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         checkTheme()
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
@@ -51,9 +55,23 @@ class NewsFragment : Fragment() {
                 }
             }
         }
+        clickListenersFun()
         return binding.root
     }
-
+    private fun clickListenersFun(){
+        binding.bksNews.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BKS_NEWS_URL))
+            startActivity(intent)
+        }
+        binding.forex.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FOREX_NEWS))
+            startActivity(intent)
+        }
+        binding.crypta.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CRYPTO_NEWS))
+            startActivity(intent)
+        }
+    }
     private fun checkTheme() {
         val nightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
@@ -94,6 +112,7 @@ class NewsFragment : Fragment() {
            }
        }
     }
+    @SuppressLint("SetTextI18n")
     private fun updateQuotes(triples: MutableList<Triple<String, Boolean, String>>) {
         if (triples.size == 2){
            binding.quote1.text = "${triples[0].third} ${triples[0].first}"

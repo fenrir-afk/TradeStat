@@ -11,7 +11,9 @@ fun Trade.toDbData() = TradeDb(
     tradeResult = tradeResult,
     instrument = instrument,
     ADDate = ADDate,
-    description = description
+    description = description,
+    images = images
+
 )
 
 fun TradeDb.toDomain() = Trade(
@@ -22,5 +24,6 @@ fun TradeDb.toDomain() = Trade(
     tradeResult = tradeResult,
     instrument = instrument,
     ADDate = ADDate,
-    description = description
+    description = description,
+    images = images
 )

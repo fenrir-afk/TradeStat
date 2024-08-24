@@ -3,6 +3,8 @@ package com.example.data.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.data.util.Converters
 
 /**
  * @param tradeDirection the direction of the trade
@@ -13,6 +15,7 @@ import androidx.room.PrimaryKey
  * @param ADDate the day when the trade was added to the app
  * @param description description for the trade
  * */
+@TypeConverters(Converters::class)
 @Entity(tableName = "trade_table")
 data class TradeDb(
     @PrimaryKey(autoGenerate = true) val id: Int,
@@ -22,5 +25,6 @@ data class TradeDb(
     @ColumnInfo(name = "trade_result") val tradeResult: String,
     @ColumnInfo(name = "Instrument") val instrument: String,
     @ColumnInfo(name = "add_date") val ADDate: String, //date of adding to the app
-    @ColumnInfo(name = "description") val description: String
+    @ColumnInfo(name = "description") val description: String,
+    @ColumnInfo(name = "images") val images: List<String>  = emptyList()
 )
