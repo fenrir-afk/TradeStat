@@ -90,9 +90,9 @@
     <string name="second_desc">Current forex market news,broken down by dates, quotes</string>
     <string name="crypta_news">Crypto news</string>
     <string name="third_news_desc">Current news of the cryptocurrency market broken down by date,quote</string>
-    <string name="add_images">Add images</string>
-    <string name="add_imaged_description">Here you can add some images if you need it.</string>
-    <string name="image_text">Click if you want to add images to the trade</string>
+    <string name="smart_money">Smart money</string>
+    <string name="image">Image</string>
+    <string name="fundamentals_of_technical_analysis">Fundamentals of technical analysis</string>
 
     <string-array name="weekDays">
         <item>Day of the week:</item>

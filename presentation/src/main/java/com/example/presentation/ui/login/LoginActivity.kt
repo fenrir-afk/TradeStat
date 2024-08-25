@@ -59,6 +59,8 @@ class LoginActivity : AppCompatActivity() {
         binding.sendToSighUp.setOnClickListener{
             startActivity(Intent(this, RegistryActivity::class.java))
         }
+        binding.sendEmail.setOnClickListener {
+        }
     }
 
     private fun checkCurrentLoginSession() {

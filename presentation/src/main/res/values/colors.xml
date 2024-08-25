@@ -17,6 +17,8 @@
     <color name="transparentGray">#002B2020</color>
     <color name="MorelightGray">#94FFFFFF</color>
 
+    <color name="DarkTransparentGray">#B0685757</color>
+
     <color name="green">#5DA50A</color>
     <color name="red">#C60303</color>
     <color name="lightGreen">#8AD138</color>

@@ -40,7 +40,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/first_materials_image" />
+                android:contentDescription="Image"
+                android:src="@drawable/materials_first" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -80,7 +81,7 @@
             android:layout_margin="@dimen/big_margin"
             android:fontFamily="@font/oxygen"
             android:gravity="center"
-            android:text="Smart money"
+            android:text="@string/smart_money"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,11 +98,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/first_label"
             app:layout_constraintWidth_percent="0.8">
-
-            <ImageView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/second_materials_image" />
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/materials_second" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/smart_money"
+                    android:fontFamily="@font/pro_regular"
+                    android:background="@color/DarkTransparentGray"
+                    android:textSize="@dimen/biggest_text"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+            </FrameLayout>
         </androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/textView5"
@@ -133,8 +148,8 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5"/>
         <androidx.cardview.widget.CardView
             android:id="@+id/image3"
-            android:layout_width="300dp"
-            android:layout_height="225dp"
+            android:layout_width="297dp"
+            android:layout_height="189dp"
             android:layout_marginTop="@dimen/big_margin"
             app:cardCornerRadius="@dimen/card_radius"
             app:layout_constraintEnd_toEndOf="parent"
@@ -143,11 +158,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/second_label"
             app:layout_constraintWidth_percent="0.8">
-
-            <ImageView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/third_materials_image" />
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/materials_third" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fundamentals_of_technical_analysis"
+                    android:fontFamily="@font/pro_regular"
+                    android:background="@color/DarkTransparentGray"
+                    android:textSize="@dimen/biggest_text"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+            </FrameLayout>
         </androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/textView6"

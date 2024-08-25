@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardBackgroundColor="@color/MediumGray"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHeight_percent="0.52"
         app:layout_constraintWidth_percent="0.87"
         >
         <TableLayout
@@ -31,7 +31,8 @@
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_margin"
                 android:text="@string/login"
                 android:gravity="center"
                 android:textColor="@color/black"
@@ -44,6 +45,7 @@
                     android:layout_height="27dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/big_margin"
+                    android:contentDescription="@string/image"
                     android:src="@drawable/ic_email" />
 
                 <EditText
@@ -52,6 +54,7 @@
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/base_margin"
+                    android:inputType="textEmailAddress"
                     android:textColorHint="@color/lightGray"
                     android:textColor="@color/black"
                     android:hint="@string/email"
@@ -64,6 +67,7 @@
                     android:layout_height="27dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/big_margin"
+                    android:contentDescription="@string/image"
                     android:src="@drawable/ic_lock"/>
                 <EditText
                     android:id="@+id/password"
@@ -110,6 +114,7 @@
                     android:layout_marginStart="@dimen/base_margin"
                     android:text="@string/sign_up"/>
             </LinearLayout>
+
         </TableLayout>
     </androidx.cardview.widget.CardView>
 

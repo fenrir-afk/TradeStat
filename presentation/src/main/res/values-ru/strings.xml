@@ -83,7 +83,9 @@
     <string name="second_desc">Актуальные новости рынка forex,разбитые оп датам, котировки</string>
     <string name="crypta_news">Новости крипты</string>
     <string name="third_news_desc">Актуальные новости рынка криптовалют разбитых по датам,котировик</string>
-
+    <string name="smart_money">Smart money</string>
+    <string name="image">Image</string>
+    <string name="fundamentals_of_technical_analysis">Fundamentals of technical analysis</string>
 
 
     <string-array name="weekDays">
