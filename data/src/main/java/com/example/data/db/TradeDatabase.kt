@@ -19,7 +19,7 @@ import com.example.data.util.Converters
 
 
 @Database(
-    version = 5,
+    version = 6,
     entities = [TradeDb::class, StrategyDb::class, InstrumentDb::class, NoteCardDb::class, UserDb::class],
     exportSchema = true,
 )
@@ -32,8 +32,8 @@ abstract class TradeDatabase : RoomDatabase() {
     abstract fun strategiesDao(): StrategiesDao
 }
 
-class Migration4To5 : Migration(4, 5) {
+class Migration5To6 : Migration(5,6) {
     override fun migrate(db: SupportSQLiteDatabase) {
-        db.execSQL("ALTER TABLE trade_table ADD COLUMN images TEXT NOT NULL DEFAULT ''")
+        db.execSQL("ALTER TABLE trade_table DROP COLUMN images")
     }
 }
