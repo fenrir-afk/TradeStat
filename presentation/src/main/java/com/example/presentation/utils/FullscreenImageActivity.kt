@@ -20,10 +20,10 @@ class FullscreenImageActivity : AppCompatActivity() {
         )
         setContentView(R.layout.activity_fullscreen_image)
 
-        // Получение изображения из Intent
+        // Getting images from intent
         val imageUrl = intent.getStringExtra("image_url")
 
-        // Загрузка и отображение изображения на весь экран
+        // Load and display image for full screen
         val imageView = findViewById<ImageView>(R.id.fullscreen_image_view)
         Glide.with(this)
             .load(imageUrl)

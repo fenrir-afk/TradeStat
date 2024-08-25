@@ -1,12 +1,9 @@
 package com.example.presentation.ui.notes
-import android.app.Activity
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -22,8 +19,7 @@ import com.example.presentation.utils.ImageHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
+
 
 @AndroidEntryPoint
 class NoteActivity : AppCompatActivity() {
@@ -32,7 +28,6 @@ class NoteActivity : AppCompatActivity() {
     private  val noteViewModel: NoteViewModel by viewModels()
     private val adapter = NoteAdapter(this)
     private var selectedPosition: Int = -1
-    private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +66,7 @@ class NoteActivity : AppCompatActivity() {
      * In this method we  turn on onActivity result method to get the images from gallery
      * */
     private fun setImageLauncher(): ActivityResultLauncher<Intent> {
-        return ImageHelper(this@NoteActivity).pickImage(filesDir){savedImagePath ->
+        return ImageHelper(this@NoteActivity).pickImage(filesDir,ImageHelper.Tokens.Note){savedImagePath ->
             adapter.updateImage(selectedPosition, savedImagePath)
             noteViewModel.updateNote(adapter.noteList[selectedPosition])
         }

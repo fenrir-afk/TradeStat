@@ -16,11 +16,11 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -29,13 +29,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.presentation.R
 import com.example.domain.model.DaysOfWeek
 import com.example.domain.model.Instrument
 import com.example.domain.model.Results
 import com.example.domain.model.Strategy
 import com.example.domain.model.Trade
+import com.example.presentation.R
 import com.example.presentation.databinding.FragmentTradeBinding
+import com.example.presentation.utils.ImageHelper
 import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -50,12 +51,14 @@ class TradeFragment : Fragment() {
         const val ITEMS_IN_ROW = 4
     }
     private var _binding: FragmentTradeBinding? = null
-
+    private val imagesList = mutableListOf<String>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
     private val tradeViewModel:TradeViewModel by viewModels()
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,6 +70,7 @@ class TradeFragment : Fragment() {
         val adapter = TradeAdapter(this)
         val manager = LinearLayoutManager(this.context)
 
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 tradeViewModel.sortedTradesListFlow.collect{
@@ -77,7 +81,6 @@ class TradeFragment : Fragment() {
 
             }
         }
-
         binding.addTradeFab.setOnClickListener{
             tradeDialog()
         }
@@ -319,6 +322,7 @@ class TradeFragment : Fragment() {
      * In this method, we create and display dialog for adding trade to the main trade list
      * */
     private fun tradeDialog() {
+        val pickImageLauncher = setImageLauncher()
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window?.decorView?.setBackgroundResource(R.drawable.dialog_background)
@@ -333,7 +337,16 @@ class TradeFragment : Fragment() {
             insertDataToDb(dialog)
         }
         dialog.findViewById<MaterialCardView>(R.id.add_image_card).setOnClickListener{
-
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            pickImageLauncher.launch(galleryIntent)
+        }
+    }
+    /**
+     * In this method we  turn on onActivity result method to get the images from gallery
+     * */
+    private fun setImageLauncher(): ActivityResultLauncher<Intent> {
+        return ImageHelper(requireActivity()).pickImage(requireContext().filesDir,ImageHelper.Tokens.Trade){ savedImagePath ->
+            imagesList.add(savedImagePath)
         }
     }
 
@@ -371,7 +384,7 @@ class TradeFragment : Fragment() {
             //getting current date
             val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()) // Use Locale.getDefault() for the local format or Locale.US for ASCII format
             val currentDate = sdf.format(Date())
-            val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description, emptyList())
+            val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description,imagesList)
             updateDb(trade,strategy,instrument)
             Toast.makeText(this.context,"Added",Toast.LENGTH_SHORT).show()
         }
