@@ -75,46 +75,7 @@
             android:hint="@string/enter_a_description"
             android:textSize="15sp"
             android:layout_weight="1"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_margin="@dimen/base_margin"
-            android:layout_height="120dp">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/add_image_card"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:strokeColor="@color/MediumGray"
-                            app:cardCornerRadius="@dimen/card_corner_radius"
-                            app:strokeWidth="1dp"
-                            android:layout_gravity="center">
-                                <LinearLayout
-                                    android:id="@+id/images_list"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:background="@color/darkGray"
-                                    android:orientation="vertical"
-                                    >
-                                        <TextView
-                                            android:id="@+id/images_text"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/image_text"
-                                            android:textColor="@color/lightGray"
-                                            android:layout_gravity="center"
-                                            android:gravity="center"/>
-                                        <ImageView
-                                            android:id="@+id/image_icon"
-                                            android:layout_width="50dp"
-                                            android:layout_height="50dp"
-                                                android:src="@drawable/ic_download"/>
-                                </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-                </FrameLayout>
-        </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

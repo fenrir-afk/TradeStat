@@ -29,7 +29,7 @@ class DatabaseModule {
             context.applicationContext,
             TradeDatabase::class.java,
             "trade_database"
-        ).addMigrations(Migration5To6()).build() //для миграции
+        ).build() //addMigrations(Migration5To6()).build() for migration
     }
     @Provides
     fun provideInstrumentDao(tradeDatabase: TradeDatabase): InstrumentDao {
