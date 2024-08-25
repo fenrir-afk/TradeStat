@@ -25,6 +25,5 @@ data class TradeDb(
     @ColumnInfo(name = "trade_result") val tradeResult: String,
     @ColumnInfo(name = "Instrument") val instrument: String,
     @ColumnInfo(name = "add_date") val ADDate: String, //date of adding to the app
-    @ColumnInfo(name = "description") val description: String,
-    @ColumnInfo(name = "images") val images: List<String>  = emptyList()
+    @ColumnInfo(name = "description") val description: String
 )

@@ -363,7 +363,7 @@ class TradeFragment : Fragment() {
             //getting current date
             val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()) // Use Locale.getDefault() for the local format or Locale.US for ASCII format
             val currentDate = sdf.format(Date())
-            val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description, emptyList())
+            val trade = Trade(0, direction, date, strategy, result, instrument,currentDate,description)
             updateDb(trade,strategy,instrument)
             Toast.makeText(this.context,"Added",Toast.LENGTH_SHORT).show()
         }
