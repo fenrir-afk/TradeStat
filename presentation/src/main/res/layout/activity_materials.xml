@@ -40,7 +40,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Image"
+                android:contentDescription="@string/image"
                 android:src="@drawable/materials_first" />
         </androidx.cardview.widget.CardView>
 
