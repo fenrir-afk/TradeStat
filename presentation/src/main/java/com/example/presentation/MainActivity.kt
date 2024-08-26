@@ -1,13 +1,18 @@
 package com.example.presentation
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -17,6 +22,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.presentation.databinding.ActivityMainBinding
+import com.example.presentation.utils.SendEmail
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
@@ -27,11 +33,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        initNightMode()
+        setLocale(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        initNightMode()
-        setLocale(this)
         setContentView(binding.root)
         setSupportActionBar(binding.include.myToolBar)
 
@@ -61,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun setLocale(activity: Activity, languageCode: String = "none") {
         var locale = Locale(languageCode)
         if (languageCode == "none"){
@@ -68,11 +79,20 @@ class MainActivity : AppCompatActivity() {
             val locale1 = sharedPreferences.getString("language", "en")
             locale = Locale(locale1!!)
         }
-        Locale.setDefault(locale)
-        val resources = activity.resources
-        val config = resources.configuration
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
+        if (locale != Locale.getDefault()){
+            Locale.setDefault(locale)
+            val resources = activity.resources
+            val config = resources.configuration
+            config.setLocale(locale)
+            resources.updateConfiguration(config, resources.displayMetrics)
+            recreate()
+        }else{
+            Locale.setDefault(locale)
+            val resources = activity.resources
+            val config = resources.configuration
+            config.setLocale(locale)
+            resources.updateConfiguration(config, resources.displayMetrics)
+        }
     }
 
 
@@ -147,6 +167,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putBoolean("night", true)
                     editor.apply()
                 }
+            }
+            R.id.help -> {
+                SendEmail(this).showAlertDialog()
             }
         }
         return super.onOptionsItemSelected(item)
