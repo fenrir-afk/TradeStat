@@ -30,7 +30,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/base_margin"
+                    android:layout_marginStart="5dp"
                     android:layout_gravity="center_vertical">
                     <app.futured.donut.DonutProgressView
                         android:id="@+id/donut_view"
@@ -232,7 +232,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/base_margin"
+                    android:layout_marginStart="5dp"
                     android:layout_gravity="center_vertical">
                     <app.futured.donut.DonutProgressView
                         android:id="@+id/donut_view_second"
@@ -307,29 +307,29 @@
                 android:padding="7dp"
                 android:src="@drawable/courses"
                 tools:ignore="ContentDescription" />
-
-            <TextView
-                android:layout_marginStart="@dimen/base_margin"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/proback"
-                android:layout_marginBottom="@dimen/medium_margin"
-                android:layout_gravity="center_vertical"
-                android:text="@string/useful_materials"
-                android:textColor="@color/white"
-                android:textSize="@dimen/base_text_size"/>
-            <TextView
+                android:orientation="vertical"
                 android:layout_marginStart="@dimen/base_margin"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/book_italic"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_gravity="center_vertical"
-                android:text="@string/base_strategies_useful_tips"
-                android:textColor="@color/white"
-                android:textSize="@dimen/base_text_size"/>
-
-
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proback"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/useful_materials"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/base_text_size"/>
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/book_italic"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/base_strategies_useful_tips"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/base_text_size"/>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:id="@+id/date_card"

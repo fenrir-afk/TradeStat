@@ -10,7 +10,7 @@ import com.example.presentation.R
 /**
  *We use this class to make images of the app scalable
  * */
-class FullscreenImageActivity : AppCompatActivity() {
+class FullscreenImageActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //hide status bar
@@ -19,7 +19,6 @@ class FullscreenImageActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         setContentView(R.layout.activity_fullscreen_image)
-
         // Getting images from intent
         val imageUrl = intent.getStringExtra("image_url")
 

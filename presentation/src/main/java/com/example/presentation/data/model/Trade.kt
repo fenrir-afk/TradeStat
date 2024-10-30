@@ -3,6 +3,7 @@ package com.example.presentation.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Objects
 
 /**
  * @param tradeDirection the direction of the trade

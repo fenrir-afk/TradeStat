@@ -39,7 +39,6 @@ class TradeViewModel @Inject constructor(
     private val deleteInstrumentUseCase: DeleteInstrumentUseCase,
     private val addStrategyUseCase: AddStrategyUseCase,
     private val addInstrumentUseCase: AddInstrumentUseCase
-
 ) : ViewModel() {
 
     private var _sortedTradesListFlow = MutableStateFlow<List<Trade>>(emptyList())
