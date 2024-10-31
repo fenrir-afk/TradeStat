@@ -21,10 +21,10 @@
       </SelectionState>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-30T20:04:39.628235800Z">
+        <DropdownSelection timestamp="2024-10-31T13:32:52.281614900Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=RFCX309971P" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Thunderobot\.android\avd\Small_Phone_API_VanillaIceCream.avd" />
             </handle>
           </Target>
         </DropdownSelection>

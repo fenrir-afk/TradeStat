@@ -16,15 +16,15 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/oxygen"
         android:text="@string/all_trades"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintTop_toBottomOf="@+id/include"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -34,6 +34,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="@dimen/big_margin"
         app:cardCornerRadius="@dimen/card_radius"
+        app:layout_constraintBottom_toTopOf="@+id/metrics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.50"
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,53 +55,54 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/result_text"
-        style="@style/Text"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/metrics"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/oxygen"
-        android:text="@string/trade_result"
-        android:textSize="@dimen/base_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/strategy_text"
-        style="@style/Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/oxygen"
-        android:text="@string/best_strategy"
-        android:textSize="@dimen/base_text_size"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result_text"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/result_text"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
 
-    <TextView
-        android:id="@+id/instrument_text"
-        style="@style/Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/oxygen"
-        android:text="@string/best_instrument"
-        android:textSize="@dimen/base_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/strategy_text"
-        app:layout_constraintVertical_bias="0.0" />
+            android:fontFamily="@font/oxygen"
+            android:text="@string/trade_result"
+            android:textSize="@dimen/base_text_size" />
+
+        <TextView
+            android:id="@+id/strategy_text"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/oxygen"
+            android:text="@string/best_strategy"
+            android:textSize="@dimen/base_text_size" />
+
+        <TextView
+            android:id="@+id/instrument_text"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/oxygen"
+            android:text="@string/best_instrument"
+            android:textSize="@dimen/base_text_size" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

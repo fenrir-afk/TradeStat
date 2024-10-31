@@ -18,7 +18,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/oxygen"
-        android:text="@string/graph_of_instrument_rating"
+        android:text="@string/graph_of_strategies_rating"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
