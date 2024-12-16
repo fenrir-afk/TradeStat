@@ -15,5 +15,4 @@ interface StrategiesDao {
     @Query("DELETE FROM strategy_table WHERE strategy_name=:strName")
     fun deleteStrategyByName(strName: String)
 
-
 }

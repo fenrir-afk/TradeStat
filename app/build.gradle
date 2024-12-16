@@ -17,8 +17,8 @@ android {
         applicationId "com.example.tradestat"
         minSdk 28
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    implementation("com.my.tracker:mytracker-sdk:3.3.2")
+
     api project(":domain")
     api project(":data")
     api project(":presentation")

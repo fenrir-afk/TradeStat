@@ -18,6 +18,8 @@ class RatingCounter(
     private val defeatTrades: List<Trade>,
     private val token: Int
 ) {
+
+
     var winRateList = mutableListOf<Int>()
     var shortWinRateList = mutableListOf<Int>()
     var longWinRateList = mutableListOf<Int>()
