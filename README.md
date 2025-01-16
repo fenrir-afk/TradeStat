@@ -15,7 +15,14 @@
 ![Retrofit](https://img.shields.io/badge/-Retrofit-000?&logo=Retrofit)
 ![Di](https://img.shields.io/badge/-Di-000?&logo=Di)
 
+### Video
+
+![Video](https://github.com/user-attachments/assets/afae18f1-2c0c-40e9-a256-f7ec3d860657)
+
+AppGallery: https://appgallery.huawei.com/app/C112499009
 
 
 ### Description
 TradeStat is a statistical application for traders that helps them make informed trading decisions on the stock exchange. This is a kind of trading diary, which contains the functions necessary to simplify trading, such as extensive trade analytics, economic news, and a notebook with images for working on errors and analyzing completed transactions.
+
+
