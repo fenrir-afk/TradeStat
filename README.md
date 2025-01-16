@@ -1,4 +1,4 @@
-[![](https://raw.githubusercontent.com/adamalston/adamalston/master/profile.gif)](https://www.adamalston.com/)<!-- If you want the template for my gif, email me! -->
+[![](https://storge.pic2.me/upload/711/60e4c59514f150.94011603.jpg)<!-- If you want the template for my gif, email me! -->
 ### Languages
 
 ![Python](https://img.shields.io/badge/-Python-000?&logo=Python)
