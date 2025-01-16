@@ -1,4 +1,5 @@
-[![](https://storge.pic2.me/upload/711/60e4c59514f150.94011603.jpg)<!-- If you want the template for my gif, email me! -->
+<img src="https://github.com/user-attachments/assets/8719c2a4-7977-475c-ac12-95ffa22e26dc" />
+
 ### Languages
 
 ![Kotlin](https://img.shields.io/badge/-Kotlin-000?&logo=Kotlin)
@@ -15,9 +16,23 @@
 ![Retrofit](https://img.shields.io/badge/-Retrofit-000?&logo=Retrofit)
 ![Di](https://img.shields.io/badge/-Di-000?&logo=Di)
 
-### Video
+### ScreenShots
+<img src="https://github.com/user-attachments/assets/cc32ca2a-d5a2-4d68-bb2d-7f1a832f4b43" width="300" />
+<img src="https://github.com/user-attachments/assets/180539ac-4f20-44c7-9d5a-f5ad1775d7bf" width="300" />
+<img src="https://github.com/user-attachments/assets/ab2764ee-a3d2-47b3-aa5b-fa19b6bd4b0d" width="300" />
+<img src="https://github.com/user-attachments/assets/43eddbb4-d030-4412-9fc2-36fab650cbae" width="300" />
+<img src="https://github.com/user-attachments/assets/cc5fbbd1-81cb-4ce2-a0f5-e24bd013cd9b" width="300" />
+<img src="https://github.com/user-attachments/assets/b59dab0d-9556-4050-8142-ba6d33b4cfc6" width="300" />
 
-![Video](https://github.com/user-attachments/assets/afae18f1-2c0c-40e9-a256-f7ec3d860657)
+<img src="https://github.com/user-attachments/assets/47769b93-e84a-4564-9084-c9420e59da7d" width="300" />
+<img src="https://github.com/user-attachments/assets/b326ec67-47b6-4831-9274-155c7f20e1a8" width="300" />
+
+
+
+
+
+
+
 
 AppGallery: https://appgallery.huawei.com/app/C112499009
 
