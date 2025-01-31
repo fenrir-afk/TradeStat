@@ -72,7 +72,11 @@ class ResultsActivity : AppCompatActivity() {
     * */
     private fun getMonthName(month: Int): String {
         val monthNames = resources.getStringArray(R.array.month_names)
-        return monthNames[month - 1]
+        return if(month != 0){
+            monthNames[month - 1]
+        }else{
+            monthNames[11]
+        }
     }
 
     private fun updateChart(

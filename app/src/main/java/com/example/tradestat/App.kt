@@ -3,7 +3,6 @@ package com.example.tradestat
 import android.app.Application
 import android.content.Context
 import android.provider.Settings
-import android.util.Log
 import com.my.tracker.MyTracker
 import dagger.hilt.android.HiltAndroidApp
 import java.net.NetworkInterface

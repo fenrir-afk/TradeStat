@@ -17,7 +17,7 @@ android {
         applicationId "com.example.tradestat"
         minSdk 28
         targetSdk 33
-        versionCode 4
+        versionCode 5
         versionName "1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
