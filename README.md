@@ -34,7 +34,6 @@
 
 
 
-AppGallery: https://appgallery.huawei.com/app/C112499009
 
 
 ### Description
